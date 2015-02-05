@@ -1,0 +1,9 @@
+*.exe
+*.ini
+
+/docs
+/etc
+/home
+/tmp
+/utils
+**/bin
