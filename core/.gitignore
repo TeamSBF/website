@@ -5,6 +5,5 @@
 /php54
 /mysql/share
 /mysql/data/performance_schema
-/mysql/data/phpmyadmin
 /mysql/data/ib*
 /mysql/data/mysql.err

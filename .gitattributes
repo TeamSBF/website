@@ -13,6 +13,9 @@
 *.png binary
 *.jpg binary
 
+# database files that need to stay the same
+*.opt text eol=lf
+
 # database files
 *.frm binary
 *.ibd binary
