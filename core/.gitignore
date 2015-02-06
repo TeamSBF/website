@@ -4,7 +4,6 @@
 /openssl
 /php54
 /mysql/share
-/mysql/data/mysql
 /mysql/data/performance_schema
 /mysql/data/phpmyadmin
 /mysql/data/ib*
