@@ -34,8 +34,8 @@
       <file leaf-file-name="SbfController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Controller/SbfController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.8846154" vertical-offset="153" max-vertical-offset="1224">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="1292">
+              <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
               <folding>
                 <element signature="e#6#86#0#PHP" expanded="true" />
                 <element signature="e#88#116#0#PHP" expanded="true" />
@@ -44,49 +44,79 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DbModel/UserModel.php">
+      <file leaf-file-name="DbManager_tester.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/DbManager_tester.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="901">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="-10.346154" vertical-offset="37" max-vertical-offset="799">
+              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DbManager_tester.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Tests/DbManager_tester.php">
+      <file leaf-file-name="BaseTableModel.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Model/BaseTableModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7450199" vertical-offset="0" max-vertical-offset="816">
-              <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
+            <state vertical-scroll-proportion="0.27827382" vertical-offset="0" max-vertical-offset="672">
+              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UserModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/UserModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.230769" vertical-offset="107" max-vertical-offset="1173">
+              <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AssessmentModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/AssessmentModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.3846154" vertical-offset="192" max-vertical-offset="1088">
+              <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MedicalFormModel.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Model/MedicalFormModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-6.576923" vertical-offset="118" max-vertical-offset="969">
+              <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="LoginModel.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DbModel/LoginModel.php">
+        <entry file="file://$PROJECT_DIR$/Model/LoginModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="612">
-              <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+            <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="867">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="DbManager.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/DbModel/DbManager.php">
+        <entry file="file://$PROJECT_DIR$/DbManager.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-100.69231" vertical-offset="0" max-vertical-offset="3179">
-              <caret line="161" column="54" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+            <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="3196">
+              <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
               <folding>
-                <marker date="1423379969349" expanded="true" signature="1348:1502" placeholder="INSERT INTO ..." />
-                <marker date="1423379969349" expanded="true" signature="2210:2228" placeholder="SELECT * FRO..user..." />
-                <marker date="1423379969349" expanded="true" signature="2900:2931" placeholder="DELETE FROM ..." />
-                <marker date="1423379969349" expanded="true" signature="3553:3769" placeholder="INSERT INTO ..." />
-                <marker date="1423379969349" expanded="true" signature="4588:4709" placeholder="INSERT INTO ..." />
-                <marker date="1423379969349" expanded="true" signature="5465:5481" placeholder="DELETE FROM ..." />
-                <marker date="1423379969349" expanded="true" signature="6049:6089" placeholder="SELECT ID FR..user..." />
+                <marker date="1423393597574" expanded="true" signature="1382:1536" placeholder="INSERT INTO ..." />
+                <marker date="1423393597574" expanded="true" signature="2244:2262" placeholder="SELECT * FRO..user..." />
+                <marker date="1423393597574" expanded="true" signature="2934:2965" placeholder="DELETE FROM ..." />
+                <marker date="1423393597574" expanded="true" signature="3587:3803" placeholder="INSERT INTO ..." />
+                <marker date="1423393597574" expanded="true" signature="4622:4743" placeholder="INSERT INTO ..." />
+                <marker date="1423393597574" expanded="true" signature="5499:5515" placeholder="DELETE FROM ..." />
+                <marker date="1423393597574" expanded="true" signature="6083:6123" placeholder="SELECT ID FR..user..." />
               </folding>
             </state>
           </provider>
@@ -103,9 +133,6 @@
         <option value="$PROJECT_DIR$/AssessmentModel.php" />
         <option value="$PROJECT_DIR$/MedFormModel.php" />
         <option value="$PROJECT_DIR$/DbController.php" />
-        <option value="$PROJECT_DIR$/Model/UserModel.php" />
-        <option value="$PROJECT_DIR$/Model/BaseTableModel.php" />
-        <option value="$PROJECT_DIR$/Model/AssessmentModel.php" />
         <option value="$PROJECT_DIR$/Model/MedFormModel.php" />
         <option value="$PROJECT_DIR$/Model/loginModel.php" />
         <option value="$PROJECT_DIR$/DbModel/MedFormModel.php" />
@@ -115,13 +142,18 @@
         <option value="$PROJECT_DIR$/DbModel/BaseTableModel.php" />
         <option value="$PROJECT_DIR$/DbModel/LoginModel.php" />
         <option value="$PROJECT_DIR$/DbModel/UserModel.php" />
-        <option value="$PROJECT_DIR$/DbManager.php" />
         <option value="$PROJECT_DIR$/UserModel.php" />
         <option value="$PROJECT_DIR$/LoginModel.php" />
-        <option value="$PROJECT_DIR$/DbManager_tester.php" />
         <option value="$PROJECT_DIR$/SbfController.php" />
         <option value="$PROJECT_DIR$/Tests/DbManager_tester.php" />
+        <option value="$PROJECT_DIR$/Model/BaseTableModel.php" />
+        <option value="$PROJECT_DIR$/DbManager.php" />
+        <option value="$PROJECT_DIR$/Model/AssessmentModel.php" />
+        <option value="$PROJECT_DIR$/Model/MedicalFormModel.php" />
+        <option value="$PROJECT_DIR$/Model/LoginModel.php" />
+        <option value="$PROJECT_DIR$/Model/UserModel.php" />
         <option value="$PROJECT_DIR$/Controller/SbfController.php" />
+        <option value="$PROJECT_DIR$/DbManager_tester.php" />
       </list>
     </option>
   </component>
@@ -188,7 +220,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -206,41 +237,10 @@
               <option name="myItemId" value="SBF_Database" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Tests" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SBF_Database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SBF_Database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DbModel" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SBF_Database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SBF_Database" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -255,14 +255,14 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\UniServerZ\www\SBF_Database" />
       <recent name="C:\UniServerZ2\www\SBF_Database\Tests" />
       <recent name="C:\UniServerZ2\www\SBF_Database\DbModel" />
       <recent name="C:\UniServerZ2\www\SBF_Database\Controller" />
       <recent name="C:\UniServerZ2\www\SBF_Database" />
-      <recent name="C:\UniServerZ2\SBF_Database2" />
     </key>
   </component>
-  <component name="RunManager" selected="JavaScript Debug.DbManager_tester.php">
+  <component name="RunManager" selected="PHP Script.DbManager_tester.php">
     <configuration default="false" name="DbManager.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/DbManager.php">
       <RunnerSettings RunnerId="PhpRunner" />
       <ConfigurationWrapper RunnerId="PhpRunner" />
@@ -281,12 +281,7 @@
       <ConfigurationWrapper RunnerId="PhpUnitDebugRunner" />
       <method />
     </configuration>
-    <configuration default="false" name="DbManager_tester.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SBF_Database/Tests/DbManager_tester.php">
-      <RunnerSettings RunnerId="JavascriptDebugRunner" />
-      <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
-      <method />
-    </configuration>
-    <configuration default="false" name="DbManager_tester.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SBF_Database/Tests/DbManager_tester.php">
+    <configuration default="false" name="DbManager_tester.php" type="JavascriptDebugType" factoryName="JavaScript Debug" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/SBF_Database/DbManager_tester.php">
       <RunnerSettings RunnerId="JavascriptDebugRunner" />
       <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
       <method />
@@ -319,17 +314,16 @@
       <envs />
       <method />
     </configuration>
-    <list size="5">
+    <list size="4">
       <item index="0" class="java.lang.String" itemvalue="PHP Script.DbManager.php" />
       <item index="1" class="java.lang.String" itemvalue="PHP Script.DbManager_tester.php" />
       <item index="2" class="java.lang.String" itemvalue="PHPUnit.SBF_Database" />
       <item index="3" class="java.lang.String" itemvalue="JavaScript Debug.DbManager_tester.php" />
-      <item index="4" class="java.lang.String" itemvalue="JavaScript Debug.DbManager_tester.php" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.DbManager_tester.php" />
-        <item index="1" class="java.lang.String" itemvalue="PHP Script.DbManager_tester.php" />
+        <item index="0" class="java.lang.String" itemvalue="PHP Script.DbManager_tester.php" />
+        <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.DbManager_tester.php" />
         <item index="2" class="java.lang.String" itemvalue="JavaScript Debug.DbManager_tester.php" />
         <item index="3" class="java.lang.String" itemvalue="PHPUnit.SBF_Database" />
         <item index="4" class="java.lang.String" itemvalue="PHP Script.DbManager.php" />
@@ -355,21 +349,21 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39891893" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39891893" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" x="0" y="46" width="1920" height="948" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18443497" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32995737" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20149253" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2345946" sideWeight="0.74040514" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21002132" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39891893" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21513514" sideWeight="0.74040514" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18443497" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21513514" sideWeight="0.2595949" order="7" side_tool="true" content_ui="tabs" x="0" y="46" width="1920" height="948" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -398,6 +392,194 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Controller/SbfController.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="1258">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#86#0#PHP" expanded="true" />
+            <element signature="e#88#116#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager_tester.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/BaseTableModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="289">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/UserModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="430" max-vertical-offset="1207">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/LoginModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="612">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="3179">
+          <caret line="161" column="54" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+          <folding>
+            <marker date="1423393597574" expanded="true" signature="1382:1536" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="2244:2262" placeholder="SELECT * FRO..user..." />
+            <marker date="1423393597574" expanded="true" signature="2934:2965" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="3587:3803" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="4622:4743" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="5499:5515" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="6083:6123" placeholder="SELECT ID FR..user..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/SbfController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1258">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#86#0#PHP" expanded="true" />
+            <element signature="e#88#116#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager_tester.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="816">
+          <caret line="16" column="92" selection-start-line="16" selection-start-column="92" selection-end-line="16" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/BaseTableModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="170" max-vertical-offset="289">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/UserModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="430" max-vertical-offset="1207">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/LoginModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="612">
+          <caret line="11" column="30" selection-start-line="11" selection-start-column="30" selection-end-line="11" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="3179">
+          <caret line="161" column="54" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+          <folding>
+            <marker date="1423393597574" expanded="true" signature="1382:1536" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="2244:2262" placeholder="SELECT * FRO..user..." />
+            <marker date="1423393597574" expanded="true" signature="2934:2965" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="3587:3803" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="4622:4743" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="5499:5515" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="6083:6123" placeholder="SELECT ID FR..user..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/SbfController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1258">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#86#0#PHP" expanded="true" />
+            <element signature="e#88#116#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager_tester.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="816">
+          <caret line="9" column="9" selection-start-line="9" selection-start-column="9" selection-end-line="9" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2618" max-vertical-offset="3179">
+          <caret line="161" column="54" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+          <folding>
+            <marker date="1423393597574" expanded="true" signature="1382:1536" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="2244:2262" placeholder="SELECT * FRO..user..." />
+            <marker date="1423393597574" expanded="true" signature="2934:2965" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="3587:3803" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="4622:4743" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="5499:5515" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="6083:6123" placeholder="SELECT ID FR..user..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/SbfController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1173">
+          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+          <folding>
+            <element signature="e#6#86#0#PHP" expanded="true" />
+            <element signature="e#88#116#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager_tester.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="578">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/DbManager.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2618" max-vertical-offset="3179">
+          <caret line="161" column="54" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+          <folding>
+            <marker date="1423393597574" expanded="true" signature="1382:1536" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="2244:2262" placeholder="SELECT * FRO..user..." />
+            <marker date="1423393597574" expanded="true" signature="2934:2965" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="3587:3803" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="4622:4743" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="5499:5515" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="6083:6123" placeholder="SELECT ID FR..user..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Controller/SbfController.php">
+      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1088">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
@@ -407,7 +589,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/DbManager_tester.php">
+    <entry file="file://$PROJECT_DIR$/DbManager_tester.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="799">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
@@ -415,18 +597,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DbModel/DbManager.php">
+    <entry file="file://$PROJECT_DIR$/DbManager.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="3179">
           <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
-            <marker date="1423379969349" expanded="true" signature="1348:1502" placeholder="INSERT INTO ..." />
-            <marker date="1423379969349" expanded="true" signature="2210:2228" placeholder="SELECT * FRO..user..." />
-            <marker date="1423379969349" expanded="true" signature="2900:2931" placeholder="DELETE FROM ..." />
-            <marker date="1423379969349" expanded="true" signature="3553:3769" placeholder="INSERT INTO ..." />
-            <marker date="1423379969349" expanded="true" signature="4588:4709" placeholder="INSERT INTO ..." />
-            <marker date="1423379969349" expanded="true" signature="5465:5481" placeholder="DELETE FROM ..." />
-            <marker date="1423379969349" expanded="true" signature="6049:6089" placeholder="SELECT ID FR..user..." />
+            <marker date="1423393597574" expanded="true" signature="1382:1536" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="2244:2262" placeholder="SELECT * FRO..user..." />
+            <marker date="1423393597574" expanded="true" signature="2934:2965" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="3587:3803" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="4622:4743" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="5499:5515" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="6083:6123" placeholder="SELECT ID FR..user..." />
           </folding>
         </state>
       </provider>
@@ -504,42 +686,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DbModel/LoginModel.php">
+    <entry file="file://$PROJECT_DIR$/Model/MedicalFormModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="612">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="-6.576923" vertical-offset="118" max-vertical-offset="969">
+          <caret line="22" column="24" selection-start-line="22" selection-start-column="24" selection-end-line="22" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DbModel/DbManager.php">
+    <entry file="file://$PROJECT_DIR$/DbManager.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-100.69231" vertical-offset="0" max-vertical-offset="3179">
-          <caret line="161" column="54" selection-start-line="161" selection-start-column="54" selection-end-line="161" selection-end-column="54" />
+        <state vertical-scroll-proportion="-15.692307" vertical-offset="0" max-vertical-offset="3196">
+          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
           <folding>
-            <marker date="1423379969349" expanded="true" signature="1348:1502" placeholder="INSERT INTO ..." />
-            <marker date="1423379969349" expanded="true" signature="2210:2228" placeholder="SELECT * FRO..user..." />
-            <marker date="1423379969349" expanded="true" signature="2900:2931" placeholder="DELETE FROM ..." />
-            <marker date="1423379969349" expanded="true" signature="3553:3769" placeholder="INSERT INTO ..." />
-            <marker date="1423379969349" expanded="true" signature="4588:4709" placeholder="INSERT INTO ..." />
-            <marker date="1423379969349" expanded="true" signature="5465:5481" placeholder="DELETE FROM ..." />
-            <marker date="1423379969349" expanded="true" signature="6049:6089" placeholder="SELECT ID FR..user..." />
+            <marker date="1423393597574" expanded="true" signature="1382:1536" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="2244:2262" placeholder="SELECT * FRO..user..." />
+            <marker date="1423393597574" expanded="true" signature="2934:2965" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="3587:3803" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="4622:4743" placeholder="INSERT INTO ..." />
+            <marker date="1423393597574" expanded="true" signature="5499:5515" placeholder="DELETE FROM ..." />
+            <marker date="1423393597574" expanded="true" signature="6083:6123" placeholder="SELECT ID FR..user..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/DbModel/UserModel.php">
+    <entry file="file://$PROJECT_DIR$/Model/UserModel.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846" vertical-offset="0" max-vertical-offset="901">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+        <state vertical-scroll-proportion="-12.230769" vertical-offset="107" max-vertical-offset="1173">
+          <caret line="30" column="30" selection-start-line="30" selection-start-column="30" selection-end-line="30" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/AssessmentModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.3846154" vertical-offset="192" max-vertical-offset="1088">
+          <caret line="23" column="18" selection-start-line="23" selection-start-column="18" selection-end-line="23" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/LoginModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5" vertical-offset="0" max-vertical-offset="867">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Controller/SbfController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.8846154" vertical-offset="153" max-vertical-offset="1224">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state vertical-scroll-proportion="-13.730769" vertical-offset="0" max-vertical-offset="1292">
+          <caret line="21" column="37" selection-start-line="21" selection-start-column="37" selection-end-line="21" selection-end-column="37" />
           <folding>
             <element signature="e#6#86#0#PHP" expanded="true" />
             <element signature="e#88#116#0#PHP" expanded="true" />
@@ -547,10 +745,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Tests/DbManager_tester.php">
+    <entry file="file://$PROJECT_DIR$/DbManager_tester.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7450199" vertical-offset="0" max-vertical-offset="816">
-          <caret line="22" column="49" selection-start-line="22" selection-start-column="49" selection-end-line="22" selection-end-column="49" />
+        <state vertical-scroll-proportion="-10.346154" vertical-offset="37" max-vertical-offset="799">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Model/BaseTableModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27827382" vertical-offset="0" max-vertical-offset="672">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
           <folding />
         </state>
       </provider>

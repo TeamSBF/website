@@ -10,20 +10,26 @@ use DbModel\AssessmentModel;
 use DbModel\MedicalFormModel;
 use DbModel\LoginModel;
 use DbModel\UserModel;
-//require 'DbManager.php';
+
+include 'C:\UniServerZ\www\SBF_Database\Model\UserModel.php';
+include 'C:\UniServerZ\www\SBF_Database\Model\LoginModel.php';
 
 
 class SbfController
 {
+    private static $db;
     // This class will change as the project progresses
+    function __construct($db_instance)
+    {
+        SbfController::$db = $db_instance;
+    }
 
     public function registerUser($values)
     {
         // Once data validation in the Model classes is in place, this method will call validateData
         // on the user object and call assignValues upon success
         $user = new UserModel($values);
-        $db = new DbManager();
-        $db->addUser($user);
+        SbfController::$db->addUser($user);
     }
 
     public function loginUser($values)
@@ -31,8 +37,7 @@ class SbfController
         // Once data validation in the Model classes is in place, this method will call validateData
         // on the user object and call assignValues upon success
         $login = new LoginModel($values);
-        $db = new DbManager();
-        $db->authenticateUser($login);
+        SbfController::$db->authenticateUser($login);
     }
 
     public function registerMedicalForm($values)
@@ -40,8 +45,7 @@ class SbfController
         // Once data validation in the Model classes is in place, this method will call validateData
         // on the user object and call assignValues upon success
         $medForm = new MedicalFormModel($values);
-        $db = new DbManager();
-        $db->addMedicalForm($medForm);
+        SbfController::$db->addMedicalForm($medForm);
     }
 
     public function registerAssessment($values)
