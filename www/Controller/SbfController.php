@@ -28,50 +28,42 @@ class SbfController
 
     public function registerUser($values)
     {
-        // Once data validation in the Model classes is in place, this method will call validateData
-        // on the user object and call assignValues upon success
         $user = new UserModel($values);
+        if ($user->validateData())
+            $user->assignValues();
         SbfController::$db->addUser($user);
-    }
-
-    public function loginUser($values)
-    {
-        // Once data validation in the Model classes is in place, this method will call validateData
-        // on the user object and call assignValues upon success
-        $login = new LoginModel($values);
-        SbfController::$db->authenticateUser($login);
     }
 
     public function registerMedicalForm($values)
     {
-        // Once data validation in the Model classes is in place, this method will call validateData
-        // on the user object and call assignValues upon success
         $medForm = new MedicalFormModel($values);
+        if ($medForm->validateData())
+            $medForm->assignValues();
         SbfController::$db->addMedicalForm($medForm);
     }
 
     public function registerAssessment($values)
     {
-        // Once data validation in the Model classes is in place, this method will call validateData
-        // on the user object and call assignValues upon success
         $assess = new AssessmentModel($values);
+        if ($assess->validateData())
+            $assess->assignValues();
         SbfController::$db->addAssessment($assess);
     }
 
     public function updateUserAccount($values)
     {
-        // Once data validation in the Model classes is in place, this method will call validateData
-        // on the user object and call assignValues upon success
         $user = new UserModel($values);
+        if ($user->validateData())
+            $user->assignValues();
         SbfController::$db->updateUser($user);
     }
 
     public function authenticateUser($values)
     {
-        // Once data validation in the Model classes is in place, this method will call validateData
-        // on the user object and call assignValues upon success
         $login = new LoginModel($values);
-        SbfController::$db->authenticateMember($login);
+        if ($login->validateData())
+            $login->assignValues();
+        return SbfController::$db->authenticateMember($login);
     }
 
     public function displayUserInfo()

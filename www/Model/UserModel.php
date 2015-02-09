@@ -12,7 +12,6 @@ include(__DIR__.'\BaseTableModel.php');
 
 class UserModel implements BaseTableModel
 {
-
     private $email;
     private $lastName;
     private $firstName;
@@ -29,13 +28,12 @@ class UserModel implements BaseTableModel
     function __construct($values)
     {
         $this->vals = $values;
-        $this->assignValues();
     }
 
-    public function validateData($values)
+    public function validateData()
     {
         // Needs to be implemented
-        // For now the dictionary "values" is passed directly to the constructor without data scrubbing
+        return true;
     }
 
     public function assignValues()

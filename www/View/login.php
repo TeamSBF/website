@@ -24,6 +24,9 @@
 		margin: 25px;
 		
 		}	
+		#error{
+			<font color = "red">;
+		}
 		</style>
 </head>
 <body>
@@ -44,20 +47,13 @@
 		$loginInfo = array("email"=>$passed_user, "password"=>$passed_pwd);
 		//pass to db manager and get results
 		$controller = new SbfController();
-		$controller->authenticateUser($loginInfo);
 
-		/*
-		//compare reults
-		$result_name = "mason";
-		$result_email = "email@email.email";
-		$result_password = "password";
-
-		if(($passed_user==$result_name or $passed_user == $result_email) and $passed_pwd == $result_password)
+		if($controller->authenticateUser($loginInfo))
 		{
 			header("location: members.php");
 		}else{
-			echo 'failed';
-		} */
+			$error = true;
+		} 
 
 	}
 ?>
@@ -66,6 +62,13 @@
 		
 			<fieldset>
 			<legend> Login Page </legend>
+			
+				<div id ="error">
+					<?php
+						if(isset($error))
+							echo '<p><font color="red">*Username/Password is incorrect*</font></p>';
+					?>
+				</div>
 
 				<div id ="userNameInput">
 					<label for="user" class ="loginLabel">

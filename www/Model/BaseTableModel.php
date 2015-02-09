@@ -11,7 +11,7 @@ namespace DbModel;
 interface BaseTableModel
 {
     public function assignValues();
-    public function validateData($values);
+    public function validateData();
     public function __get($property);
     public function __set($property, $value);
 }
