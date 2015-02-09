@@ -47,7 +47,8 @@
 		$loginInfo = array("email"=>$passed_user, "password"=>$passed_pwd);
 		//pass to db manager and get results
 		$controller = new SbfController();
-
+		$controller->authenticateUser($loginInfo);
+		
 		if($controller->authenticateUser($loginInfo))
 		{
 			header("location: members.php");
