@@ -1,4 +1,6 @@
+<html>
 
+    <a href="login.php">Log In</a>
 <?php
 require(__DIR__.'\..\Controller\SbfController.php');
 
@@ -95,10 +97,6 @@ require(__DIR__.'\..\Controller\SbfController.php');
 		
 	
 ?>
-
-
-<html>
-
 	<form action='Registration.php' method='POST'>
 		<!-- this value='' is for when the user made a mistake so we keep this field next time around so they dont have to retype -->
 		First name: <input type="text" name = "firstname" value="<?php echo $firstname ?>">
@@ -226,8 +224,4 @@ require(__DIR__.'\..\Controller\SbfController.php');
 			<input type = "submit" value = "Register" name="register">
 			<!--input type = "submit" value = "Sign in" name="signIn"-->
 	</form >
-		
-	<form action = 'login.php'>
-		<input type = "submit" value = "Sign in" name="signIn">
-	</form>	
 </html>
