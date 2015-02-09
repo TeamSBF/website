@@ -3,6 +3,8 @@
 /msmtp
 /openssl
 /php54
+/mysql/data/phpmyadmin
 /mysql/share
 /mysql/data/performance_schema
 /mysql/data/mysql.err
+/mysql/data/ib_log*
