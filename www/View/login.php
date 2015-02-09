@@ -24,6 +24,9 @@
 		margin: 25px;
 		
 		}	
+		#error{
+			<font color = "red">;
+		}
 		</style>
 </head>
 <body>
@@ -45,8 +48,8 @@
 		//pass to db manager and get results
 		$controller = new SbfController();
 		$controller->authenticateUser($loginInfo);
-
-		/*
+		
+		
 		//compare reults
 		$result_name = "mason";
 		$result_email = "email@email.email";
@@ -56,8 +59,8 @@
 		{
 			header("location: members.php");
 		}else{
-			echo 'failed';
-		} */
+			$error = true;
+		} 
 
 	}
 ?>
@@ -66,6 +69,13 @@
 		
 			<fieldset>
 			<legend> Login Page </legend>
+			
+				<div id ="error">
+					<?php
+						if(isset($error))
+							echo '<p><font color="red">*error logging please try again*</font></p>';
+					?>
+				</div>
 
 				<div id ="userNameInput">
 					<label for="user" class ="loginLabel">

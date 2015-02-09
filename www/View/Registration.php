@@ -227,7 +227,7 @@ require(__DIR__.'\..\Controller\SbfController.php');
 			<!--input type = "submit" value = "Sign in" name="signIn"-->
 	</form >
 		
-	<form action = 'Index.php'>
+	<form action = 'login.php'>
 		<input type = "submit" value = "Sign in" name="signIn">
 	</form>	
 </html>
