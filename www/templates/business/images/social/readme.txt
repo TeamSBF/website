@@ -1,0 +1,1 @@
+This social icons were created by "Prekesh Chavda" and are available for free at: http://www.premiumpixels.com/freebies/41-social-media-icons-png/

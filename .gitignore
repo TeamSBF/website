@@ -1,0 +1,6 @@
+backups/
+cache/
+lock
+log/
+run
+spool/

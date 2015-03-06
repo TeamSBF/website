@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension type="module" version="3.0" client="site" method="upgrade">
+	<name>test mod</name>
+	<author>mason</author>
+	<version>0.0.6</version>
+	<description>my test moduel</description>
+	
+<install>
+     <sql>
+         <file driver="mysql" charset="utf8">mysql/install.mysql.utf8.sql</file>
+     </sql>
+</install>
+ 
+<uninstall>
+     <sql>
+         <file driver="mysql" charset="utf8">mysql/uninstall.mysql.utf8.sql</file>
+     </sql>
+</uninstall>
+ 
+<update> 
+    <schemas>
+        <schemapath type="mysql">mysql/updates</schemapath> 
+    </schemas> 
+</update>
+	<files>
+		<filename>mod_Mason.xml</filename>
+		<filename module="mod_Mason">mod_Mason.php</filename>
+		<filename>index.html</filename>
+		<filename>helper.php</filename>
+		<filename>tmpl/default.php</filename>
+		<filename>tmpl/form_success.php</filename>
+		<filename>tmpl/index.html</filename>
+		<folder>mysql</folder>
+		<folder>mysql/updates</folder>
+	
+	</files>
+	
+	<config>
+		<fields name="params">
+			<fieldset name="advanced">
+				<field name="moduleclass_sfx" type="text" label="Module Class Suffix"
+			   		 description = "Please enter Module Class Suffix"/>
+			
+			</fieldset>
+		</fields>
+	</config>
+
+</extension>
+

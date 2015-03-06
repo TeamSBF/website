@@ -1,0 +1,1 @@
+var chronoJQ = jQuery.noConflict();
