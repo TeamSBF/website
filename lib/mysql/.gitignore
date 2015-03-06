@@ -3,4 +3,4 @@
 !.gitignore
 !/mysql/
 !/database/
-!ibdata1
+!ibdata*
