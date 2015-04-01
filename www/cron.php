@@ -34,9 +34,13 @@ function tableExists($conn, $tableName)
 
 
 $tableName = "users";
-if(!tableExists($conn, $tableName))
-{
+if(!tableExists($conn, $tableName)) {
     $user = include("sql/" . $tableName . ".php");
-    echo $user->Query();
+    try {
+        $conn->query($user->Query());
+        echo "Added table '$tableName'<br>";
+    } catch (PDOException $e) {
+        echo "Adding table '$tableName' failed: " . $e->getMessage();
+    }
 }
-else echo"table does exist. do nothing.";
+else echo"table exists. do nothing.";
