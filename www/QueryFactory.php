@@ -23,7 +23,7 @@ class QueryFactory
         $query = null;
         switch ($type) {
             case"table":
-                $query = new TableQuery($name);
+                $query = new CreateTableQuery($name);
                 break;
         }
 

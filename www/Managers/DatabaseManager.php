@@ -4,25 +4,32 @@ class DatabaseManager
     // ---
     private static $instance = null;
     // ---
-
+	
     private $conn = null;
 
     private function __construct()
     {
-        $dsn = "mysql:dbname=sbf_database;host:localhost";
+		$host = "localhost";
+		$dbname = "sbf_database";
         $user = "root";
         $pass = "root";
         try {
-            $conn = new PDO($dsn, $user, $pass);
+            $this->conn = new PDO("mysql:dbname=$dbname;host:$host", $user, $pass);
         } catch (PDOException $e) {
             echo "Connection Failed: " . $e->getMessage();
         }
     }
-
-    public function test()
-    {
-        echo "test db";
-    }
+	
+	public static function TableExists($tableName)
+	{
+		try{
+			$res = $this->conn->query("SELECT 1 FROM `$tableName` LIMIt 1");
+		} catch(Exception $e) {
+			return false;
+		}
+		
+		return $res !== false;
+	}
 
     public static function Instance()
     {

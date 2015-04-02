@@ -1,5 +1,5 @@
 <?php
-class TableQuery
+class CreateTableQuery
 {
     private $name = "";
     private $ai = "";

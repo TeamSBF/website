@@ -1,12 +1,11 @@
 <?php
 require_once"config.php";
-//require_once"Managers/DatabaseManager.php";
 //require_once"QueryBuilder.php";
 //require_once"cron/DatabaseMigration.php";
 
 //DatabaseMigration::Migrate();
 
-require_once"QueryFactory.php";
+//require_once"QueryFactory.php";
 
 $conn = null;
 $host = "localhost";
@@ -20,7 +19,7 @@ try {
 }
 
 
-
+/*
 function tableExists($conn, $tableName)
 {
     try {
@@ -31,13 +30,17 @@ function tableExists($conn, $tableName)
 
     return $res !== false;
 }
-
+*/
 
 $tableName = "users";
-if(!tableExists($conn, $tableName)) {
+if(!DatabaseManager::TableExists($tableName)) {
     $user = include("sql/" . $tableName . ".php");
     try {
-        $conn->query($user->Query());
+        //$conn->query($user->Query());
+		
+		echo"<pre>";
+		echo $user->Query();
+		echo"</pre>";
         echo "Added table '$tableName'<br>";
     } catch (PDOException $e) {
         echo "Adding table '$tableName' failed: " . $e->getMessage();
