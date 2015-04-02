@@ -9,8 +9,8 @@ class DatabaseManager
 
     private function __construct()
     {
-		$host = "localhost";
-		$dbname = "sbf_database";
+        $host = "localhost";
+        $dbname = "sbf_database";
         $user = "root";
         $pass = "root";
         try {
@@ -19,11 +19,23 @@ class DatabaseManager
             echo "Connection Failed: " . $e->getMessage();
         }
     }
+
+    public static function Query($query)
+    {
+        $res = null;
+        if($query instanceof CreateTableQuery)
+        {
+            $stmt = self::Instance()->conn->prepare($query->Query());
+            $res = new QueryInfo($stmt->execute());
+        }
+
+        return $res;
+    }
 	
 	public static function TableExists($tableName)
 	{
 		try{
-			$res = $this->conn->query("SELECT 1 FROM `$tableName` LIMIt 1");
+			$res = self::Instance()->conn->query("SELECT 1 FROM `$tableName` LIMIT 1");
 		} catch(Exception $e) {
 			return false;
 		}
