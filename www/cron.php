@@ -1,11 +1,10 @@
 <?php
 require_once"config.php";
-//require_once"QueryBuilder.php";
-//require_once"cron/DatabaseMigration.php";
 require_once "Queries/QueryInfo.php";
 require_once "Queries/QueryFactory.php";
 require_once "Managers/DatabaseManager.php";
 require_once "Queries/CreateTableQuery.php";
+require_once "Queries/SelectQuery.php";
 
 $tableName = "users";
 if(!DatabaseManager::TableExists($tableName)) {
@@ -20,4 +19,11 @@ if(!DatabaseManager::TableExists($tableName)) {
         echo "Adding table '$tableName' failed: " . $e->getMessage();
     }
 }
-else echo"table exists. do nothing.";
+//else echo"table exists. do nothing.";
+
+$select = new SelectQuery();
+$select->Select("id")->From("users")->WhereColumns("id")->WhereOperators("=")->WhereValues("1");
+$qinfo = DatabaseManager::Query($select);
+echo"<pre>\nResults from ".$select->Query()[0]."\n";
+print_r($qinfo->Result());
+echo"</pre>";

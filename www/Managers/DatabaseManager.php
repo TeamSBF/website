@@ -22,14 +22,27 @@ class DatabaseManager
 
     public static function Query($query)
     {
-        $res = null;
-        if($query instanceof CreateTableQuery)
-        {
-            $stmt = self::Instance()->conn->prepare($query->Query());
-            $res = new QueryInfo($stmt->execute());
+        try {
+            if ($query instanceof CreateTableQuery) {
+                $stmt = self::Instance()->conn->prepare($query->Query());
+            } else if ($query instanceof SelectQuery) {
+                $q = $query->Query()[0];
+                $cols = $query->Query()[1];
+                $vals = $query->Query()[2];
+
+                $stmt = self::Instance()->conn->prepare($q);
+                for ($i = 0; $i < count($cols); $i++)
+                    $stmt->bindParam(":" . $cols[$i], $vals[$i]);
+            }
+
+            $stmt->execute();
+
+            return new QueryInfo($stmt);
+        } catch (PDOException $e) {
+            echo "Error occured executing query '$query->Query()': " . $e->getMessage();
         }
 
-        return $res;
+        return null;
     }
 	
 	public static function TableExists($tableName)
