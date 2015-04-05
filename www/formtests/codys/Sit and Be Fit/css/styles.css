@@ -1,0 +1,64 @@
+/* Application Styles */
+html{
+  margin-top: 33px;
+}
+body 
+{
+  padding-top: 100px;
+  font-family: 'Bitter', serif;
+  background-image: url("../img/bg_img.png");
+  background-size: 100%;
+  /*font-family: 'Bree Serif', serif;*/
+}
+
+/*NAVIGATION*/
+ul {
+  list-style:none;
+  padding-left: 32px;
+  margin: 0;
+  color: #C0260A;
+}
+nav ul {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  background:#0DB9FF;
+  height: 1.7em;
+  list-style: none;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  font-size: 1.25em;
+  font-style: bold;
+  color: transparent;
+}
+nav a:link, nav a:visited {
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
+}
+nav a:hover {
+  color: black;
+  background: white;
+  font-weight: bold;
+  border-bottom: 1px solid white;
+}
+nav li {
+  display: inline;
+  float: left;
+  padding: .625em 0;
+}
+
+nav a{
+  text-decoration: none;
+  font-weight: 800;
+  padding: 20px;
+  color: #93AAFF;
+}
+nav a.selected, 
+nav a:hover,
+nav a:visited{
+	padding-bottom: 0;
+	color:#0E216C;
+}
