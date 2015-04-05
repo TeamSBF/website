@@ -11,10 +11,12 @@ body
   background-repeat: no-repeat;
   background-size: 100%;
 }
+
 p
 {
   text-indent: 2em;
 }
+
 section
 {
   background: white;
@@ -26,24 +28,34 @@ section
 p
 {
   font-family: 'Bree Serif', serif;
+  font-size: 1.1em;
 }
+
 /*Headings/Titles font and sizes */
 h1,h2,h3,nav
 {
   font-family: 'Bitter', serif;
 }
+
 h1,h2
 {
   color:whitesmoke;
 }
+
 h3
 {
+  font-size: 1.3em;
   color:#FF0000;
+}
+h1
+{
+  font-size: 2em;
 }
 input
 {
   width:313px;
 }
+
 section > ul > li
 {
   font-family: 'Bree Serif',serif;
@@ -56,13 +68,16 @@ section > ul > li
 
 
 /*NAVIGATION*/
-ul {
+ul 
+{
   list-style:none;
   padding-left: 32px;
   margin: 0;
   color: violet;
 }
-nav ul {
+
+nav ul 
+{
   padding: 0;
   padding-left: 174px;
   margin: 0;
@@ -80,33 +95,41 @@ nav ul {
   color: transparent;
   text-align: justify;
 }
-nav a:link, nav a:visited {
+
+nav a:link, nav a:visited 
+{
   padding: 10px 20px;
   color: white;
   text-decoration: none;
 }
-nav a:hover {
+
+nav a:hover 
+{
   color: black;
   background: white;
   font-weight: bold;
   border-bottom: 1px solid white;
 }
-nav li {
+
+nav li 
+{
   display: block;
   float: left;
   padding: .625em 0;
 }
 
-nav a{
+nav a
+{
   text-decoration: none;
   font-weight: 800;
   padding: 20px;
   color: #93AAFF;
-  
 }
+
 nav a.selected, 
 nav a:hover,
-nav a:visited{
+nav a:visited
+{
 	padding-bottom: 0;
 	color:#9709B2;
 }
