@@ -7,11 +7,40 @@ html
 body 
 {
   padding-top: 100px;
-  font-family: 'Bitter', serif;
   background-image: url("../img/bg_img.png");
   background-size: 100%;
-  /*font-family: 'Bree Serif', serif;*/
 }
+p
+{
+  text-indent: 2em;
+}
+section
+{
+  background: white;
+  border: .1em solid black;
+}
+
+/* FONT STYLING */
+/*Paragraph fonts and styles*/
+p
+{
+  font-family: 'Bree Serif', serif;
+}
+/*Headings/Titles font and sizes */
+h1,h2,h3,nav
+{
+  font-family: 'Bitter', serif;
+}
+h1,h2,h3
+{
+  color:whitesmoke;
+}
+
+
+
+
+
+
 
 /*NAVIGATION*/
 ul {
@@ -62,5 +91,5 @@ nav a.selected,
 nav a:hover,
 nav a:visited{
 	padding-bottom: 0;
-	color:#0E216C;
+	color:#9709B2;
 }
