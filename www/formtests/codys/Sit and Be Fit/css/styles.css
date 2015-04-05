@@ -32,15 +32,24 @@ h1,h2,h3,nav
 {
   font-family: 'Bitter', serif;
 }
-h1,h2,h3
+h1,h2
 {
   color:whitesmoke;
+}
+h3
+{
+  color:#FF0000;
 }
 input
 {
   width:313px;
 }
-
+section > ul > li
+{
+  font-family: 'Bree Serif',serif;
+  color:black;
+  list-style: disc;
+}
 
 
 
