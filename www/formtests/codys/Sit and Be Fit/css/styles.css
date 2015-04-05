@@ -1,13 +1,14 @@
 /* Application Styles */
 html
 {
-  margin-top: 33px;
+  margin-top: 50px;
 }
 
 body 
 {
   padding-top: 100px;
   background-image: url("../img/bg_img.png");
+  background-repeat: no-repeat;
   background-size: 100%;
 }
 p
@@ -35,7 +36,10 @@ h1,h2,h3
 {
   color:whitesmoke;
 }
-
+input
+{
+  width:313px;
+}
 
 
 
@@ -47,15 +51,17 @@ ul {
   list-style:none;
   padding-left: 32px;
   margin: 0;
-  color: #C0260A;
+  color: violet;
 }
 nav ul {
   padding: 0;
+  padding-left: 174px;
   margin: 0;
   width: 100%;
   max-width: 100%;
-  background:#0DB9FF;
-  height: 1.7em;
+  background: #0DB9FF;
+  background:#aaaaaa;
+  height: 2.5em;
   list-style: none;
   position: fixed;
   z-index: 2;
@@ -63,6 +69,7 @@ nav ul {
   font-size: 1.25em;
   font-style: bold;
   color: transparent;
+  text-align: justify;
 }
 nav a:link, nav a:visited {
   padding: 10px 20px;
@@ -76,7 +83,7 @@ nav a:hover {
   border-bottom: 1px solid white;
 }
 nav li {
-  display: inline;
+  display: block;
   float: left;
   padding: .625em 0;
 }
@@ -86,6 +93,7 @@ nav a{
   font-weight: 800;
   padding: 20px;
   color: #93AAFF;
+  
 }
 nav a.selected, 
 nav a:hover,
