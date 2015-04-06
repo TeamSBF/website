@@ -1,59 +1,44 @@
 <?php
-class SelectQuery
+class SelectQuery extends AbstractQuery
 {
-	private $select;
-	private $from;
-	private $whereColumns;
-    private $whereOps;
-    private $whereValues;
+    private $select;
+    private $whereElements;
+    private $conditions;
     private $limit;
-	
-	public function __construct()
-	{
-		$this->select = [];
-		$this->from = [];
-		$this->whereColumns = [];
-        $this->whereOps = [];
-        $this->whereValues = [];
-        $this->limit = 0;
-	}
-	
-	public function Select()
-	{
-		$this->select = $this->getArgs(func_get_args());
-        return $this;
-	}
-	
-	public function From()
-	{
-		$this->from = $this->getArgs(func_get_args());
-        return $this;
-	}
-	
-	public function WhereColumns()
-	{
-		$this->whereColumns = $this->getArgs(func_get_args());
-        return $this;
-	}
 
-    public function WhereOperators()
+    public function __construct()
     {
-        $this->whereOps = $this->getArgs(func_get_args());
+        parent::__construct();
+        $this->select = [];
+        $this->whereElements = [];
+        $this->conditions = 0;
+        $this->limit = 0;
+    }
+
+    public function Select($items)
+    {
+
+        $this->select = $items;
         return $this;
     }
 
-    public function WhereValues()
+    public function Where($column, $operator, $value, $condition = null)
     {
-        $this->whereValues = $this->getArgs(func_get_args());
+        if($condition != null)
+            $this->conditions++;
+
+        $e = new WhereElement($column, $operator, $value, $condition);
+        $this->whereElements[count($this->whereElements)] = $e;
         return $this;
     }
 
     public function Limit($limit)
     {
-        if(!is_numeric($limit))
+        if (!is_numeric($limit))
             throw new Exception("The limit must be a number: '$limit'");
 
         $this->limit = $limit;
+        return $this;
     }
 
     public function Query()
@@ -61,26 +46,22 @@ class SelectQuery
         $this->checkCounts();
 
         $query = "SELECT " . $this->parseInfo($this->select);
-        $query .= " FROM " . $this->parseInfo($this->from);
-        $query .= " WHERE " . $this->parseColumns();
+        $query .= " FROM " . $this->table;
+        if (count($this->whereElements) > 0)
+            $query .= " WHERE " . $this->parseWhere();
 
-        if($this->limit > 0)
+        if ($this->limit > 0)
             $query .= " LIMIT " . $this->limit;
 
-        return [$query, $this->whereColumns, $this->whereValues];
+        return [$query, $this->whereElements];
     }
 
     private function checkCounts()
     {
-        $columnCount = count($this->whereColumns);
-        $valueCount = count($this->whereValues);
-        $opsCount = count($this->whereOps);
+        $elementCount = count($this->whereElements);
 
-        if($valueCount !== $columnCount)
-            throw new Exception("WhereColumn(" . $columnCount . ") and WhereValue(" . $valueCount . ") counts do not match.");
-
-        if($opsCount !== $columnCount)
-            throw new Exception("WhereOperators(" . $columnCount . ") and WhereValue(" . $opsCount . ") counts do not match.");
+        if(abs($elementCount - $this->conditions) != 1)
+            throw new Exception("Query does not contain the correct number of WHERE clause conditionals.");
     }
 
     private function parseInfo($arr)
@@ -96,29 +77,15 @@ class SelectQuery
         return $info;
     }
 
-    private function parseColumns()
+    private function parseWhere()
     {
         $columns = "";
+        $elements = count($this->whereElements);
 
-        for($i = 0; $i < count($this->whereColumns); $i++)
-        {
-            $columns .= "`". $this->whereColumns[$i] ."` ";
-            $columns .= $this->whereOps[$i];
-            $columns .= " :". $this->whereColumns[$i];
+        for ($i = 0; $i < $elements; $i++) {
+            $columns .= $this->whereElements[$i]->Where();
         }
 
         return $columns;
     }
-	
-	private function getArgs($args)
-	{
-		$ret = [];
-		foreach($args as $arg)
-		{
-			$count = count($ret);
-			$ret[$count] = $arg;
-		}
-		
-		return $ret;
-	}
 }

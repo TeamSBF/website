@@ -117,6 +117,16 @@ class CreateTableQuery
         return $this;
     }
 
+    public function Columns()
+    {
+        return $this->cols;
+    }
+
+    public function Keys()
+    {
+        return array_merge($this->keys, ["ai" => $this->ai]);
+    }
+
     private function getDefaultValue($type)
     {
         $default = null;

@@ -1,6 +1,6 @@
 <?php
 
-$table = QueryFactory::CreateTable("users");
+$table = new CreateTableQuery("users");
 $table->AddColumn('id')->SetAutoIncrement();
 $table->AddColumn('email')->MakeVarChar(100)->AddKey('unique');
 $table->AddColumn('password')->MakeVarChar();

@@ -1,29 +1,89 @@
+<pre>
 <?php
-require_once"config.php";
+require_once "config.php";
+/*
 require_once "Queries/QueryInfo.php";
 require_once "Queries/QueryFactory.php";
 require_once "Managers/DatabaseManager.php";
 require_once "Queries/CreateTableQuery.php";
 require_once "Queries/SelectQuery.php";
+require_once "Queries/InsertQuery.php";
+require_once "Queries/UpdateQuery.php";
+*/
 
+/*
 $tableName = "users";
 if(!DatabaseManager::TableExists($tableName)) {
     $user = include("sql/" . $tableName . ".php");
     try {
 
-        echo"<pre>";
+
 		print_r(DatabaseManager::Query($user));
-		echo"</pre>";
         echo "Added table '$tableName'<br>";
     } catch (PDOException $e) {
         echo "Adding table '$tableName' failed: " . $e->getMessage();
     }
 }
-//else echo"table exists. do nothing.";
+//*/
 
+//*
+echo "\n\n=============== SelectQuery Checks ===============\n";
 $select = new SelectQuery();
-$select->Select("id")->From("users")->WhereColumns("id")->WhereOperators("=")->WhereValues("1");
-$qinfo = DatabaseManager::Query($select);
-echo"<pre>\nResults from ".$select->Query()[0]."\n";
-print_r($qinfo->Result());
-echo"</pre>";
+$select->Select(["id","email","activated"])->Table("users")->Where("id","=","1","and")->Where("email","=","email");
+//print_r($select->Query());
+testQuery($select);
+//*/
+
+/*
+echo "\n\n=============== InsertQuery Checks ===============\n";
+$insert = new InsertQuery();
+$insert->Table("users")->Set("id","NULL")->Set("email","blah12@blah.blah")->Set("password","asdasf");
+$insert->Set("salt","erbver")->Set("created","UNIX_TIMESTAMP()")->Set("activated","0");
+//print_r($insert->Query());
+testQuery($insert);
+//*/
+
+/*
+echo "\n\n=============== UpdateQuery Checks ===============\n";
+$update = new UpdateQuery();
+$update->Table("users")->Set("email","erbveredfvev")->Set("created","UNIX_TIMESTAMP()")->Set("salt","blahblah1")->Where("id","=","3");
+//print_r($update->Query());
+testQuery($update);
+//*/
+
+/*
+echo "\n\n=============== DeleteQuery Checks ===============\n";
+$delete = new DeleteQuery();
+$delete->From("users")->Where("id","=","4");
+//print_r($delete->Query());
+testQuery($delete);
+//*/
+
+function testQuery($query)
+{
+    $qinfo = DatabaseManager::Query($query);
+    echo "\nResults from " . $query->Query()[0] . "\n";
+    print_r($qinfo->Result());
+    echo"\nRows Affected: " . $qinfo->RowCount();
+}
+
+/*
+echo "=============== Exists Checks ===============\n";
+echo "successful user exists: ". (UserModel::Exists("email","erbveredfvev")?"true":"false") . "\n";
+echo "failed user exists: ". (UserModel::Exists("email","doesnotexist")?"true":"false") . "\n";
+//*/
+
+/*
+echo "\n\n=============== Login Checks ===============\n";
+echo "successful user login: "; print_r(UserModel::Login("sadf","ads"));
+echo "failed user login: "; print_r(UserModel::Login("doesnot","exist"));
+//*/
+
+/*
+echo "\n\n=============== Register Checks ===============\n";
+echo "successful user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") . "\n";
+echo "failed user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") ."\n";
+//*/
+
+?>
+</pre>
