@@ -16,7 +16,7 @@ class UserModel
         // do error checking here
 
         $select = new SelectQuery();
-        $select->Select("id")->From("users")->Where("email", "=", $email, "and")->Where("password", "=", $pass)->Limit(1);
+        $select->Select("id")->Table("users")->Where("email", "=", $email, "and")->Where("password", "=", $pass)->Limit(1);
         $res = DatabaseManager::Query($select);
         if ($res->RowCount() == 1)
             return new UserModel($res->Result()['id']);
@@ -38,7 +38,7 @@ class UserModel
     public static function Exists($column, $value)
     {
         $select = new SelectQuery();
-        $select->Select('id')->From("users")->Where($column, "=", $value)->Limit(1);
+        $select->Select('id')->Table"users")->Where($column, "=", $value)->Limit(1);
         $res = DatabaseManager::Query($select);
         if ($res->RowCount() == 1)
             return true;
