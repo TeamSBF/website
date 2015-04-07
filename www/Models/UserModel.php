@@ -27,18 +27,19 @@ class UserModel
     public static function Register($email, $pass, $salt)
     {
         $insert = new InsertQuery();
-        $insert->Table("users")->Set("email", $email)->Set("password", $pass)->Set("Salt", $salt)->Set("created","UNIX_TIMESTAMP()");
+        $insert->Table("users")->Set("email", $email)->Set("password", $pass)->Set("salt", $salt)->Set("created", "UNIX_TIMESTAMP()");
         $qinfo = DatabaseManager::Query($insert);
-        if($qinfo != null && $qinfo->RowCount() == 1)
+        //echo $qinfo->Errors();
+        if ($qinfo->RowCount() == 1)
             return true;
 
-        return false;;
+        return false;
     }
 
     public static function Exists($column, $value)
     {
         $select = new SelectQuery();
-        $select->Select('id')->Table"users")->Where($column, "=", $value)->Limit(1);
+        $select->Select('id')->Table("users")->Where($column, "=", $value)->Limit(1);
         $res = DatabaseManager::Query($select);
         if ($res->RowCount() == 1)
             return true;

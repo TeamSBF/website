@@ -31,17 +31,18 @@ class DatabaseManager
                 $stmt = self::instance()->parseIntoPrepared($query->Query());
             }
 
-            //$stmt->execute();
-            //return new QueryInfo($stmt);
-            //*
-            if ($stmt->execute()) {
-                $ret = new QueryInfo($stmt);
+            $errors = "";
+            for ($i = 0; !$stmt->execute() && $i < 3; $i++) {
+                $err = $stmt->errorInfo()[2];
+                $errors .= "Failed to process the query: " . $err . "\n";
 
-            } else {
+                if (is_numeric(strpos(strtolower($err),"duplicate")))
+                    break;
+
                 MigrationManager::HandleError($query, $stmt->errorInfo());
-                $ret = self::Query($query);
             }
-            //*/
+            $ret = new QueryInfo($stmt, $errors);
+
         } catch (PDOException $e) {
             echo "Error occured executing query '$query->Query()': " . $e->getMessage();
         }

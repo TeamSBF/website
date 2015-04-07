@@ -26,7 +26,7 @@ if(!DatabaseManager::TableExists($tableName)) {
 }
 //*/
 
-//*
+/*
 echo "\n\n=============== SelectQuery Checks ===============\n";
 $select = new SelectQuery();
 $select->Select(["id","email","activated"])->Table("users")->Where("id","=","1","and")->Where("email","=","email");
@@ -67,22 +67,30 @@ function testQuery($query)
     echo"\nRows Affected: " . $qinfo->RowCount();
 }
 
+//*
+echo "\n\n=============== Register Checks ===============\n";
+echo "successful user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") . "\n";
+echo "failed user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") ."\n";
+//*/
+
 /*
 echo "=============== Exists Checks ===============\n";
-echo "successful user exists: ". (UserModel::Exists("email","erbveredfvev")?"true":"false") . "\n";
+echo "successful user exists: ". (UserModel::Exists("email","blah")?"true":"false") . "\n";
 echo "failed user exists: ". (UserModel::Exists("email","doesnotexist")?"true":"false") . "\n";
 //*/
 
 /*
 echo "\n\n=============== Login Checks ===============\n";
-echo "successful user login: "; print_r(UserModel::Login("sadf","ads"));
+echo "successful user login: "; print_r(UserModel::Login("email","blah"));
 echo "failed user login: "; print_r(UserModel::Login("doesnot","exist"));
 //*/
 
-/*
-echo "\n\n=============== Register Checks ===============\n";
-echo "successful user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") . "\n";
-echo "failed user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") ."\n";
+//*
+echo "\n\n=============== DeleteQuery Checks ===============\n";
+$delete = new DeleteQuery();
+$delete->From("users")->Where("email","=","email","and")->Where("password","=","blah");
+//print_r($delete->Query());
+testQuery($delete);
 //*/
 
 ?>

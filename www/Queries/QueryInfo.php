@@ -2,11 +2,15 @@
 class QueryInfo
 {
     private $statement = null;
+    private $errors = "No Errors";
 
-    public function __construct($stmt)
+    public function __construct($stmt, $errors)
     {
         if($stmt instanceof PDOStatement)
             $this->statement = $stmt;
+
+        if($errors != "")
+            $this->errors = $errors;
     }
 
     public function RowCount()
@@ -35,5 +39,10 @@ class QueryInfo
     public function ErrorInfo()
     {
         return $this->statement->errorInfo();
+    }
+
+    public function Errors()
+    {
+        return $this->errors;
     }
 }

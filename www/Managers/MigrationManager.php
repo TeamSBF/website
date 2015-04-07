@@ -12,10 +12,6 @@ class MigrationManager
 
     public static function HandleError($query, $errorInfo)
     {
-        //print_r($errorInfo);
-        //print_r($query);
-        //echo "table: " . $query->Table() ."\n";
-
         // 1054: field does not exist
         // 1146: table does not exist
         $instance = self::instance();
@@ -95,7 +91,7 @@ class MigrationManager
     private function createTable($table)
     {
         try {
-            $schema = $this->grabTablInfo($table);
+            $schema = $this->grabTableInfo($table);
             //print_r(DatabaseManager::Query($user));
             DatabaseManager::Query($schema);
             //echo "Added table '$table'<br>";
