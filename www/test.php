@@ -26,7 +26,7 @@ if(!DatabaseManager::TableExists($tableName)) {
 }
 //*/
 
-/*
+//*
 echo "\n\n=============== SelectQuery Checks ===============\n";
 $select = new SelectQuery();
 $select->Select(["id","email","activated"])->Table("users")->Where("id","=","1","and")->Where("email","=","email");
