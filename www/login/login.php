@@ -43,7 +43,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div>
-			<form class="form-signin" method="POST">
+			<form class="form-signin" action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
 				<input name="regKey" type="hidden" value = <?php echo $_SESSION['regKey'];?> >
 				<h2 class="form-signin-heading">Please sign in</h2>
 				
