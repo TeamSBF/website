@@ -24,3 +24,8 @@ class AutoLoader
             throw new Exception("Failed to find '" . $className . "' in any of the listed directories.");
     }
 }
+
+function printr($arr)
+{
+	echo"<pre>". print_r($arr, true) . "</pre>";
+}

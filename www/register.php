@@ -1,15 +1,15 @@
 <?php
-	require_once "config.php";
+	require_once "header.php";
 	
-	//if(isset($_POST['regKey']) && $_POST['regKey'] === $_SESSION['regKey'])
-	if(isset($_POST['register']))
+	//printr($_POST);
+	if(isset($_POST['regKey'], $_POST['register']))// && $_POST['regKey'] === $_SESSION['regKey'])
 	{
 		$email = trim($_POST['email']);
 		$cEmail = trim($_POST['cEmail']); 
 		$password = trim($_POST['password']);
 		$cPassword = trim($_POST['cPassword']);
 		$salt = "salt";
-		print_r($_POST);
+		//print_r($_POST);
 		
 		
 		
@@ -24,49 +24,25 @@
 		else
 		{
 			
-			if(!UserModel::Register($email,$password,$salt))
-				echo "failed to register";
-			else  //SEND to controller?
+			if(UserModel::Register($email,$password,$salt))
 				echo "registration successful!";
+			else  //SEND to controller?
+				echo "failed to register";
 			
 			
 		}
 		
 		
 	}
-	
-	if(isset($_POST['login']))
-	{
-		header('Location: login.php');  
-		//go to log in
-	}
-		
-	
-	
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-
-<html>
-	<head>
-		<title> Register </title>
-
-	</head>
-	
-	<body>
 		<h1> Register </h1>
-		
-		<!--form action="</?=$_SERVER['PHP_SELF'];?>" method="POST">
-			<input type="hidden" name="key" value="</?=$_SESSION['regKey'];?>" /-->
 		<form method = "POST">
-			<label>email address </label> <input type="text" name ="email" value="" >  <br> 
-			<label>confirm email address </label> <input type="text" name ="cEmail" value="">	  <br>
-			<label>password </label> <input type="password" name ="password" value=""> <br>
-			<label>confirm password </label> <input type="password" name ="cPassword" value=""> <br>
+			<input type="hidden" name="regKey" value="<?=$_SESSION['regKey'];?>" />
+			<label>email address </label> <input type="text" name ="email" <?php if(isset($_POST['email'])){echo 'value="'.$_POST['email'].'"'; }?> />  <br> 
+			<label>confirm email address </label> <input type="text" name ="cEmail" <?php if(isset($_POST['email'])){echo 'value="'.$_POST['email'].'"'; }?> />	  <br>
+			<label>password </label> <input type="password" name ="password" <?php if(isset($_POST['password'])){echo 'value="'.$_POST['password'].'"'; }?>> <br>
+			<label>confirm password </label> <input type="password" name ="cPassword" <?php if(isset($_POST['cPassword'])){echo 'value="'.$_POST['cPassword'].'"'; }?>> <br>
 			<input type="submit" name="register" value="Register">
-			<input type="submit" name="login" value="Log in">
 		</form>
-	
-	</body>
-	
-	
-</html>
+<?php require_once"footer.php";?>
