@@ -26,7 +26,7 @@ if(!DatabaseManager::TableExists($tableName)) {
 }
 //*/
 
-//*
+/*
 echo "\n\n=============== SelectQuery Checks ===============\n";
 $select = new SelectQuery();
 $select->Select(["id","email","activated"])->Table("users")->Where("id","=","1","and")->Where("email","=","email");
@@ -67,7 +67,7 @@ function testQuery($query)
     echo"\nRows Affected: " . $qinfo->RowCount();
 }
 
-//*
+/*
 echo "\n\n=============== Register Checks ===============\n";
 echo "successful user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") . "\n";
 echo "failed user registration: ". (UserModel::Register("email","blah","asd")?"true":"false") ."\n";
@@ -85,7 +85,7 @@ echo "successful user login: "; print_r(UserModel::Login("email","blah"));
 echo "failed user login: "; print_r(UserModel::Login("doesnot","exist"));
 //*/
 
-//*
+/*
 echo "\n\n=============== DeleteQuery Checks ===============\n";
 $delete = new DeleteQuery();
 $delete->From("users")->Where("email","=","email","and")->Where("password","=","blah");
@@ -93,5 +93,8 @@ $delete->From("users")->Where("email","=","email","and")->Where("password","=","
 testQuery($delete);
 //*/
 
+$test = QueryBuilder::Build("select");
+$test->Select("id","email","password")->From("users")->Where(["id","=","1","and"],["email","=","asd","or"],["password",">=","4"])->Limit();
+echo $test->Query();
 ?>
 </pre>
