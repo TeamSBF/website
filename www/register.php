@@ -1,6 +1,6 @@
 <?php
 	require_once "header.php";
-	
+
 	//printr($_POST);
 	if(isset($_POST['regKey'], $_POST['register']))// && $_POST['regKey'] === $_SESSION['regKey'])
 	{
@@ -36,13 +36,18 @@
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-		<h1> Register </h1>
-		<form method = "POST">
-			<input type="hidden" name="regKey" value="<?=$_SESSION['regKey'];?>" />
-			<label>email address </label> <input type="text" name ="email" <?php if(isset($_POST['email'])){echo 'value="'.$_POST['email'].'"'; }?> />  <br> 
-			<label>confirm email address </label> <input type="text" name ="cEmail" <?php if(isset($_POST['email'])){echo 'value="'.$_POST['email'].'"'; }?> />	  <br>
-			<label>password </label> <input type="password" name ="password" <?php if(isset($_POST['password'])){echo 'value="'.$_POST['password'].'"'; }?>> <br>
-			<label>confirm password </label> <input type="password" name ="cPassword" <?php if(isset($_POST['cPassword'])){echo 'value="'.$_POST['cPassword'].'"'; }?>> <br>
-			<input type="submit" name="register" value="Register">
+		<h1> Register </h1><section>
+		<form method="POST">
+			<input type="hidden" name="regKey" value="">
+			<label>E-mail Address </label><br> 
+            <input type="text" name="email" placeholder="E-mail Address">  <br> 
+			<br><label>Confirm E-mail Address </label><br>
+            <input type="text" name="cEmail" placeholder="Confirm E-mail Address">	  <br><br>
+			<label>Password </label> <br>
+            <input type="password" name="password" placeholder="Password"> <br><br>
+			<label>Confirm Password </label><br>
+            <input type="password" name="cPassword" placeholder="Confirm Password"> <br>
+            <button type="submit" name="register" value="Register">Register</button><br>
+			
 		</form>
 <?php require_once"footer.php";?>

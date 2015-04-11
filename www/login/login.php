@@ -46,15 +46,15 @@
 				
 				<?php if(!empty($err_message)){ echo $err_message; }?>
 					
-				<label for="inputEmail" class="sr-only">Email address</label>
-				<input name="emailLogin" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" <?php if(isset($_POST['emailLogin'])){echo 'value="'.$_POST['emailLogin'].'"'; }?> />
-				<label for="inputPassword" class="sr-only">Password</label>
+				<label for="inputEmail" class="sr-only">E-mail Address</label>
+				<input name="emailLogin" type="email" id="inputEmail" class="form-control" placeholder="E-mail Address" required="required" <?php if(isset($_POST['emailLogin'])){echo 'value="'.$_POST['emailLogin'].'"'; }?> />
+				<br><label for="inputPassword" class="sr-only">Password</label>
 				<input name="passwordLogin" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" <?php if(isset($_POST['passwordLogin'])){echo 'value="'.$_POST['passwordLogin'].'"'; }?> />
 							
 				<button  type="submit">Sign in</button><br>
-				<a href>forgot your password?</a>
+				<a href>Forgot Your Password?</a>
 				<br>
-				<a href = "../register.php">register account</a>
+				<a href = "../register.php">Register Account</a>
 			</form>
 			</div>
 	  

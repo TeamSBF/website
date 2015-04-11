@@ -1,7 +1,7 @@
 /* Application Styles */
 html
 {
-  margin-top: 50px;
+  margin-top: 24px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
 }
@@ -25,6 +25,8 @@ section
   border: .1em solid black;
 }
 
+
+
 /* FONT STYLING */
 /*Paragraph fonts and styles*/
 p
@@ -34,6 +36,8 @@ p
   padding-left: 1em;
   padding-right: 1em;
 }
+
+
 
 /*Headings/Titles font and sizes */
 h1,h2,h3,nav
@@ -73,8 +77,6 @@ section > ul > li
     padding-top: 20px;
     padding-bottom: 20px;
 }
-
-
 
 /* BUTTON AND INPUT STYLING */
 button {
@@ -161,39 +163,47 @@ nav ul
   margin: 0;
   width: 100%;
   max-width: 100%;
-  background: #0DB9FF;
-  background:#aaaaaa;
-  height: 2.5em;
+  font-size: 22px;
+  background-color: rgba(170, 170, 170, 1);
+  background: -webkit-linear-gradient(top, rgba(230, 225, 225, 1) 0%, rgba(170, 170, 170, 1) 100%);
+  background: linear-gradient(to bottom, rgba(230, 225, 225, 1) 0%, rgba(170, 170, 170, 1) 100%);
+  border-bottom-width: 4px;
+  height: 28px;
   list-style: none;
   position: fixed;
   z-index: 2;
   top: 0;
-  font-size: 1.25em;
+  
   font-style: bold;
   color: transparent;
   text-align: justify;
 }
 
-nav a:link, nav a:visited 
+nav a:link, 
+nav a:visited 
 {
   padding: 10px 20px;
   color: white;
   text-decoration: none;
 }
 
-nav a:hover 
+nav a:hover,
+nav a:focus
 {
-  color: black;
-  background: white;
+  color: #2BFFB1;
+  background-color: #F6F6F6;
+  
   font-weight: bold;
-  border-bottom: 1px solid white;
+}
+nav>ul{
+    padding-bottom: 0px;
 }
 
 nav li 
 {
-  display: block;
+  display: inline-block;
   float: left;
-  padding: .625em 0;
+  
 }
 
 nav a
@@ -209,5 +219,5 @@ nav a:hover,
 nav a:visited
 {
 	padding-bottom: 0;
-	color:#9709B2;
+	color:#CE22F5;
 }

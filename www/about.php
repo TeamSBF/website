@@ -1,8 +1,7 @@
 <?php
     require_once"header.php"; 
 ?>
-  <div class="container">
-    <div class="grid_8 alpha">
+
       <h1>About Us</h1>
       <section>
         <h3>Our Mission</h3>
@@ -35,26 +34,4 @@
           <li>Tell your doctor, other health care providers, and fitness professionals in local communities about Sit and Be Fit programs.</li>
         </ul>
         </section>
-    </div>
-    <div class="grid_4 omega">
-      <h1>Login</h1>
-      <section>
-        <form action="<?=$_SERVER['PHP_SELF'];?>" method="post">
-        <input type="hidden" name="key" value="<?=$_SESSION['regKey'];?>" />
-            <div>
-                <input type="text" name="email" placeholder="Email Address" />
-            </div>
-            <div>
-                <input type="password" name="password" placeholder="Password" />
-            </div>
-            <div>
-                Need to Register?<a href="registration.html">Register</a>
-            </div>
-          <div>
-            <button type="submit">Login</button>
-          </div>
-        </form>
-    </section>
-    </div>
-</body>
-</html>
+<?php require_once"footer.php";?>
