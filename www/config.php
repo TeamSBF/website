@@ -1,4 +1,5 @@
 <?php
+ob_start();
 spl_autoload_extensions(".php");
 spl_autoload_register('AutoLoader::ClassLoader');
 
