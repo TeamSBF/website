@@ -47,8 +47,10 @@ h1,h2,h3,nav
 
 h1,h2,h3
 {
+  text-shadow: 1px 1px black;
   padding-left: 1em;
   color:whitesmoke;
+  
 }
 
 h3
@@ -58,6 +60,7 @@ h3
 }
 h1
 {
+  text-shadow: 4px 4px black;
   font-size: 2em;
 }
 input
@@ -90,7 +93,14 @@ section > ul > li
 {
     width: 500px;   
 }
+
+
 /* BUTTON AND INPUT STYLING */
+label
+{
+    font-family: 'Bree Serif',serif;
+    font-size: 20px;
+}
 button {
 	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
 	-webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
