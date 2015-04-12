@@ -59,7 +59,7 @@ class MigrationManager
 
     private function alterTable($table, $toAdd, $keys)
     {
-        $alter = new AlterQuery();
+        $alter = new AlterTable();
         $alter->Table($table);
         for ($i = 0; $i < count($toAdd); $i++)
             $alter->AddField($toAdd[$i]['name'], $toAdd[$i]['type'], $toAdd[$i]['value']);
@@ -92,6 +92,8 @@ class MigrationManager
     {
         try {
             $schema = $this->grabTableInfo($table);
+            //printr($schema->Query());
+
             //print_r(DatabaseManager::Query($user));
             DatabaseManager::Query($schema);
             //echo "Added table '$table'<br>";

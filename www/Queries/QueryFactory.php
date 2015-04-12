@@ -1,5 +1,5 @@
 <?php
-class QueryBuilder
+class QueryFactory
 {
     // ---
     private static $instance = null;
@@ -19,6 +19,15 @@ class QueryBuilder
 
         $query = [];
         switch ($type) {
+            case "insert":
+                $query = self::instance()->insert($table);
+                break;
+            case "update":
+                $query = self::instance()->update($table);
+                break;
+            case "delete":
+                $query = self::instance()->delete($table);
+                break;
             default:
             case "select":
                 $query = self::instance()->select($table);
@@ -28,13 +37,24 @@ class QueryBuilder
         return new Query($query);
     }
 
-    private function select($table = null)
+    private function update($table)
     {
-        $reqs = ["table" => $table];
-        $pieces = [new Select(), new Table(), new Where(), new Limit()];//, "where", "limit"];
+        return [new Update(), new Table($table), new UpdateSet(), new Where(), new Limit()];
+    }
 
-        $reqs["pieces"] = $pieces;
-        return $reqs;
+    private function delete($table)
+    {
+        return [new Delete(), new Table($table), new Where(), new Limit()];
+    }
+
+    private function insert($table)
+    {
+        return [new Insert(), new Table($table), new InsertSet()];
+    }
+
+    private function select($table)
+    {
+        return [new Select(), new Table($table), new Where(), new Limit()];
     }
 
     private static function instance()

@@ -8,8 +8,11 @@ class Where
         $this->where = [];
     }
 
-    public function Where($arr)
+    public function Where($arr, $clear = true)
     {
+        if($clear)
+            $this->where = [];
+
         //printr($arr);
         foreach($arr as $where)
         {
@@ -19,28 +22,32 @@ class Where
 
             $this->where[count($this->where)] = new CVOCPair($where[0],$where[2],$where[1],$where[3]);
         }
-
-        printr($this->where);
     }
 
-    public function Query()
+    public function Query($values = false)
     {
-        $query = "WHERE ";
-
         $count = count($this->where);
-        for($i = 0; $i < $count; $i++)
-        {
+        if($count < 1)
+            return "";
+
+        $query = "WHERE ";
+        for ($i = 0; $i < $count; $i++) {
             $where = $this->where[$i];
 
-            $query .= "`" . $where->Column() . "` " . $where->Operator() . " " . $where->Value();
-            if(!self::isEmpty($where->Condition())) {
+            $query .= "`" . $where->Column() . "` " . $where->Operator();
+            $query .= " " . ((!$values) ? ":" . $where->Column() : "'".$where->Value()."'");
+
+            if (!self::isEmpty($where->Condition())) {
                 $query .= " " . $where->Condition();
             }
-            if($i < $count - 1)
+            if ($i < $count - 1)
                 $query .= " ";
         }
 
-        return $query;
+        if($values)
+            return $query;
+
+        return [$query, $this->where];
     }
 
     private static function isEmpty($element)

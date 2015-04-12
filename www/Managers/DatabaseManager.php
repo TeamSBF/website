@@ -2,6 +2,7 @@
 class DatabaseManager
 {
     // ---
+    private static $tries = 3;
     private static $instance = null;
     // ---
 
@@ -24,15 +25,19 @@ class DatabaseManager
     public static function Query($query)
     {
         $ret = "";
+        $stmt = "";
         try {
-            if ($query instanceof CreateTableQuery) {
+            if ($query instanceof CreateTable) {
                 $stmt = self::instance()->conn->prepare($query->Query());
             } else if ($query instanceof IQuery) {
                 $stmt = self::instance()->parseIntoPrepared($query->Query());
             }
 
+            if(!($stmt instanceof PDOStatement))
+                throw new Exception("Fatal Error: no statement found");
+
             $errors = "";
-            for ($i = 0; !$stmt->execute() && $i < 3; $i++) {
+            for ($i = 0; !$stmt->execute() && $i < self::$tries; $i++) {
                 $err = $stmt->errorInfo()[2];
                 $errors .= "Failed to process the query: " . $err . "\n";
 
@@ -61,7 +66,7 @@ class DatabaseManager
     {
         $q = $query[0];
         $cvpair = $query[1];
-
+        //printr($cvpair);
         $stmt = self::instance()->conn->prepare($q);
         for ($i = 0; $i < count($cvpair); $i++)
             $stmt->bindValue(":" . $cvpair[$i]->Column(), $cvpair[$i]->Value());

@@ -1,18 +1,34 @@
 <?php
-class AlterQuery extends AbstractQuery
+/*
+ * THIS NEEDS TO BE REFACTORED TO UTILIZE THE QUERY OBJECT TO SIMPLIFY THE OVERALL STRUCTURE
+ */
+class AlterTable implements IQuery
 {
+    private $table;
     private $fields = [];
     private $keys = [];
     private $ai = "";
 
     public function __construct()
     {
-        parent::__construct();
+        $this->table = "";
+    }
+
+    public function Table($tableName = null)
+    {
+        if($tableName == null)
+            return $this->table;
+
+        if (!is_string($tableName))
+            return;
+
+        $this->table = $tableName;
+        return $this;
     }
 
     public function AddField($name, $type, $value = null)
     {
-        $this->fields[count($this->fields)] = new FieldElement($name, $type, $value);
+        $this->fields[count($this->fields)] = new Field($name, $type, $value);
     }
 
     public function AddKey($type, $name = null)
@@ -45,7 +61,7 @@ class AlterQuery extends AbstractQuery
         return $this->keys;
     }
 
-    public function Query()
+    public function Query($values = null)
     {
         $query = "ALTER TABLE `" . $this->table . "`\n";
         $query .= $this->parseFields();

@@ -1,44 +1,58 @@
 <?php
-class Query
+class Query implements IQuery
 {
-    private $reqs;
+    // ---
+    private static $translatedNames = ["from"=>"Table", "into"=>"Table"];
+    // ---
 
-    public function __construct($reqs)
+    private $pieces;
+
+    public function __construct($pieces)
     {
-        $this->reqs = [];
+        //printr($pieces);
+        $this->pieces = [];
 
-        $pieces = $reqs["pieces"];
-        foreach($pieces as $piece)
-        {
-            $name = get_class($piece);
-            $this->reqs[strtolower($name)] = $piece;
+        foreach ($pieces as $piece) {
+            $name = (!is_subclass_of($piece, "Set")) ? get_class($piece) : get_parent_class($piece);
+            $this->pieces[strtolower($name)] = $piece;
         }
-        //printr($this->reqs);
+        //printr($this->pieces);
     }
 
     public function __call($func, $params)
     {
+        $ret = "";
         $obj = strtolower($func);
-        if ($obj == "from" || $obj == "into" || $obj == "table") {
-            $func = "Table";
+        if (array_key_exists($obj, self::$translatedNames)) {
+            $func = self::$translatedNames[$obj];
             $obj = strtolower($func);
         }
 
-        if (array_key_exists($obj, $this->reqs))
-            $this->reqs[$obj]->$func($params);
-        else
-            throw new Exception("No method name like that exists.");
+        if (array_key_exists($obj, $this->pieces)) {
+            $ret = $this->pieces[$obj]->$func($params);
+            if(!empty($params))
+                $ret = $this;
+        }else
+            throw new Exception("Method name('$func') does not exist.");
 
-        return $this;
+        return $ret;
     }
 
-    public function Query()
+    public function Query($values = false)
     {
         $query = "";
+        $cvs = [];
 
-        foreach ($this->reqs as $req) {
-            $query .= " " . $req->Query();
+        foreach ($this->pieces as $piece) {
+            $q = $piece->Query($values);
+            if (!is_array($q)) {
+                $query .= " " . $q;
+            } else {
+                $query .= " " . $q[0];
+                $cvs = array_merge($q[1], $cvs);
+            }
+
         }
-        return $query;
+        return [$query, $cvs];
     }
 }
