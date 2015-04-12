@@ -74,6 +74,7 @@ section > ul > li
   font-family: 'Bree Serif',serif;
   color:black;
   list-style: disc;
+  font-size:1.1em;
 }
 
 /*FORM STYLING*/

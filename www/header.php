@@ -24,9 +24,11 @@
         <li><a href="index.php">Home</a></li>
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
+        <li><a href="assessments.php">Assessments</a></li>
+        <li><a href="faq.php">FAQ</a></li>
 		<li><a href="register.php">Register</a></li>
       </ul>
     </nav>
   </header>
     <div class="container">
-    <div class="grid_7 alpha">
+    <div class="grid_8 alpha">

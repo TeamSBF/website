@@ -1,5 +1,5 @@
     </div>
-    <div class="grid_5 omega">
+    <div class="grid_4 omega">
       
       <section>
           <h1>Login</h1>
