@@ -21,9 +21,11 @@ p
 
 section
 {
-    margin-top: 50px;
+  margin-top: 50px;
   background: white;
   border: .1em solid black;
+  padding-left:2%;
+  padding-right:2%;
 }
 
 
