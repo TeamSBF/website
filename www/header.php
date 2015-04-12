@@ -29,4 +29,4 @@
     </nav>
   </header>
     <div class="container">
-    <div class="grid_8 alpha">
+    <div class="grid_7 alpha">

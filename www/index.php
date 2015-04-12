@@ -3,7 +3,7 @@
 ?>
       <h1>About</h1>
       <section>
-        <iframe width="660" height="360" src="https://www.youtube.com/embed/31Ew1ogQqpE" frameborder="0" allowfullscreen></iframe>
+        <iframe width="100%" height="360" src="https://www.youtube.com/embed/31Ew1ogQqpE" frameborder="0" allowfullscreen></iframe>
         <!-Information goes here to describe the business ->
         <p>Bacon ipsum dolor amet duis boudin non, do reprehenderit culpa sed chuck velit short ribs brisket. Cow est sausage pork chop enim turkey ullamco. Meatloaf et ipsum chicken ground round cow anim duis id rump consectetur. Ground round beef ribs short ribs, adipisicing nulla jowl pork belly cupim. Dolor cillum ut, boudin ham hock consequat fugiat sint officia. Meatball kielbasa eu ham hock, turducken tempor enim t-bone pork ullamco in.</p>
 

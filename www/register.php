@@ -36,18 +36,27 @@
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-		<h1> Register </h1><section>
-		<form method="POST">
+    <h1> Register </h1>
+    <section>
+		<form class="register" method="POST">
 			<input type="hidden" name="regKey" value="">
 			<label>E-mail Address </label><br> 
-            <input type="text" name="email" placeholder="E-mail Address">  <br> 
-			<br><label>Confirm E-mail Address </label><br>
-            <input type="text" name="cEmail" placeholder="Confirm E-mail Address">	  <br><br>
-			<label>Password </label> <br>
-            <input type="password" name="password" placeholder="Password"> <br><br>
-			<label>Confirm Password </label><br>
-            <input type="password" name="cPassword" placeholder="Confirm Password"> <br>
-            <button type="submit" name="register" value="Register">Register</button><br>
-			
-		</form>
+            <input type="text" name="email" placeholder="E-mail Address"> 
+            <br> 
+			<br>
+            <label>Confirm E-mail Address </label><br>
+            <input type="text" name="cEmail" placeholder="Confirm E-mail Address">	  
+            <br>
+            <br>
+			<label>Password </label> 
+            <br>
+            <input type="password" name="password" placeholder="Password"> 
+            <br><br>
+			<label>Confirm Password </label>
+            <br>
+            <input type="password" name="cPassword" placeholder="Confirm Password"> 
+            <br><br>
+            <button type="submit" name="register" value="Register">Register</button>
+            <br>
+            </form>
 <?php require_once"footer.php";?>

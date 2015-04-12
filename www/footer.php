@@ -1,5 +1,5 @@
     </div>
-    <div class="grid_4 omega">
+    <div class="grid_5 omega">
       <h1>Login</h1>
       <section>
 	  <?php require_once"login/loginWidget.php";?>
