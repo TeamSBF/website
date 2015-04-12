@@ -1,9 +1,8 @@
 <?php
     require_once"header.php"; 
 ?>
-
-      <h1>About Us</h1>
-      <section>
+ <section>
+          <h1>About Us</h1>
         <h3>Our Mission</h3>
         <p>Sit and Be Fit is committed to improving the quality of life of older adults and physically limited individuals through safe, effective exercises that are available through television, videos, personal appearances, classes, seminars, books, and the Internet.</p>
 

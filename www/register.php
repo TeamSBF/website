@@ -36,8 +36,9 @@
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-    <h1> Register </h1>
+    
     <section>
+        <h1> Register </h1>
 		<form class="register" method="POST">
 			<input type="hidden" name="regKey" value="">
 			<label>E-mail Address </label><br> 
