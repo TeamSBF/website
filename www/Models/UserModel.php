@@ -13,6 +13,7 @@ class UserModel
 
     public static function Login($email, $pass)
     {
+		require_once("assets/password.php");
         // do error checking here
 		//$pass = self::hashPass($pass);
 
@@ -22,13 +23,12 @@ class UserModel
         $res = DatabaseManager::Query($select);
         if ($res->RowCount() == 1)
 		{
-			echo "here2 -> $pass";
-			printr($res->Result());
-			if(password_verify($pass, $res->Result()['password']))
+			$resultArray = $res->Result();
+			if(password_verify($pass, $resultArray['password']))
 			{
-				echo "here";
-				return new UserModel($res->Result()['id']);
-		}}
+				return new UserModel($resultArray['id']);
+			}
+		}
 
         return false;
     }
