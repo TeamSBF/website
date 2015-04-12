@@ -20,7 +20,7 @@
 			//$targetP = password_hash("test", PASSWORD_BCRYPT, $options);   //hardcode
 			
 			$result = UserModel::Login($email, $passed_pwd);    //to db
-			
+			echo $result . "----";
 //			if($targetE == $email && password_verify($_POST['password'], $targetP))  //hardcode
 			if($result)    //to db
 			{
@@ -56,7 +56,7 @@
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
 				<a href>forgot your password?</a>
 				<br>
-				<a href>register account</a>
+				<a href = "../register.php">register account</a>
 			</form>
 			</div>
 	  
