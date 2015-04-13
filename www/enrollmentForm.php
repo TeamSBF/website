@@ -3,7 +3,7 @@
 
     if (isset($_POST['submitEnrollment']))
     {
-      echo var_dump($_POST); //DEBUG
+      //echo var_dump($_POST); //DEBUG
       $validator = new FormsModel($_POST);
       $return = $validator->ValidateEnrollment();
     } 
@@ -128,6 +128,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>
     $(document).ready(function (){
+      $("#message").addClass('alert-danger');
       $("#message").html('<?= $return;?>');
       $("#message").show();
     });

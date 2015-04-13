@@ -11,14 +11,14 @@ class FormsModel
 	public function ValidateEnrollment()
 	{
 		// do some checks here
-		if($empties = $this->CheckforEmpties() != "")
-			return $empties;
+		//if($empties = $this->CheckforEmpties() != "")
+			//return $empties;
 
 
 		// if everything went well we save data to the database
 		if ($this->saveDbEnrollment())
 			return '***Success!***';
-		return "***FAILED TO SAVE TO DB***";
+		return "***DB SAVE FAILED***";
 	}
 
 	public function ValidateQuestionnaireP1()
@@ -26,8 +26,9 @@ class FormsModel
 		// do some checks here
 
 		// if everything went well we save data to the database
-		$this->saveDbQuestionnaireP1();
-		return "Success!";
+		if ($this->saveDbQuestionnaireP1())
+			return '***Success!***';
+		return "***DB SAVE FAILED***";
 	}
 
 	public function ValidateQuestionnaireP2()
@@ -35,8 +36,9 @@ class FormsModel
 		// do some checks here
 
 		// if everything went well we save data to the database
-		$this->saveDbQuestionnaireP2();
-		return "Success!";
+		if ($this->saveDbQuestionnaireP2())
+			return '***Success!***';
+		return "***DB SAVE FAILED***";
 	}
 
 	public function ValidateParQ()
@@ -44,13 +46,14 @@ class FormsModel
 		// do some checks here
 
 		// if everything went well we save data to the database
-		$this->saveDbParQ();
-		return "Success!";
+		if ($this->saveDbParQ())
+			return '***Success!***';
+		return "***DB SAVE FAILED***";
 	}
 
 	private function CheckforEmpties()
 	{
-		for ($i = 0; $i < $array->length; $i++)
+		for ($i = 0; $i < $this->form->length; $i++)
 		{
 			if ($this->form[i] == "")
 				return 'Some required fields are missing, every field preceded by a * are required';
@@ -60,7 +63,7 @@ class FormsModel
 
 	private function CheckForIllegalCharacters($str)
 	{
-		return !preg_match('/[^A-Za-z0-9.#\\-$\']/', $str);
+		return !preg_match('/[^A-Za-z0-9.!\\-$\']/', $str);
 
 	}
 
