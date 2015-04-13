@@ -45,84 +45,84 @@
 
                     <div class="form-group">
                       <label class="control-label col-sm-7">Lifting or carrying groceries: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="groceries" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="groceries" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="groceries" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="groceries" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Climbing one flight of stairs: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="climbingStairs" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="climbingStairs" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="climbingStairs" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="climbingStairs" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Stepping up and down a small curb: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="steppingCurb" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="steppingCurb" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="steppingCurb" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="steppingCurb" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Picking up small object from the floor: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="pickingObject" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="pickingObject" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="pickingObject" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="pickingObject" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Walking a mile or more: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="walkingMile" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="walkingMile" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="walkingMile" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="walkingMile" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Walking 2-3 blocks: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="walkingBlocks" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="walkingBlocks" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="walkingBlocks" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="walkingBlocks" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Walking around in your home: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="walkingHome" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="walkingHome" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="walkingHome" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="walkingHome" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Bathing or dressing yourself: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="dressingSelf" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="dressingSelf" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="dressingSelf" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="dressingSelf" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Getting in and out of a car: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="gettingOutCar" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="gettingOutCar" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="gettingOutCar" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="gettingOutCar" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Writing on a computer Keyboard: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="usingKeyboard" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="usingKeyboard" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="usingKeyboard" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="usingKeyboard" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Preparing meals: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="preparingMeal" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="preparingMeal" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="preparingMeal" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="preparingMeal" value=2>Unable to perform</label>
                     </div>
                     <hr>
                     <div class="form-group">
                       <label class="control-label col-sm-7">Cleaning your home: *</label>
-                      <label class="radio col-sm-offset-7"><input type="radio" name="cleaningHome" value=0>No help</label>
+                      <label class="radio col-sm-offset-7"><input type="radio" name="cleaningHome" required checked value=0>No help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="cleaningHome" value=1>Some help</label>
                       <label class="radio col-sm-offset-7"><input type="radio" name="cleaningHome" value=2>Unable to perform</label>
                     </div>                    
@@ -147,7 +147,7 @@
 
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel full of life?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeB" value=3>Rarely</label>
@@ -155,7 +155,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel nervous?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousB" value=3>Rarely</label>
@@ -163,7 +163,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel that you are playing a useful part in things?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulB" value=3>Rarely</label>
@@ -171,7 +171,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel calm and peaceful?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmB" value=3>Rarely</label>
@@ -179,7 +179,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Have a lot of energy?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyB" value=3>Rarely</label>
@@ -187,7 +187,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel depressed?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedB" value=3>Rarely</label>
@@ -195,7 +195,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel worn out?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutB" value=3>Rarely</label>
@@ -203,7 +203,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel happy?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyB" value=3>Rarely</label>
@@ -211,7 +211,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel satisfied with your life?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedB" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedB" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedB" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedB" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedB" value=3>Rarely</label>
@@ -227,7 +227,7 @@
 
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel full of life?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelFullOfLifeA" value=3>Rarely</label>
@@ -235,7 +235,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel nervous?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelNervousA" value=3>Rarely</label>
@@ -243,7 +243,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel that you are playing a useful part in things?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelUsefulA" value=3>Rarely</label>
@@ -251,7 +251,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel calm and peaceful?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelCalmA" value=3>Rarely</label>
@@ -259,7 +259,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Have a lot of energy?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelEnergyA" value=3>Rarely</label>
@@ -267,7 +267,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel depressed?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelDepressedA" value=3>Rarely</label>
@@ -275,7 +275,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel worn out?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelWornOutA" value=3>Rarely</label>
@@ -283,7 +283,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel happy?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelHappyA" value=3>Rarely</label>
@@ -291,7 +291,7 @@
                       <hr>
                       <div class="form-group">
                         <label class="control-label col-sm-7">Feel satisfied with your life?: *</label>
-                        <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedA" value=0>Always</label>
+                        <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedA" required checked value=0>Always</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedA" value=1>Mostly</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedA" value=2>Half the time</label>
                         <label class="radio col-sm-offset-7"><input type="radio" name="feelSatisfiedA" value=3>Rarely</label>

@@ -5,7 +5,8 @@
     {
       $validator = new FormsModel($_POST);
       $return = $validator->ValidateQuestionnaireP1();
-    } 
+    }
+    //$radio = new MakeRadio();
 ?>
 
       <div class="container">
@@ -20,7 +21,7 @@
               <div class="alert" id="message" style="diplay:none"></div>
               <div class="form-group">
                 <label class="control-label">*How often do you perform the Sit and Be Fit exercises?</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" value=0>Less than once a month</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" required checked value=0>Less than once a month</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" value=1>Once per month</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" value=2>Once per week</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" value=3>More than once per week</label>
@@ -28,7 +29,7 @@
               <hr>
               <div class="form-group">
                 <label class="control-label">*How long have you participated in the Sit and Be Fit program?</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="howLongParticipate" value=0>Less than 3 months</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="howLongParticipate" required checked value=0>Less than 3 months</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howLongParticipate" value=1>3 to 6 months</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howLongParticipate" value=2>6 to 12 months</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howLongParticipate" value=3>More than 12 months</label>
@@ -36,7 +37,7 @@
               <hr>
               <div class="form-group">
                 <label class="control-label">*You exercise:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="whoExerciseWith" value=0>By yourself</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="whoExerciseWith" required checked value=0>By yourself</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="whoExerciseWith" value=1>With a partner</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="whoExerciseWith" value=2>With a class</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="whoExerciseWith" value=3>Other</label>
@@ -44,14 +45,14 @@
               <hr>
               <div class="form-group">
                 <label class="control-label">*Where do you exercise:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="whereExercise" value=0>Home</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="whereExercise" required checked value=0>Home</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="whereExercise" value=1>Gym</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="whereExercise" value=2>Other</label>
               </div>
               <hr>
               <div class="form-group">
                 <label class="control-label">*Do you consider the Sit and Be Fit program host Mary Ann Wilson to be your exercise partner?:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="isMaryAnnPartner" value=0>Yes</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="isMaryAnnPartner" required checked value=0>Yes</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="isMaryAnnPartner" value=1>No</label>
               </div>
 
@@ -64,7 +65,7 @@
 
               <div class="form-group">
                 <label class="control-label">*How would you have rated your overall health BEFORE starting the Sit and Be Fit program?:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="beforeHealthRating" value=0>Excellent</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="beforeHealthRating" required checked value=0>Excellent</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="beforeHealthRating" value=1>Very good</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="beforeHealthRating" value=2>Good</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="beforeHealthRating" value=3>Fair</label>
@@ -73,7 +74,7 @@
               <hr>
               <div class="form-group">
                 <label class="control-label">*How would you rate your current overall health?:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="currentHealthRating" value=0>Excellent</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="currentHealthRating" required checked value=0>Excellent</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="currentHealthRating" value=1>Very good</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="currentHealthRating" value=2>Good</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="currentHealthRating" value=3>Fair</label>
@@ -82,7 +83,7 @@
               <hr>
               <div class="form-group">
                 <label class="control-label">*Do you use an aid for walking? If so please select the aid usually used:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="walkingAid" value=0>None</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="walkingAid" required checked value=0>None</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="walkingAid" value=1>Wheel chair</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="walkingAid" value=2>Walker</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="walkingAid" value=3>Cane</label>
@@ -90,7 +91,7 @@
               <hr>
               <div class="form-group">
                 <label class="control-label">*How many times have you fallen in the last year?:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="howManyTimesFallen" value=0>None</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="howManyTimesFallen" required checked value=0>None</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howManyTimesFallen" value=1>1 time</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howManyTimesFallen" value=2>2 times</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howManyTimesFallen" value=3>3 or more</label>
@@ -98,13 +99,13 @@
               <hr>
               <div class="form-group">
                 <label class="control-label">*Do you have pains?:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="havePains" value=0>Yes</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="havePains" required checked value=0>Yes</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="havePains" value=1>No</label>              
               </div>          
               <hr>
               <div class="form-group">
                 <label class="control-label">*Do you have trouble sleeping at night?:</label><br>
-                <label class="radio col-sm-offset-2"><input type="radio" name="troubleSleeping" value=0>Yes</label>
+                <label class="radio col-sm-offset-2"><input type="radio" name="troubleSleeping" required checked value=0>Yes</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="troubleSleeping" value=1>No</label>              
               </div>
 
@@ -117,7 +118,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Hearing/Vision problems?</label>
-                <label class="radio-inline"><input type="radio" name="hearing/vision-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="hearing/vision-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="hearing/vision-problems" value=0>No
                 </label>
@@ -125,7 +126,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Heart/Vascular problems?</label>
-                <label class="radio-inline"><input type="radio" name="heart/vascular-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="heart/vascular-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="heart/vascular-problems" value=0>No
                 </label>
@@ -133,7 +134,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Lung problems?</label>
-                <label class="radio-inline"><input type="radio" name="lung-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="lung-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="lung-problems" value=0>No
                 </label>
@@ -141,7 +142,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Nervous system problems?</label>
-                <label class="radio-inline"><input type="radio" name="nervous-system-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="nervous-system-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="nervous-system-problems" value=0>No
                 </label>
@@ -149,7 +150,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Hormone/Endoctrine problems?</label>
-                <label class="radio-inline"><input type="radio" name="hormone/endoctrine-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="hormone/endoctrine-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="hormone/endoctrine-problems" value=0>No
                 </label>
@@ -157,7 +158,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Kidney/Bladder problems?</label>
-                <label class="radio-inline"><input type="radio" name="kidney/bladder-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="kidney/bladder-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="kidney/bladder-problems" value=0>No
                 </label>
@@ -165,7 +166,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Cancer problems?</label>
-                <label class="radio-inline"><input type="radio" name="cancer-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="cancer-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="cancer-problems" value=0>No
                 </label>
@@ -173,7 +174,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Digestive problems?</label>
-                <label class="radio-inline"><input type="radio" name="digestive-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="digestive-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="digestive-problems" value=0>No
                 </label>
@@ -181,7 +182,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Muscle joints or bone problems?</label>
-                <label class="radio-inline"><input type="radio" name="muscle/bone-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="muscle/bone-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="muscle/bone-problems" value=0>No
                 </label>
@@ -189,7 +190,7 @@
 
               <div class="form-group">
                 <label class="control-label col-sm-8">*Skin problems?</label>
-                <label class="radio-inline"><input type="radio" name="skin-problems" value=1>Yes
+                <label class="radio-inline"><input type="radio" name="skin-problems" required checked value=1>Yes
                 </label>
                 <label class="radio-inline"><input type="radio" name="skin-problems" value=0>No
                 </label>
@@ -220,7 +221,7 @@
             <div class="form-group">
               <label class="col-sm-4">*Gender:</label>
               <div class="col-sm-offset-5">
-                <label class="radio"><input type="radio" name="gender" value="Male">Male</label>
+                <label class="radio"><input type="radio" name="gender" required checked value="Male">Male</label>
                 <label class="radio"><input type="radio" name="gender" value="Female">Female</label>
               </div>
             </div><br>
@@ -228,7 +229,7 @@
             <div class="form-group">
               <label class="col-sm-4">*Ethnicity:</label>
               <div class="col-sm-offset-5">
-                <label class="radio"><input type="radio" name="ethnicity" value="Asian">Asian</label>
+                <label class="radio"><input type="radio" name="ethnicity" required checked value="Asian">Asian</label>
                 <label class="radio"><input type="radio" name="ethnicity" value="African American">African American</label>
                 <label class="radio"><input type="radio" name="ethnicity" value="Caucasian">Caucasian</label>
                 <label class="radio"><input type="radio" name="ethnicity" value="Hispanic">Hispanic</label>
@@ -246,7 +247,7 @@
             <div class="form-group">
               <label class="col-sm-5">*Current Working Status:</label>
               <div class="col-sm-offset-5">
-                <label class="radio"><input type="radio" name="workingStatus" value="Employed">Employed</label>
+                <label class="radio"><input type="radio" name="workingStatus" required checked value="Employed">Employed</label>
                 <label class="radio"><input type="radio" name="workingStatus" value="Unemployed">Unemployed</label>
                 <label class="radio"><input type="radio" name="workingStatus" value="Retired">Retired</label>
               </div>

@@ -3,6 +3,7 @@
 
     if (isset($_POST['submitEnrollment']))
     {
+      echo var_dump($_POST); //DEBUG
       $validator = new FormsModel($_POST);
       $return = $validator->ValidateEnrollment();
     } 
@@ -70,7 +71,7 @@
 
           <div class="form-group">
             <div class="control-label col-sm-3" style="font-weight:bold">Gender</div>
-            <label class="radio-inline col-sm-offset-1"><input type="radio" name="gender" value="Male">Male</label>
+            <label class="radio-inline col-sm-offset-1"><input type="radio" name="gender" required checked value="Male">Male</label>
             <label class="radio-inline"><input type="radio" name="gender" value="Female">Female</label>
           </div>
 
@@ -84,28 +85,28 @@
 
           <div class="form-group">
             <label class="control-label col-sm-4">Do you watch Sit and Be Fit?</label>
-            <label class="radio-inline"><input type="radio" name="watchSbf" value="yes">Yes</label>
+            <label class="radio-inline"><input type="radio" name="watchSbf" required checked value="yes">Yes</label>
             <label class="radio-inline"><input type="radio" name="watchSbf" value="no">No</label>
           </div>
 
           <div class="form-group" name="howManyTimes">
             <label for="howMany" class="control-label col-sm-3">How many times a week?</label>
             <div class="col-sm-9">
-              <input type="number" class="form-control" name="howMany" value="<?php if(isset($_POST['howMany'])){echo htmlspecialchars($_POST['howMany']);} ?>">
+              <input type="number" class="form-control" name="howMany" value="<?php if(isset($_POST['howMany'])){echo htmlspecialchars($_POST['howMany']);}else{echo 1;} ?>">
             </div>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-4">Control Group (will NOT participate in Sit and Be Fit)
             </label>
-            <label class="radio-inline"><input type="radio" name="controlGrp" value="yes">Yes</label>
+            <label class="radio-inline"><input type="radio" name="controlGrp" required checked value="yes">Yes</label>
             <label class="radio-inline"><input type="radio" name="controlGrp" value="no">No</label>
           </div>
 
           <div class="form-group">
             <label class="control-label col-sm-4">Experimental Group (participate in Sit and Be Fit)
             </label>
-            <label class="radio-inline"><input type="radio" name="experimentalGrp" value=1>Yes
+            <label class="radio-inline"><input type="radio" name="experimentalGrp" required checked value=1>Yes
             </label>
             <label class="radio-inline"><input type="radio" name="experimentalGrp" value=0>No
             </label>

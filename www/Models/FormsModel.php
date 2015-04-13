@@ -2,19 +2,23 @@
 
 class FormsModel
 {
-	private $array;
+	private $form;
 	public function __construct($data)
 	{
-		$array = $data;
+		$this->form = $data;
 	}
 
 	public function ValidateEnrollment()
 	{
 		// do some checks here
+		if($empties = $this->CheckforEmpties() != "")
+			return $empties;
+
 
 		// if everything went well we save data to the database
-		$this->saveDbEnrollment();
-		return 'Success!';
+		if ($this->saveDbEnrollment())
+			return '***Success!***';
+		return "***FAILED TO SAVE TO DB***";
 	}
 
 	public function ValidateQuestionnaireP1()
@@ -44,13 +48,14 @@ class FormsModel
 		return "Success!";
 	}
 
-	private function CheckforEmpties($array)
+	private function CheckforEmpties()
 	{
 		for ($i = 0; $i < $array->length; $i++)
 		{
-			if ($array[i] == "")
+			if ($this->form[i] == "")
 				return 'Some required fields are missing, every field preceded by a * are required';
 		}
+		return "";
 	}
 
 	private function CheckForIllegalCharacters($str)
@@ -81,26 +86,55 @@ class FormsModel
 
 	private function ValidatePhone($phone)
 	{
-
+		//TO DO
 	}
 
 	private function saveDbEnrollment()
 	{
+		$form = $this->form;
+		$insert = new InsertQuery();
+        $insert->Table("enrollment_form")->Set("lastName", $form['lName'])->Set("firstName", $form['fName'])
+        ->Set("streetAddress", $form['streetAddress'])->Set("city", $form['city'])->Set("phone", $form['phone'])
+        ->Set("email", $form['email'])->Set("dob", $form['dob'])->Set("gender", $form['gender'])
+        ->Set("healthHistory", $form['healthHistory'])->Set("watchSbf", $form['watchSbf'])->Set("howManyTimesAWeek", $form['howMany'])
+        ->Set("controlGroup", $form['controlGrp'])->Set("experimentalGroup", $form['experimentalGrp']);
+        
+        $qinfo = DatabaseManager::Query($insert);
 
+        if ($qinfo->RowCount() == 1)
+            return true;
+
+        return false;
 	}
 
 	private function saveDbQuestionnaireP1()
 	{
-
+		//TO DO
 	}
 
 	private function saveDbQuestionnaireP2()
 	{
-
+		//TO DO
 	}
 
 	private function saveDbParQ()
 	{
-
+		//TO DO
 	}
 }
+/*
+$table = new CreateTableQuery("enrollment_form");
+$table->AddColumn('id')->SetAutoIncrement();
+$table->AddColumn('lastName')->MakeVarChar(50);
+$table->AddColumn('firstName')->MakeVarChar(50);
+$table->AddColumn('streetAddress')->MakeVarChar(120);
+$table->AddColumn('city')->MakeVarChar(50);
+$table->AddColumn('phone')->MakeVarChar(20);
+$table->AddColumn('email')->MakeVarChar(100)->AddKey('unique');
+$table->AddColumn('dob')->MakeVarChar(10)->DefaultValue('false');
+$table->AddColumn('gender')->MakeBool()->DefaultValue('false');
+$table->AddColumn('healthHistory')->MakeVarChar(500)->DefaultValue('false');
+$table->AddColumn('watchSbf')->MakeBool()->DefaultValue('false');
+$table->AddColumn('HowManyTimesAWeek')->MakeInt()->DefaultValue(0);
+$table->AddColumn('controlGroup')->MakeBool()->DefaultValue('false');
+$table->AddColumn('experimentalGroup')->MakeBool()->DefaultValue('false');  */
