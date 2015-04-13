@@ -1,6 +1,5 @@
 <?php
 	require_once "header.php";
-
 	//printr($_POST);
 	if(isset($_POST['regKey'], $_POST['register']))// && $_POST['regKey'] === $_SESSION['regKey'])
 	{
@@ -36,7 +35,6 @@
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-    
     <section>
         <h1> Register </h1>
 		<form class="register" method="POST">
@@ -59,5 +57,5 @@
             <br><br>
             <button type="submit" name="register" value="Register">Register</button>
             <br>
-            </form>
+        </form>
 <?php require_once"footer.php";?>
