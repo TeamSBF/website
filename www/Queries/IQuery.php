@@ -1,5 +1,5 @@
 <?php
 interface IQuery
 {
-    public function Query();
+    public function Query($values = null);
 }

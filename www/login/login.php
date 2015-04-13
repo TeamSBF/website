@@ -1,39 +1,29 @@
-
-
 <?php
-	if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] == $_SESSION['regKeyLogin']))
-	{
-		$err_message = "";
-		if(isset($_POST['emailLogin'], $_POST['passwordLogin']))
-		{
-			//scrub input
-			$email = htmlspecialchars($_POST['emailLogin']);
-			$passed_pwd = htmlspecialchars($_POST['passwordLogin']);
-		
-			//clear whitespace
-			$email = trim($email);
-			$passed_pwd = trim($passed_pwd);
-		
-			require_once("assets/password.php");
-			//$options = array('cost' => 11);
-	
-			//$targetP = password_hash("test", PASSWORD_BCRYPT, $options);   //hardcode
-			
-			$result = UserModel::Login($email, $passed_pwd);    //to db
-			echo $result . "----";
-//			if($targetE == $email && password_verify($_POST['password'], $targetP))  //hardcode
-			if($result)    //to db
-			{
-				$_SESSION['user_id']=$result;
-				header("location: ".$_SERVER['PHP_SELF'] ) ;
-			}
-			else
-			{
-				$err_message= '<div class="alert alert-warning"> *failed to login* </div>';
-			}
-		}	
-	}
-	//$_POST['password'] = null;
+	if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $_SESSION['regKeyLogin'])) {
+        $err_message = "";
+        if (isset($_POST['emailLogin'], $_POST['passwordLogin'])) {
+            //scrub input
+            $email = htmlspecialchars($_POST['emailLogin']);
+            $passed_pwd = htmlspecialchars($_POST['passwordLogin']);
+
+            //clear whitespace
+            $email = trim($email);
+            $passed_pwd = trim($passed_pwd);
+
+            require_once("assets/password.php");
+
+            $result = UserModel::Login($email, $passed_pwd);    //to db
+            if ($result)    //to db
+            {
+                $_SESSION['id'] = $result;
+                unset($_SESSION['regKeyLogin']);
+                header("location: " . $_SERVER['PHP_SELF']);
+            } else {
+                $err_message = '<div class="alert alert-warning"> *failed to login* </div>';
+            }
+        }
+    }
+	unset($_POST['password']);
 	
 	$_SESSION['regKeyLogin'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 ?>

@@ -1,5 +1,5 @@
 <?php
-class FieldElement
+class Field
 {
     // ---
     //private static $keys = ["primary" => "", "unique" => []];

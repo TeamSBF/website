@@ -1,5 +1,8 @@
 <?php
-class CreateTableQuery
+/*
+ * THIS NEEDS TO BE REFACTORED TO UTILIZE THE QUERY OBJECT TO SIMPLIFY THE OVERALL STRUCTURE
+ */
+class CreateTable
 {
     private $name = "";
     private $ai = "";

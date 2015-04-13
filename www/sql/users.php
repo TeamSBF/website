@@ -1,6 +1,6 @@
 <?php
 
-$table = new CreateTableQuery("users");
+$table = new CreateTable("users");
 $table->AddColumn('id')->SetAutoIncrement();
 $table->AddColumn('email')->MakeVarChar(100)->AddKey('unique');
 $table->AddColumn('password')->MakeVarChar(100);

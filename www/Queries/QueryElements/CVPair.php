@@ -1,5 +1,5 @@
 <?php
-class ColumnValuePair
+class CVPair
 {
     protected $column;
     protected $value;
