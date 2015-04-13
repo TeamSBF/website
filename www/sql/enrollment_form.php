@@ -1,6 +1,6 @@
 <?php
 
-$table = new CreateTableQuery("enrollment_form");
+$table = new CreateTable("enrollment_form");
 $table->AddColumn('id')->SetAutoIncrement();
 $table->AddColumn('lastName')->MakeVarChar(50);
 $table->AddColumn('firstName')->MakeVarChar(50);
