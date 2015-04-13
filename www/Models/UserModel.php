@@ -24,7 +24,7 @@ class UserModel
         if ($res->RowCount() == 1) {
             $resultArray = $res->Result();
             if (password_verify($pass, $resultArray['password'])) {
-                return new UserModel($resultArray['id']);
+                return $resultArray['id'];
             }
         }
 
