@@ -1,9 +1,28 @@
 <?php
+/*
+ * Provides an object wrapper for the PDOStatement object that is used to retrieve the database results
+ */
 class QueryInfo
 {
+    /*
+     * A reference to the PDOStatement
+     *
+     * @var PDOStatement
+     */
     private $statement = null;
+    /*
+     * A string that contains the error.
+     *
+     * @var string
+     */
     private $errors = "No Errors";
 
+    /*
+     * The class constructor
+     *
+     * @param PDOStatement The PDOStatement to be stored
+     * @param string Any error(s) that occurred during the execution of the query
+     */
     public function __construct($stmt, $errors)
     {
         if($stmt instanceof PDOStatement)

@@ -4,7 +4,7 @@
 			<div class ="col-sm-4">
 <?php
 
-if (isset($_SESSION['user_id'])) 
+if (isset($_SESSION['id'])) 
 {
 	require_once('login/logout.php');
 }
@@ -17,3 +17,5 @@ else
 		</div>
 	</div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
