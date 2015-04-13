@@ -249,6 +249,7 @@ nav a
   font-weight: 800;
   padding: 20px;
   color: #93AAFF;
+    
 }
 
 nav a.selected, 
@@ -257,4 +258,11 @@ nav a:visited
 {
 	padding-bottom: 0;
     color: #2E4BC3;
+}
+nav a:hover,
+nav a:visited,
+nav a:focus,
+nav a:link
+{
+    padding-bottom: 0;
 }
