@@ -40,11 +40,11 @@
 		<form class="register" method="POST">
 			<input type="hidden" name="regKey" value="">
 			<label>E-mail Address </label><br> 
-            <input type="text" name="email" placeholder="E-mail Address"> 
+            <input type="text" name="email" placeholder="johndoe@example.net"> 
             <br> 
 			<br>
             <label>Confirm E-mail Address </label><br>
-            <input type="text" name="cEmail" placeholder="Confirm E-mail Address">	  
+            <input type="text" name="cEmail" placeholder="johndoe@example.net">	  
             <br>
             <br>
 			<label>Password </label> 
