@@ -95,15 +95,17 @@ class FormsModel
 	private function saveDbEnrollment()
 	{
 		$form = $this->form;
-		$insert = new InsertQuery();
-        $insert->Table("enrollment_form")->Set("lastName", $form['lName'])->Set("firstName", $form['fName'])
-        ->Set("streetAddress", $form['streetAddress'])->Set("city", $form['city'])->Set("phone", $form['phone'])
-        ->Set("email", $form['email'])->Set("dob", $form['dob'])->Set("gender", $form['gender'])
-        ->Set("healthHistory", $form['healthHistory'])->Set("watchSbf", $form['watchSbf'])->Set("howManyTimesAWeek", $form['howMany'])
-        ->Set("controlGroup", $form['controlGrp'])->Set("experimentalGroup", $form['experimentalGrp']);
+		// get a Insert query object
+		$insert = QueryFactory::Build("insert");
+		// build the query
+        $insert->Into("enrollment_form")->Set(["lastName", $form['lName']], ["firstName", $form['fName']], ["streetAddress", $form['streetAddress']],
+        	["city", $form['city']], ["phone", $form['phone']], ["email", $form['email']], ["dob", $form['dob']], ["gender", $form['gender']],
+        	["healthHistory", $form['healthHistory']], ["watchSbf", $form['watchSbf']], ["howManyTimesAWeek", $form['howMany']],
+        	["controlGroup", $form['controlGrp']], ["experimentalGroup", $form['experimentalGrp']]);
         
+        // save to the DB
         $qinfo = DatabaseManager::Query($insert);
-
+        // check for success or failure
         if ($qinfo->RowCount() == 1)
             return true;
 
