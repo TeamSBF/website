@@ -4,7 +4,7 @@
 			<div class ="col-sm-4">
 <?php
 
-if (isset($_SESSION['user_id'])) 
+if (isset($_SESSION['id'])) 
 {
 	require_once('login/logout.php');
 }

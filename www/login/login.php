@@ -1,4 +1,5 @@
 <?php
+
 	if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $_SESSION['regKeyLogin'])) {
         $err_message = "";
         if (isset($_POST['emailLogin'], $_POST['passwordLogin'])) {
@@ -16,6 +17,7 @@
             if ($result)    //to db
             {
                 $_SESSION['id'] = $result;
+				
                 unset($_SESSION['regKeyLogin']);
                 header("location: " . $_SERVER['PHP_SELF']);
             } else {
