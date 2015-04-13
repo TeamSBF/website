@@ -41,7 +41,7 @@
 				<?php if(!empty($err_message)){ echo $err_message; }?>
 					
 				<label for="inputEmail" class="sr-only">Email address</label>
-				<input name="emailLogin" type="email" id="inputEmail" class="form-control" placeholder="Email address" required="required" <?php if(isset($_POST['emailLogin'])){echo 'value="'.$_POST['emailLogin'].'"'; }?> />
+				<input name="emailLogin" type="email" id="inputEmail" class="form-control" placeholder="johndoe@example.net" required="required" <?php if(isset($_POST['emailLogin'])){echo 'value="'.$_POST['emailLogin'].'"'; }?> />
 				<label for="inputPassword" class="sr-only">Password</label>
 				<input name="passwordLogin" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" <?php if(isset($_POST['passwordLogin'])){echo 'value="'.$_POST['passwordLogin'].'"'; }?> />
 							
