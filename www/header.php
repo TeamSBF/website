@@ -13,9 +13,25 @@
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/grid.css">	
-  <link href='http://fonts.googleapis.com/css?family=Bitter|Bree+Serif' rel='stylesheet' type='text/css'>			
-  <link rel="stylesheet" href="css/styles.css">	
+  <link href='http://fonts.googleapis.com/css?family=Bitter|Bree+Serif' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
+  
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function($) {
+			$('#accordion').find('.accordion-toggle').click(function(){
 	
+				//Expand or collapse this panel
+				$(this).next().slideToggle('fast');
+	
+				//Hide the other panels
+				$(".accordion-content").not($(this).next()).slideUp('fast');
+	
+			});
+		});
+	</script>
+  <link rel="stylesheet" href="css/styles.css">	
+
 </head>
 <body>
   <header class="grid_12 alpha">

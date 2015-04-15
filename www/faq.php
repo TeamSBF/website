@@ -1,7 +1,7 @@
 <?php
     require_once"header.php"; 
 ?>
-<section>
+<div class="background">
     <h1>FAQ</h1>
     <h2>What is Sit and Be Fit?</h2>
         <p>Sit and Be Fit believes that everyone has the right to feel good and age well. We do this by empowering people to improve their lives through safe, effective media-based health and wellness program. Sit and Be Fit is a non-profit organization committed to healthy aging advocacy.</p>
@@ -42,5 +42,5 @@ We are recruiting participants to watch Sit and Be Fit on public television, 3-5
     
     <h2>Who to contact with more questions</h2>
     <p>If you have additional questions, please contact the Sit and Be Fit offices toll free at 888-678-9438 or (509) 448-9438. You may also e-mail questions to <a href="mailto:sitandbefit@sitandbefit.org"> sitandbefit@sitandbefit.org </a></p>
-</section>
+</div>
 <?php require_once"footer.php";?>
