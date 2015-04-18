@@ -15,23 +15,30 @@
   <link rel="stylesheet" href="css/grid.css">	
   <link href='http://fonts.googleapis.com/css?family=Bitter|Bree+Serif' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
-  
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
-	<script type="text/javascript">
-		$(document).ready(function($) {
-			$('#accordion').find('.accordion-toggle').click(function(){
-	
-				//Expand or collapse this panel
-				$(this).next().slideToggle('fast');
-	
-				//Hide the other panels
-				$(".accordion-content").not($(this).next()).slideUp('fast');
-	
-			});
-		});
-	</script>
+  <link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">	
 
+    
+    <script src="js/jquery-1.10.2.js"></script>
+	<script src="js/jquery-ui-1.10.4.custom.js"></script>
+	<script>
+	$(function() {
+		
+		$( "#accordion" ).accordion();
+		
+		// Hover states on the static widgets
+		$( "#dialog-link, #icons li" ).hover(
+			function() {
+				$( this ).addClass( "ui-state-hover" );
+			},
+			function() {
+				$( this ).removeClass( "ui-state-hover" );
+			}
+		);
+	});
+	</script>
+    
+    
 </head>
 <body>
   <header class="grid_12 alpha">
@@ -41,10 +48,11 @@
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
 		<li><a href="faq.php">FAQ</a></li>
-        <li><a href="assessments.php">Assessments</a></li>
+          <li><a href="assessments.php">Assessments</a></li>
+        <li><a href="tassessments.php">TAssessments</a></li>
         <li><a href="register.php">Register</a></li>
       </ul>
     </nav>
   </header>
     <div class="container">
-    <div class="grid_8 alpha">
+    

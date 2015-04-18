@@ -35,6 +35,7 @@
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
+<div class="grid_8 alpha">
     <div class="background">
         <h1> Register </h1>
 		<form class="register" method="POST">
