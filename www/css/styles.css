@@ -172,26 +172,28 @@ input{
   transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
 /* Accordion Styling*/
-#ArmCurl,#ChairStand,#StepTest,#FootUp,#Unilateral,#Functional
-{
-    border: 1px solid black;
-}
-.accordion-toggle 
-{
-    background:rgb(235, 233, 234);
-    cursor: pointer;
-    margin: 0;
+#accordion {
+     margin-top:10px;
+     border:thin solid #cecece;   
+     border-top:none;
+     border-bottom:none;
+    height: auto;
 }
 
-.accordion-content 
-{
-    display: none;
+#accordion div {
+    background:white;
+    height:auto;
+    display:block;
+    border-bottom:thin solid #cecece;
+    padding-left:15px;
 }
 
-.accordion-content.default 
-{
-    display: block;
+
+
+.first {
+    border-top:thin solid #cecece;    
 }
+
 /*NAVIGATION*/
 
 nav ul 
