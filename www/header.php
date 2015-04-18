@@ -26,7 +26,7 @@
         <li><a href="contact.php">Contact</a></li>
 		<li><a href="faq.php">FAQ</a></li>
         <li><a href="assessments.php">Assessments</a></li>
-        <li><a href="register.php">Register</a></li>
+        <?php if(isset($_SESSION['id'])){?><li><a href="profile.php">Profile</a></li><?php }?> <!--  have to be log on for this to show -->
       </ul>
     </nav>
   </header>

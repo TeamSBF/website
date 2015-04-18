@@ -46,7 +46,7 @@
 				<input name="passwordLogin" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" <?php if(isset($_POST['passwordLogin'])){echo 'value="'.$_POST['passwordLogin'].'"'; }?> />
 							
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br>
-				<a href>forgot your password?</a>
+				<a href = "../forgotPassword.php">forgot your password?</a>
 				<br>
 				<a href = "../register.php">register account</a>
 			</form>
