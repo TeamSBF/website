@@ -49,10 +49,9 @@
         <li><a href="contact.php">Contact</a></li>
 		<li><a href="faq.php">FAQ</a></li>
           <li><a href="assessments.php">Assessments</a></li>
-        <li><a href="tassessments.php">TAssessments</a></li>
         <li><a href="register.php">Register</a></li>
       </ul>
     </nav>
   </header>
     <div class="container">
-    
+   <div class="grid_8 alpha">

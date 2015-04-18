@@ -6,7 +6,6 @@
 	  <?php require_once"login/loginWidget.php";?>
     </div>
     </div>
-
 </body>
 </html>
 <? ob_end_flush();?>
