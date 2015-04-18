@@ -2,7 +2,7 @@
 <?php
 require_once "config.php";
 
-QueryTests::All();
+//QueryTests::All();
 
 ?>
 </pre>

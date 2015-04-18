@@ -1,4 +1,7 @@
-<?php require_once ("config.php"); ?>
+<?php
+require_once "config.php";
+require_once "sessions.php";
+?>
 
 <!doctype html>
 <html lang="en">
@@ -19,11 +22,16 @@
     <nav class="grid_12 alpha">
       <ul>
         <li><a href="index.php">Home</a></li>
+        <?php if(!$user){?>
         <li><a href="about.php">About</a></li>
         <li><a href="contact.php">Contact</a></li>
 		<li><a href="faq.php">FAQ</a></li>
         <li><a href="assessments.php">Assessments</a></li>
         <li><a href="register.php">Register</a></li>
+        <?php }else{
+            if($user->HasPrivilege(10)) echo '<li><a href="admin.php">Admin</a>\n';?>
+        <li><a href="logout.php">Logout</a></li>
+        <?php } ?>
       </ul>
     </nav>
   </header>

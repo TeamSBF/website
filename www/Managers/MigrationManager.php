@@ -1,11 +1,11 @@
 <?php
-/*
- * The MigrationManager Singleton that is used to handle all database migration issues and errors
+/**
+ * Class MigrationManager The MigrationManager Singleton that is used to handle all database migration issues and errors
  */
 class MigrationManager
 {
     // ---
-    /*
+    /**
      * The singleton instance
      *
      * @var MigrationManager = null
@@ -14,14 +14,14 @@ class MigrationManager
 
     // ---
 
-    /*
+    /**
      * Private constructor to help prevent outside initialization
      */
     private function __construct()
     {
     }
 
-    /*
+    /**
      * Determines the error and how to handle it
      *
      * @param mixed $query The Query or CreateTable object that failed to execute
@@ -40,7 +40,7 @@ class MigrationManager
         }
     }
 
-    /*
+    /**
      * Checks the currently existing table against the provided SQL schema in its associated file
      *
      * @param string $table The name of the table to check
@@ -82,7 +82,7 @@ class MigrationManager
             $this->alterTable($table, $toAdd, $keys);
     }
 
-    /*
+    /**
      * Used to create the alter table query that will be used to repair a given table
      *
      * @param string $table The table to be altered
@@ -97,7 +97,7 @@ class MigrationManager
         $alter->Table($table);
         // Add each field to the alter table query
         for ($i = 0; $i < count($toAdd); $i++)
-            $alter->AddField($toAdd[$i]['name'], $toAdd[$i]['type'], $toAdd[$i]['value']);
+            $alter->AddField($toAdd[$i]);
         // Add the keys if needed
         $this->addKeys($alter, $keys);
 
@@ -105,7 +105,7 @@ class MigrationManager
         DatabaseManager::Query($alter);
     }
 
-    /*
+    /**
      * Adds keys to an alter table query
      *
      * @param AlterTable $alter The alert table query
@@ -137,7 +137,7 @@ class MigrationManager
         }
     }
 
-    /*
+    /**
      * Attempts to create the specified table
      *
      * @param string $table The name of the table
@@ -154,16 +154,20 @@ class MigrationManager
         }
     }
 
-    /*
+    /**
      * Returns the file associated table structure
      *
      * @param string $table The name of the table to retrieve
+     * @return mixed Returns the table schema from the sql file
      */
     private function grabTableInfo($table)
     {
         return require("sql/" . $table . ".php");
     }
 
+    /**
+     * @return MigrationManager
+     */
     private static function instance()
     {
         if (!isset(self::$instance) || self::$instance == null) {
