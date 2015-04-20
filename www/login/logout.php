@@ -1,10 +1,3 @@
-<?php
-if(isset($_POST['loggedOut']))
-{
-	session_start();
-	session_destroy();
-	header("location: index.php");
-}
 
 ?>
 <div class="container-fluid">
