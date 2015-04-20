@@ -272,6 +272,7 @@ nav ul
   width: 100%;
   max-width: 100%;
   font-size: 22px;
+  padding-bottom:4px;
  
 background: #d8d7dd; /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
