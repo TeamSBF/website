@@ -23,10 +23,12 @@
 		else
 		{
 			
-			if(UserModel::Register($email,$password,$salt))
-				echo "registration successful!";
-			else  //SEND to controller?
-				echo "failed to register";
+			if(UserModel::Exists("email", $email))
+				echo "Failed to register, email already exists, please use a different email"; 
+			else if(UserModel::Register($email,$password,$salt))
+				echo "Registration Successful!";
+			else
+				echo "Failed to register";
 			
 			
 		}
@@ -58,4 +60,5 @@
             <button type="submit" name="register" value="Register">Register</button>
             <br>
         </form>
+	</section>
 <?php require_once"footer.php";?>

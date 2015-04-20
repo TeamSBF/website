@@ -106,7 +106,7 @@ class UserModel
     public static function Exists($column, $value)
     {
         // Get a select query
-        $select = QueryFactory::Builder("select");//new SelectQuery();
+        $select = QueryFactory::Build("select");//new SelectQuery();
         // Build the select query
         $select->Select('id')->Table("users")->Where([$column, "=", $value])->Limit();
         // Execute the query and get the results
@@ -118,6 +118,27 @@ class UserModel
         return false;
     }
 
+	/*
+     * Update the password of the currently logged in user
+     *
+     * @param string $id The current  session id
+     * @param string $newPass The new password that will be update
+     *
+     * @return boolean True if the change is a success, false if it doesn't
+     */
+	public static function updatePassword($id, $newPass)
+	{
+		$newPass = self::hashPass($newPass); // hash the incoming password
+		$update = QueryFactory::Build("update"); //new update query
+		$update->Table("users")->Where( ["id", "=", $id] )->Set(["password",  $newPass]); //update the query
+		$res = DatabaseManager::Query($update); // execute the query
+		
+		if ($res->RowCount() == 1)
+            return true;
+
+        return false;
+	}
+	
     /**
      * Hashes a given password
      *
