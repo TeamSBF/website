@@ -1,0 +1,17 @@
+<div id="accordion">
+    <a href="#one" class="first">30 Second Chair Stand</a>
+    <div id="one">
+         Definition: Lower body strength evaluation. Assess strength for climbing stairs, walking, and getting out of a chair, car, or tub. Number of full stands that can be completed in 30 seconds with arms folded across chest. If the arms are pulled away from the chest or you rock back and forward to help you stand that is unacceptable and the test will be stopped at that point. You may rest while siting on the chair and continue if you are still within the 30 seconds.
+         <iframe width="100%" height="315" src="https://www.youtube.com/embed/m0APvLqZr5E" frameborder="0" allowfullscreen></iframe>
+    </div>
+    
+    <a href="#two">Popular Posts</a>
+    <div id="two">
+        this is some more info.
+    </div>
+    
+    <a href="#three">Archived Posts</a>
+    <div id="three">
+        this is even more info.
+    </div>
+</div>

@@ -1,7 +1,7 @@
 <?php
     require_once"header.php"; 
 ?>
- <section>
+ <div class="background">
           <h1>About Us</h1>
         <h3>Our Mission</h3>
         <p>Sit and Be Fit is committed to improving the quality of life of older adults and physically limited individuals through safe, effective exercises that are available through television, videos, personal appearances, classes, seminars, books, and the Internet.</p>
@@ -32,5 +32,5 @@
           <li>Ask your local public television stations to air Sit and Be Fit three or more days each week at times convenient for older adults and others.</li>
           <li>Tell your doctor, other health care providers, and fitness professionals in local communities about Sit and Be Fit programs.</li>
         </ul>
-        </section>
+        </div>
 <?php require_once"footer.php";?>

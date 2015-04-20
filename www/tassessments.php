@@ -1,7 +1,7 @@
 <?php
     require_once"header.php"; 
 ?>
-
+<div class="grid_12 alpha">
 <div class="background">
 <h1 class="demoHeaders">Assessments</h1>
 <!-- Accordion -->

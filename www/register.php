@@ -37,7 +37,7 @@
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-    <section>
+    <div class="background">
         <h1> Register </h1>
 		<form class="register" method="POST">
 			<input type="hidden" name="regKey" value="">
@@ -60,5 +60,5 @@
             <button type="submit" name="register" value="Register">Register</button>
             <br>
         </form>
-	</section>
+	</div>
 <?php require_once"footer.php";?>

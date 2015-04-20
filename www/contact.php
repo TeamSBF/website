@@ -3,7 +3,7 @@
 ?>
 
       
-        <section>
+        <div class="background">
           <h1>Contact Information</h1>
           <p>Postal Service:</p>
           <p>SIT AND BE FIT</p>
@@ -18,5 +18,5 @@
           <p>For order inquiries, including bulk and international sales, product information, cable and TV series, event scheduling or to receive a brochure, please contact Casandra at casandra@sitandbefit.org.</p>
             <p>For questions regarding marketing, PR, production, sponsorships, licensing or new media development, please contact gretchen@sitandbefit.org.</p>
             <p>Thank You!!</p>
-        </section>
+        </div>
 <?php require_once"footer.php";?>
