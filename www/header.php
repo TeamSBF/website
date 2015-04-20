@@ -50,7 +50,7 @@ require_once "sessions.php";
         <li><a href="contact.php">Contact</a></li>
 		<li><a href="faq.php">FAQ</a></li>
           <li><a href="assessments.php">Assessments</a></li>
-        <li><a href="parQTest.php">ParQ Form</a></li>
+        <li><a href="parQ.php">ParQ Form</a></li>
         <li><a href="register.php">Register</a></li>
         <?php }else{
             if($user->HasPrivilege(10)) echo '<li><a href="admin.php">Admin</a>\n';?>
