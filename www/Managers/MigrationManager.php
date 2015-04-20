@@ -2,40 +2,22 @@
 /**
  * Class MigrationManager The MigrationManager Singleton that is used to handle all database migration issues and errors
  */
-class MigrationManager
+class MigrationManager extends Singleton
 {
-    // ---
-    /**
-     * The singleton instance
-     *
-     * @var MigrationManager = null
-     */
-    private static $instance = null;
-
-    // ---
-
-    /**
-     * Private constructor to help prevent outside initialization
-     */
-    private function __construct()
-    {
-    }
-
     /**
      * Determines the error and how to handle it
      *
      * @param mixed $query The Query or CreateTable object that failed to execute
      * @param int $errorInfo The error that occurred
      */
-    public static function HandleError($query, $errorInfo)
+    public function HandleError($query, $errorInfo)
     {
-        $instance = self::instance();
         switch ($errorInfo[1]) {
             case 1054: // 1054: field does not exist
-                $instance->checkTable($query->Table());
+                $this->checkTable($query->Table());
                 break;
             case 1146: // 1146: table does not exist
-                $instance->createTable($query->Table());
+                $this->createTable($query->Table());
                 break;
         }
     }
@@ -163,19 +145,5 @@ class MigrationManager
     private function grabTableInfo($table)
     {
         return require("sql/" . $table . ".php");
-    }
-
-    /**
-     * @return MigrationManager
-     */
-    private static function instance()
-    {
-        if (!isset(self::$instance) || self::$instance == null) {
-            //echo"\n================= creating (". __CLASS__ .") =================\n";
-            $c = __CLASS__;
-            self::$instance = new $c;
-        }
-
-        return self::$instance;
     }
 }

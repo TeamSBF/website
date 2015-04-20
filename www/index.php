@@ -1,7 +1,7 @@
 <?php
-    require_once"header.php"; 
+    require_once"header.php";
 ?>
-      
+
       <section>
         <iframe width="100%" height="360" src="https://www.youtube.com/embed/31Ew1ogQqpE" frameborder="0" allowfullscreen></iframe>
         <!-Information goes here to describe the business ->
