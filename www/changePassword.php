@@ -1,53 +1,63 @@
 <?php
-	require_once "config.php";
-	
-	
-	//if(isset($_POST['regKey']) && $_POST['regKey'] === $_SESSION['regKey'])
-	if(isset($_POST['submit']))
+	require_once "header.php";
+	//printr($_POST);
+	if(isset($_POST['regKey'], $_POST['register']))// && $_POST['regKey'] === $_SESSION['regKey'])
 	{
-		$oldPass = trim($_POST['oldPass']);
-		$newPass = trim($_POST['newPass']); 
-		$cNewPass = trim($_POST['cNewPass']);
+		$email = trim($_POST['email']);
+		$cEmail = trim($_POST['cEmail']); 
+		$password = trim($_POST['password']);
+		$cPassword = trim($_POST['cPassword']);
+		$salt = "salt";
+		//print_r($_POST);
 		
-		if(empty($oldPass) || empty($newPass) || empty($cNewPass))
+		
+		
+		if(empty($email) || empty($cEmail) || empty($password) || empty($cPassword))
 			echo "all fields required";
-		else if($newPass !== $cNewPass)
-			echo "new password doesn't match!";
+		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
+			echo "invalid email, try again";
+		else if($email !== $cEmail)
+			echo "Email doesn't match";
+		else if($password !== $cPassword)
+			echo "password doesn't match";
 		else
 		{
 			
-			echo "send to controller???";
-			//SEND to controller?
+			if(UserModel::Exists("email", $email))
+				echo "Failed to register, email already exists, please use a different email"; 
+			else if(UserModel::Register($email,$password,$salt))
+				echo "Registration Successful!";
+			else
+				echo "Failed to register";
+			
 			
 		}
 		
 		
 	}
-		
-	
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-
-<html>
-	<head>
-		<title> Change Password </title>
-
-	</head>
-	
-	<body>
-		<h1> Change Password </h1>
-		
-		<!--<form action="</?=$_SERVER['PHP_SELF'];?>" method="POST">-->
-		<form method = "POST">
-			<label>current password </label> <input type="password" name ="oldPass" value="" >  <br> 
-			<label>new password </label> <input type="password" name ="newPass" value="">	  <br>
-			<label>confirm new password </label> <input type="password" name ="cNewPass" value=""> <br>
-			<input type="submit" name="submit" value="submit">
-		</form>
-	
-	</body>
-	
-	
-</html>
-
-
+    <section>
+        <h1> Change Password </h1>
+		<form class="changePassword" method="POST">
+			<input type="hidden" name="regKey" value="">
+			<label>E-mail Address </label><br> 
+            <input type="text" name="email" placeholder="johndoe@example.net"> 
+            <br>
+            <br>
+			<label>Password </label> 
+            <br>
+            <input type="password" name="password" placeholder="Password"> 
+            <br><br>
+			<label>Confirm Password </label>
+            <br>
+            <input type="password" name="cPassword" placeholder="Confirm Password"> 
+            <br><br>
+            <button type="submit" name="update" value="update">update</button>
+            <br>
+        </form>
+	</section>
+	<section>
+		<h1> something else </h1>
+	</section>
+<?php require_once"footer.php";?>

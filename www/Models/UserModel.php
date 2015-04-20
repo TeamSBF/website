@@ -1,35 +1,50 @@
 <?php
-/*
- * A class to represent the User
+/**
+ * Class UserModel A class to represent the User
  */
 class UserModel
 {
-    /*
+    /**
      * The user ID of the user
-     *
      * @var int
      */
     private $id;
+    /**
+     * The privilege level of the user
+     * @var int
+     */
+    private $level;
 
-    /*
+    /**
      * The class constructor
      *
-     * @param int $id The id of the user
+     * @param $info The array of info the model will store
      */
-    private function __construct($id)
+    private function __construct($info)
     {
-        echo "setID: " . $id . "\n";
-        self::checkUserID($id);
-
-        $this->id = $id;
+        $this->id = $info['id'];
+        $this->level = $info['pLevel'];
     }
 
-    /*
+    /**
+     * @param $level The level to compare the user's level against
+     * @return bool True if high enough, false if not
+     * @throws Exception Thrown if $level is not an integer
+     */
+    public function HasPrivilege($level)
+    {
+        if(!is_int($level))
+            throw new Exception("Privilege level('$level') must be an integer");
+
+        return $this->level >= $level;
+    }
+
+    // ----------------------------- Static Functions -----------------------------
+    /**
      * Attempts to log the user in
      *
      * @param string $email The user's email address
      * @param string $pass The user's password
-     *
      * @return mixed Returns the user's ID upon successful login or false upon failure
      */
     public static function Login($email, $pass)
@@ -40,28 +55,28 @@ class UserModel
         // Gets a select query from the query factory
         $select = QueryFactory::Build("select");
         // Builds the select query
-        $select->Select("id", "password")->From("users")->Where(["email", "=", $email])->Limit(1);
-        // Get the results from the query exection
+        $select->Select("id", "password", "pLevel")->From("users")->Where(["email", "=", $email])->Limit();
+        // Get the results from the query execution
         $res = DatabaseManager::Query($select);
         // If a user was found, try to log them in
         if ($res->RowCount() == 1) {
             // Get the query results
             $resultArray = $res->Result();
-            // If their provided password matches the database password, return the user ID
+            // If their provided password matches the database password, return a new user model
             if (password_verify($pass, $resultArray['password'])) {
-                return $resultArray['id'];
+                unset($resultArray['password']);
+                return new UserModel($resultArray);
             }
         }
 
         return false;
     }
 
-    /*
+    /**
      * Attempts to register a user
      *
      * @param string $email The users email
      * @param string $pass The users password
-     *
      * @return boolean True when the registration succeeds and false when it fails
      */
     public static function Register($email, $pass)
@@ -81,18 +96,17 @@ class UserModel
         return false;
     }
 
-    /*
+    /**
      * Checks to see if a user exists with a specified column and value (recommended primarily or unique column)
      *
      * @param string $column The column to grab
      * @param string $value The value to compare the column against
-     *
      * @return boolean True if the user exists, false if it doesn't
      */
     public static function Exists($column, $value)
     {
         // Get a select query
-        $select = QueryFactory::Builder("select");//new SelectQuery();
+        $select = QueryFactory::Build("select");//new SelectQuery();
         // Build the select query
         $select->Select('id')->Table("users")->Where([$column, "=", $value])->Limit();
         // Execute the query and get the results
@@ -104,17 +118,28 @@ class UserModel
         return false;
     }
 
-    /*
-     * Checks the user ID to make sure it's numeric. Throws and error if it isn't.
+	/*
+     * Update the password of the currently logged in user
+     *
+     * @param string $id The current  session id
+     * @param string $newPass The new password that will be update
+     *
+     * @return boolean True if the change is a success, false if it doesn't
      */
-    private static function checkUserID($id)
-    {
-        echo "User ID is: " . $id;
-        if (!is_numeric($id))
-            throw new Exception("User ID must be a number");
-    }
+	public static function updatePassword($id, $newPass)
+	{
+		$newPass = self::hashPass($newPass); // hash the incoming password
+		$update = QueryFactory::Build("update"); //new update query
+		$update->Table("users")->Where( ["id", "=", $id] )->Set(["password",  $newPass]); //update the query
+		$res = DatabaseManager::Query($update); // execute the query
+		
+		if ($res->RowCount() == 1)
+            return true;
 
-    /*
+        return false;
+	}
+	
+    /**
      * Hashes a given password
      *
      * @param string $pass The password to be hashed
