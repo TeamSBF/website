@@ -44,11 +44,11 @@ class FormsModel
 	public function ValidateParQ()
 	{
 		// do some checks here
-
 		// if everything went well we save data to the database
+		
 		if ($this->saveDbParQ())
 			return '***Success!***';
-		return "***DB SAVE FAILED***";
+		return "***DB SAVE FAILED***"; 
 	}
 
 	private function CheckforEmpties()
@@ -96,12 +96,12 @@ class FormsModel
 	{
 		$form = $this->form;
 		// get a Insert query object
-		$insert = QueryFactory::Build("insert");
+		$insert = QueryFactory::Build('insert');
 		// build the query
-        $insert->Into("enrollment_form")->Set(["lastName", $form['lName']], ["firstName", $form['fName']], ["streetAddress", $form['streetAddress']],
-        	["city", $form['city']], ["phone", $form['phone']], ["email", $form['email']], ["dob", $form['dob']], ["gender", $form['gender']],
-        	["healthHistory", $form['healthHistory']], ["watchSbf", $form['watchSbf']], ["howManyTimesAWeek", $form['howMany']],
-        	["controlGroup", $form['controlGrp']], ["experimentalGroup", $form['experimentalGrp']]);
+        $insert->Into('enrollment_form')->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
+        	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
+        	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
+        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
         
         // save to the DB
         $qinfo = DatabaseManager::Query($insert);
@@ -124,22 +124,29 @@ class FormsModel
 
 	private function saveDbParQ()
 	{
-		//TO DO
+		$form = $this->form;
+		// get a Insert query object
+		$insert = QueryFactory::Build('insert');
+		// build the query
+		// NOT WORKING!!!
+        $insert->Into('parq_form')->Set(['q1-1', $form['q1-1']], ['q1-2', $form['q1-2']], ['q1-3', $form['q1-3']],
+        	['q1-4', $form['q1-4']], ['q1-5', $form['q1-5']], ['q1-6', $form['q1-6']], ['q1-7', $form['q1-7']], ['q2-1', $form['q2-1']],
+        	['q2-1a', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
+        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
+        
+        // save to the DB
+        $qinfo = DatabaseManager::Query($insert);
+        // check for success or failure
+        if ($qinfo->RowCount() == 1)
+            return true;
+
+        return false;
+	}
+
+	private function validateParQFields()
+	{
+		$f = $this->form;
+		
+
 	}
 }
-/*
-$table = new CreateTableQuery("enrollment_form");
-$table->AddColumn('id')->SetAutoIncrement();
-$table->AddColumn('lastName')->MakeVarChar(50);
-$table->AddColumn('firstName')->MakeVarChar(50);
-$table->AddColumn('streetAddress')->MakeVarChar(120);
-$table->AddColumn('city')->MakeVarChar(50);
-$table->AddColumn('phone')->MakeVarChar(20);
-$table->AddColumn('email')->MakeVarChar(100)->AddKey('unique');
-$table->AddColumn('dob')->MakeVarChar(10)->DefaultValue('false');
-$table->AddColumn('gender')->MakeBool()->DefaultValue('false');
-$table->AddColumn('healthHistory')->MakeVarChar(500)->DefaultValue('false');
-$table->AddColumn('watchSbf')->MakeBool()->DefaultValue('false');
-$table->AddColumn('HowManyTimesAWeek')->MakeInt()->DefaultValue(0);
-$table->AddColumn('controlGroup')->MakeBool()->DefaultValue('false');
-$table->AddColumn('experimentalGroup')->MakeBool()->DefaultValue('false');  */
