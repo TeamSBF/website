@@ -29,6 +29,7 @@ p
 
 
 
+/*--------------------------------------------------------------------------------*/
 /* FONT STYLING */
 /*Paragraph fonts and styles*/
 h1,h2,h3,p,ul
@@ -40,7 +41,7 @@ h1,h2,h3,p,ul
 }
 
 
-
+/*--------------------------------------------------------------------------------*/
 /*Headings/Titles font and sizes */
 
 
@@ -68,17 +69,7 @@ h1
     padding-bottom: 12px;
     margin-bottom: 0;
 }
-input
-{
-  width:313px;
-}
 
-section > ul > li
-{
-  color:black;
-  list-style: disc;
-  font-size:1.1em;
-}
 
 /*FORM STYLING*/
 .form-signin,
@@ -99,8 +90,9 @@ section > ul > li
     width: 500px;   
 }
 
-
+/*--------------------------------------------------------------------------------*/
 /* BUTTON AND INPUT STYLING */
+
 label,nav
 {
     font-family: 'Bree Serif',serif;
@@ -163,15 +155,68 @@ input{
   -o-text-overflow: clip;
   text-overflow: clip;
   background: rgba(252,252,252,1);
-  -webkit-box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
-  box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2) inset;
   text-shadow: 1px 1px 0 rgba(255,255,255,0.66) ;
   -webkit-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   -moz-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
+
+/*ParQ Form Styling*/
+#s1Radios, 
+label, 
+#s1RadioGroup > div:nth-child(n) > label > p,
+#section2 > fieldset > div:nth-child(n) > div:nth-child(1) > label > p,
+#section2 > fieldset > div:nth-child(n) > div > div > div:nth-child(n) > div:nth-child(1) > label > p,
+#section2 > fieldset > div:nth-child(8) > div > div:nth-child(2) > div:nth-child(3) > label>p,
+#q2-9extra > div:nth-child(n) > label > p,
+#q2-8extra > div:nth-child(n) > label > p,
+#q2-7extra > div:nth-child(n) > label > p,
+#q2-6extra > div:nth-child(n) > label > p,
+#q2-5extra > div:nth-child(n) > label > p,
+#q2-4extra > div:nth-child(n) > label > p,
+#q2-3extra > div:nth-child(n) > label > p,
+#q2-2extra > div:nth-child(n) > label > p,
+#q2-1extra > div:nth-child(n) > label > p
+{
+    font-family: 'Bitter', serif; 
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    text-indent: 0;
+}
+
+
+body > div > div > div > form > div > div:nth-child(n+6) > fieldset > div:nth-child(n) > label:nth-child(n) > p
+{
+    padding-left: 0;
+    padding-top:5px;
+    margin:10px;
+    text-indent: 0;
+}
+
+#s1RadioGroup > div:nth-child(n) > div:nth-child(n+2),
+#section2 > fieldset > div:nth-child(n) > div:nth-child(1) > label > div:nth-child(n+2),
+#section2 > fieldset > div:nth-child(n) > div:nth-child(1) > div:nth-child(n+2),
+#q2-1extra > div:nth-child(n) > div:nth-child(n),
+#q2-2extra > div:nth-child(n) > div:nth-child(n),
+#q2-3extra > div:nth-child(n) > div:nth-child(n),
+#q2-4extra > div:nth-child(n) > div:nth-child(n),
+#q2-5extra > div:nth-child(n) > div:nth-child(n),
+#q2-6extra > div:nth-child(n) > div:nth-child(n),
+#q2-7extra > div:nth-child(n) > div:nth-child(n),
+#q2-8extra > div:nth-child(n) > div:nth-child(n),
+#q2-9extra > div:nth-child(n) > div:nth-child(n)
+{
+    padding-left: 30px;   
+}
+
+
+/*--------------------------------------------------------------------------------*/
 /* Accordion Styling*/
+
 #accordion {
      margin-top:10px;
      border:thin solid #cecece;   
@@ -193,7 +238,7 @@ input{
 .first {
     border-top:thin solid #cecece;    
 }
-
+/*--------------------------------------------------------------------------------*/
 /*NAVIGATION*/
 
 nav ul 

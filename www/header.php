@@ -13,7 +13,7 @@
   <link rel="icon" href="favicon.ico">
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/grid.css">	
-  <link href='http://fonts.googleapis.com/css?family=Bitter|Bree+Serif' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Bitter:400,700|Bree+Serif' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
   <link href="css/jquery-ui-1.10.4.custom.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">	
@@ -49,6 +49,7 @@
         <li><a href="contact.php">Contact</a></li>
 		<li><a href="faq.php">FAQ</a></li>
           <li><a href="assessments.php">Assessments</a></li>
+        <li><a href="parQTest.php">ParQ Form</a></li>
         <li><a href="register.php">Register</a></li>
       </ul>
     </nav>
