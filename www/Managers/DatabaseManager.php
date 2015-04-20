@@ -1,35 +1,29 @@
 <?php
-/*
+/**
  * The DatabaseManager Singleton is the only access point to the database in which query objects must be used
  */
-class DatabaseManager
+class DatabaseManager extends Singleton
 {
     // ---
-    /*
+    /**
      * The number of tries to attempt a given query
      *
      * @var int = 3
      */
     private static $tries = 3;
-    /*
-     * The singleton instance
-     *
-     * @var DatabaseManager = null
-     */
-    private static $instance = null;
     // ---
 
-    /*
+    /**
      * The database connection string
      *
      * @var PDO
      */
     private $conn = null;
 
-    /*
+    /**
      * Private constructor to help ensure the singleton pattern
      */
-    private function __construct()
+    protected function __construct()
     {
         // connect to the database or throw an error if it can't
         $host = "127.0.0.1";
@@ -43,23 +37,25 @@ class DatabaseManager
         }
     }
 
-    /*
+    /**
      * Takes a query object of CreateTable or IQuery types and tries to execute it,
      * returning a QueryInfo object.
      *
-     * @param mixed An object that represents the query object. Either Query or CreateTable
+     * @param $query An object that represents the query object. Either Query or CreateTable
      * @return QueryInfo A QueryInfo object that gives access to the query results, including any errors
+     * @throws Exception
      */
     public static function Query($query)
     {
         $ret = "";
         $stmt = "";
         try {
+            $instance = self::instance();
             // Determine which kind of object we're dealing with
             if ($query instanceof CreateTable) {
-                $stmt = self::instance()->conn->prepare($query->Query());
+                $stmt = $instance->conn->prepare($query->Query());
             } else if ($query instanceof IQuery) {
-                $stmt = self::instance()->parseIntoPrepared($query->Query());
+                $stmt = $instance->parseIntoPrepared($query->Query());
             }
 
             // If neither of the above condtions is met, $stmt will be "" but needs to be
@@ -83,7 +79,7 @@ class DatabaseManager
 
                 // Toss the query and the error info off to the MigrationManager to see if it can't
                 // find a fix to the problem
-                MigrationManager::HandleError($query, $stmt->errorInfo());
+                MigrationManager::instance()->HandleError($query, $stmt->errorInfo());
             }
             // Set the return value to a new Query Info object
             $ret = new QueryInfo($stmt, $errors);
@@ -95,21 +91,21 @@ class DatabaseManager
         return $ret;
     }
 
-    /*
+    /**
      * Returns a description of the provided table. Only used by the MigrationManager.
      * This needs to be restricted to only be accessible by the MigrationManager.
      *
      * @param string $table The name of the table to get the description of
      * @return PDOStatement The PDOStatement associated with the table description
      */
-    public static function Table($table)
+    public function Table($table)
     {
-        $stmt = self::instance()->conn->prepare("DESCRIBE `" . $table . "`");
+        $stmt = $this->conn->prepare("DESCRIBE `" . $table . "`");
         $stmt->execute();
         return $stmt;
     }
 
-    /*
+    /**
      * Parses a given query into a prepared statement getting it ready for execution
      *
      * @param array $query An array that contains the query and CVPairs that need to be bound
@@ -122,7 +118,7 @@ class DatabaseManager
         // Grab the cvpairs to be bound
         $cvpair = $query[1];
         // Create the prepared statement with the given query
-        $stmt = self::instance()->conn->prepare($q);
+        $stmt = $this->conn->prepare($q);
         // Bind all the columns with their associated values
         for ($i = 0; $i < count($cvpair); $i++)
             $stmt->bindValue(":" . $cvpair[$i]->Column(), $cvpair[$i]->Value());
@@ -130,31 +126,20 @@ class DatabaseManager
         return $stmt;
     }
 
-    /*
+    /**
      * Is used to determine if a given table exists
      *
      * @param string $tableName The name of the table to check for
      * @return boolean True if the table exists, false if not
      */
-    public static function TableExists($tableName)
+    public function TableExists($tableName)
     {
         try {
-            $res = self::instance()->conn->query("SELECT 1 FROM `$tableName` LIMIT 1");
+            $res = $this->conn->query("SELECT 1 FROM `$tableName` LIMIT 1");
         } catch (Exception $e) {
             return false;
         }
 
         return $res !== false;
-    }
-
-    private static function instance()
-    {
-        if (!isset(self::$instance) || self::$instance == null) {
-            //echo"\n================= creating (". __CLASS__ .") =================\n";
-            $c = __CLASS__;
-            self::$instance = new $c;
-        }
-
-        return self::$instance;
     }
 }
