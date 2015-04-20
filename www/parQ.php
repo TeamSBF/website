@@ -72,7 +72,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 		<br><hr><br>
 		<div id="section2" style="display:none">
 			<fieldset>
-				<legend>SECTION 2 - CHRONIC MEDICAL CONDITIONS</legend>
+                <legend>SECTION 2 - CHRONIC MEDICAL CONDITIONS</legend>
 				<p>Please read the questions below carefully and answer each one honestly: check YES or NO.</p>
 
 				<div> <!-- div for question 2.1, the sub section with id: q2.*extra should be indented (see parQ pdf) -->
@@ -81,7 +81,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					      <div><input type="radio" onclick="s2RadiosClick(this, 'q2-1extra');" name="q2-1" value="Yes">Yes</div>
 					      <div><input type="radio" onclick="s2RadiosClick(this, 'q2-1extra');" name="q2-1" value="No">No</div>
                     </div>
-					<div id="q2-1extra" style="display:none">
+					<div class="subQuestions" id="q2-1extra" style="display:none">
                         <div>
 						      <label for="q2-1a"><p>2.1.a: Do you have difficulty controlling your condition with medications or other
 												physician-prescribed therapies? (Answer NO if you are not currently taking
@@ -115,7 +115,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2-2extra');" name="q2-2" value="No">No</div>
                     </div>
                     
-					<div id="q2-2extra" style="display:none">
+					<div class="subQuestions" id="q2-2extra" style="display:none">
                         <div>
 						  <label for="q2-2a"><p>2.2.a: Does your cancer diagnosis include any of the following types: lung/bronchogenic,
 											multiple myeloma (cancer of plasma cells), head, and neck?</p></label>
@@ -139,7 +139,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2-3extra');" name="q2-3" value="No">No</div>
                     </div>
                     
-					<div id="q2-3extra" style="display:none">
+					<div class="subQuestions" id="q2-3extra" style="display:none">
                         <div>
 						      <label for="q2-3a"><p>2.3.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
@@ -178,7 +178,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					<div><input type="radio" onclick="s2RadiosClick(this, 'q2-4extra');" name="q2-4" value="Yes">Yes</div>
 					<div><input type="radio" onclick="s2RadiosClick(this, 'q2-4extra');" name="q2-4" value="No">No</div>
                     </div>
-					<div id="q2-4extra" style="display:none">
+					<div class="subQuestions" id="q2-4extra" style="display:none">
                         <div>
 						      <label for="q2-4a"><p>2.4.a: Is your blood sugar often above 13.0 mmol/L? (Answer YES if you are not sure)</p></label>
 						      <div><input type="radio" name="q2-4a" value="Yes">Yes</div>
@@ -209,7 +209,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2-5extra');" name="q2-5" value="No">No</div>
                     </div>
                     
-					<div id="q2-5extra" style="display:none">
+					<div class="subQuestions" id="q2-5extra" style="display:none">
                         <div>
 						      <label for="q2-5a"><p>2.5.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking
@@ -233,7 +233,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2-6extra');" name="q2-6" value="No">No</div>
                     </div>
 
-					<div id="q2-6extra" style="display:none">
+					<div class="subQuestions" id="q2-6extra" style="display:none">
                         <div>
 						      <label for="q2-6a"><p>2.6.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
@@ -267,7 +267,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2-7extra');" name="q2-7" value="Yes">Yes</div>
 					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2-7extra');" name="q2-7" value="No">No</div>
                     </div>
-					<div id="q2-7extra" style="display:none">
+					<div class="subQuestions" id="q2-7extra" style="display:none">
                         <div>
 						      <label for="q2-7a"><p>2.7.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
@@ -295,7 +295,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2-8extra');" name="q2-8" value="Yes">Yes</div>
 					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2-8extra');" name="q2-8" value="No">No</div>
                     </div>
-					<div id="q2-8extra" style="display:none">
+					<div class="subQuestions" id="q2-8extra" style="display:none">
                         <div>
 						      <label for="q2-8a"><p>2.8.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
@@ -322,7 +322,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2-9extra');" name="q2-9" value="No">No</div>
                     </div>
                     
-					<div id="q2-9extra" style="display:none">
+					<div class="subQuestions" id="q2-9extra" style="display:none">
                         <div>
 						      <label for="q2-9a"><p>2.9.a: Have you experienced a blackout, fainted, or lost consciousness as a result of a head
 											injury within the last 12 months OR have you had a diagnosed concussion within the last 12 months?</p></label>
@@ -380,7 +380,6 @@ seek further advice from your doctor OR a qualified exercise professional before
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
 <script>
-
 	/* Loops through section 1 answers and decide if section 2 should be shown/hidden */
 	$(".s1Radios").change(function () {
 		var show = false;
@@ -397,7 +396,6 @@ seek further advice from your doctor OR a qualified exercise professional before
 			$("#section2").hide("slow");
 		}
 	});
-
 	/* Generic function for all section 2 questions, if yes show sub-questions, if no hide */
 	function s2RadiosClick(radioElement, divID) {
 		if ($(radioElement).val() === "Yes") {
@@ -407,7 +405,6 @@ seek further advice from your doctor OR a qualified exercise professional before
 			$("#"+ divID).hide("slow");
 		}
 	}
-
 </script>
 
 <?php if(isset($parQreturn) && !empty($parQreturn)){?>
