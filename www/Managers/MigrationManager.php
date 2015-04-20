@@ -30,7 +30,7 @@ class MigrationManager extends Singleton
     private function checkTable($table)
     {
         // Get the fields from the existing table
-        $fields = DatabaseManager::Table($table)->fetchAll(PDO::FETCH_COLUMN);
+        $fields = DatabaseManager::instance()->Table($table)->fetchAll(PDO::FETCH_COLUMN);
         // Get the table schema from the table structure in the file
         $schema = $this->grabTableInfo($table);
         // Get the fields/columns from the schema - these will be used for comparison
