@@ -38,6 +38,11 @@ class UserModel
 
         return $this->level >= $level;
     }
+	
+	public function ID()
+	{
+		return $this->id;
+	}
 
     // ----------------------------- Static Functions -----------------------------
     /**

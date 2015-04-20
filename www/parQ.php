@@ -69,7 +69,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 				</div>
 			</fieldset>	
 		</div> <!-- end section1 -->
-		<br><hr><br>
+		<br><br>
 		<div id="section2" style="display:none">
 			<fieldset>
                 <legend>SECTION 2 - CHRONIC MEDICAL CONDITIONS</legend>
