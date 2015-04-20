@@ -111,6 +111,12 @@ class CreateTable
         $this->AddAttribute('varchar', $value, $colName);
         return $this;
     }
+	
+	public function MakeFloat($value = null, $colName = null)
+	{
+		$this->AddAttribute('float', $value, $colName);
+		return $this;
+	}
 
     /**
      * @param null $colName
