@@ -58,6 +58,6 @@
         </form>
 	</section>
 	<section>
-		<h1> something else </h1>
+		<h1> something else ... </h1>
 	</section>
 <?php require_once"footer.php";?>
