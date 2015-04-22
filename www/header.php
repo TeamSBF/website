@@ -45,21 +45,7 @@ $grid = ($user) ? 12 : 8;
 <body>
   <header class="grid_12 alpha">
     <nav class="grid_12 alpha">
-      <ul>
-        <li><a href="index.php">Home</a></li>
-        <?php if($user){?>
-		<li><a href="profile.php">Profile</a></li>
-		<li><a href="parQ.php">ParQ Form</a></li>
-        <li><a href="logout.php">Logout</a></li>
-		<?php if($user->HasPrivilege(10)) echo '<li><a href="admin.php">Admin</a>\n';?>
-        <?php }else{ ?>
-		<li><a href="about.php">About</a></li>
-        <li><a href="contact.php">Contact</a></li>
-		<li><a href="faq.php">FAQ</a></li>
-        <li><a href="assessments.php">Assessments</a></li>
-        <li><a href="register.php">Register</a></li>
-        <?php } ?>
-      </ul>
+      <?php NavMenu::Build($user);?>
     </nav>
   </header>
     <div class="container">
