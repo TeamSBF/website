@@ -1,35 +1,52 @@
 <?php
 class NavMenu extends Singleton
 {
+    private static $items = null;
+
+    protected function __construct()
+    {
+        if (self::$items === null) {
+            self::$items = [
+                new MenuItem("Home", "index.php"),
+                new MenuItem("About", "about.php"),
+                new MenuItem("Contact", "contact.php"),
+                new MenuItem("FAQ", "faq.php"),
+                new MenuItem("Assessments", "assessments.php"),
+                new MenuItem("Register", "register.php", UserLevel::Anon, "only"),
+                new MenuItem("Profile", "profile.php", UserLevel::Member),
+                new MenuItem("ParQ Form", "parQ.php", UserLevel::Member),
+                new MenuItem("Logout", "logout.php", UserLevel::Member)
+            ];
+        }
+    }
+
     public static function Build($user)
     {
-        printr($user);
+        //printr($user);
         $plevel = $user ? $user->PrivilegeLevel : 0;
-        echo "blah: " .$plevel;
+        //echo "blah: " .$plevel;
         self::instance()->buildMenu($plevel);
     }
 
     private function buildMenu($plevel = 0)
     {
-        $q = QueryFactory::Build("select")->Select("name","page")->From("menu")->Where(["pLevel","<=",$plevel]);
-        $items = DatabaseManager::Query($q);
+        //$q = QueryFactory::Build("select")->Select("name","page")->From("menu")->Where(["pLevel","<=",$plevel]);
+        //$items = DatabaseManager::Query($q);
 
 
-        if($items->RowCount() > 0) {
-            $output = "<ul>";
-            foreach ($items->Result() as $item)
+        $output = "<ul>";
+        foreach (self::$items as $item) {
+            if ($item->priv == $plevel || ($item->priv < $plevel && $item->mode == "all"))
                 $output .= $this->buildItem($item);
-            $output .= "</ul>";
-        }else {
-            $output = 'no menu items for this permission level';
         }
+        $output .= "</ul>";
 
         echo $output;
     }
 
     private function buildItem($item)
     {
-        return '<li><a href="'.$item['page'].'">'.$item['name'].'</a></li>';
+        return '<li><a href="' . $item->page . '">' . $item->name . '</a></li>';
     }
 }
 
