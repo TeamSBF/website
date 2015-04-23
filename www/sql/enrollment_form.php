@@ -16,4 +16,4 @@ $table->AddColumn('HowManyTimesAWeek')->MakeInt()->DefaultValue(0);
 $table->AddColumn('controlGroup')->MakeBool()->DefaultValue('false');
 $table->AddColumn('experimentalGroup')->MakeBool()->DefaultValue('false');
 
-return $table;
+return [$table,[]];

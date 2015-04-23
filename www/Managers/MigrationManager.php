@@ -128,13 +128,26 @@ class MigrationManager extends Singleton
     {
         try {
             // Gets the table information from the associated table file
-            $schema = $this->grabTableInfo($table);
+            $tableInfo = $this->grabTableInfo($table);
+			// Get the table schema from the file
+			$schema = $tableInfo[0];
             // Executes the query to build the table
             DatabaseManager::Query($schema);
+			$this->populateTable($tableInfo[1]);
         } catch (PDOException $e) {
             echo "Adding table '$table' failed: " . $e->getMessage();
         }
     }
+	
+	private function populateTable($inserts)
+	{
+		// nothing to populate the table with
+		if(count($inserts) < 1)
+			return;
+		
+		foreach($inserts as $insert)
+			DatabaseManager::Query($insert);
+	}
 
     /**
      * Returns the file associated table structure

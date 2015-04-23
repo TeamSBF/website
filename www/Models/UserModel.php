@@ -13,7 +13,7 @@ class UserModel
      * The privilege level of the user
      * @var int
      */
-    private $level;
+    private $privilegelevel;
 
     /**
      * The class constructor
@@ -23,26 +23,15 @@ class UserModel
     private function __construct($info)
     {
         $this->id = $info['id'];
-        $this->level = $info['pLevel'];
+        $this->privilegelevel = $info['pLevel'];
     }
 
-    /**
-     * @param $level The level to compare the user's level against
-     * @return bool True if high enough, false if not
-     * @throws Exception Thrown if $level is not an integer
-     */
-    public function HasPrivilege($level)
+    public function __get($name)
     {
-        if(!is_int($level))
-            throw new Exception("Privilege level('$level') must be an integer");
-
-        return $this->level >= $level;
+        $name = strtolower($name);
+        if(property_exists(__CLASS__, $name))
+            return $this->{$name};
     }
-	
-	public function ID()
-	{
-		return $this->id;
-	}
 
     // ----------------------------- Static Functions -----------------------------
     /**
@@ -96,7 +85,12 @@ class UserModel
         $qinfo = DatabaseManager::Query($insert);
         // If the user was added successfully return true
         if ($qinfo->RowCount() == 1)
-            return true;
+		{
+			$select = QueryFactory::Build("select");
+			$select->Select("id")->From("user")->Where(["email","=",$email,"and"],["password","=",$pass])->Limit();
+			$res = DatabaseManager::Query($select);
+            return $res->Result()["id"];
+		}
 
         return false;
     }
