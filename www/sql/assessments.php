@@ -13,4 +13,6 @@ $table->AddColumn('rightunilateralbalancetest')->MakeFloat();
 $table->AddColumn('functionalreach')->MakeInt();
 
 
-return $table;
+
+return [$table,[]];
+
