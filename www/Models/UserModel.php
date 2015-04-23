@@ -87,7 +87,7 @@ class UserModel
         if ($qinfo->RowCount() == 1)
 		{
 			$select = QueryFactory::Build("select");
-			$select->Select("id")->From("user")->Where(["email","=",$email,"and"],["password","=",$pass])->Limit();
+			$select->Select("id")->From("users")->Where(["email","=",$email,"and"],["password","=",$pass])->Limit();
 			$res = DatabaseManager::Query($select);
             return $res->Result()["id"];
 		}

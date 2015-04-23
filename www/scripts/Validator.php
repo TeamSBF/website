@@ -3,7 +3,8 @@ class Validator extends Singleton
 {
     private $types = [
         "email" => ['s' => FILTER_SANITIZE_EMAIL, 'v' => FILTER_VALIDATE_EMAIL],
-        "string" => ['s' => FILTER_SANITIZE_STRING]
+        "string" => ['s' => FILTER_SANITIZE_STRING],
+		"int" => ['s' => FILTER_SANITIZE_NUMBER_INT]
     ];
 
     public function Validate($type, $value)
