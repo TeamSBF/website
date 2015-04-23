@@ -13,11 +13,17 @@ if($res["activated"])
 	die("already activated");
 
 $blah = sha1($res["id"].$res["email"].$res["created"]);
-echo $blah ."\n";
+echo $blah ."above is hash\n";
 echo $_GET['link']."\n";
 if($blah === $_GET['link'])
 	echo "activate the account";
 else
 	echo "activation failed";
+
+/*
+http://localhost/test.php?id=1&link=ifhudtudtgvuybui      <- failed
+http://localhost/test.php?id=1&link=da39a3ee5e6b4b0d3255bfef95601890afd80709   <- success
+
+*/
 ?>
 </pre>
