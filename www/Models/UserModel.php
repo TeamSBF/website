@@ -85,7 +85,12 @@ class UserModel
         $qinfo = DatabaseManager::Query($insert);
         // If the user was added successfully return true
         if ($qinfo->RowCount() == 1)
-            return true;
+		{
+			$select = QueryFactory::Build("select");
+			$select->Select("id")->From("user")->Where(["email","=",$email,"and"],["password","=",$pass])->Limit();
+			$res = DatabaseManager::Query($select);
+            return $res->Result()["id"];
+		}
 
         return false;
     }
