@@ -17,8 +17,8 @@ class FormsModel
 
 		// if everything went well we save data to the database
 		if ($this->saveDbEnrollment())
-			return '***Success!***';
-		return "***DB SAVE FAILED***";
+			return true;
+		return false;
 	}
 
 	public function ValidateQuestionnaireP1()
