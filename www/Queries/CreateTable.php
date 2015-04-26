@@ -111,12 +111,22 @@ class CreateTable
         $this->AddAttribute('varchar', $value, $colName);
         return $this;
     }
-	
-	public function MakeFloat($value = null, $colName = null)
-	{
-		$this->AddAttribute('float', $value, $colName);
-		return $this;
-	}
+
+    public function MakeFloat($value = null, $colName = null)
+    {
+        $this->AddAttribute('float', $value, $colName);
+        return $this;
+    }
+
+    public function MakeText($value = null, $colName = null)
+    {
+        $this->AddAttribute('text', $value, $colName);
+    }
+
+    public function MakeTinyInt($value = null, $colName = null)
+    {
+        $this->AddAttribute('tinyint', $value, $colName);
+    }
 
     /**
      * @param null $colName
@@ -223,6 +233,12 @@ class CreateTable
             case "bool":
             case "boolean":
                 $default = 1;
+                break;
+            case "text":
+                $default = "";
+                break;
+            case "tinyint":
+                $default = 4;
                 break;
             case "int":
             default:
@@ -388,7 +404,9 @@ class CreateTable
     {
         $name = $col['name'];
         $type = $col['type'];
-        $value = $col['value'];
-        return "`$name` " . strtoupper($type) . "($value) NOT NULL";
+        $value = "";
+        if(!empty($col['value']))
+            $value = "(" . $col['value'] . ")";
+        return "`$name` " . strtoupper($type) . "$value NOT NULL";
     }
 }

@@ -13,7 +13,7 @@ class UserModel
      * The privilege level of the user
      * @var int
      */
-    private $privilegelevel;
+    private $accesslevel;
 
     /**
      * The class constructor
@@ -23,7 +23,7 @@ class UserModel
     private function __construct($info)
     {
         $this->id = $info['id'];
-        $this->privilegelevel = $info['pLevel'];
+        $this->accesslevel = $info['pLevel'];
     }
 
     public function __get($name)
