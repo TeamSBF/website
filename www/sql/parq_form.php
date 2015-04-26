@@ -46,3 +46,7 @@ $table->AddColumn('q2-9')->MakeVarChar(11);
 $table->AddColumn('q2-9a')->MakeVarChar(11)->DefaultValue('UNSANSWERED');
 $table->AddColumn('q2-9b')->MakeVarChar(11)->DefaultValue('UNSANSWERED');
 $table->AddColumn('q2-9c')->MakeVarChar(11)->DefaultValue('UNSANSWERED');
+$table->AddColumn('completed')->MakeBool()->DefaultValue('false'); //---------
+$table->AddColumn('userID')->MakeInt(100); //---------
+
+return [$table,[]];

@@ -14,7 +14,6 @@ class FormsModelTemp
 		//if($empties = $this->CheckforEmpties() != "")
 			//return $empties;
 
-
 		// if everything went well we save data to the database
 		if ($this->saveDbEnrollment())
 			return true;
@@ -103,7 +102,7 @@ class FormsModelTemp
         $insert->Into('enrollment_form')->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
         	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
         	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
-        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userId',$id], ['enrollmentCompleted',$complete]);
+        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userID',$id], ['completed',$complete]);
         
         // save to the DB
         $qinfo = DatabaseManager::Query($insert);
@@ -156,6 +155,7 @@ class FormsModelTemp
 	public static function isEnrollmentComplete()
 	{
 		$id = $_SESSION['user']->__get('id');
+		
 		
 		$select = QueryFactory::Build("select");
 		$select->Select('completed')->Table('enrollment_form')->Where(['userID','=', $id])->Limit();

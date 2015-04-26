@@ -14,18 +14,21 @@ $parqStat ="";
 //---------------------------------------------validation--------------------------------	
 	if(isset($_POST))
 	{
-		$validator = new FormsModel($_POST);
+		//$validator = new FormsModel($_POST); //------------------------
+		$validator = new FormsModelTemp($_POST);
 		if (isset($_POST['submitEnrollment']))
 		{
+			
 		//$validator = new FormsModel($_POST);
 			$returnEnroll = $validator->ValidateEnrollment();
+			echo "returnEnroll= " .$returnEnroll ;
 		}
 	
 		else if (isset($_POST['submitParQ']))
 		{
 			$returnParQ = $validator->ValidateParQ();
 		}
-		else if (isset($_POST['submitQ1']))
+/*		else if (isset($_POST['submitQ1']))
 		{
 			$returnQues1 = $validator->ValidateQuestionnaireP1();
 		}
@@ -33,6 +36,7 @@ $parqStat ="";
 		{
 			$returnQues2 = $validator->ValidateQuestionnaireP1();
 		}
+		*/
 	}
 	
 //-----------------------------------lock completed forms-------------------------------------------
@@ -43,7 +47,7 @@ $parqStat ="";
 //	if(FormsModel::isParQComplete())	
 	if(FormsModelTemp::isParQComplete())
 		$parqStat = "lock";
-
+/*
 //	if(FormsModel::isQues1Complete())	
 	if(FormsModelTemp::isQues1Complete())
 		$ques1Stat = "lock";
@@ -51,21 +55,21 @@ $parqStat ="";
 //	if(FormsModel::isQues2Complete())	
 	if(FormsModelTemp::isQues2Complete())
 		$ques2Stat = "lock";
-	
+*/	
 //----------------------------------------errors-------------------------------------------------
 	if(isset($returnEnroll) && $returnEnroll==false && $enrollStat != "lock")
 	{
 		$enrollStat = "error";
 	}
-		if(isset($returnParQ) && $returnParQ==false && $parqStat != "lock")
+	if(isset($returnParQ) && $returnParQ==false && $parqStat != "lock")
 	{
 		$parqStat = "error";
 	}
-		if(isset($returnQues1) && $returnQues1==false && $ques1Stat != "lock")
+	if(isset($returnQues1) && $returnQues1==false && $ques1Stat != "lock")
 	{
 		$ques1Stat = "error";
 	}
-		if(isset($returnQues2) && $returnQues2==false && $ques2Stat != "lock")
+	if(isset($returnQues2) && $returnQues2==false && $ques2Stat != "lock")
 	{
 		$ques2Stat = "error";
 	}
@@ -104,8 +108,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $parqStat;?>" href="#accordion-4">ParQ form</a>
 			<div id="accordion-4" class="accordion-section-content">
 				<div>
-					<p> parq stuff</p>
-					<?php //require_once("parq.php"); ?>
+					<?php require_once("parQTemp.php");//require_once("parQ.php"); ?>
 				</div>
 			</div><!--end .accordion-section-content-->
 		</div><!--end .accordion-section-->
