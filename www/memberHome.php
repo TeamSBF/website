@@ -9,47 +9,66 @@ require_once("header.php");
 $enrollStat = "";
 $ques1Stat = ""; 
 $ques2Stat = "";
-$parqStat ="";
-//check for completed forms
-//completedForms = formModel::completedForms(id);
-//	
-//	if(completedForms['questionare1'])
-		//lock q1
-//	if(completedForms['questionare2'])
-		//lock q2
-//	if(completedForms['parq'])
-		//lock parq
-
-//check if error on form	
+$parqStat ="";	
 
 //---------------------------------------------validation--------------------------------	
-
-	if (isset($_POST['submitEnrollment']))
-    {
-      //echo var_dump($_POST); //DEBUG
-      $validator = new FormsModel($_POST);
-      $returnEnroll = $validator->ValidateEnrollment();
-    }
+	if(isset($_POST))
+	{
+		$validator = new FormsModel($_POST);
+		if (isset($_POST['submitEnrollment']))
+		{
+		//$validator = new FormsModel($_POST);
+			$returnEnroll = $validator->ValidateEnrollment();
+		}
 	
-//----------------------------------------------------------------------------------
-	if(FormsModel::isEnrollmentComplete())
+		else if (isset($_POST['submitParQ']))
+		{
+			$returnParQ = $validator->ValidateParQ();
+		}
+		else if (isset($_POST['submitQ1']))
+		{
+			$returnQues1 = $validator->ValidateQuestionnaireP1();
+		}
+		else if (isset($_POST['submitQ2']))
+		{
+			$returnQues2 = $validator->ValidateQuestionnaireP1();
+		}
+	}
+	
+//-----------------------------------lock completed forms-------------------------------------------
+	//if(FormsModel::isEnrollmentComplete())
+		if(FormsModelTemp::isEnrollmentComplete())
 		$enrollStat = "lock";
 	
-	//else
+//	if(FormsModel::isParQComplete())	
+	if(FormsModelTemp::isParQComplete())
+		$parqStat = "lock";
+
+//	if(FormsModel::isQues1Complete())	
+	if(FormsModelTemp::isQues1Complete())
+		$ques1Stat = "lock";
+
+//	if(FormsModel::isQues2Complete())	
+	if(FormsModelTemp::isQues2Complete())
+		$ques2Stat = "lock";
+	
+//----------------------------------------errors-------------------------------------------------
 	if(isset($returnEnroll) && $returnEnroll==false && $enrollStat != "lock")
 	{
 		$enrollStat = "error";
 	}
-	//else if(isset(enrollsubmit))
-		//enroll.click
-	//else if(isset(enrollsubmit))
-		//enroll.click
-	//else if(isset(enrollsubmit))
-		//enroll.click
-	
-//place into hidden variables
-// lock section
-//check last form
+		if(isset($returnParQ) && $returnParQ==false && $parqStat != "lock")
+	{
+		$parqStat = "error";
+	}
+		if(isset($returnQues1) && $returnQues1==false && $ques1Stat != "lock")
+	{
+		$ques1Stat = "error";
+	}
+		if(isset($returnQues2) && $returnQues2==false && $ques2Stat != "lock")
+	{
+		$ques2Stat = "error";
+	}
 
 ?>  
    <div class="accordion">
@@ -57,7 +76,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $enrollStat;?>" href="#accordion-1">enrollment form</a>
 			<div id="accordion-1" class="accordion-section-content">
 				<div>
-					<?php require_once("enrollmentFormTemp.php"); ?>
+					<?php require_once("enrollmentFormTemp.php"); //require_once("enrollmentForm.php");?>
 				</div>
 			</div><!--end .accordion-section-content-->
 		</div><!--end .accordion-section-->
@@ -66,7 +85,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $ques1Stat;?>" href="#accordion-2">questionnaire 1</a>
 			<div id="accordion-2" class="accordion-section-content">
 				<div>
-					<?php require_once("questionnaireP1Temp.php"); ?>
+					<?php require_once("questionnaireP1Temp.php"); //require_once("questionnaireP1.php"); ?>
 				</div>
 				
 			</div><!--end .accordion-section-content-->
@@ -76,7 +95,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $ques2Stat;?>" href="#accordion-3">questionnaire 2</a>
 			<div id="accordion-3" class="accordion-section-content">
 				<div>
-					<?php require_once("questionnaireP2Temp.php"); ?>
+					<?php require_once("questionnaireP2Temp.php"); //require_once("questionnaireP2.php"); ?>
 				</div>
 			</div><!--end .accordion-section-content-->
 		</div><!--end .accordion-section-->
