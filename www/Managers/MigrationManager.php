@@ -32,7 +32,7 @@ class MigrationManager extends Singleton
         // Get the fields from the existing table
         $fields = DatabaseManager::instance()->Table($table)->fetchAll(PDO::FETCH_COLUMN);
         // Get the table schema from the table structure in the file
-        $schema = $this->grabTableInfo($table);
+        $schema = $this->grabTableInfo($table)[0];
         // Get the fields/columns from the schema - these will be used for comparison
         $columns = $schema->Columns();
         // Get the keys from the schema - used to determine if the key needs to be added
@@ -144,7 +144,7 @@ class MigrationManager extends Singleton
 		// nothing to populate the table with
 		if(count($inserts) < 1)
 			return;
-		
+
 		foreach($inserts as $insert)
 			DatabaseManager::Query($insert);
 	}
