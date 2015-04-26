@@ -2,6 +2,7 @@
 
 $table = new CreateTable("enrollment_form");
 $table->AddColumn('id')->SetAutoIncrement();
+$table->AddColumn('userId')->MakeInt(100); //---------
 $table->AddColumn('lastName')->MakeVarChar(50);
 $table->AddColumn('firstName')->MakeVarChar(50);
 $table->AddColumn('streetAddress')->MakeVarChar(120);
@@ -15,5 +16,6 @@ $table->AddColumn('watchSbf')->MakeBool()->DefaultValue('false');
 $table->AddColumn('HowManyTimesAWeek')->MakeInt()->DefaultValue(0);
 $table->AddColumn('controlGroup')->MakeBool()->DefaultValue('false');
 $table->AddColumn('experimentalGroup')->MakeBool()->DefaultValue('false');
+$table->AddColumn('enrollmentCompleted')->MakeBool()->DefaultValue('false'); //---------
 
 return [$table,[]];

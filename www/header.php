@@ -23,7 +23,13 @@ $grid = ($user) ? 12 : 8;
     
     <script src="js/jquery-1.10.2.js"></script>
 	<script src="js/jquery-ui-1.10.4.custom.js"></script>
-	<script>
+	<!--      for webshim -->
+	<script src="assets/mod.js"></script>
+	<script src="assets/webshim/minified/polyfiller.js"></script>
+	<script> $.webshims.polyfill(); </script>
+	<!--      for webshim -->
+	<script>	
+
 /*	$(function() {
 		
 		$( "#accordion" ).accordion();

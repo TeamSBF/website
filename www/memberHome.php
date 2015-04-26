@@ -23,18 +23,17 @@ $parqStat ="";
 //check if error on form	
 
 //---------------------------------------------validation--------------------------------	
+
 	if (isset($_POST['submitEnrollment']))
     {
       //echo var_dump($_POST); //DEBUG
       $validator = new FormsModel($_POST);
       $returnEnroll = $validator->ValidateEnrollment();
-	  
-	  echo "returnEnroll: " . $returnEnroll;
     }
 	
 //----------------------------------------------------------------------------------
-//	if(isset($returnEnroll) && $returnEnroll)
-//		$enrollStat = "lock";
+	if(FormsModel::isEnrollmentComplete())
+		$enrollStat = "lock";
 	
 	//else
 	if(isset($returnEnroll) && $returnEnroll==false && $enrollStat != "lock")

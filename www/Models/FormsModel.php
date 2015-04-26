@@ -95,13 +95,15 @@ class FormsModel
 	private function saveDbEnrollment()
 	{
 		$form = $this->form;
+		$id = $_SESSION['user']->__get('id');
+		$complete = true;//------------------------temporary 
 		// get a Insert query object
 		$insert = QueryFactory::Build('insert');
 		// build the query
         $insert->Into('enrollment_form')->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
         	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
         	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
-        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
+        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userId',$id], ['enrollmentCompleted',$complete]);
         
         // save to the DB
         $qinfo = DatabaseManager::Query($insert);
@@ -148,5 +150,23 @@ class FormsModel
 		$f = $this->form;
 		
 
+	}
+	
+	//==================================================
+	public static function isEnrollmentComplete()
+	{
+		$id = $_SESSION['user']->__get('id');
+		
+		$select = QueryFactory::Build("select");
+		$select->Select('enrollmentCompleted')->Table('enrollment_form')->Where(['userId','=', $id])->Limit();
+		$res = DatabaseManager::Query($select);
+		$resultArray = $res->Result();
+
+		if ($res->RowCount() == 1)
+		{
+
+			return $res;
+		}
+		return false;
 	}
 }
