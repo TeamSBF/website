@@ -17,13 +17,13 @@
 			
 			// this below is to grab the current password from the database
 			$select = QueryFactory::Build("select");// build an empty select query
-			$select->Select("password")->From("users")->Where( ["id", "=", $user->ID()] )->Limit(1);  // SELECT password from user where id = id
+			$select->Select("password")->From("users")->Where( ["id", "=", $user->ID] )->Limit(1);  // SELECT password from user where id = id
 			$res = DatabaseManager::Query($select); // send to DBmanager
 			//$res->Result()['password']; //get password from table
 			
 			if( password_verify($oldPass, $res->Result()['password']) ) //verify if the current password matches the password in the database
 			{
-				if(UserModel::updatePassword($user->ID(), $newPass))
+				if(UserModel::updatePassword($user->ID, $newPass))
 					echo "Password changed successfully";
 				else
 					echo "Failed to change password";
