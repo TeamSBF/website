@@ -44,7 +44,7 @@ class UserModel
     public static function Login($email, $pass)
     {
         // require the password file due to this being a php5.5 feature while using php5.4
-        require_once("assets/password.php");
+        require_once("scripts/password.php");
 
         // Gets a select query from the query factory
         $select = QueryFactory::Build("select");

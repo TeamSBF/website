@@ -10,7 +10,7 @@ if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $session->get('reg
         $email = trim($email);
         $passed_pwd = trim($passed_pwd);
 
-        require_once("assets/password.php");
+        //require_once("assets/password.php");
 
         $result = UserModel::Login($email, $passed_pwd);    //to db
         if ($result)    //to db

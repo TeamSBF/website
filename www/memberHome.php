@@ -3,8 +3,8 @@ require_once("header.php");
 ?>
 
 <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
-<script type="text/javascript" src="assets/accordion.js"></script>
-<link rel="stylesheet" type="text/css" href="assets/accordion.css">
+<script type="text/javascript" src="js/accordion.js"></script>
+<link rel="stylesheet" type="text/css" href="css/accordion.css">
 <?php
 $enrollStat = "";
 $ques1Stat = ""; 
@@ -87,7 +87,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $ques1Stat;?>" href="#accordion-2">questionnaire 1</a>
 			<div id="accordion-2" class="accordion-section-content">
 				<div>
-					<?php require_once("questionnaireP1Temp.php"); //require_once("questionnaireP1.php"); ?>
+					<?php require_once("questionnaireP1.php"); ?>
 				</div>
 				
 			</div><!--end .accordion-section-content-->
@@ -97,7 +97,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $ques2Stat;?>" href="#accordion-3">questionnaire 2</a>
 			<div id="accordion-3" class="accordion-section-content">
 				<div>
-					<?php require_once("questionnaireP2Temp.php"); //require_once("questionnaireP2.php"); ?>
+					<?php require_once("questionnaireP2.php"); ?>
 				</div>
 			</div><!--end .accordion-section-content-->
 		</div><!--end .accordion-section-->
@@ -106,7 +106,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $parqStat;?>" href="#accordion-4">ParQ form</a>
 			<div id="accordion-4" class="accordion-section-content">
 				<div>
-					<?php require_once("parQTemp.php");//require_once("parQ.php"); ?>
+					<?php require_once("parQ.php"); ?>
 				</div>
 			</div><!--end .accordion-section-content-->
 		</div><!--end .accordion-section-->
