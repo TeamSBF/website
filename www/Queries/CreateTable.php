@@ -121,11 +121,13 @@ class CreateTable
     public function MakeText($value = null, $colName = null)
     {
         $this->AddAttribute('text', $value, $colName);
+        return $this;
     }
 
     public function MakeTinyInt($value = null, $colName = null)
     {
         $this->AddAttribute('tinyint', $value, $colName);
+        return $this;
     }
 
     /**
