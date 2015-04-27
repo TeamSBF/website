@@ -8,13 +8,15 @@ class AutoLoader
     private static $folders = ["Queries/",
         "Queries/QueryElements/",
         "Models/",
-        "Managers/"];
+        "Managers/",
+        "scripts/"];
 
     public static function ClassLoader($className)
     {
         $found = false;
         foreach (self::$folders as $folder) {
             $path = $folder . $className . ".php";
+            //echo $path . "\n";
             if (file_exists($path)) {
                 require_once($path);
                 $found = true;

@@ -1,46 +1,28 @@
 <?php
-/*
- * The MigrationManager Singleton that is used to handle all database migration issues and errors
+/**
+ * Class MigrationManager The MigrationManager Singleton that is used to handle all database migration issues and errors
  */
-class MigrationManager
+class MigrationManager extends Singleton
 {
-    // ---
-    /*
-     * The singleton instance
-     *
-     * @var MigrationManager = null
-     */
-    private static $instance = null;
-
-    // ---
-
-    /*
-     * Private constructor to help prevent outside initialization
-     */
-    private function __construct()
-    {
-    }
-
-    /*
+    /**
      * Determines the error and how to handle it
      *
      * @param mixed $query The Query or CreateTable object that failed to execute
      * @param int $errorInfo The error that occurred
      */
-    public static function HandleError($query, $errorInfo)
+    public function HandleError($query, $errorInfo)
     {
-        $instance = self::instance();
         switch ($errorInfo[1]) {
             case 1054: // 1054: field does not exist
-                $instance->checkTable($query->Table());
+                $this->checkTable($query->Table());
                 break;
             case 1146: // 1146: table does not exist
-                $instance->createTable($query->Table());
+                $this->createTable($query->Table());
                 break;
         }
     }
 
-    /*
+    /**
      * Checks the currently existing table against the provided SQL schema in its associated file
      *
      * @param string $table The name of the table to check
@@ -48,9 +30,9 @@ class MigrationManager
     private function checkTable($table)
     {
         // Get the fields from the existing table
-        $fields = DatabaseManager::Table($table)->fetchAll(PDO::FETCH_COLUMN);
+        $fields = DatabaseManager::instance()->Table($table)->fetchAll(PDO::FETCH_COLUMN);
         // Get the table schema from the table structure in the file
-        $schema = $this->grabTableInfo($table);
+        $schema = $this->grabTableInfo($table)[0];
         // Get the fields/columns from the schema - these will be used for comparison
         $columns = $schema->Columns();
         // Get the keys from the schema - used to determine if the key needs to be added
@@ -82,7 +64,7 @@ class MigrationManager
             $this->alterTable($table, $toAdd, $keys);
     }
 
-    /*
+    /**
      * Used to create the alter table query that will be used to repair a given table
      *
      * @param string $table The table to be altered
@@ -97,7 +79,7 @@ class MigrationManager
         $alter->Table($table);
         // Add each field to the alter table query
         for ($i = 0; $i < count($toAdd); $i++)
-            $alter->AddField($toAdd[$i]['name'], $toAdd[$i]['type'], $toAdd[$i]['value']);
+            $alter->AddField($toAdd[$i]);
         // Add the keys if needed
         $this->addKeys($alter, $keys);
 
@@ -105,7 +87,7 @@ class MigrationManager
         DatabaseManager::Query($alter);
     }
 
-    /*
+    /**
      * Adds keys to an alter table query
      *
      * @param AlterTable $alter The alert table query
@@ -137,7 +119,7 @@ class MigrationManager
         }
     }
 
-    /*
+    /**
      * Attempts to create the specified table
      *
      * @param string $table The name of the table
@@ -146,32 +128,35 @@ class MigrationManager
     {
         try {
             // Gets the table information from the associated table file
-            $schema = $this->grabTableInfo($table);
+            $tableInfo = $this->grabTableInfo($table);
+			// Get the table schema from the file
+			$schema = $tableInfo[0];
             // Executes the query to build the table
             DatabaseManager::Query($schema);
+			$this->populateTable($tableInfo[1]);
         } catch (PDOException $e) {
             echo "Adding table '$table' failed: " . $e->getMessage();
         }
     }
+	
+	private function populateTable($inserts)
+	{
+		// nothing to populate the table with
+		if(count($inserts) < 1)
+			return;
 
-    /*
+		foreach($inserts as $insert)
+			DatabaseManager::Query($insert);
+	}
+
+    /**
      * Returns the file associated table structure
      *
      * @param string $table The name of the table to retrieve
+     * @return mixed Returns the table schema from the sql file
      */
     private function grabTableInfo($table)
     {
         return require("sql/" . $table . ".php");
-    }
-
-    private static function instance()
-    {
-        if (!isset(self::$instance) || self::$instance == null) {
-            //echo"\n================= creating (". __CLASS__ .") =================\n";
-            $c = __CLASS__;
-            self::$instance = new $c;
-        }
-
-        return self::$instance;
     }
 }

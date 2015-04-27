@@ -11,68 +11,40 @@
 
 
 <div class="container">
-  <div class="col-sm-8 col-sm-offset-2">
-    <form method="post" class="form-horizontal">
-      <legend><strong>Enrollment Form</strong></legend>
+<div class="background">
+    
+  <div><form method="post" class="form-horizontal">
       <div class="alert" id="message" style="display:none"></div>
-      <div class="panel panel-primary">
-        <div class="panel-heading">enrollment</div>
-        <div class="panel-body">
-          <div class="form-group">
-            <label for="lName" class="control-label col-sm-3">Last Name</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="lName" placeholder="Last Name" value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['lName']);} ?>">
-            </div>
+      <div><h2>Enrollment</h2>
+          <div><label>Last Name</label>
+            <div><input type="text" name="lName" placeholder="Doe" value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['lName']);} ?>"></div>
           </div>
 
-          <div class="form-group">
-            <label for="fName" class="control-label col-sm-3">First Name</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="fName" placeholder="First Name" value="<?php if(isset($_POST['fName'])){echo htmlspecialchars($_POST['fName']);} ?>">
-            </div>
+          <div><label for="fName">First Name</label></div>
+              <input type="text" name="fName" placeholder="John" value="<?php if(isset($_POST['fName'])){echo htmlspecialchars($_POST['fName']);} ?>">
           </div>
 
-          <div class="form-group">
-            <label for="streetAddress" class="control-label col-sm-3">Street Address</label>
-            <div class="col-sm-9">
-              <textarea type="text" class="form-control" name="streetAddress" placeholder="Street Address" rows="3" value="<?php if(isset($_POST['streetAddress'])){echo htmlspecialchars($_POST['streetAddress']);} ?>">
+          
+            <div><label>Street Address</label></div>
+              <textarea type="text" name="streetAddress" placeholder="Street Address" rows="3" value="<?php if(isset($_POST['streetAddress'])){echo htmlspecialchars($_POST['streetAddress']);} ?>">
               </textarea>
-            </div>
-          </div>
 
-          <div class="form-group">
-            <label for="city" class="control-label col-sm-3">City</label>
-            <div class="col-sm-9">
-              <input type="text" class="form-control" name="city" placeholder="City" value="<?php if(isset($_POST['city'])){echo htmlspecialchars($_POST['city']);} ?>">
-            </div>
-          </div>
+            <div><label>City</label></div>
+              <input type="text" name="city" placeholder="Spokane" value="<?php if(isset($_POST['city'])){echo htmlspecialchars($_POST['city']);} ?>">
 
-          <div class="form-group">
-            <label for="phone" class="control-label col-sm-3">Phone</label>
-            <div class="col-sm-9">
-              <input type="tel" class="form-control" name="phone" placeholder="Phone Number" value="<?php if(isset($_POST['phone'])){echo htmlspecialchars($_POST['phone']);} ?>">
-            </div>
-          </div>
+           <div><label>Phone</label></div>
+              <input type="tel" name="phone" placeholder="(509)-555-5555" value="<?php if(isset($_POST['phone'])){echo htmlspecialchars($_POST['phone']);} ?>">
+            
+            <div><label>Email</label></div>
+              <input type="email" name="email" placeholder="johnDoe@abc.com" value="<?php if(isset($_POST['email'])){echo htmlspecialchars($_POST['email']);} ?>">
 
-          <div class="form-group">
-            <label for="email" class="control-label col-sm-3">Email</label>
-            <div class="col-sm-9">
-              <input type="email" class="form-control" name="email" placeholder="johnDoe@abc.com" value="<?php if(isset($_POST['email'])){echo htmlspecialchars($_POST['email']);} ?>">
-            </div>
-          </div>
+            <div><label>Date of Birth</label></div>
+              <input type="date" name="dob" value="<?php if(isset($_POST['dob'])){echo htmlspecialchars($_POST['dob']);} ?>">
 
-          <div class="form-group">
-            <label for="dob" class="control-label col-sm-3">Date of Birth</label>
-            <div class="col-sm-9">
-              <input type="date" class="form-control" name="dob" value="<?php if(isset($_POST['dob'])){echo htmlspecialchars($_POST['dob']);} ?>">
-            </div>
-          </div>
 
-          <div class="form-group">
-            <div class="control-label col-sm-3" style="font-weight:bold">Gender</div>
-            <label class="radio-inline col-sm-offset-1"><input type="radio" name="gender" required checked value="Male">Male</label>
-            <label class="radio-inline"><input type="radio" name="gender" value="Female">Female</label>
-          </div>
+            <div><label>Gender</label></div>
+            <div><input type="radio" name="gender" required checked value="Male">Male</div>
+            <div><input type="radio" name="gender" value="Female">Female</div>
 
           <div class="form-group">
             <label for="healthHistory" class="control-label col-sm-3">Health History</label>
@@ -111,13 +83,15 @@
             </label>
           </div>
 
-          <input class="col-sm-offset-10 col-sm-2 btn-primary" type="submit" name="submitEnrollment">
+          <button type="submit" name="submitEnrollment">Submit</button>
         </div>
       </div>
     </div>
   </form>
 
   <div id="returnMessage" class="alert"></div>
+    
+</div>
 </div>
 </div>
 

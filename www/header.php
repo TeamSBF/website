@@ -1,6 +1,8 @@
-<?php 
-	session_start(); 
-	require_once ("config.php");
+<?php
+require_once "config.php";
+require_once "sessions.php";
+
+$grid = ($user) ? 12 : 8;
 ?>
 
 <!doctype html>
@@ -43,16 +45,8 @@
 <body>
   <header class="grid_12 alpha">
     <nav class="grid_12 alpha">
-      <ul>
-        <li><a href="index.php">Home</a></li>
-        <li><a href="about.php">About</a></li>
-        <li><a href="contact.php">Contact</a></li>
-		<li><a href="faq.php">FAQ</a></li>
-          <li><a href="assessments.php">Assessments</a></li>
-        <li><a href="parQTest.php">ParQ Form</a></li>
-        <li><a href="register.php">Register</a></li>
-      </ul>
+      <?php NavMenu::Build($user);?>
     </nav>
   </header>
     <div class="container">
-   <div class="grid_8 alpha">
+	<div class="grid_<?=$grid;?> alpha">

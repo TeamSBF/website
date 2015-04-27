@@ -21,7 +21,7 @@ class QueryTests
     {
         $results = [];
         $test = QueryFactory::Build("insert");
-        $test->Into("users")->Set(["id", "1"], ["email", "asd"], ["password", "pass"], ["salt", "blah"], ["created", "UNIX_TIMESTAMP()"]);
+        $test->Into("users")->Set(["email", "asd"], ["password", "pass"], ["created", "UNIX_TIMESTAMP()"]);
         self::testing("Insert");
 
         $qinfo = DatabaseManager::Query($test);
@@ -77,7 +77,7 @@ class QueryTests
     {
         $results = [];
         $test = QueryFactory::Build("delete");
-        $test->From("users")->Where(["id","=","1","and"],["email","=","asd"])->Limit();
+        $test->From("users")->Where(["email","=","asd"])->Limit();
         self::testing("Delete");
 
         $qinfo = DatabaseManager::Query($test);

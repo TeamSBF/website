@@ -1,37 +1,37 @@
 <?php
-/*
+/**
  * The query that provides table altering support. This is, so far, solely used by the MigrationManager
  * when an error has occurred during the execution of a query to repair the tables' associated column(s)
  * THIS NEEDS TO BE REFACTORED TO UTILIZE THE QUERY OBJECT TO SIMPLIFY THE OVERALL STRUCTURE
  */
 class AlterTable implements IQuery
 {
-    /*
+    /**
      * The name of the table to be altered
      *
      * @var string
      */
     private $table;
-    /*
+    /**
      * The fields to be added or changed
      *
      * @var array
      */
     private $fields = [];
-    /*
+    /**
      * Any keys that might need to be added or changed
      *
      * @var array
      */
     private $keys = [];
-    /*
+    /**
      * The value that is to be set to auto-incremenet
      *
      * @var string
      */
     private $ai = "";
 
-    /*
+    /**
      * The class constructor
      */
     public function __construct()
@@ -39,7 +39,7 @@ class AlterTable implements IQuery
         $this->table = "";
     }
 
-    /*
+    /**
      * Defines the table to be altered
      *
      * @param string $tableName The name of the table name to be altered. The parameters is optional
@@ -49,7 +49,7 @@ class AlterTable implements IQuery
     public function Table($tableName = null)
     {
         // If no table name was provided, return the table name
-        if($tableName == null)
+        if ($tableName == null)
             return $this->table;
 
         // If the provided table name is not a string, return nothing.
@@ -63,20 +63,20 @@ class AlterTable implements IQuery
         return $this;
     }
 
-    /*
+    /**
      * Adds a field
      *
-     * @param string $name The name of the field (column) to add
-     * @param string $type The field (column) type that is being added
-     * @param mixed $value (Optional) The storage capacity of the field (column) being added.
+     * @param $field
      */
-    public function AddField($name, $type, $value = null)
+    public function AddField($field)
     {
+        if(!isset($field['default']))
+            $field['default'] = null;
         // Store the field as a new field object
-        $this->fields[count($this->fields)] = new Field($name, $type, $value);
+        $this->fields[count($this->fields)] = new Field($field['name'], $field['type'], $field['value'], $field['default']);
     }
 
-    /*
+    /**
      * Adds a key to the table given an optional field name.
      * Note when the name is left out, this method defaults to the previously added field to make as the key
      *
@@ -107,7 +107,7 @@ class AlterTable implements IQuery
         return $this;
     }
 
-    /*
+    /**
      * Sets the given $name to be the auto-incremented field in the table. Note this overwrites the primary key.
      *
      * @param string $name (Optional) The name of the field (column) to be set to the auto-increment column and key
@@ -125,7 +125,7 @@ class AlterTable implements IQuery
         return $this;
     }
 
-    /*
+    /**
      * Returns the current fields array
      */
     public function Fields()
@@ -133,7 +133,7 @@ class AlterTable implements IQuery
         return $this->fields;
     }
 
-    /*
+    /**
      * Returns the current keys array
      */
     public function Keys()
@@ -141,7 +141,7 @@ class AlterTable implements IQuery
         return $this->keys;
     }
 
-    /*
+    /**
      * Returns the string query that is used to execute the query
      *
      * @param boolean $values A boolean to print the values in the query. This is a superficial option and has
@@ -161,7 +161,7 @@ class AlterTable implements IQuery
         return [$query, []];
     }
 
-    /*
+    /**
      * Parses the fields into MySQL format
      *
      * @return string Returns the fields parsed into MySQL format
@@ -171,25 +171,28 @@ class AlterTable implements IQuery
         // Grab all the fields
         $fields = $this->fields;
         $ret = "";
-        for($i = 0; $i < count($fields); $i++)
-        {
+        for ($i = 0; $i < count($fields); $i++) {
             // Grab the associated information for each field
             $name = $fields[$i]->Name();
             $type = $fields[$i]->Type();
             $value = $fields[$i]->Value();
             // Check to see if the column has a value associated with it. If it doesn't, grab a default one
             $value = ($value == null) ? $this->getDefaultValue($type) : $value;
+            $default = $fields[$i]->DefaultValue();
 
             // Append the name to the query string
             $ret .= " ADD `" . $name . "` ";
             // Append the column type to the query string
-            $ret .= strtoupper($type) . "(". $value .") NOT NULL";
+            $ret .= strtoupper($type) . "(" . $value . ") NOT NULL";
+            // Check for default values
+            if ($default)
+                $ret .= " DEFAULT '" . $default . "'";
             // Check for the auto-increment field and append if needed
-            if($this->ai == $name)
+            if ($this->ai == $name)
                 $ret .= " AUTO_INCREMENT";
 
             // If we're not at the end, append a comma
-            if($i < count($fields) - 1)
+            if ($i < count($fields) - 1)
                 $ret .= ",";
             // This is for readability when printing to the screen to visually see it
             $ret .= "\n";
@@ -198,7 +201,7 @@ class AlterTable implements IQuery
         return $ret;
     }
 
-    /*
+    /**
      * Parses the keys associated with the table
      *
      * @return string Returns the keys parsed into MySQL format
@@ -212,18 +215,14 @@ class AlterTable implements IQuery
         if (array_key_exists("primary", $keys))
             $ret .= ",\nADD PRIMARY KEY (`" . $keys["primary"] . "`)";
         // Check to see if the unique key exists and append as needed
-        if(array_key_exists("unique",$keys))
-            for($i = 0; $i < count($keys["unique"]); $i++)
+        if (array_key_exists("unique", $keys))
+            for ($i = 0; $i < count($keys["unique"]); $i++)
                 $ret .= ", ADD UNIQUE (`" . $keys["unique"][$i] . "`)";
 
         return $ret;
     }
 
-    //ALTER TABLE `users` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST,
-    //                    ADD `email` VARCHAR(100) NOT NULL AFTER `id`,
-    //                    ADD PRIMARY KEY (`id`) , ADD UNIQUE (`email`) ;
-
-    /*
+    /**
      * Gets the default value (storage capacity in this context) for the given type
      *
      * @param string $type The type of field
@@ -252,7 +251,7 @@ class AlterTable implements IQuery
         return $default;
     }
 
-    /*
+    /**
      * Returns either the $name of the previously added field's $name
      */
     private function getFieldName($name)
@@ -260,7 +259,3 @@ class AlterTable implements IQuery
         return ($name == null) ? $this->fields[count($this->fields) - 1]->Name() : $name;
     }
 }
-
-//ALTER TABLE `users` ADD `id` INT NOT NULL AUTO_INCREMENT FIRST, ADD PRIMARY KEY (`id`) ;
-//ALTER TABLE `users` ADD `email` VARCHAR(100) NOT NULL , ADD UNIQUE `email` (`email`) ;
-//ALTER TABLE `users` ADD `password` VARCHAR(50) NOT NULL AFTER `id`;

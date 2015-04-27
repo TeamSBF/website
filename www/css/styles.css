@@ -99,7 +99,17 @@ label,nav
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
 }
-button {
+.inputFields,.labels
+{
+    padding-left: 75px;
+}
+.inputFields
+{
+    padding-bottom: 10px;
+}
+
+button 
+{
 	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
 	-webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
 	box-shadow: 0px 0px 0px 2px #9fb4f2;
@@ -125,6 +135,7 @@ button {
 	text-shadow:0px 1px 0px #283966;
     margin-top: 10px;
     margin-bottom: 10px;
+   
 }
 button:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7892c2));
@@ -161,8 +172,31 @@ input{
   -o-transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
   transition: all 200ms cubic-bezier(0.42, 0, 0.58, 1);
 }
-
+/*--------------------------------------------------------------------------------*/
 /*ParQ Form Styling*/
+.subQuestions
+{
+   border: black solid 1px;
+   padding: 2%;
+   background: rgba(194, 190, 190, 0.27);  
+}
+body > div > div.grid_8.alpha > div > form > div > div:nth-child(n) > div
+{
+  border: 0;
+  padding: 0;
+  width: 100%;
+  background: yellow;
+}
+
+#s1RadioGroup > div:nth-child(n),
+#section2 > fieldset > div:nth-child(n) > div:nth-child(1)
+{
+    padding-top:10px;
+    padding-bottom: 15px;   
+}
+
+
+
 #s1Radios, 
 label, 
 #s1RadioGroup > div:nth-child(n) > label > p,
@@ -249,6 +283,7 @@ nav ul
   width: 100%;
   max-width: 100%;
   font-size: 22px;
+  padding-bottom:4px;
  
 background: #d8d7dd; /* Old browsers */
 /* IE9 SVG, needs conditional override of 'filter' to 'none' */
