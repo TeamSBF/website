@@ -52,20 +52,21 @@ $grid = ($user) ? 12 : 8;
         });
         <?php } ?>
     	$(function() {
-		$("#accordion").accordion({
+            $("#accordion").accordion({
                 collapsible: true,
                 heightStyle: "content"
             });
-		
-		// Hover states on the static widgets
-		$( "#dialog-link, #icons li" ).hover(
-			function() {
-				$( this ).addClass( "ui-state-hover" );
-			},
-			function() {
-				$( this ).removeClass( "ui-state-hover" );
-			}
-		);
+
+            // Hover states on the static widgets
+            $("#dialog-link, #icons li").hover(
+                function () {
+                    $(this).addClass("ui-state-hover");
+                },
+                function () {
+                    $(this).removeClass("ui-state-hover");
+                }
+            );
+        });
 	</script>
     
     
