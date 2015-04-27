@@ -11,7 +11,7 @@ class NavMenu extends Singleton
                 new MenuItem("About", "about.php",UserLevel::Anon, "only"),
                 new MenuItem("Contact", "contact.php",UserLevel::Anon, "only"),
                 new MenuItem("FAQ", "faq.php",UserLevel::Anon, "only"),
-                 new MenuItem("MemberHome", "memberHome.php", UserLevel::Member),
+                 new MenuItem("Home", "memberHome.php", UserLevel::Member),
                 new MenuItem("Assessments", "assessments.php",UserLevel::Member),
                 new MenuItem("Register", "register.php", UserLevel::Anon, "only"),
                 new MenuItem("Profile", "profile.php", UserLevel::Member),
