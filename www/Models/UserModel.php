@@ -167,7 +167,7 @@ class UserModel
      */
     private static function hashPass($pass)
     {
-        require_once("assets/password.php");
+        require_once("scripts/password.php");
         $options = array('cost' => 11);
         return password_hash($pass, PASSWORD_BCRYPT, $options);
     }
