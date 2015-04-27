@@ -1,15 +1,15 @@
-
 <?php
 	require_once"header.php";
  	if (isset($_POST['submitParQ']))
     {
     	if ($user)
+    	{
     		$_POST['userID'] = $user->id;
-	    print_r($_POST);
-	    $parQvalidator = new FormsModel($_POST);
-	    $parQreturn = $parQvalidator->validateParQ();
-	    print_r($parQreturn);
-
+	    	print_r($_POST);
+	    	$parQvalidator = new FormsModel($_POST);
+	    	$parQreturn = $parQvalidator->validateParQ();
+	    	print_r($parQreturn);
+	    }
     }
 ?>
 
@@ -21,7 +21,7 @@
 		<p>Regular physical activity is fun and healthy, and more people should become more physically active every day of the week.
 Being more physically active is very safe for MOST people. This questionnaire will tell you whether it is necessary for you to
 seek further advice from your doctor OR a qualified exercise professional before becoming more physically active.</p>
-		<div id="parQmessage" class="success"></div>
+		<div id="parQmessage" class="success" style="display:none"></div>
 		<div id="section1">
 			
 			<fieldset>
@@ -70,7 +70,7 @@ seek further advice from your doctor OR a qualified exercise professional before
                     <div>
 					   <label for="q1_7"><p>7: Has your doctor ever said that you should only do medically supervised physical activity?</p></label>
 					   <div><input type="radio" class="s1Radios" name="q1_7" <?php if (isset($_POST['q1_7']) && $_POST['q1_7'] == 'Yes') echo "checked";?> required value="Yes">Yes</div>
-					   <div><input type="radio" class="s1Radios" name="q1_7" <?php if (isset($_POST['q1_7']) && $_POST['q1_7'] == 'No') echo "checked";?>  value="No">No</div>
+					   <div><input type="radio" class="s1Radios" name="q1_7" <?php if (isset($_POST['q1_7']) && $_POST['q1_7'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
 				</div>
 			</fieldset>	
@@ -84,16 +84,16 @@ seek further advice from your doctor OR a qualified exercise professional before
 				<div> <!-- div for question 2.1, the sub section with id: q2.* should be indented (see parQ pdf) -->
                     <div>
                         <label for="q2_1"><p>2.1: Do you have Arthritis, Osteoporosis, or Back Problems?</p></label>
-					      <div><input type="radio" onclick="s2RadiosClick(this, 'q2_1');" name="q2_1" value="Yes">Yes</div>
-					      <div><input type="radio" onclick="s2RadiosClick(this, 'q2_1');" name="q2_1" value="No">No</div>
+					      <div><input type="radio" onclick="s2RadiosClick(this, 'q2_1');" name="q2_1" <?php if (isset($_POST['q2_1']) && $_POST['q2_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					      <div><input type="radio" onclick="s2RadiosClick(this, 'q2_1');" name="q2_1" <?php if (isset($_POST['q2_1']) && $_POST['q2_1'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
-					<div id="q2_1" style="display:none">
+					<div id="q2_1" <?php if (!isset($_POST['q2_1']) || $_POST['q2_1'] === "No") {echo 'style="display:none"';}?> >
                         <div>
 						      <label for="q2_1_1"><p>2.1.a: Do you have difficulty controlling your condition with medications or other
 												physician_prescribed therapies? (Answer NO if you are not currently taking
 												medications or other treatments)</p></label>
-						      <div><input type="radio" name="q2_1_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_1_1" value="No">No</div>
+						      <div><input type="radio" name="q2_1_1" <?php if (isset($_POST['q2_1_1']) && $_POST['q2_1_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_1_1" <?php if (isset($_POST['q2_1_1']) && $_POST['q2_1_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         
                         <div>
@@ -101,14 +101,14 @@ seek further advice from your doctor OR a qualified exercise professional before
 											by osteoporosis or cancer, displaced vertebra (e.g., spondylolisthesis), and/
 											or spondylolysis/pars defect (a crack in the bony ring on the back of the spinal
 											column)?</p></label>
-						  <div><input type="radio" name="q2_1_2" value="Yes">Yes</div>  
-						  <div><input type="radio" name="q2_1_2" value="No">No</div> 
+						  <div><input type="radio" name="q2_1_2" <?php if (isset($_POST['q2_1_2']) && $_POST['q2_1_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>  
+						  <div><input type="radio" name="q2_1_2" <?php if (isset($_POST['q2_1_2']) && $_POST['q2_1_2'] == 'No') echo "checked";?> value="No">No</div> 
                         </div>
                         
                         <div>
 						  <label for="q2_1_3"><p>2.1.c: Have you had steroid injections or taken steroid tablets regularly for more than 3 months?</p></label>
-						  <div><input type="radio" name="q2_1_3" value="Yes">Yes</div>
-						  <div><input type="radio" name="q2_1_3" value="No">No</div>
+						  <div><input type="radio" name="q2_1_3" <?php if (isset($_POST['q2_1_3']) && $_POST['q2_1_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						  <div><input type="radio" name="q2_1_3" <?php if (isset($_POST['q2_1_3']) && $_POST['q2_1_3'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         
 					</div>
@@ -117,22 +117,22 @@ seek further advice from your doctor OR a qualified exercise professional before
 				<div> <!-- div for question 2.2, the sub section with id: q2.* should be indented (see parQ pdf) -->
                     <div>
 					   <label for="q2_2"><p>2.2: Do you have Cancer of any kind?</p></label>
-					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_2');" name="q2_2" value="Yes">Yes</div>
-					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_2');" name="q2_2" value="No">No</div>
+					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_2');" name="q2_2" <?php if (isset($_POST['q2_2']) && $_POST['q2_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_2');" name="q2_2" <?php if (isset($_POST['q2_2']) && $_POST['q2_2'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
                     
-					<div id="q2_2" style="display:none">
+					<div id="q2_2" <?php if (!isset($_POST['q2_2']) || $_POST['q2_2'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						  <label for="q2_2_1"><p>2.2.a: Does your cancer diagnosis include any of the following types: lung/bronchogenic,
 											multiple myeloma (cancer of plasma cells), head, and neck?</p></label>
-						  <div><input type="radio" name="q2_2_1" value="Yes">Yes</div>
-						  <div><input type="radio" name="q2_2_1" value="No">No</div>
+						  <div><input type="radio" name="q2_2_1" <?php if (isset($_POST['q2_2_1']) && $_POST['q2_2_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						  <div><input type="radio" name="q2_2_1" <?php if (isset($_POST['q2_2_1']) && $_POST['q2_2_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                        
                         <div>
 						  <label for="q2_2_2"><p>2.2.b: Are you currently receiving cancer therapy (such as chemotherapy or radiotherapy)?</p></label>
-						  <div><input type="radio" name="q2_2_2" value="Yes">Yes</div>
-						  <div><input type="radio" name="q2_2_2" value="No">No</div>
+						  <div><input type="radio" name="q2_2_2" <?php if (isset($_POST['q2_2_2']) && $_POST['q2_2_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						  <div><input type="radio" name="q2_2_2" <?php if (isset($_POST['q2_2_2']) && $_POST['q2_2_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
 					</div>
 				</div> <!-- end div for question 2.2 -->
@@ -141,39 +141,39 @@ seek further advice from your doctor OR a qualified exercise professional before
                     <div>
 					   <label for="q2_3"><p>2.3: Do you have Heart Disease or Cardiovascular Disease?
 										This includes Coronary Artery Disease, High Blood Pressure, Heart Failure, Diagnosed Abnormality of Heart Rhythm</p></label>
-					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_3');" name="q2_3" value="Yes">Yes</div>
-					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_3');" name="q2_3" value="No">No</div>
+					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_3');" name="q2_3" <?php if (isset($_POST['q2_3']) && $_POST['q2_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_3');" name="q2_3" <?php if (isset($_POST['q2_3']) && $_POST['q2_3'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
                     
-					<div id="q2_3" style="display:none">
+					<div id="q2_3" <?php if (!isset($_POST['q2_3']) || $_POST['q2_3'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						      <label for="q2_3_1"><p>2.3.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
-						      <div><input type="radio" name="q2_3_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_3_1" value="No">No</div>
+						      <div><input type="radio" name="q2_3_1" <?php if (isset($_POST['q2_3_1']) && $_POST['q2_3_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_3_1" <?php if (isset($_POST['q2_3_1']) && $_POST['q2_3_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_3_2"><p>2.3.b: Do you have an irregular heart beat that requires medical management?
 											(e.g. atrial fibrillation, premature ventricular contraction)</p></label>
-						      <div><input type="radio" name="q2_3_2" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_3_2" value="No">No</div>
+						      <div><input type="radio" name="q2_3_2" <?php if (isset($_POST['q2_3_2']) && $_POST['q2_3_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_3_2" <?php if (isset($_POST['q2_3_2']) && $_POST['q2_3_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_3_3"><p>2.3.c: Do you have chronic heart failure?</p></label>
-						      <div><input type="radio" name="q2_3_3" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_3_3" value="No">No</div>
+						      <div><input type="radio" name="q2_3_3" <?php if (isset($_POST['q2_3_3']) && $_POST['q2_3_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_3_3" <?php if (isset($_POST['q2_3_3']) && $_POST['q2_3_3'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_3_4"><p>2.3.d: Do you have a resting blood pressure equal to or greater than 160/90 mmHg with or
 											without medication? (Answer YES if you do not know your resting blood pressure)</p></label>
-						      <div><input type="radio" name="q2_3_4" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_3_4" value="No">No</div>
+						      <div><input type="radio" name="q2_3_4" <?php if (isset($_POST['q2_3_4']) && $_POST['q2_3_4'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_3_4" <?php if (isset($_POST['q2_3_4']) && $_POST['q2_3_4'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_3_5"><p>2.3.e: Do you have diagnosed coronary artery (cardiovascular) disease and have not
 											participated in regular physical activity in the last 2 months?</p></label>
-						      <div><input type="radio" name="q2_3_5" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_3_5" value="No">No</div>
+						      <div><input type="radio" name="q2_3_5" <?php if (isset($_POST['q2_3_5']) && $_POST['q2_3_5'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_3_5" <?php if (isset($_POST['q2_3_5']) && $_POST['q2_3_5'] == 'No') echo "checked";?> value="No">No</div>
                         </div>      
 					</div>
 				</div> <!-- end div for question 2.3 -->
@@ -181,27 +181,27 @@ seek further advice from your doctor OR a qualified exercise professional before
 				<div> <!-- div for question 2.4, the sub section with id: q2.* should be indented (see parQ pdf) -->
                     <div>
 					<label for="q2-4"><p>2.4: Do you have any Metabolic Conditions? This includes Type 1 Diabetes, Type 2 Diabetes, Pre-Diabetes</p></label>
-					<div><input type="radio" onclick="s2RadiosClick(this, 'q2_4');" name="q2_4" value="Yes">Yes</div>
-					<div><input type="radio" onclick="s2RadiosClick(this, 'q2_4');" name="q2_4" value="No">No</div>
+					<div><input type="radio" onclick="s2RadiosClick(this, 'q2_4');" <?php if (isset($_POST['q2_4']) && $_POST['q2_4'] == 'Yes') echo "checked";?> name="q2_4" value="Yes">Yes</div>
+					<div><input type="radio" onclick="s2RadiosClick(this, 'q2_4');" <?php if (isset($_POST['q2_4']) && $_POST['q2_4'] == 'Yes') echo "checked";?> name="q2_4" value="No">No</div>
                     </div>
-					<div id="q2_4" style="display:none">
+					<div id="q2_4" <?php if (!isset($_POST['q2_4']) || $_POST['q2_4'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						      <label for="q2_4_1"><p>2.4.a: Is your blood sugar often above 13.0 mmol/L? (Answer YES if you are not sure)</p></label>
-						      <div><input type="radio" name="q2_4_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_4_1" value="No">No</div>
+						      <div><input type="radio" name="q2_4_1" <?php if (isset($_POST['q2_4_1']) && $_POST['q2_4_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_4_1" <?php if (isset($_POST['q2_4_1']) && $_POST['q2_4_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_4_2"><p>2.4.b: Do you have any signs or symptoms of diabetes complications such as heart
 											or vascular disease and/or complications affecting your eyes, kidneys, and the
 											sensation in your toes and feet?</p></label>
-						      <div><input type="radio" name="q2_4_2" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_4_2" value="No">No</div>
+						      <div><input type="radio" name="q2_4_2" <?php if (isset($_POST['q2_4_2']) && $_POST['q2_4_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_4_2" <?php if (isset($_POST['q2_4_2']) && $_POST['q2_4_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_4_3"><p>2.4.c: Do you have other metabolic conditions (such as thyroid disorders, pregnancyrelated
 											diabetes, chronic kidney disease, liver problems)?</p></label>
-						      <div><input type="radio" name="q2_4_3" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_4_3" value="No">No</div>
+						      <div><input type="radio" name="q2_4_3" <?php if (isset($_POST['q2_4_3']) && $_POST['q2_4_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_4_3" <?php if (isset($_POST['q2_4_3']) && $_POST['q2_4_3'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
 					</div>
 				</div> <!-- end div for question 2.4 -->
@@ -211,22 +211,22 @@ seek further advice from your doctor OR a qualified exercise professional before
 					       <label for="q2_5"><p>2.5: Do you have any Mental Health Problems or Learning Difficulties?
 										This includes Alzheimer’s, Dementia, Depression, Anxiety Disorder, Eating Disorder,
 										Psychotic Disorder, Intellectual Disability, Down Syndrome)</p></label>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_5');" name="q2_5" value="Yes">Yes</div>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_5');" name="q2_5" value="No">No</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_5');" name="q2_5" <?php if (isset($_POST['q2_5']) && $_POST['q2_5'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_5');" name="q2_5" <?php if (isset($_POST['q2_5']) && $_POST['q2_5'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
                     
-					<div id="q2_5" style="display:none">
+					<div id="q2_5" <?php if (!isset($_POST['q2_5']) || $_POST['q2_5'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						      <label for="q2_5_1"><p>2.5.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking
 											medications or other treatments)</p></label>
-						      <div><input type="radio" name="q2_5_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_5_1" value="No">No</div>
+						      <div><input type="radio" name="q2_5_1" <?php if (isset($_POST['q2_5_1']) && $_POST['q2_5_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_5_1" <?php if (isset($_POST['q2_5_1']) && $_POST['q2_5_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_5_2"><p>2.5.b: Do you also have back problems affecting nerves or muscles?</p></label>
-						      <div><input type="radio" name="q2_5_2" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_5_2" value="No">No</div>
+						      <div><input type="radio" name="q2_5_2" <?php if (isset($_POST['q2_5_2']) && $_POST['q2_5_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_5_2" <?php if (isset($_POST['q2_5_2']) && $_POST['q2_5_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
 					</div>
 				</div> <!-- end div for question 2.5 -->
@@ -235,34 +235,34 @@ seek further advice from your doctor OR a qualified exercise professional before
                     <div>
 					   <label for="q2_6"><p>2.6: Do you have a Respiratory Disease? This includes Chronic Obstructive 
 										Pulmonary Disease, Asthma, Pulmonary High Blood Pressure</p></label>
-					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_6');" name="q2_6" value="Yes">Yes</div>
-					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_6');" name="q2_6" value="No">No</div>
+					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_6');" name="q2_6" <?php if (isset($_POST['q2_6']) && $_POST['q2_6'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					   <div><input type="radio" onclick="s2RadiosClick(this, 'q2_6');" name="q2_6" <?php if (isset($_POST['q2_6']) && $_POST['q2_6'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
 
-					<div id="q2_6" style="display:none">
+					<div id="q2_6" <?php if (!isset($_POST['q2_6']) || $_POST['q2_6'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						      <label for="q2_6_1"><p>2.6.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
-						      <div><input type="radio" name="q2_6_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_6_1" value="No">No</div>
+						      <div><input type="radio" name="q2_6_1" <?php if (isset($_POST['q2_6_1']) && $_POST['q2_6_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_6_1" <?php if (isset($_POST['q2_6_1']) && $_POST['q2_6_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_6_2"><p>2.6.b: Has your doctor ever said your blood oxygen level is low at rest or during exercise
 											and/or that you require supplemental oxygen therapy?</p></label>
-						      <div><input type="radio" name="q2_6_2" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_6_2" value="No">No</div>
+						      <div><input type="radio" name="q2_6_2" <?php if (isset($_POST['q2_6_2']) && $_POST['q2_6_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_6_2" <?php if (isset($_POST['q2_6_2']) && $_POST['q2_6_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_6_3"><p>2.6.c: If asthmatic, do you currently have symptoms of chest tightness, wheezing, laboured
 											breathing, consistent cough (more than 2 days/week), or have you used your rescue
 											medication more than twice in the last week?</p></label>
-						      <div><input type="radio" name="q2_6_3" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_6_3" value="No">No</div>
+						      <div><input type="radio" name="q2_6_3" <?php if (isset($_POST['q2_6_3']) && $_POST['q2_6_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_6_3" <?php if (isset($_POST['q2_6_3']) && $_POST['q2_6_3'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_6_4"><p>2.6.d: Has your doctor ever said you have high blood pressure in the blood vessels of your lungs?</p></label>
-						      <div><input type="radio" name="q2_6_4" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_6_4" value="No">No</div>
+						      <div><input type="radio" name="q2_6_4" <?php if (isset($_POST['q2_6_4']) && $_POST['q2_6_4'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_6_4" <?php if (isset($_POST['q2_6_4']) && $_POST['q2_6_4'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
 					</div>
 				</div> <!-- end div for question 2.6 -->
@@ -270,27 +270,27 @@ seek further advice from your doctor OR a qualified exercise professional before
 				<div> <!-- div for question 2.7, the sub section with id: q2.* should be indented (see parQ pdf) -->
                     <div>
 					       <label for="q2_7"><p>2.7: Do you have a Spinal Cord Injury? This includes Tetraplegia and Paraplegia</p></label>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_7');" name="q2_7" value="Yes">Yes</div>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_7');" name="q2_7" value="No">No</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_7');" name="q2_7" <?php if (isset($_POST['q2_7']) && $_POST['q2_7'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_7');" name="q2_7" <?php if (isset($_POST['q2_7']) && $_POST['q2_7'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
-					<div id="q2_7" style="display:none">
+					<div id="q2_7" <?php if (!isset($_POST['q2_7']) || $_POST['q2_7'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						      <label for="q2_7_1"><p>2.7.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
-						      <div><input type="radio" name="q2_7_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_7_1" value="No">No</div>
+						      <div><input type="radio" name="q2_7_1" <?php if (isset($_POST['q2_7_1']) && $_POST['q2_7_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_7_1" <?php if (isset($_POST['q2_7_1']) && $_POST['q2_7_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>       
                         <div>
 						      <label for="q2_7_2"><p>2.7.b: Do you commonly exhibit low resting blood pressure significant enough to cause
 											dizziness, light_headedness, and/or fainting?</p></label>
-						      <div><input type="radio" name="q2_7_2" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_7_2" value="No">No</div>
+						      <div><input type="radio" name="q2_7_2" <?php if (isset($_POST['q2_7_2']) && $_POST['q2_7_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_7_2" <?php if (isset($_POST['q2_7_2']) && $_POST['q2_7_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>     
                         <div>
 						      <label for="q2_7_3"><p>2.7.c: Has your physician indicated that you exhibit sudden bouts of high blood pressure
 											(known as Autonomic Dysreflexia)?</p></label>
-						      <div><input type="radio" name="q2_7_3" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_7_3" value="No">No</div>
+						      <div><input type="radio" name="q2_7_3" <?php if (isset($_POST['q2_7_3']) && $_POST['q2_7_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_7_3" <?php if (isset($_POST['q2_7_3']) && $_POST['q2_7_3'] == 'No') echo "checked";?> value="No">No</div>
                        </div>      
 					</div>
 				</div> <!-- end div for question 2.7 -->
@@ -298,25 +298,25 @@ seek further advice from your doctor OR a qualified exercise professional before
 				<div> <!-- div for question 2.8, the sub section with id: q2.* should be indented (see parQ pdf) -->
                     <div>
 					       <label for="q2_8"><p>2.8: Have you had a Stroke? This includes Transient Ischemic Attack (TIA) or Cerebrovascular Event</p></label>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_8');" name="q2_8" value="Yes">Yes</div>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_8');" name="q2_8" value="No">No</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_8');" name="q2_8" <?php if (isset($_POST['q2_8']) && $_POST['q2_8'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_8');" name="q2_8" <?php if (isset($_POST['q2_8']) && $_POST['q2_8'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
-					<div id="q2_8" style="display:none">
+					<div id="q2_8" <?php if (!isset($_POST['q2_8']) || $_POST['q2_8'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						      <label for="q2_8_1"><p>2.8.a: Do you have difficulty controlling your condition with medications or other
 											physician-prescribed therapies? (Answer NO if you are not currently taking medications or other treatments)</p></label>
-						      <div><input type="radio" name="q2_8_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_8_1" value="No">No</div>
+						      <div><input type="radio" name="q2_8_1" <?php if (isset($_POST['q2_8_1']) && $_POST['q2_8_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_8_1" <?php if (isset($_POST['q2_8_1']) && $_POST['q2_8_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_8_2"><p>2.8.b: Do you have any impairment in walking or mobility?</p></label>
-						      <div><input type="radio" name="q2_8_2" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_8_2" value="No">No</div>
+						      <div><input type="radio" name="q2_8_2" <?php if (isset($_POST['q2_8_2']) && $_POST['q2_8_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_8_2" <?php if (isset($_POST['q2_8_2']) && $_POST['q2_8_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_8_3"><p>2.8.c: Have you experienced a stroke or impairment in nerves or muscles in the past 6 months?</p></label>
-						      <div><input type="radio" name="q2_8_3" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_8_3" value="No">No</div>
+						      <div><input type="radio" name="q2_8_3" <?php if (isset($_POST['q2_8_3']) && $_POST['q2_8_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_8_3" <?php if (isset($_POST['q2_8_3']) && $_POST['q2_8_3'] == 'No') echo "checked";?> value="No">No</div>
                         </div>    
 					</div>
 				</div> <!-- end div for question 2.8 -->
@@ -324,26 +324,26 @@ seek further advice from your doctor OR a qualified exercise professional before
 				<div> <!-- div for question 2.9, the sub section with id: q2.* should be indented (see parQ pdf) -->
                     <div>
 					       <label for="q2_9"><p>2.9: Do you have any other medical condition not listed above or do you live with two chronic conditions?</p></label>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_9');" name="q2_9" value="Yes">Yes</div>
-					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_9');" name="q2_9" value="No">No</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_9');" name="q2_9" <?php if (isset($_POST['q2_9']) && $_POST['q2_9'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+					       <div><input type="radio" onclick="s2RadiosClick(this, 'q2_9');" name="q2_9" <?php if (isset($_POST['q2_9']) && $_POST['q2_9'] == 'No') echo "checked";?> value="No">No</div>
                     </div>
                     
-					<div id="q2_9" style="display:none">
+					<div id="q2_9" <?php if (!isset($_POST['q2_9']) || $_POST['q2_9'] === "No") {echo 'style="display:none"';}?>>
                         <div>
 						      <label for="q2_9_1"><p>2.9.a: Have you experienced a blackout, fainted, or lost consciousness as a result of a head
 											injury within the last 12 months OR have you had a diagnosed concussion within the last 12 months?</p></label>
-						      <div><input type="radio" name="q2_9_1" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_9_1" value="No">No</div>
+						      <div><input type="radio" name="q2_9_1" <?php if (isset($_POST['q2_9_1']) && $_POST['q2_9_1'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_9_1" <?php if (isset($_POST['q2_9_1']) && $_POST['q2_9_1'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                        <div> 
 						      <label for="q2_9_2"><p>2.9.b: Do you have a medical condition that is not listed (such as epilepsy, neurological conditions, kidney problems)?</p></label>
-						      <div><input type="radio" name="q2_9_2" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_9_2" value="No">No</div>
+						      <div><input type="radio" name="q2_9_2" <?php if (isset($_POST['q2_9_2']) && $_POST['q2_9_2'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_9_2" <?php if (isset($_POST['q2_9_2']) && $_POST['q2_9_2'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
                         <div>
 						      <label for="q2_9_3"><p>2.9.c: Do you currently live with two chronic conditions?</p></label>
-						      <div><input type="radio" name="q2_9_3" value="Yes">Yes</div>
-						      <div><input type="radio" name="q2_9_3" value="No">No</div>
+						      <div><input type="radio" name="q2_9_3" <?php if (isset($_POST['q2_9_3']) && $_POST['q2_9_3'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+						      <div><input type="radio" name="q2_9_3" <?php if (isset($_POST['q2_9_3']) && $_POST['q2_9_3'] == 'No') echo "checked";?> value="No">No</div>
                         </div>
 					</div>
 				</div> <!-- end div for question 2.9 -->
@@ -367,13 +367,13 @@ seek further advice from your doctor OR a qualified exercise professional before
 			<fieldset>
 
 				   <div><label for="dateCompleted"><p>Date Completed</p></label>
-				    <input type="date" class="" name="q3_1" required value="<?php if(isset($_POST['dob'])){echo htmlspecialchars($_POST['dateCompleted']);} ?>"></div>
+				    <input type="date" class="" name="q3_1" required value="<?php if(isset($_POST['q3_1'])){echo htmlspecialchars($_POST['q3_1']);} ?>"></div>
                 <div>
 				    <label for="signature"><p>Signature (type your full name)</p></label>
-				    <input type="text" class="" name="q3_2" required placeholder="Sign here" value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['signature']);} ?>"></div>
+				    <input type="text" class="" name="q3_2" required placeholder="Sign here" value="<?php if(isset($_POST['q3_2'])){echo htmlspecialchars($_POST['q3_2']);} ?>"></div>
                 <div>
 				    <label for="guardianSignature"><p>Parent/Guardian/Care Provider Signature (If applicable)</p></label>
-                    <input type="text" class="" name="q3_3" placeholder="Sign here" value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['guardianSignature']);} ?>"></div>
+                    <input type="text" class="" name="q3_3" placeholder="Sign here" value="<?php if(isset($_POST['q3_3'])){echo htmlspecialchars($_POST['q3_3']);} ?>"></div>
 			</fieldset>
 		</div>
 	</div>
@@ -386,6 +386,11 @@ seek further advice from your doctor OR a qualified exercise professional before
 
 	/* Loops through section 1 answers and decide if section 2 should be shown/hidden */
 	$(".s1Radios").change(function () {
+		showHideSection2();		
+	});
+
+	// show or hide section depending on input from section 1
+	function showHideSection2() {
 		var show = false;
 		$(".s1Radios").each(function () {
 			if ($(this).is(":checked") && $(this).val() == "Yes") {
@@ -403,8 +408,9 @@ seek further advice from your doctor OR a qualified exercise professional before
 			$("#section2").hide("slow");
 			switchRequiredAttribute("q2", questions, "false");
 		}
-	});
+	}
 
+	// switch the required attribute between true and false depending on input
 	function switchRequiredAttribute(name, howmany, value)	{
 		for (var i = 1; i <= howmany; i++)
 		{
@@ -430,19 +436,21 @@ seek further advice from your doctor OR a qualified exercise professional before
 	}
 
 	<?php 	if(isset($parQreturn)) { ?>
-		
-		$(document).ready(function () { 
+		// on document ready, figure out if section should be shown (on page reload after submitting maybe it should show)
+		// display message upon success  or error
+		$(document).ready(function () {
+			showHideSection2(); 
 			var message;
 			<?php if ($parQreturn == false) { ?>
-				message = "<strong>Error!</strong> Something went wrong while saving the form data. Check your answers.";
+				message = "<strong>Error!</strong> Something went wrong while saving the form data.\nHave you already completed and submitted this form?.";
 				$("#parQmessage").removeClass("success").addClass("error");
 				$("#parQmessage").html(message);
 				$("#parQmessage").show();			    
 				<?php 	}
 				else { ?>
-					message = "<strong>Success!</strong?> Form successfuly submited!"			    
+					message = "<strong>Success!</strong?> Form submitted!";			    
 					$("#parQmessage").removeClass("error").addClass("success");
-					$("#parQmessage").html('<?= $parQreturn;?>');
+					$("#parQmessage").html(message);
 					$("#parQmessage").show();					
 					<?php } ?>
 				}); 
@@ -451,4 +459,3 @@ seek further advice from your doctor OR a qualified exercise professional before
 </script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="js/bootstrap.min.js"></script>
-<?php require_once"footer.php"; ?>

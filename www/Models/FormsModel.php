@@ -2,7 +2,7 @@
 
 /*
 *	FormsModel.php: Validates form data, build insert queries, and save to the database.
-*	One entry point (function) per Form.*
+*	One entry point (function) per Form
 *
 */
 
@@ -20,14 +20,7 @@ class FormsModel
 	/* Entry point for the enrollment form */
 	public function validateEnrollment()
 	{
-		// do some checks here
-		if($empties = $this->CheckforEmpties() != "")
-			return $empties;
-
-
-		// if everything went well we save data to the database
-		 return $this->saveDbEnrollment();
-
+		 return $this->validateAndSaveEnrollment();
 	}
 
 	/* Entry point for the pre-study questionnaire part 1 form */
@@ -58,22 +51,10 @@ class FormsModel
 		return $this->validateAndSaveParQ();
 	}
 
-	/* check if a field is empty */
-	private function checkforEmpties()
-	{
-		for ($i = 0; $i < $this->form->length; $i++)
-		{
-			if ($this->form[i] == "")
-				return 'Some required fields are missing, every field preceded by a * are required';
-		}
-		return "";
-	}
-
 	/* Checks if some input contains character we don't want */
 	private function checkForIllegalCharacters($str)
 	{
-		return !preg_match('/[^A-Za-z0-9.!?\\-$\']/', $str);
-
+		return preg_match('/[^A-Za-z0-9.!?\\-$\']/', $str);
 	}
 
 	/* Checks if a given string is below allowed length
@@ -124,17 +105,38 @@ class FormsModel
 	 */
 	private function ValidatePhone($phone)
 	{
-		//TO DO
+		return preg_match("/^(\d[\s-]?)?[\(\[\s-]{0,2}?\d{3}[\)\]\s-]{0,2}?\d{3}[\s-]?\d{4}$/i", $phone);
+	}
+
+	/* Check if a given string exists and not longer than a given length
+	 * $param: 	$value (string),
+	 *			$length (int),
+	 *			$isREquired (bool)
+	 */
+	private function isStringFieldValid($value, $length, $isRequired)
+	{
+		if (isset($this->form[$value]))
+		{
+			if (!$this->validateValueLength($this->form[$value], $length) && !$this->checkForIllegalCharacters($this->form[$value]))
+				return false;
+			return true;
+		}
+		else
+			return !$isRequired;
 	}
 
 	/* Validates the enrollment form data, build the insert query and save to the database */
-	private function saveDbEnrollment()
+	private function validateAndSaveEnrollment()
 	{
 		$form = $this->form;
+
+		// validate the fields
+		if (($r = $this->validateEnrollmentFields()) != "success")
+			return $r;
 		// get a Insert query object
 		$insert = QueryFactory::Build('insert');
 		// build the query
-        $insert->Into('enrollment_form')->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
+        $insert->Into('enrollment_form')->Set(['userID', $form['userID']])->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
         	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
         	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
         	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
@@ -143,9 +145,87 @@ class FormsModel
         $qinfo = DatabaseManager::Query($insert);
         // check for success or failure
         if ($qinfo->RowCount() == 1)
-            return true;
+        {
+        	$complete = QueryFactory::Build('update');
+        	$complete->Table('enrollment_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$cinfo = DatabaseManager::Query($complete);
+        	if ($cinfo->RowCount() == 1)
+        		return "success";
+        }
 
         return false;
+	}
+
+	/* Validates the enrollment form fields */
+	private function validateEnrollmentFields()
+	{
+		$f = $this->form;
+		$nameLength = 50;
+		$addressLength = 150;
+		$emailLength = 100;
+		$textAreaLength = 500;
+		$dateLength = 10;
+
+		if (!($this->isStringFieldValid('lName', $nameLength, true))) 
+			return "Last Name invalid";
+		if (!$this->isStringFieldValid('fName', $nameLength, true)) 
+			return "First Name invalid";
+		if (!$this->isStringFieldValid('streetAddress', $addressLength, false)) 
+			return "Street Address invalid";
+		if (!$this->isStringFieldValid('city', $nameLength, false)) 
+			return "City invalid";
+		if (!$this->isStringFieldValid('healthHistory', $textAreaLength, false)) 
+			return "Health history invalid (only alpha-numeric characters and limited to 500 characters)";
+		if (isset($f['phone']))
+		{
+			if (!$this->ValidatePhone($f['phone']))
+				return "Phone Number format invalid.";	
+		}
+		if (isset($f['email']))
+		{
+			if (!$this->validateEmail($f['email']) && !$this->validateValueLength($f['email'], $emailLength))
+				return "Email invalid";
+		}
+		else
+			return "Email invalid";
+		if (isset($f['dob']))
+		{
+			if (!$this->validateDate($f['dob']) && !$this->validateValueLength($f[$value], $dateLength))
+				return "Date invalid";
+		}
+		else
+			return false;
+		if (isset($f['gender']))
+		{
+			if (!$this->validateRadioButton($f['gender'], ["Male", "Female"]))
+				return "Bad Gender";
+		}
+		else
+			return "Bad Gender";
+		if (isset($f['watchSbf']))
+		{
+			if (!$this->validateRadioButton($f['watchSbf'], ["Yes", "No"]))
+				return "Bad Watchsbf";
+		}
+		else
+			return "Bad watchsbf";
+		if (isset($f['howMany']))
+		{
+			if (!($f['howMany'] > -1) && !($f['howmany'] < 101))
+				return "Bad howmany";
+		}
+		if (isset($f['controlGrp']))
+		{
+			if (!$this->validateRadioButton($f['controlGrp'], ["Yes", "No"]))
+				return "Bad ControlGrp";
+		}
+		if (isset($f['experimentalGrp']))
+		{
+			if (!$this->validateRadioButton($f['experimentalGrp'], ["Yes", "No"]))
+				return "Bad Experimental";
+		}
+		// if we made it this far, data is valid, return true
+		return "success";		
 	}
 
 	/* Validates the questionnaire part 2 form data, build the insert query and save to the database */
@@ -179,9 +259,11 @@ class FormsModel
         // check for success or failure
         if ($qinfo->RowCount() == 1)
         {
-        	$complete = QueryFactory::Build('insert');
-        	$complete->Into('parq_form')->Set(['completed', true]);
-        	return true;
+        	$complete = QueryFactory::Build('update');
+        	$complete->Table('parq_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$cinfo = DatabaseManager::Query($complete);
+        	if ($cinfo->RowCount() == 1)
+        		return "sucess";
         }
         return false;
 	}
