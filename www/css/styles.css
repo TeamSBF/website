@@ -69,8 +69,7 @@ h1
     padding-bottom: 12px;
     margin-bottom: 0;
 }
-
-
+/*--------------------------------------------------------------------------------*/
 /*FORM STYLING*/
 .form-signin,
 .register
@@ -89,7 +88,10 @@ h1
 {
     width: 500px;   
 }
-
+form
+{
+    padding-left: 40px;
+}
 /*--------------------------------------------------------------------------------*/
 /* BUTTON AND INPUT STYLING */
 
@@ -103,11 +105,14 @@ label,nav
 {
     padding-left: 75px;
 }
-.inputFields
+.inputFields,.inputs
 {
     padding-bottom: 10px;
 }
-
+.inputs,.input
+{
+    padding-left: 50px;
+}
 button 
 {
 	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
@@ -177,8 +182,13 @@ input{
 .subQuestions
 {
    border: black solid 1px;
-   padding: 2%;
+   padding: 0;
    background: rgba(194, 190, 190, 0.27);  
+}
+.question
+{
+    text-indent: 0;
+    margin-bottom: 0;
 }
 body > div > div.grid_8.alpha > div > form > div > div:nth-child(n) > div
 {
