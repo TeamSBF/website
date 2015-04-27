@@ -1,5 +1,4 @@
 <?php
-    require_once"header.php";
 
     if (isset($_POST['submitEnrollment']))
     {
@@ -89,7 +88,7 @@
             <div><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'No') echo "checked";?> value="No">No</div>
           </div>
 
-          <input class="col-sm-offset-10 col-sm-2 btn-primary" type="submit" name="submitEnrollment">
+          <input class="btn-primary" type="submit" name="submitEnrollment">
       </fieldset>
   </form>
 </div>
@@ -125,7 +124,6 @@
 </script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js"></script>
-<?php require_once"footer.php";?>
 
 
 

@@ -23,7 +23,7 @@ class NavMenu extends Singleton
     public static function Build($user)
     {
         //printr($user);
-        $plevel = $user ? $user->PrivilegeLevel : 0;
+        $plevel = $user ? $user->AccessLevel : 0;
         //echo "blah: " .$plevel;
         self::instance()->buildMenu($plevel);
     }

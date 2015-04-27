@@ -7,7 +7,6 @@
 		$cEmail = trim($_POST['cEmail']); 
 		$password = trim($_POST['password']);
 		$cPassword = trim($_POST['cPassword']);
-		$salt = "salt";
 		//print_r($_POST);
 		
 		
@@ -25,10 +24,21 @@
 			
 			if(UserModel::Exists("email", $email))
 				echo "Failed to register, email already exists, please use a different email"; 
-			else if(UserModel::Register($email,$password,$salt))
-				echo "Registration Successful!";
-			else
-				echo "Failed to register";
+			else{
+				$id =  UserModel::Register($email,$password);
+				if($id){
+					//*****************   SEND ACTIVATION EMAIL ********************************//
+					$user = QueryFactory::Build("select");				
+					$user->Select("email","created", "password")->From("users")->Where(["id","=",$id])->Limit();
+					$res = DatabaseManager::Query($user);
+					$res = $res->Result(); // get result from table
+					
+					$link = sha1($id.$res["email"].$res["created"].$res["password"]);// get the hash value for the link to send out
+					
+					Mailer::Send("$email","Activation Email","Please click on the link below to activate your account, http://localhost/activation.php?id=$id&link=$link"); 
+					echo "<br/><br/>Check your email for account activation";
+				}
+			}
 			
 			
 		}
