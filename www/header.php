@@ -11,12 +11,19 @@ $grid = ($user) ? 12 : 8;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale = 1.0">
     <title>Sit and Be Fit Research</title>
+
+    <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700|Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
-    <link href="css/jquery-ui.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <!--      for webshim -->
+    <script src="assets/mod.js"></script>
+    <script src="assets/webshim/minified/polyfiller.js"></script>
+    <script> $.webshims.polyfill(); </script>
+    <!--      for webshim -->
     <script src="js/jquery-ui-1.11.4/external/jquery/jquery.js"></script>
     <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
     <script src="js/tinymce/tinymce.min.js"></script>
@@ -40,8 +47,7 @@ $grid = ($user) ? 12 : 8;
                 });
             }
         });
-	$(function() {
-		/*
+    /*	$(function() {
 		$( "#accordion" ).accordion();
 		
 		// Hover states on the static widgets
@@ -53,7 +59,6 @@ $grid = ($user) ? 12 : 8;
 				$( this ).removeClass( "ui-state-hover" );
 			}
 		);*/
-	});
 	</script>
     
     

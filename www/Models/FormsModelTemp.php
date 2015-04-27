@@ -1,6 +1,6 @@
 <?php
 
-class FormsModel
+class FormsModelTemp
 {
 	private $form;
 	public function __construct($data)
@@ -13,7 +13,6 @@ class FormsModel
 		// do some checks here
 		//if($empties = $this->CheckforEmpties() != "")
 			//return $empties;
-
 
 		// if everything went well we save data to the database
 		if ($this->saveDbEnrollment())
@@ -103,7 +102,7 @@ class FormsModel
         $insert->Into('enrollment_form')->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
         	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
         	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
-        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userId',$id], ['enrollmentCompleted',$complete]);
+        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userID',$id], ['completed',$complete]);
         
         // save to the DB
         $qinfo = DatabaseManager::Query($insert);
@@ -152,13 +151,64 @@ class FormsModel
 
 	}
 	
-	//==================================================
+	//=========================================================================================================================
 	public static function isEnrollmentComplete()
 	{
 		$id = $_SESSION['user']->__get('id');
 		
+		
 		$select = QueryFactory::Build("select");
-		$select->Select('enrollmentCompleted')->Table('enrollment_form')->Where(['userId','=', $id])->Limit();
+		$select->Select('completed')->Table('enrollment_form')->Where(['userID','=', $id])->Limit();
+		$res = DatabaseManager::Query($select);
+		$resultArray = $res->Result();
+
+		if ($res->RowCount() == 1)
+		{
+
+			return $res;
+		}
+		return false;
+	}
+	
+	public static function isParQComplete()
+	{
+		$id = $_SESSION['user']->__get('id');
+		
+		$select = QueryFactory::Build("select");
+		$select->Select('completed')->Table('parq_form')->Where(['userID','=', $id])->Limit();
+		$res = DatabaseManager::Query($select);
+		$resultArray = $res->Result();
+
+		if ($res->RowCount() == 1)
+		{
+
+			return $res;
+		}
+		return false;
+	}
+	public static function isQues1Complete()
+	{
+		$id = $_SESSION['user']->__get('id');
+		
+		$select = QueryFactory::Build("select");
+		$select->Select('completed')->Table('questionnaireP1_form')->Where(['userID','=', $id])->Limit();
+		$res = DatabaseManager::Query($select);
+		$resultArray = $res->Result();
+
+		if ($res->RowCount() == 1)
+		{
+
+			return $res;
+		}
+		return false;
+	}
+	
+		public static function isQues2Complete()
+	{
+		$id = $_SESSION['user']->__get('id');
+		
+		$select = QueryFactory::Build("select");
+		$select->Select('completed')->Table('questionnaireP2_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
 		$resultArray = $res->Result();
 

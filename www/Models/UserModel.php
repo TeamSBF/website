@@ -138,6 +138,27 @@ class UserModel
         return false;
 	}
 	
+	/*
+     * Update the column of the table
+     *
+     * @param string $id The current  session id
+     * @param string $column The column that needs to be updated
+	 *@param string $value The new value that will be changed to
+     *
+     * @return boolean True if the change is a success, false if it doesn't
+     */
+	public static function updateElement($id, $column, $value)
+	{
+		$update = QueryFactory::Build("update"); //new update query
+		$update->Table("users")->Where( ["id", "=", $id] )->Set([$column,  $value]); //update the query
+		$res = DatabaseManager::Query($update); // execute the query
+		
+		if ($res->RowCount() == 1)
+            return true;
+
+        return false;
+	}
+	
     /**
      * Hashes a given password
      *
