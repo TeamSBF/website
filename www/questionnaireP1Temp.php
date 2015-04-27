@@ -1,5 +1,4 @@
 <?php
-    
 
     if (isset($_POST['submitQuestionnaireP1']))
     {
@@ -20,7 +19,7 @@
             <div class="panel-body">
               <div class="alert" id="message" style="diplay:none"></div>
               <div class="form-group">
-                <label class="control-label">*How often do you perform the Sit and Be Fit exercises?</label><br>
+                <label>*How often do you perform the Sit and Be Fit exercises?</label><br>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" required checked value=0>Less than once a month</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" value=1>Once per month</label>
                 <label class="radio col-sm-offset-2"><input type="radio" name="howOftenPerform" value=2>Once per week</label>

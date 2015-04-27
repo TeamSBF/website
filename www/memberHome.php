@@ -14,11 +14,15 @@ $parqStat ="";
 //---------------------------------------------validation--------------------------------	
 	if(isset($_POST))
 	{
+		$_POST['userID'] = $user->id;
 		$validator = new FormsModel($_POST); //------------------------
 //		$validator = new FormsModelTemp($_POST);
 		if (isset($_POST['submitEnrollment']))
 		{
+			
+		//$validator = new FormsModel($_POST);
 			$returnEnroll = $validator->ValidateEnrollment();
+			echo "returnEnroll= " .$returnEnroll ;
 		}
 	
 		else if (isset($_POST['submitParQ']))
@@ -37,18 +41,17 @@ $parqStat ="";
 	}
 	
 //-----------------------------------lock completed forms-------------------------------------------
-	//if(FormsModel::isEnrollmentComplete())
-		if(FormsModelTemp::isEnrollmentComplete())
+	if(FormsModel::isEnrollmentComplete())
+	//	if(FormsModelTemp::isEnrollmentComplete())
 		$enrollStat = "lock";
 	
 	if(FormsModel::isParQComplete())	
-//	if(FormsModelTemp::isParQComplete())
 		$parqStat = "lock";
 /*
-//	if(FormsModel::isQues1Complete())	
+	if(FormsModel::isQues1Complete())	
 		$ques1Stat = "lock";
 
-//	if(FormsModel::isQues2Complete())	
+	if(FormsModel::isQues2Complete())	
 		$ques2Stat = "lock";
 */	
 //----------------------------------------errors-------------------------------------------------

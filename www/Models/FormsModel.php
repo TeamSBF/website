@@ -129,7 +129,7 @@ class FormsModel
 	private function validateAndSaveEnrollment()
 	{
 		$form = $this->form;
-		$form['userID'] = $_SESSION['user']->__get('id');
+
 		// validate the fields
 		if (($r = $this->validateEnrollmentFields()) != "success")
 			return $r;
@@ -137,18 +137,16 @@ class FormsModel
 		// get a Insert query object
 		$insert = QueryFactory::Build('insert');
 		// build the query
-        $insert->Into('enrollment_form')->Set(['userID', $form['userID']],['completed',true], ['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
+        $insert->Into('enrollment_form')->Set(['userID', $form['userID']])->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
         	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
         	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
-        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
+        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userId',$id], ['completed',$complete]);
         
         // save to the DB
         $qinfo = DatabaseManager::Query($insert);
-		print_r($qinfo);
         // check for success or failure
         if ($qinfo->RowCount() == 1)
         {
-			echo("in");
         	$complete = QueryFactory::Build('update');
         	$complete->Table('enrollment_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
@@ -354,8 +352,7 @@ class FormsModel
 	}
 	
 	//==================================================
-	//returns if the enrollment form is complete or not
-	public static function isEnrollmentComplete()
+		public static function isEnrollmentComplete()
 	{
 		$id = $_SESSION['user']->__get('id');
 		
@@ -373,7 +370,6 @@ class FormsModel
 		return false;
 	}
 	
-	//returns if the parq form is complete or not
 	public static function isParQComplete()
 	{
 		$id = $_SESSION['user']->__get('id');
@@ -390,8 +386,6 @@ class FormsModel
 		}
 		return false;
 	}
-	
-	//returns if the questionnaire part 1 form is complete or not
 	public static function isQues1Complete()
 	{
 		$id = $_SESSION['user']->__get('id');
@@ -409,7 +403,6 @@ class FormsModel
 		return false;
 	}
 	
-	//returns if the questionnaire part 2 form is complete or not
 	public static function isQues2Complete()
 	{
 		$id = $_SESSION['user']->__get('id');
