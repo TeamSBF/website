@@ -60,7 +60,7 @@ h2
 
 h2,h3
 {
-  font-size: 1.3em;
+  font-size: 1.1em;
   color: rgb(50, 142, 213);
 }
 h1
@@ -112,6 +112,10 @@ label,nav
 .inputs,.input
 {
     padding-left: 50px;
+}
+.input>label
+{
+    font-weight: 400;
 }
 button 
 {
