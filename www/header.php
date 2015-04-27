@@ -20,10 +20,11 @@ $grid = ($user) ? 12 : 8;
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700|Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <!--      for webshim -->
-    <script src="assets/mod.js"></script>
-    <script src="assets/webshim/minified/polyfiller.js"></script>
+    <script src="js/mod.js"></script>
+    <script src="js/webshim/minified/polyfiller.js"></script>
     <script> $.webshims.polyfill(); </script>
     <!--      for webshim -->
+    <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/jquery-ui-1.11.4/external/jquery/jquery.js"></script>
     <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
     <?php if($user && $user->AccessLevel > 1 && strstr($_SERVER['PHP_SELF'], "index")){?>
@@ -52,7 +53,10 @@ $grid = ($user) ? 12 : 8;
         });
         <?php } ?>
     	$(function() {
-            $("#accordion").accordion();
+            $("#accordion").accordion({
+                collapsible: true,
+                heightStyle: "content"
+            });
 
             // Hover states on the static widgets
             $("#dialog-link, #icons li").hover(
