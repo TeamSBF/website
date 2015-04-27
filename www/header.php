@@ -26,8 +26,11 @@ $grid = ($user) ? 12 : 8;
     <!--      for webshim -->
     <script src="js/jquery-ui-1.11.4/external/jquery/jquery.js"></script>
     <script src="js/jquery-ui-1.11.4/jquery-ui.js"></script>
+    <?php if($user && $user->AccessLevel > 1 && strstr($_SERVER['PHP_SELF'], "index")){?>
     <script src="js/tinymce/tinymce.min.js"></script>
+    <?php } ?>
 	<script>
+        <?php if($user && $user->AccessLevel > 1 && strstr($_SERVER['PHP_SELF'], "index")){?>
         tinymce.init({
             selector: "textarea",
             plugins: [
@@ -47,6 +50,7 @@ $grid = ($user) ? 12 : 8;
                 });
             }
         });
+        <?php } ?>
     /*	$(function() {
 		$( "#accordion" ).accordion();
 		
