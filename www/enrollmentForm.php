@@ -1,3 +1,4 @@
+<?php require_once"header.php"?>
 <?php
 
     if (isset($_POST['submitEnrollment']))
@@ -16,79 +17,79 @@
 
 <div class="background">
     <form method="post" class="form-horizontal">
-      <legend>ENROLLMENT FORM</legend>
+      <h2>ENROLLMENT FORM</h2>
       <div id="enrollmentMessage" class="success" style="display:none"></div>
       <fieldset>
           <div>
-            <label for="lName">Last Name</label>
-            <input type="text" name="lName" placeholder="Last Name" required value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['lName']);} ?>">
+              <div class="inputs"><label for="lName">Last Name</label></div>
+              <div class="inputs"><input type="text" name="lName" placeholder="Doe" required value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['lName']);} ?>"></div>
+          </div>
+          
+          <div>
+              <div class="inputs"><label for="fName">First Name</label></div>
+              <div class="inputs"><input type="text" class="form-control" name="fName" placeholder="John" required value="<?php if(isset($_POST['fName'])){echo htmlspecialchars($_POST['fName']);} ?>"></div>
           </div>
 
           <div>
-            <label for="fName">First Name</label>
-            <input type="text" class="form-control" name="fName" placeholder="First Name" required value="<?php if(isset($_POST['fName'])){echo htmlspecialchars($_POST['fName']);} ?>">            
+              <div class="inputs"><label for="streetAddress">Street Address</label></div>
+              <div class="inputs"><textarea type="text" class="form-control" name="streetAddress" placeholder="123 Fake St" rows="3" value="<?php if(isset($_POST['streetAddress'])){echo htmlspecialchars($_POST['streetAddress']);} ?>"></textarea></div>
+          </div>
+          
+          <div>
+              <div class="inputs"><label for="city">City</label></div>
+              <div class="inputs"><input type="text" class="form-control" name="city" placeholder="Spokane" value="<?php if(isset($_POST['city'])){echo htmlspecialchars($_POST['city']);} ?>"></div>
           </div>
 
           <div>
-            <label for="streetAddress">Street Address</label>
-              <textarea type="text" class="form-control" name="streetAddress" placeholder="Street Address" rows="3" value="<?php if(isset($_POST['streetAddress'])){echo htmlspecialchars($_POST['streetAddress']);} ?>"></textarea>
+              <div class="inputs"><label for="phone">Phone</label></div>
+              <div class="inputs"><input type="tel" class="form-control" name="phone" placeholder="(509)555-5555" value="<?php if(isset($_POST['phone'])){echo htmlspecialchars($_POST['phone']);} ?>"></div>
           </div>
 
           <div>
-            <label for="city">City</label>
-              <input type="text" class="form-control" name="city" placeholder="City" value="<?php if(isset($_POST['city'])){echo htmlspecialchars($_POST['city']);} ?>">
+              <div class="inputs"><label for="email">E-mail</label></div>
+              <div class="inputs"><input type="email" class="form-control" name="email" placeholder="johnDoe@abc.com" required value="<?php if(isset($_POST['email'])){echo htmlspecialchars($_POST['email']);} ?>"></div>
           </div>
 
           <div>
-            <label for="phone">Phone</label>
-              <input type="tel" class="form-control" name="phone" placeholder="Phone Number" value="<?php if(isset($_POST['phone'])){echo htmlspecialchars($_POST['phone']);} ?>">
+              <div class="inputs"><label for="dob">Date of Birth</label></div>
+              <div class="inputs"><input type="date" class="form-control" name="dob" required value="<?php if(isset($_POST['dob'])){echo htmlspecialchars($_POST['dob']);} ?>"></div>
           </div>
 
           <div>
-            <label for="email">Email</label>
-              <input type="email" class="form-control" name="email" placeholder="johnDoe@abc.com" required value="<?php if(isset($_POST['email'])){echo htmlspecialchars($_POST['email']);} ?>">
+              <div class="inputs"style="font-weight:bold"><label>Gender</label></div>
+            <div class="inputs"><input type="radio" name="gender" required <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Male') echo "checked";?> value="Male">Male</div>
+            <div class="inputs"><input type="radio" name="gender" <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Female') echo "checked";?> value="Female">Female</div>
           </div>
 
           <div>
-            <label for="dob">Date of Birth</label>
-              <input type="date" class="form-control" name="dob" required value="<?php if(isset($_POST['dob'])){echo htmlspecialchars($_POST['dob']);} ?>">
+              <div class="inputs"><label for="healthHistory">Health History</label></div>
+              <div class="inputs"><textarea type="text" class="form-control" name="healthHistory" rows="3"></textarea></div>
           </div>
 
-          <div>
-            <div style="font-weight:bold">Gender</div>
-            <div><input type="radio" name="gender" required <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Male') echo "checked";?> value="Male">Male</div>
-            <div><input type="radio" name="gender" <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Female') echo "checked";?> value="Female">Female</div>
-          </div>
-
-          <div>
-            <label for="healthHistory">Health History</label>
-              <textarea type="text" class="form-control" name="healthHistory" rows="3"></textarea>
-          </div>
-
-          <div>
-            <label class="control-label col-sm-4">Do you watch Sit and Be Fit?</label>
-            <div><input type="radio" name="watchSbf" required <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
-            <div><input type="radio" name="watchSbf" <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 'No') echo "checked";?> value="No">No</div>
+          <div >
+              <div class="inputs"><label>Do you watch Sit and Be Fit?</label></div>
+            <div class="inputs"><input type="radio" name="watchSbf" required <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+            <div class="inputs"><input type="radio" name="watchSbf" <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 'No') echo "checked";?> value="No">No</div>
           </div>
 
           <div name="howManyTimes">
-            <label for="howMany">How many times a week?</label>            
-              <input type="number" class="form-control" name="howMany" value="<?php if(isset($_POST['howMany'])){echo htmlspecialchars($_POST['howMany']);}else{echo 1;} ?>">
+              <div class="inputs"><label for="howMany">How many times a week?</label>            </div>
+              <div class="inputs"><input type="number" class="form-control" name="howMany" value="<?php if(isset($_POST['howMany'])){echo htmlspecialchars($_POST['howMany']);}else{echo 1;} ?>"></div>
           </div>
 
           <div>
-            <label for="controlGrp">Control Group (will NOT participate in Sit and Be Fit)</label>
-            <div><input type="radio" name="controlGrp" required <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
-            <div><input type="radio" name="controlGrp" <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 'No') echo "checked";?> value="No">No</div>
+              <div class="inputs"><label for="controlGrp">Control Group (will NOT participate in Sit and Be Fit)</label></div>
+            <div class="inputs"><input type="radio" name="controlGrp" required <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
+            <div class="inputs"><input type="radio" name="controlGrp" <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 'No') echo "checked";?> value="No">No</div>
           </div>
 
           <div>
-            <label for="experimentalGrp">Experimental Group (participate in Sit and Be Fit)</label>
-            <div><input type="radio" name="experimentalGrp" required <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'Yes') echo "checked";?> value="Yes">Yes</div>            
-            <div><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'No') echo "checked";?> value="No">No</div>
+              <div class="inputs"><label for="experimentalGrp">Experimental Group (participate in Sit and Be Fit)</label></div>
+            <div class="inputs"><input type="radio" name="experimentalGrp" required <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'Yes') echo "checked";?> value="Yes">Yes</div>            
+            <div class="inputs"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'No') echo "checked";?> value="No">No</div>
           </div>
 
-          <input class="btn-primary" type="submit" name="submitEnrollment">
+          <div class="inputs"><button type="submit" name="submitEnrollment">Submit</button></div>
       </fieldset>
   </form>
 </div>
@@ -124,7 +125,7 @@
 </script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js"></script>
-
+<?php require_once"footer.php"?>
 
 
 

@@ -88,9 +88,9 @@ h1
 {
     width: 500px;   
 }
-form
+textarea
 {
-    padding-left: 40px;
+    width:25%;
 }
 /*--------------------------------------------------------------------------------*/
 /* BUTTON AND INPUT STYLING */
@@ -205,8 +205,6 @@ body > div > div.grid_8.alpha > div > form > div > div:nth-child(n) > div
     padding-bottom: 15px;   
 }
 
-
-
 #s1Radios, 
 label, 
 #s1RadioGroup > div:nth-child(n) > label > p,
@@ -276,8 +274,6 @@ body > div > div > div > form > div > div:nth-child(n+6) > fieldset > div:nth-ch
     border-bottom:thin solid #cecece;
     padding-left:15px;
 }
-
-
 
 .first {
     border-top:thin solid #cecece;    

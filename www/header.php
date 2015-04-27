@@ -51,7 +51,7 @@ $grid = ($user) ? 12 : 8;
             }
         });
         <?php } ?>
-    /*	$(function() {
+    	$(function() {
 		$( "#accordion" ).accordion();
 		
 		// Hover states on the static widgets
@@ -62,7 +62,7 @@ $grid = ($user) ? 12 : 8;
 			function() {
 				$( this ).removeClass( "ui-state-hover" );
 			}
-		);*/
+		);
 	</script>
     
     
