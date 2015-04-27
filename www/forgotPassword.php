@@ -26,17 +26,15 @@
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 	?>
-    <section>
+    <div class="background">
         <h1> Forgot Password </h1>
 		<form class="forgotPassword" method="POST" >
 			<input type="hidden" name="regKey" value="">
-			<label>E-mail Address </label><br> 
-            <input type="text" name="email" placeholder="johndoe@example.net"> 
-            <br> 
-            <button type="submit" name="forgot" value="forgot">Submit</button>
-            <br>
+            <div class="labels"><label>E-mail Address </label></div> 
+            <div class="inputFields"><input type="text" name="email" placeholder="johndoe@example.net"></div>  
+            <div class="inputFields"><button type="submit" name="forgot" value="forgot">Submit</button></div>
         </form>
-		
+    </div>
 
 <?php require_once"footer.php";?>
 

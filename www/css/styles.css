@@ -69,8 +69,7 @@ h1
     padding-bottom: 12px;
     margin-bottom: 0;
 }
-
-
+/*--------------------------------------------------------------------------------*/
 /*FORM STYLING*/
 .form-signin,
 .register
@@ -89,7 +88,10 @@ h1
 {
     width: 500px;   
 }
-
+form
+{
+    padding-left: 40px;
+}
 /*--------------------------------------------------------------------------------*/
 /* BUTTON AND INPUT STYLING */
 
@@ -99,7 +101,20 @@ label,nav
     font-family: 'Raleway', sans-serif;
     font-size: 20px;
 }
-button {
+.inputFields,.labels
+{
+    padding-left: 75px;
+}
+.inputFields,.inputs
+{
+    padding-bottom: 10px;
+}
+.inputs,.input
+{
+    padding-left: 50px;
+}
+button 
+{
 	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
 	-webkit-box-shadow: 0px 0px 0px 2px #9fb4f2;
 	box-shadow: 0px 0px 0px 2px #9fb4f2;
@@ -125,6 +140,7 @@ button {
 	text-shadow:0px 1px 0px #283966;
     margin-top: 10px;
     margin-bottom: 10px;
+   
 }
 button:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #476e9e), color-stop(1, #7892c2));
@@ -166,8 +182,13 @@ input{
 .subQuestions
 {
    border: black solid 1px;
-   padding: 2%;
+   padding: 0;
    background: rgba(194, 190, 190, 0.27);  
+}
+.question
+{
+    text-indent: 0;
+    margin-bottom: 0;
 }
 body > div > div.grid_8.alpha > div > form > div > div:nth-child(n) > div
 {
@@ -302,7 +323,7 @@ nav a:visited
 {
   padding: 10px 20px;
   padding-bottom: 0;
-  color: #3676FF;
+  color: #2E4BC3;
   text-decoration: none;
 }
 
@@ -318,7 +339,7 @@ nav a
   text-decoration: none;
   font-weight: 800;
   padding: 20px;
-  color: #93AAFF;
+  color: #2E4BC3;
     
 }
 
@@ -328,28 +349,4 @@ nav a:visited
 {
 	padding-bottom: 0;
     color: #2E4BC3;
-}
-
-.info, .success, .warning, .error, .validation {
-border: 1px solid;
-margin: 10px 0px;
-padding:15px 10px 15px 50px;
-background-repeat: no-repeat;
-background-position: 10px center;
-}
-.info {
-color: #00529B;
-background-color: #BDE5F8;
-}
-.success {
-color: #4F8A10;
-background-color: #DFF2BF;
-}
-.warning {
-color: #9F6000;
-background-color: #FEEFB3;
-}
-.error {
-color: #D8000C;
-background-color: #FFBABA;
 }

@@ -39,28 +39,24 @@
 		
 	}
 	?>
-    <section>
+    <div class="background">
         <h1> Change Password </h1>
 		<form class="changePassword" method="POST">
-			<label>Current password </label><br> 
-            <input type="password" name="oldPass" placeholder=""> 
-            <br>
-            <br>
-			<label>New Password </label> 
-            <br>
-            <input type="password" name="newPass" placeholder=""> 
-            <br><br>
-			<label>Confirm New Password </label>
-            <br>
-            <input type="password" name="cNewPass" placeholder=""> 
-            <br><br>
-            <button type="submit" name="update" value="update">update</button>
-            <br>
+			<div class="labels"><label>Current password </label></div>
+            <div class="inputFields"><input type="password" name="oldPass" placeholder=""></div> 
+
+			<div class="labels"><label>New Password </label></div> 
+            <div class="inputFields"><input type="password" name="newPass" placeholder=""></div> 
+			
+            <div class="labels"><label>Confirm New Password </label></div>
+            <div class="inputFields"><input type="password" name="cNewPass" placeholder=""></div> 
+            
+            <div class="inputFields"><button type="submit" name="update" value="update">update</button></div>
         </form>
-	</section>
-	
-	<section>
-		<h1> something else </h1> <br>
+        </div>
+	</div>
+
 		
-	</section>
+
+		
 <?php require_once"footer.php";?>
