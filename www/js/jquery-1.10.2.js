@@ -1,3 +1,4 @@
+/*!
  * jQuery JavaScript Library v1.10.2
  * http://jquery.com/
  *
@@ -9786,4 +9787,3 @@ if ( typeof module === "object" && module && typeof module.exports === "object" 
 }
 
 })( window );
-
