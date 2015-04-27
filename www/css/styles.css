@@ -113,6 +113,10 @@ label,nav
 {
     padding-left: 50px;
 }
+.input>label
+{
+    font-weight: 400;
+}
 button 
 {
 	-moz-box-shadow: 0px 0px 0px 2px #9fb4f2;
