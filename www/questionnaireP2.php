@@ -13,7 +13,7 @@
     <legend><strong>Pre-Study Questionnaire Part 2<br></strong></legend>
 
     <form class="form-vertical" method="post">
-      <fieldset>
+      
         <div>
           <label for="currentHeight">*Current Height (in inches): *</label>                  
           <input type="number" name="currentHeight" placeholder="Your height"><br>                  
@@ -28,10 +28,10 @@
           <label for="affectedConditions">Describe how the Sit and Be Fit exercise program has affected the listed medical conditions in part 1:</label>                  
           <textarea type="text" name="affectedConditions"></textarea><br>                  
         </div>
-      </fieldset><br><br>
+      
 
       <label><h4><strong>Please rate your ability to perform certain activities that might occur during a typical day:</strong></h4></label><br>
-      <fieldset>
+      
         <div>
           <label>*Lifting or carrying groceries:</label>
           <div><input type="radio" name="groceries" required checked value=0>No help</div>
@@ -120,10 +120,10 @@
           <label for="affectActivities">Describe how the Sit and Be Fit exercise program affects your ability to perform the activities listed above?:</label>                
           <textarea type="text" name="affectActivities"></textarea><br>
         </div>
-    </fieldset><br><br> <!-- end panel "More About Yourself" -->
+     <!-- end panel "More About Yourself" -->
 
     <label><h4><strong>The following questions are about your feelings. For each question, please choose the one answer that comes closest to the way you felt BEFORE ever doing the Sit and Be Fit exercise program.</strong></h4></label><br>
-    <fieldset>
+    
       <label>How much of the time did you...</label>
         <div>
           <label>*Feel full of life?:</label>
@@ -196,10 +196,10 @@
           <div><input type="radio" name="feelSatisfiedB" value=2>Half the time</div>
           <div><input type="radio" name="feelSatisfiedB" value=3>Rarely</div>
         </div>
-      </fieldset><br><br> <!-- end well -->
+       <!-- end well -->
 
       <label><h4><strong>The following questions are about how you feel currently.</strong></h4></label><br>
-      <fieldset>                                    
+                                          
         <label>How much of the time did you...</label>
           <div>
             <label>*Feel full of life?:</label>
@@ -277,7 +277,7 @@
             <label for="affectFeelings">How are the feelings that are listed above affected when you participate in a Sit and Be Fit exercise class?:</label>                    
             <textarea type="text" id="affectFeelings" name="affectFeelings"></textarea><br>
           </div>
-        </fieldset>
+        
 
 
         <input class="btn-primary" type="submit" id="submitQ2">

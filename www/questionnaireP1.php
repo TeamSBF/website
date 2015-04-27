@@ -10,10 +10,10 @@
 ?>
 
       <div class="container">
-        <div class="background">
+        <div class="background"><fieldset>
           <legend><strong><h1>Pre-Study Questionnaire Part 1</h1></strong></legend>
 
-          <hr><form class="form-vertical" method="post">
+          <form class="form-vertical" method="post">
            <div class="panel panel-primary">
             <div class="panel-body">
               <div class="alert" id="message" style="diplay:none"></div>
@@ -58,7 +58,7 @@
           </div>
 
           <div class="panel panel-primary">
-              <hr><div class="panel-heading"><h1>Health Questions</h1></div><hr>
+              <hr><div class="panel-heading"><h2>Health Questions</h2></div><hr>
             <div class="panel-body">
 
               <div class="form-group">
@@ -111,7 +111,7 @@
           </div>
 
           <div class="panel panel-primary">
-              <hr><div class="panel-heading"><h1>Health Problems</h1></div><hr>
+              <hr><div class="panel-heading"><h2>Health Problems</h2></div><hr>
             <div class="panel-body">
 
               <div class="form-group">
@@ -184,7 +184,7 @@
           </div> <!-- end panel "Health problems" -->
 
           <div class="panel panel-primary">
-              <hr><div class="panel-heading"><h1>Demographics</h1></div><hr>
+              <hr><div class="panel-heading"><h2>Demographics</h2></div><hr>
             <div class="panel-body">
 
              <div class="form-group">
@@ -248,7 +248,7 @@
                <button class="col-sm-offset-10 col-sm-2 btn-primary" type="submit" id="submitQuestionnaireP1">Submit</button>
       </form>
 
-    </div> <!-- end offset centered -->
+            </div></fieldset> <!-- end offset centered -->
   </div> <!-- end container -->
 
  <?php if(isset($return) && !empty($return)){?>
