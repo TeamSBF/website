@@ -140,11 +140,8 @@ class FormsModel
         $insert->Into('enrollment_form')->Set(['userID', $form['userID']])->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
         	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
         	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
-<<<<<<< .merge_file_a08032
-        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userId',$id], ['enrollmentCompleted',$complete]);
-=======
         	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userId',$id], ['completed',$complete]);
->>>>>>> .merge_file_a08592
+
         
         // save to the DB
         $qinfo = DatabaseManager::Query($insert);
@@ -356,10 +353,8 @@ class FormsModel
 	}
 	
 	//==================================================
-<<<<<<< .merge_file_a08032
+
 	public static function isEnrollmentComplete()
-=======
-		public static function isEnrollmentComplete()
 	{
 		$id = $_SESSION['user']->__get('id');
 		
@@ -411,16 +406,11 @@ class FormsModel
 	}
 	
 	public static function isQues2Complete()
->>>>>>> .merge_file_a08592
 	{
 		$id = $_SESSION['user']->__get('id');
 		
 		$select = QueryFactory::Build("select");
-<<<<<<< .merge_file_a08032
-		$select->Select('enrollmentCompleted')->Table('enrollment_form')->Where(['userId','=', $id])->Limit();
-=======
 		$select->Select('completed')->Table('questionnaireP2_form')->Where(['userID','=', $id])->Limit();
->>>>>>> .merge_file_a08592
 		$res = DatabaseManager::Query($select);
 		$resultArray = $res->Result();
 
