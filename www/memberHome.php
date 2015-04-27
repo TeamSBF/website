@@ -14,14 +14,11 @@ $parqStat ="";
 //---------------------------------------------validation--------------------------------	
 	if(isset($_POST))
 	{
-		//$validator = new FormsModel($_POST); //------------------------
-		$validator = new FormsModelTemp($_POST);
+		$validator = new FormsModel($_POST); //------------------------
+//		$validator = new FormsModelTemp($_POST);
 		if (isset($_POST['submitEnrollment']))
 		{
-			
-		//$validator = new FormsModel($_POST);
 			$returnEnroll = $validator->ValidateEnrollment();
-			echo "returnEnroll= " .$returnEnroll ;
 		}
 	
 		else if (isset($_POST['submitParQ']))
@@ -44,16 +41,14 @@ $parqStat ="";
 		if(FormsModelTemp::isEnrollmentComplete())
 		$enrollStat = "lock";
 	
-//	if(FormsModel::isParQComplete())	
-	if(FormsModelTemp::isParQComplete())
+	if(FormsModel::isParQComplete())	
+//	if(FormsModelTemp::isParQComplete())
 		$parqStat = "lock";
 /*
 //	if(FormsModel::isQues1Complete())	
-	if(FormsModelTemp::isQues1Complete())
 		$ques1Stat = "lock";
 
 //	if(FormsModel::isQues2Complete())	
-	if(FormsModelTemp::isQues2Complete())
 		$ques2Stat = "lock";
 */	
 //----------------------------------------errors-------------------------------------------------
@@ -80,7 +75,7 @@ $parqStat ="";
 			<a class="accordion-section-title" target="<?php echo $enrollStat;?>" href="#accordion-1">enrollment form</a>
 			<div id="accordion-1" class="accordion-section-content">
 				<div>
-					<?php require_once("enrollmentFormTemp.php"); //require_once("enrollmentForm.php");?>
+					<?php require_once("enrollmentForm.php");?>
 				</div>
 			</div><!--end .accordion-section-content-->
 		</div><!--end .accordion-section-->
