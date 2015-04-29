@@ -19,7 +19,6 @@ if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $session->get('reg
 		$res = DatabaseManager::Query($user);
 		$activated = $res->Result()['activated']; // get result from table
 		
-		print_r("activated: $activated <br>");
         if ($result && $activated === "1")    //to db (result must be valid and must be activated to be able to log in)
         {
             $session->refresh();
