@@ -13,7 +13,14 @@ if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $session->get('reg
         //require_once("assets/password.php");
 
         $result = UserModel::Login($email, $passed_pwd);    //to db
-        if ($result)    //to db
+		//grab activated to check against
+		$user = QueryFactory::Build("select");	
+		$user->Select("activated")->From("users")->Where(["email","=",$email])->Limit();
+		$res = DatabaseManager::Query($user);
+		$activated = $res->Result()['activated']; // get result from table
+		
+		print_r("activated: $activated <br>");
+        if ($result && $activated === "1")    //to db (result must be valid and must be activated to be able to log in)
         {
             $session->refresh();
             $session->put('user', $result);

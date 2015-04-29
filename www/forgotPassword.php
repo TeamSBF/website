@@ -8,26 +8,26 @@
 			echo "Email is invalid, please try again";
 		else if(!UserModel::Exists("email", $email))
 			echo "Email doesn't exist in database, please try again";
-		else{
+		else{// email exists go ahead and send out temp password
+			require_once("scripts/password.php");
 			$user = QueryFactory::Build("select");	
-			$user->Select("password")->From("users")->Where(["email","=",$email])->Limit();
+			$user->Select("password", "id")->From("users")->Where(["email","=",$email])->Limit();
 			$res = DatabaseManager::Query($user);
 			$res = $res->Result(); // get result from table
-			$password = $res["password"];
-			$passwordHash = sha1($password);
+			$password = sha1($res["password"]);
+			$id = $res["id"];
 			
-			$newPass = UserModel::hashPass($newPass); // hash the incoming password
-			$update = QueryFactory::Build("update"); //new update query
-			$update->Table("users")->Where( ["password", "=", $password] )->Set(["password",  $passwordHash]); //update the query
-			$res1 = DatabaseManager::Query($update); // execute the query
-			
-			Mailer::Send("$email","Retrieve password", " Your temporary password  is: $passwordHash , please log in and update your password");
-			print_r($password);
+			//print_r("password is : $password <br><br>");
+			//print_r("id is: $id <br><br>");
 
+			$update = QueryFactory::Build("update"); //new update query
+			$update->Table("users")->Where( ["id", "=", $id] )->Set(["password",  UserModel::hashPass($password)]); //update the query
+			$res1 = DatabaseManager::Query($update); // execute the query
+			if($res1->RowCount() == 1)
+				Mailer::Send("$email","Retrieve password", " Your temporary password  is: $password , please log in and update your password");
+			else
+				echo "Update table failed <br>";	
 		}
-			
-		
-		
 	}
 ?>
 
