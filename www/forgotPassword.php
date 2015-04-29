@@ -1,40 +1,46 @@
 <?php
 	require_once "header.php";
-	//printr($_POST);
-	if(isset($_POST['regKey'], $_POST['forgot']))// && $_POST['regKey'] === $_SESSION['regKey'])
+	if(isset($_POST['retrieve']) )
 	{
 		$email = trim($_POST['email']);
 		
-		//print_r($_POST);
-		
-		
-		
-		if(empty($email))
-			echo "email is required";
-		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
-			echo "invalid email, try again";
-		else// input is valid check against  db if email actually exist and do something
-		{
-			if(UserModel::Exists("email",$email))// send an email???
-				echo "email exists";
-			else
-				echo "Email not exists in database, please enter a different email";
+		if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
+			echo "Email is invalid, please try again";
+		else if(!UserModel::Exists("email", $email))
+			echo "Email doesn't exist in database, please try again";
+		else{
+			$user = QueryFactory::Build("select");	
+			$user->Select("password")->From("users")->Where(["email","=",$email])->Limit();
+			$res = DatabaseManager::Query($user);
+			$res = $res->Result(); // get result from table
+			$password = $res["password"];
+			$passwordHash = sha1($password);
 			
+			$newPass = UserModel::hashPass($newPass); // hash the incoming password
+			$update = QueryFactory::Build("update"); //new update query
+			$update->Table("users")->Where( ["password", "=", $password] )->Set(["password",  $passwordHash]); //update the query
+			$res1 = DatabaseManager::Query($update); // execute the query
+			
+			Mailer::Send("$email","Retrieve password", " Your temporary password  is: $passwordHash , please log in and update your password");
+			print_r($password);
+
 		}
+			
 		
 		
 	}
-	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
-	?>
+?>
+
+
     <div class="background">
         <h1> Forgot Password </h1>
-		<form class="forgotPassword" method="POST" >
-			<input type="hidden" name="regKey" value="">
-            <div class="labels"><label>E-mail Address </label></div> 
-            <div class="inputFields"><input type="text" name="email" placeholder="johndoe@example.net"></div>  
-            <div class="inputFields"><button type="submit" name="forgot" value="forgot">Submit</button></div>
+		<form class="forgotPassword" method="POST">
+			<div class="labels"><label>Email address </label></div>
+            <div class="inputFields"><input type="text" name="email" placeholder=""></div> 
+            <div class="inputFields"><button type="submit" name="retrieve" value="retrieve">Retreive</button></div>
         </form>
-    </div>
+        </div>
+	</div>
 
+	
 <?php require_once"footer.php";?>
-

@@ -45,7 +45,7 @@ $session->put('regKeyLogin', bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)));
                                 <input name="passwordLogin" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" <?php if(isset($_POST['passwordLogin'])){echo 'value="'.$_POST['passwordLogin'].'"'; }?> />
 
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br>
-                                <a href>Forgot your password?</a>
+                                <a href="forgotPassword.php">Forgot your password?</a>
                                 <br>
                                 <a href="register.php">Register account</a>
                             </form>
