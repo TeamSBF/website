@@ -19,7 +19,6 @@
 			else if($newPass !== $cNewPass)
 				echo "Password doesn't match, please try again!";
 			else{// new pass match go ahead and update the database
-				echo "here";
 				require_once("scripts/password.php");
 				
 				//********************this block below does all the update password in the database*******************************************************************
@@ -41,7 +40,7 @@
 					$res = $res->Result(); // get result from table
 					$email = $res['email'];
 					$activationLink = sha1($id.$res["email"].$res["created"].$res["password"]);// get the hash value for the link to send out
-					Mailer::Send("$email","Activation Email","Please click on the link below to activate your account, http://localhost/activation.php?id=$id&link=$activationLink"); 
+					Mailer::Send("$email","Activation Email","Your account is yet to be activated, please click on the link below to activate your account, http://localhost/activation.php?id=$id&link=$activationLink"); 
 				}
 			}	
 		}else{

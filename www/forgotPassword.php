@@ -14,7 +14,6 @@
 			$res = DatabaseManager::Query($user)->Result();
 			$id = $res["id"];
 			$link = sha1($id);
-			echo "id is: $id";
 			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://localhost/resetPassword.php?id=$id&link=$link"); 
 		}
 	}
