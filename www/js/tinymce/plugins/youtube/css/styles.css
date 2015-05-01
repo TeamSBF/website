@@ -1,0 +1,33 @@
+.table
+{
+	display: table;
+	padding: 10px;
+}
+
+.row
+{
+	display: table-row;
+	padding: 10px;
+}
+
+.cell
+{
+	display: table-cell;
+	padding: 10px;
+}
+
+.header
+{
+	vertical-align: top;
+}
+
+.previewImage
+{
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.Hover
+{
+	border: 5px solid green;
+}
