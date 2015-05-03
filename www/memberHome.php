@@ -73,7 +73,7 @@ $parqStat ="";
 <h1 class="demoHeaders">Forms</h1>
 <!-- Accordion -->
     <div id="accordion">
-        <div class="accordion-section-title" target="<?php echo $enrollStat;?>"><a href="#accordion-1">enrollment form</a></div>
+        <div class="accordion-section-title" target="<?php echo $enrollStat;?>"><a href="#accordion-1">Enrollment</a></div>
         <div id="accordion-1" class="accordion-section-content">
             <div class="accordion-section"><script>$( "#accordion-1" ).load( "enrollmentForm.php" );</script></div>
         </div>

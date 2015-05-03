@@ -88,7 +88,7 @@
             <div class="inputs"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'No') echo "checked";?> value="No">No</div>
           </div>
 
-          <div class="inputs"><button type="submit" name="submitEnrollment">Submit</button></div>
+          <div class="enrollInput"><button type="submit" name="submitEnrollment">Submit</button></div>
         </div>
   </form>
 </div>

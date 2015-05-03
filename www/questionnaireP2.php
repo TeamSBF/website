@@ -277,10 +277,7 @@
             <div><label for="affectFeelings">How are the feelings that are listed above affected when you participate in a Sit and Be Fit exercise class?:</label></div>                    
             <div><textarea type="text" id="affectFeelings" name="affectFeelings"></textarea></div>
           </div>
-        
-
-
-            <button class="btn-primary" type="submit" id="submitQ2">Submit</button>
+            <div class="inputs"><button type="submit" name="submitQ2">Submit</button></div>
       </form> <!-- end form -->
     </fieldset> <!-- end offset centered -->
   </div> <!-- end container -->

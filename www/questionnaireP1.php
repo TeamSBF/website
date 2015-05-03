@@ -245,7 +245,7 @@
 
           </div> <!-- end panel-body -->
         </div> <!-- end panel "demographics" -->
-               <button class="col-sm-offset-10 col-sm-2 btn-primary" type="submit" id="submitQuestionnaireP1">Submit</button>
+               <div class="inputs"><button type="submit" name="submitQuestionnaireP1">Submit</button></div>
       </form>
 
             </div></fieldset> <!-- end offset centered -->

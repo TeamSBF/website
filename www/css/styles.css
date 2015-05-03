@@ -80,7 +80,6 @@ h1
 }
 .register,.form-signin
 {
-    padding: 8%;
     padding-left: 12%;
     
 }
@@ -117,9 +116,26 @@ label,nav
 {
     font-weight: 400;
 }
-.inputs
+
+.inputs > button
 {
-    padding-top: 4%;   
+    position: relative;
+    top:75px;
+    left: 88%;
+}
+.enrollInput > button
+{
+    position: relative;
+    top:48px;
+    left: 88%;
+}
+.parqInput
+{
+  position: relative;
+  top: 48px;
+  left: 85%;
+  padding-bottom: 2%;
+  padding-top: 2%;   
 }
 button 
 {
@@ -148,8 +164,6 @@ button
 	text-shadow:0px 1px 0px #283966;
     margin-top: 10px;
     margin-bottom: 10px;
-    position:relative;
-    float: right;
    
 }
 button:hover {
@@ -165,6 +179,12 @@ button:hover {
 button:active {
 	position:relative;
 	top:5px;
+}
+.loginInput>button
+{
+    position: relative;
+    right:10px;
+      padding: 12px 37px;
 }
 input{ 
     max-width: 80%;
