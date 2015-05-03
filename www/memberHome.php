@@ -72,7 +72,9 @@ $parqStat ="";
 		$ques2Stat = "error";
 	}
 
-?>  
+?>
+<div class="background">
+    <h1 class="demoHeaders">Forms</h1>
    <div class="accordion">
 		<div class="accordion-section">
 			<a class="accordion-section-title" target="<?php echo $enrollStat;?>" href="#accordion-1">enrollment form</a>
@@ -113,7 +115,7 @@ $parqStat ="";
 		
 		
 	</div><!--end .accordion-->
-
+</div>
 <?php
 
 require_once("footer.php");
