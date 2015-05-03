@@ -14,12 +14,11 @@
     } 
 ?>
 
-
 <div class="background">
     <form method="post" class="form-horizontal">
+    <div class="formBackground">
       <h2>ENROLLMENT FORM</h2>
       <div id="enrollmentMessage" class="success" style="display:none"></div>
-      <fieldset>
           <div>
               <div class="inputs"><label for="lName">Last Name</label></div>
               <div class="inputs"><input type="text" name="lName" placeholder="Doe" required value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['lName']);} ?>"></div>
@@ -90,7 +89,7 @@
           </div>
 
           <div class="inputs"><button type="submit" name="submitEnrollment">Submit</button></div>
-      </fieldset>
+        </div>
   </form>
 </div>
 

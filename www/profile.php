@@ -13,7 +13,7 @@
 			echo "new password doesn't match";
 		else // update the password
 		{
-			require_once("assets/password.php");
+			require_once("scripts/password.php");
 			
 			// this below is to grab the current password from the database
 			$select = QueryFactory::Build("select");// build an empty select query

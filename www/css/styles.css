@@ -22,7 +22,7 @@ p
 .background
 {
   margin-top: 50px;
-  background: white;
+  background: rgba(244, 244, 244, 1);
   border: .1em solid black;
   padding:2%;
 }
@@ -265,18 +265,17 @@ body > div > div > div > form > div > div:nth-child(n+6) > fieldset > div:nth-ch
 
 #accordion {
      margin-top:10px;
-     border:thin solid #cecece;   
      border-top:none;
      border-bottom:none;
     height: auto;
+    width: auto;
 }
 
-#accordion div {
+#accordion> div {
     background:white;
     height:auto;
     display:block;
-    border-bottom:thin solid #cecece;
-    padding-left:15px;
+
 }
 
 .first {
