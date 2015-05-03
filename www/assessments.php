@@ -17,6 +17,6 @@ $array = [ ["30 Second Chair Stand","Lower body strength evaluation. Assess stre
                 <input type="checkbox" name="<?php $array[$x][0];?>">Select if you would like to do</div>
     <?php }?>
 </div>
-    <div class="inputs"><button type="submit" name="submitAssessments">Submit</button></div>
+    <div class="inputs"><button type="submit" name="submitAssessments" style="float:right;">Submit</button></div>
 </div>
 <?php require_once"footer.php";?>
