@@ -45,6 +45,8 @@ echo $res->RowCount();
 //*/
 
 // tinymce developement
+echo"POST\n" . htmlspecialchars($_POST['content'], ENT_QUOTES);
+echo"\n";
 ?>
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/tinymce/tinymce.min.js"></script>
@@ -52,12 +54,14 @@ echo $res->RowCount();
 tinymce.init({
             selector: "textarea",
             plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
+                "save advlist autolink lists link image charmap preview anchor",
                 "searchreplace visualblocks code fullscreen",
                 "insertdatetime media table contextmenu paste youtube"
             ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image| youtube"
+            toolbar: "save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image| youtube"
         });
 </script>
-<textarea></textarea>
+<form method="POST">
+<textarea name="content" rows="20"></textarea>
+</form>
 </pre>
