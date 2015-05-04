@@ -20,9 +20,9 @@ $grid = ($user) ? 12 : 8;
     <link href='http://fonts.googleapis.com/css?family=Bitter:400,700|Bree+Serif' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Raleway:400,700' rel='stylesheet' type='text/css'>
     <!--      for webshim -->
-    <script src="js/mod.js"></script>
+    <?php if(1==2){?><script src="js/mod.js"></script>
     <script src="js/webshim/minified/polyfiller.js"></script>
-    <script> $.webshims.polyfill(); </script>
+    <script> $.webshims.polyfill(); </script><?php }?>
     <!--      for webshim -->
     <script src="js/jquery-1.11.2.min.js"></script>
     <script src="js/jquery-ui-1.11.4/external/jquery/jquery.js"></script>
@@ -33,24 +33,14 @@ $grid = ($user) ? 12 : 8;
 	<script>
         <?php if($user && $user->AccessLevel > 1 && strstr($_SERVER['PHP_SELF'], "index")){?>
         tinymce.init({
-            selector: "textarea",
+            selector: "textarea[id^='articleEditor']",
             plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
+                "save advlist autolink lists link image charmap preview anchor",
                 "searchreplace visualblocks code fullscreen",
                 "insertdatetime media table contextmenu paste youtube"
             ],
-            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image| youtube",
-            setup: function(ed) {
-                ed.addMenuItem('example',{
-                   text: "My Menu Item",
-                    context: "tools",
-                    onclick: function()
-                    {
-                        ed.insertContent("hello world");
-                    }
-                });
-            }
-        });
+            toolbar: "save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image| youtube"
+            });
         <?php } ?>
     	$(function() {
             $("#accordion").accordion({

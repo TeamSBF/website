@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>YouTube</title>
+    <link href="./css/styles.css" rel="stylesheet">
+	<!--[if lt IE 9]>
+	    <script type="text/javascript" src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+    <script>window.jQuery || document.write('<script src="./js/jquery-1.11.2.min.js"><\/script>')</script>
+    <script src="./js/main.js"></script>
+</head>
+  <body>
+        <div class="container table">
+			<div class="row">
+                <input type="hidden" id="videoID" value="" />
+				<div class="cell header">YouTube Link</div>
+				<div class="cell"><input type="text" id="link" name="link" value="https://www.youtube.com/watch?v=cm7uURk9mZg" /></div>
+			</div>
+			<div class="row" id="previews">
+                <input type="hidden" id="imagePreview" value="0" />
+				<div class="cell header border">Preview Image Choice</div>
+                <div class="cell border" id="youtubeImagePreview"><img src="img/leftarrow.png" id="leftArrow" class="arrow" /><img src="img/rightarrow.png" id="rightArrow" class="arrow" /></div>
+			</div>
+            <div class="row">
+                <div class="cell"><button type="submit" id="submit-btn">Insert Video</button></div>
+            </div>
+        </div>
+  </body>
+</html>

@@ -34,6 +34,7 @@ if($info->RowCount() < 2)
 
 echo PartialParser::Parse("article", $articles[0]);
 //*/
+/*
 $insert = QueryFactory::Build("insert")->Into("parq_form")->Set(["userID", "2"]);
 $insert->Set(["q11","No"],["q12","No"],["q13","No"],["q14","No"],["q15","No"],["q16","No"],["q17","No"]);
 $insert->Set(["q31","2015-04-20"],["q32","sami"],["q33",""]);
@@ -41,5 +42,26 @@ printr($insert->Query(true));
 echo "INSERT INTO `parq_form` (`userID`, `q11`, `q12`, `q13`, `q14`, `q15`, `q16`, `q17`, `q31`, `q32`, `q33`) VALUES(2, 'No', 'No', 'No', 'No', 'No', 'No', 'No', '2015-04-20', 'sami', '')";
 $res = DatabaseManager::Query($insert);
 echo $res->RowCount();
+//*/
+
+// tinymce developement
+echo"POST\n" . htmlspecialchars($_POST['content'], ENT_QUOTES);
+echo"\n";
 ?>
+<script src="js/jquery-1.11.2.min.js"></script>
+<script src="js/tinymce/tinymce.min.js"></script>
+<script>
+tinymce.init({
+            selector: "textarea",
+            plugins: [
+                "save advlist autolink lists link image charmap preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste youtube"
+            ],
+            toolbar: "save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image| youtube"
+        });
+</script>
+<form method="POST">
+<textarea name="content" rows="20"></textarea>
+</form>
 </pre>
