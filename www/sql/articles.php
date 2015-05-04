@@ -5,6 +5,7 @@ $table->AddColumn("id")->SetAutoIncrement();
 $table->AddColumn("title")->MakeVarChar(100);
 $table->AddColumn("content")->MakeText();
 $table->AddColumn("created")->MakeInt();
+$table->AddColumn("updated")->MakeInt();
 $table->AddColumn("viewby")->MakeTinyInt()->DefaultValue(0);
 
 $info = array();
