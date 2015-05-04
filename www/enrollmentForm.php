@@ -32,7 +32,7 @@
 
           <div>
               <div class="inputs"><label for="streetAddress">Street Address</label></div>
-              <div class="inputs"><textarea type="text" class="form-control" name="streetAddress" placeholder="123 Fake St" rows="3" value="<?php if(isset($_POST['streetAddress'])){echo htmlspecialchars($_POST['streetAddress']);} ?>"></textarea></div>
+              <div class="inputs"><textarea type="text" class="form-control" name="streetAddress" placeholder="123 Fake St" rows="3"><?php if(isset($_POST['streetAddress'])){echo htmlspecialchars($_POST['streetAddress']);} ?></textarea></div>
           </div>
           
           <div>
@@ -57,19 +57,19 @@
 
           <div>
               <div class="inputs"style="font-weight:bold"><label>Gender</label></div>
-            <div class="inputs"><input type="radio" name="gender" required <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Male') echo "checked";?> value="Male">Male</div>
-            <div class="inputs"><input type="radio" name="gender" <?php if (isset($_POST['gender']) && $_POST['gender'] == 'Female') echo "checked";?> value="Female">Female</div>
+            <div class="inputs"><input type="radio" name="gender" required <?php if (isset($_POST['gender']) && $_POST['gender'] == 1) echo "checked";?> value=1>Male</div>
+            <div class="inputs"><input type="radio" name="gender" <?php if (isset($_POST['gender']) && $_POST['gender'] == 0) echo "checked";?> value=0>Female</div>
           </div>
 
           <div>
               <div class="inputs"><label for="healthHistory">Health History</label></div>
-              <div class="inputs"><textarea type="text" class="form-control" name="healthHistory" rows="3"></textarea></div>
+              <div class="inputs"><textarea type="text" class="form-control" name="healthHistory" rows="3"><?php if(isset($_POST['healthHistory'])){echo htmlspecialchars($_POST['healthHistory']);} ?></textarea></div>
           </div>
 
           <div >
               <div class="inputs"><label>Do you watch Sit and Be Fit?</label></div>
-            <div class="inputs"><input type="radio" name="watchSbf" required <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
-            <div class="inputs"><input type="radio" name="watchSbf" <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 'No') echo "checked";?> value="No">No</div>
+            <div class="inputs"><input type="radio" name="watchSbf" required <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 1) echo "checked";?> value=1>Yes</div>
+            <div class="inputs"><input type="radio" name="watchSbf" <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 0) echo "checked";?> value=0>No</div>
           </div>
 
           <div name="howManyTimes">
@@ -79,14 +79,14 @@
 
           <div>
               <div class="inputs"><label for="controlGrp">Control Group (will NOT participate in Sit and Be Fit)</label></div>
-            <div class="inputs"><input type="radio" name="controlGrp" required <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 'Yes') echo "checked";?> value="Yes">Yes</div>
-            <div class="inputs"><input type="radio" name="controlGrp" <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 'No') echo "checked";?> value="No">No</div>
+            <div class="inputs"><input type="radio" name="controlGrp" required <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 1) echo "checked";?> value=1>Yes</div>
+            <div class="inputs"><input type="radio" name="controlGrp" <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 0) echo "checked";?> value=0>No</div>
           </div>
 
           <div>
               <div class="inputs"><label for="experimentalGrp">Experimental Group (participate in Sit and Be Fit)</label></div>
-            <div class="inputs"><input type="radio" name="experimentalGrp" required <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'Yes') echo "checked";?> value="Yes">Yes</div>            
-            <div class="inputs"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 'No') echo "checked";?> value="No">No</div>
+            <div class="inputs"><input type="radio" name="experimentalGrp" required <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 1) echo "checked";?> value=1>Yes</div>            
+            <div class="inputs"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 0) echo "checked";?> value=0>No</div>
           </div>
 
           <div class="inputs"><button type="submit" name="submitEnrollment">Submit</button></div>
@@ -125,6 +125,7 @@
 </script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js"></script>
+
 
 
 

@@ -26,23 +26,13 @@ class FormsModel
 	/* Entry point for the pre-study questionnaire part 1 form */
 	public function validateQuestionnaireP1()
 	{
-		// do some checks here
-
-		// if everything went well we save data to the database
-		if ($this->saveDbQuestionnaireP1())
-			return '***Success!***';
-		return "***DB SAVE FAILED***";
+		return $this->validateAndSaveQuestionnaireP1();
 	}
 
 	/* Entry point for the pre-study questionnaire part 2 form */
 	public function validateQuestionnaireP2()
 	{
-		// do some checks here
-
-		// if everything went well we save data to the database
-		if ($this->saveDbQuestionnaireP2())
-			return '***Success!***';
-		return "***DB SAVE FAILED***";
+		return $this->validateAndSaveQuestionnaireP2();
 	}
 
 	/* Entry point for the parQ form */
@@ -54,7 +44,7 @@ class FormsModel
 	/* Checks if some input contains character we don't want */
 	private function checkForIllegalCharacters($str)
 	{
-		return preg_match('/[^A-Za-z0-9.!?\\-$\']/', $str);
+		return !preg_match('/[^A-Za-z0-9.!?\\-$\']/', $str);
 	}
 
 	/* Checks if a given string is below allowed length
@@ -88,16 +78,25 @@ class FormsModel
 
 	/* Validates a radio button
 	 * $param: 	$value (string)
-	 *			$options (array of possible accepted values)
+	 *			$options (defines how many options)
 	 */
 	private function validateRadioButton($value=null, $options=null)
 	{
-		foreach ($options as $val)
+		if (is_numeric($options))
 		{
-			if ($value === $val)
+			if ($value >= 0 && $value <= $options)
 				return true;
+			return false;
 		}
-		return false;
+	}
+
+	private function validateNumber($value)
+	{
+		if (filter_var($value+1, FILTER_VALIDATE_INT, array("options" => array("min_range"=> 0, "max_range"=> PHP_INT_MAX))) === false) 
+		{
+    		return false;
+		} 
+		return true;
 	}
 
 	/* Validates a phone number
@@ -140,7 +139,7 @@ class FormsModel
         $insert->Into('enrollment_form')->Set(['userID', $form['userID']])->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
         	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
         	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
-        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']] , ['userId',$id], ['completed',$complete]);
+        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
 
         
         // save to the DB
@@ -199,14 +198,14 @@ class FormsModel
 			return false;
 		if (isset($f['gender']))
 		{
-			if (!$this->validateRadioButton($f['gender'], ["Male", "Female"]))
+			if (!$this->validateRadioButton($f['gender'], 1))
 				return "Bad Gender";
 		}
 		else
 			return "Bad Gender";
 		if (isset($f['watchSbf']))
 		{
-			if (!$this->validateRadioButton($f['watchSbf'], ["Yes", "No"]))
+			if (!$this->validateRadioButton($f['watchSbf'], 1))
 				return "Bad Watchsbf";
 		}
 		else
@@ -218,12 +217,12 @@ class FormsModel
 		}
 		if (isset($f['controlGrp']))
 		{
-			if (!$this->validateRadioButton($f['controlGrp'], ["Yes", "No"]))
+			if (!$this->validateRadioButton($f['controlGrp'], 1))
 				return "Bad ControlGrp";
 		}
 		if (isset($f['experimentalGrp']))
 		{
-			if (!$this->validateRadioButton($f['experimentalGrp'], ["Yes", "No"]))
+			if (!$this->validateRadioButton($f['experimentalGrp'], 1))
 				return "Bad Experimental";
 		}
 		// if we made it this far, data is valid, return true
@@ -231,15 +230,136 @@ class FormsModel
 	}
 
 	/* Validates the questionnaire part 2 form data, build the insert query and save to the database */
-	private function saveDbQuestionnaireP1()
+	private function validateAndSaveQuestionnaireP1()
 	{
-		//TO DO
+		// get a Insert query object
+		$insert = QueryFactory::Build('insert');
+		$insert->Into("questionnairep1_form");
+
+		//return $this->validateParQFieldsAndBuildQuery($insert);
+		$insert = $this->validateQuestionnaireP1AndBuildQuery($insert);
+		// Check if validation passed
+		if ($insert == false)
+			return false;
+		//return printr($insert->Query(true));
+        // save to the DB
+        $qinfo = DatabaseManager::Query($insert);
+
+        // check for success or failure
+        if ($qinfo->RowCount() == 1)
+        {
+        	$complete = QueryFactory::Build('update');
+        	$complete->Table('questionnairep1_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$cinfo = DatabaseManager::Query($complete);
+        	if ($cinfo->RowCount() == 1)
+        		return "success";
+        }
+        return false;
+	}
+
+	/* Validates the fields for the questionnaire part 1 form */
+	private function validateQuestionnaireP1AndBuildQuery($query)
+	{
+		$f = $this->form;
+		if (isset($f["userID"]))
+			$query->Set(["userID", $f["userID"]]);
+		// array defining valid options (integers mean this radio button options goes from 0 to X)
+		$q = array(
+			"q1" => 3, "q2" => 3, "q3" => 3, "q4" => 2, "q5" => 1, "q6" => 4, "q7" => 4, "q8" => 3,
+			"q9" => 3, "q10" => 1, "q11" => 1, "q12" => 1, "q13" => 1, "q14" => 1, "q15" => 1, "q16" => 1,
+			"q17" => 1, "q18" => 1, "q19" => 1, "q20" => 1, "q21" => 1, "q22" => "text", "q23" => "number", "q24" => 1,
+			"q25" => 4, "q26" => "text", "q27" => 2, "q28" => "number", "q29" => "number");
+
+		return $this->validateP1P2($q, $query);
+	}
+
+	private function validateP1P2($arr, $query)
+	{
+		$f = $this->form;
+		$textLength = 500;
+
+		// loop through all questions
+		for ($i = 1; $i <= count($arr); $i++)
+		{
+			if (isset($f["q$i"]))
+			{
+				$name = "q$i";
+				$val = $arr[$name];
+
+				if ($val === "text") // this is a text input
+				{
+					if ($this->checkForIllegalCharacters($f[$name]) && $this->validateValueLength($f[$name], $textLength))
+					{
+						$query->Set([$name, $f[$name]]);
+					}
+					else
+						return false;
+				}
+				else if ($val === "number") // this is a number input
+				{
+					if ($f[$name] != "" && $this->validateNumber($f[$name]))
+					{
+						$query->Set([$name, $f[$name]]);
+					}
+					else
+						return false;
+				}
+				else // this is a radio button input
+				{
+					if ($this->validateRadioButton($f[$name], $arr[$name]))
+						$query->Set([$name, $f[$name]]);
+					else
+						return false;
+				}
+			}
+			else
+				return false;
+		}
+
+		return $query;
 	}
 
 	/* Validates the questionnaire part 2 form data, build the insert query and save to the database */
-	private function saveDbQuestionnaireP2()
+	private function validateAndSaveQuestionnaireP2()
 	{
-		//TO DO
+		// get a Insert query object
+		$insert = QueryFactory::Build('insert');
+		$insert->Into("questionnairep2_form");
+
+		//return $this->validateParQFieldsAndBuildQuery($insert);
+		$insert = $this->validateQuestionnaireP2AndBuildQuery($insert);
+		// Check if validation passed
+		if ($insert == false)
+			return false;
+		//return printr($insert->Query(true));
+        // save to the DB
+        $qinfo = DatabaseManager::Query($insert);
+
+        // check for success or failure
+        if ($qinfo->RowCount() == 1)
+        {
+        	$complete = QueryFactory::Build('update');
+        	$complete->Table('questionnairep2_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$cinfo = DatabaseManager::Query($complete);
+        	if ($cinfo->RowCount() == 1)
+        		return "success";
+        }
+        return false;
+	}
+
+	private function validateQuestionnaireP2AndBuildQuery($query)
+	{
+		$f = $this->form;
+		if (isset($f["userID"]))
+			$query->Set(["userID", $f["userID"]]);
+		// array defining valid options (integers mean this radio button options goes from 0 to X)
+		$q = array(
+			"q1" => "number", "q2" => "number", "q3" => "text", "q4" => 2, "q5" => 2, "q6" => 2, "q7" => 2, "q8" => 2,
+			"q9" => 2, "q10" => 2, "q11" => 2, "q12" => 2, "q13" => 2, "q14" => 2, "q15" => 2, "q16" => "text",
+			"q17" => 3, "q18" => 3, "q19" => 3, "q20" => 3, "q21" => 3, "q22" => 3, "q23" => 3, "q24" => 3,
+			"q25" => 3, "q26" => 3, "q27" => 3, "q28" => 3, "q29" => 3, "q30" => 3, "q31" => 3, "q32" => 3, "q33" => 3, "q34" => 3, "q35" => "text");
+
+		return $this->validateP1P2($q, $query);
 	}
 
 	/* Validates the parQ form data, build the insert query and save to the database */
@@ -265,7 +385,7 @@ class FormsModel
         	$complete->Table('parq_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
         	if ($cinfo->RowCount() == 1)
-        		return "sucess";
+        		return "success";
         }
         return false;
 	}
@@ -292,7 +412,7 @@ class FormsModel
 				  					"q2_7" => 3, "q2_8" => 3,
 				  					"q2_9" => 3),
 				  	"section3" => 3);
-		$opts = ["Yes", "No"];
+		$opts = 1;
 		// section 1 		
 		for ($i = 1; $i <= $questions["section1"]; $i++)
 		{
@@ -316,7 +436,7 @@ class FormsModel
 				if ($this->validateRadioButton($f[$name], $opts))
 				{
 					$query->Set([$name, $f[$name]]);
-					if ($f[$name] === "No")
+					if ($f[$name] === 0)
 						continue;	
 				}
 				else
