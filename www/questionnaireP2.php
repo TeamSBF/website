@@ -47,9 +47,9 @@
           {
             echo '<div>';
             echo '<div><label>'.$question1[$i-4].'</label></div>';
-            echo '<div class="input"><input type="radio" name="q'. ($i) .'" required checked value=0>No help</div>';
-            echo '<div class="input"><input type="radio" name="q'. ($i) .'" required checked value=1>Some help</div>';
-            echo '<div class="input"><input type="radio" name="q'. ($i) .'" required checked value=2>Unable to perform</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($i) .'"' . ((isset($_POST["q$i"]) && $_POST["q$i"] == 0)? "checked":"") .' required value=0>No help</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($i) .'"' . ((isset($_POST["q$i"]) && $_POST["q$i"] == 1)? "checked":"") .' value=1>Some help</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($i) .'"' . ((isset($_POST["q$i"]) && $_POST["q$i"] == 2)? "checked":"") .' value=2>Unable to perform</div>';
             echo '</div>';
           }
         ?>
@@ -70,10 +70,10 @@
           {
             echo '<div>';
             echo '<div><label>'.$question2[$j - $i].'</label></div>';
-            echo '<div class="input"><input type="radio" name="q'. ($j) .'" required checked value=0>Always</div>';
-            echo '<div class="input"><input type="radio" name="q'. ($j) .'" value=1>Mostly</div>';
-            echo '<div class="input"><input type="radio" name="q'. ($j) .'" value=2>Half the time</div>';
-            echo '<div class="input"><input type="radio" name="q'. ($j) .'" value=3>Rarely</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 0)? "checked":"") .' required value=0>Always</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 1)? "checked":"") .' value=1>Mostly</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 2)? "checked":"") .' value=2>Half the time</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 3)? "checked":"") .' value=3>Rarely</div>';
             echo '</div>';
           }
       ?>  
@@ -87,10 +87,10 @@
             {
               echo '<div>';
               echo '<div><label>'.$question2[$k - $j].'</label></div>';
-              echo '<div class="input"><input type="radio" name="q'. ($k) .'" required checked value=0>Always</div>';
-              echo '<div class="input"><input type="radio" name="q'. ($k) .'" value=1>Mostly</div>';
-              echo '<div class="input"><input type="radio" name="q'. ($k) .'" value=2>Half the time</div>';
-              echo '<div class="input"><input type="radio" name="q'. ($k) .'" value=3>Rarely</div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 0)? "checked":"") .' required value=0>Always</div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 1)? "checked":"") .' value=1>Mostly</div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 2)? "checked":"") .' value=2>Half the time</div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 3)? "checked":"") .' value=3>Rarely</div>';
               echo '</div>';
             }
         ?>  
