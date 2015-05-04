@@ -13,7 +13,13 @@ if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $session->get('reg
         //require_once("assets/password.php");
 
         $result = UserModel::Login($email, $passed_pwd);    //to db
-        if ($result)    //to db
+		//grab activated to check against
+		$user = QueryFactory::Build("select");	
+		$user->Select("activated")->From("users")->Where(["email","=",$email])->Limit();
+		$res = DatabaseManager::Query($user);
+		$activated = $res->Result()['activated']; // get result from table
+		
+        if ($result && $activated === "1")    //to db (result must be valid and must be activated to be able to log in)
         {
             $session->refresh();
             $session->put('user', $result);
@@ -45,7 +51,7 @@ $session->put('regKeyLogin', bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)));
                                 <input name="passwordLogin" type="password" id="inputPassword" class="form-control" placeholder="Password" required="required" <?php if(isset($_POST['passwordLogin'])){echo 'value="'.$_POST['passwordLogin'].'"'; }?> />
 
                                 <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button><br>
-                                <a href>Forgot your password?</a>
+                                <a href="forgotPassword.php">Forgot your password?</a>
                                 <br>
                                 <a href="register.php">Register account</a>
                             </form>
