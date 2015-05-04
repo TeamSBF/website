@@ -1,5 +1,5 @@
 <?php
-    require_once"header.php";
+
 
     if (isset($_POST['submitQuestionnaireP2']))
     {
@@ -131,4 +131,4 @@
   </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
-    <?php require_once"footer.php";?>
+ 
