@@ -1,40 +1,34 @@
 <?php
 	require_once "header.php";
-	//printr($_POST);
-	if(isset($_POST['regKey'], $_POST['forgot']))// && $_POST['regKey'] === $_SESSION['regKey'])
+	if(isset($_POST['retrieve']) )
 	{
 		$email = trim($_POST['email']);
 		
-		//print_r($_POST);
-		
-		
-		
-		if(empty($email))
-			echo "email is required";
-		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
-			echo "invalid email, try again";
-		else// input is valid check against  db if email actually exist and do something
-		{
-			if(UserModel::Exists("email",$email))// send an email???
-				echo "email exists";
-			else
-				echo "Email not exists in database, please enter a different email";
-			
+		if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
+			echo "Email is invalid, please try again";
+		else if(!UserModel::Exists("email", $email))
+			echo "Email doesn't exist in database, please try again";
+		else{// email exists go ahead send a reset password link and activation link
+			$user = QueryFactory::Build("select");				
+			$user->Select("id")->From("users")->Where(["email","=",$email])->Limit();
+			$res = DatabaseManager::Query($user)->Result();
+			$id = $res["id"];
+			$link = sha1($id);
+			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://localhost/resetPassword.php?id=$id&link=$link"); 
 		}
-		
-		
 	}
-	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
-	?>
+?>
+
+
     <div class="background">
         <h1> Forgot Password </h1>
-		<form class="forgotPassword" method="POST" >
-			<input type="hidden" name="regKey" value="">
-            <div class="labels"><label>E-mail Address </label></div> 
-            <div class="inputFields"><input type="text" name="email" placeholder="johndoe@example.net"></div>  
-            <div class="inputFields"><button type="submit" name="forgot" value="forgot">Submit</button></div>
+		<form class="forgotPassword" method="POST">
+			<div class="labels"><label>Email address </label></div>
+            <div class="inputFields"><input type="text" name="email" placeholder=""></div> 
+            <div class="inputFields"><button type="submit" name="retrieve" value="retrieve">Retreive</button></div>
         </form>
-    </div>
+        </div>
+	</div>
 
+	
 <?php require_once"footer.php";?>
-

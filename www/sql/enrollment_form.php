@@ -11,11 +11,11 @@ $table->AddColumn('city')->MakeVarChar(50);
 $table->AddColumn('phone')->MakeVarChar(20);
 $table->AddColumn('email')->MakeVarChar(100)->AddKey('unique');
 $table->AddColumn('dob')->MakeVarChar(11)->DefaultValue('false');
-$table->AddColumn('gender')->MakeVarChar(7);
+$table->AddColumn('gender')->MakeBool();
 $table->AddColumn('healthHistory')->MakeVarChar(500)->DefaultValue('false');
 $table->AddColumn('watchSbf')->MakeBool()->DefaultValue('false');
 $table->AddColumn('HowManyTimesAWeek')->MakeInt()->DefaultValue(0);
-$table->AddColumn('controlGroup')->MakeVarChar(4)->DefaultValue("No");
-$table->AddColumn('experimentalGroup')->MakeVarChar(4)->DefaultValue("No");
+$table->AddColumn('controlGroup')->MakeBool()->DefaultValue('false');
+$table->AddColumn('experimentalGroup')->MakeVarChar(4)->DefaultValue('false');
 
 return [$table,[]];

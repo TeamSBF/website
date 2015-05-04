@@ -165,7 +165,7 @@ class UserModel
      * @param string $pass The password to be hashed
      * @return string The hashed password
      */
-    private static function hashPass($pass)
+    public static function hashPass($pass)
     {
         require_once("scripts/password.php");
         $options = array('cost' => 11);
