@@ -14,12 +14,11 @@
     } 
 ?>
 
-
 <div class="background">
     <form method="post" class="form-horizontal">
+    <div class="formBackground">
       <h2>ENROLLMENT FORM</h2>
       <div id="enrollmentMessage" class="success" style="display:none"></div>
-      <fieldset>
           <div>
               <div class="inputs"><label for="lName">Last Name</label></div>
               <div class="inputs"><input type="text" name="lName" placeholder="Doe" required value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['lName']);} ?>"></div>
@@ -89,8 +88,8 @@
             <div class="inputs"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 0) echo "checked";?> value=0>No</div>
           </div>
 
-          <div class="inputs"><button type="submit" name="submitEnrollment">Submit</button></div>
-      </fieldset>
+          <div class="enrollInput"><button type="submit" name="submitEnrollment">Submit</button></div>
+        </div>
   </form>
 </div>
 

@@ -377,7 +377,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 			</fieldset>
 		</div>
 	</div>
-    <button class="btn-primary" type="submit" name="submitParQ">Submit</button>
+    <div class="parqInput"><button type="submit" name="submitParQ">Submit</button></div>
 </form> <!-- end Form -->
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

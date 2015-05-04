@@ -11,10 +11,12 @@ $array = [ ["30 Second Chair Stand","Lower body strength evaluation. Assess stre
 <!-- Accordion -->
 <div id="accordion">
     <?php for($x=0;$x<count($array);$x++){?>
-             <h2><?php echo $array[$x][0];?></h2>  
-             <div><p>Definition:<?php echo $array[$x][1];?></p>
-             <iframe width="100%" height="315" src="https://www.youtube.com/embed/m0APvLqZr5E " frameborder="0" allowfullscreen></iframe></div>
+                <h2><?php echo $array[$x][0];?></h2>  
+                <div><p>Definition:<?php echo $array[$x][1];?></p>
+                <iframe width="100%" height="315" src="https://www.youtube.com/embed/m0APvLqZr5E " frameborder="0" allowfullscreen></iframe>
+                <input type="checkbox" name="<?php $array[$x][0];?>">Select if you would like to do</div>
     <?php }?>
 </div>
+    <div class="inputs"><button type="submit" name="submitAssessments" >Submit</button></div>
 </div>
 <?php require_once"footer.php";?>

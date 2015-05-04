@@ -7,11 +7,10 @@ class NavMenu extends Singleton
     {
         if (self::$items === null) {
             self::$items = [
-                new MenuItem("Home", "index.php",UserLevel::Anon, "only"),
+                new MenuItem("Home", "index.php",UserLevel::Anon),
                 new MenuItem("About", "about.php",UserLevel::Anon, "only"),
                 new MenuItem("Contact", "contact.php",UserLevel::Anon, "only"),
                 new MenuItem("FAQ", "faq.php",UserLevel::Anon, "only"),
-                new MenuItem("Home", "memberHome.php", UserLevel::Member),
 				new MenuItem("Forms", "memberHome.php",UserLevel::Member),
                 new MenuItem("Assessments", "assessments.php",UserLevel::Member),
                 new MenuItem("Register", "register.php", UserLevel::Anon, "only"),
