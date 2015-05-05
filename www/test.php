@@ -45,8 +45,8 @@ echo $res->RowCount();
 //*/
 
 // tinymce developement
-echo"POST\n" . htmlspecialchars($_POST['content'], ENT_QUOTES);
-echo"\n";
+//echo"POST\n" . htmlspecialchars($_POST['content'], ENT_QUOTES);
+//echo"\n";
 ?>
 <script src="js/jquery-1.11.2.min.js"></script>
 <script src="js/tinymce/tinymce.min.js"></script>
@@ -60,8 +60,32 @@ tinymce.init({
             ],
             toolbar: "save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image| youtube"
         });
+	$(document).ready(function(){
+		var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
+		var match = $(this).val().match(regExp);
+		var content = $("#content");
+		var editor = $("#editor");
+		var contents = content.html();
+		var iframes = $(contents).filter("iframe");
+		for(i = 0; i < iframes.length; i++)
+		{
+			var iframe = $(iframes[i]);
+			var replace = iframe.wrap('<p/>').parent().html();
+			var src = iframe.attr("src");
+			src = 'http://img.youtube.com/vi/' + src.match(regExp)[7] + '/0.jpg';
+			var img = '<img width="'+iframe.attr("width")+'" height="'+iframe.attr("height")+'" src="'+src+'" />';
+			contents = contents.replace(replace, img);
+		}
+		
+		editor.html(contents);
+		content.hide();
+	});
 </script>
+<div id="content">
+	<iframe width="400" height="360" src="https://www.youtube.com/embed/31Ew1ogQqpE" frameborder="0" allowfullscreen></iframe>
+	<iframe width="400" height="360" src="https://www.youtube.com/embed/31Ew1ogQqpE" frameborder="0" allowfullscreen></iframe>
+</div>
 <form method="POST">
-<textarea name="content" rows="20"></textarea>
+<textarea id="editor" rows="20"></textarea>
 </form>
 </pre>
