@@ -1,11 +1,17 @@
 <?php
-    
 
-    if (isset($_POST['submitQuestionnaireP1']))
+
+    if (isset($_POST['submitQuestionnaireP2']))
     {
-      $validator = new FormsModel($_POST);
-      $return = $validator->ValidateQuestionnaireP2();
-    } 
+      if ($user)
+      {
+        $_POST['userID'] = $user->id;
+        print_r($_POST);
+        $qp2validator = new FormsModel($_POST);
+        $q2return = $qp2validator->validateQuestionnaireP2();
+        echo $q2return;
+      }      
+    }
 ?>
 
 <div class="background">
@@ -13,284 +19,116 @@
       <legend><strong><h1>Pre-Study Questionnaire Part 2</h1></strong></legend>
 
     <form class="form-vertical" method="post">
-      
+      <div id="q2message" style="display:none"></div>
         <div>
-            <div><label for="currentHeight">*Current Height (in inches): *</label></div>
-            <div class="input"><input type="number" name="currentHeight" placeholder="Your height"></div>
+            <div><label for="q1">Current Height (in inches): </label></div>
+            <div class="input"><input type="number" name="q1" placeholder="Your height"></div>
         </div>  
 
         <div>
-            <div><label for="currentWeight">*Current Weight (in pounds): *</label></div>
-            <div class="input"><input type="number" name="currentWeight" placeholder="Your weight"></div>
+            <div><label for="q2">Current Weight (in pounds): </label></div>
+            <div class="input"><input type="number" name="q2" placeholder="Your weight"></div>
         </div>
 
         <div>
-            <div><label for="affectedConditions">Describe how the Sit and Be Fit exercise program has affected the listed medical conditions in part 1</label></div>
-            <div class="input"><textarea type="text" name="affectedConditions"></textarea></div>
+            <div><label for="q3">Describe how the Sit and Be Fit exercise program has affected the listed medical conditions in part 1</label></div>
+            <div class="input"><textarea type="text" name="q3"></textarea></div>
         </div>
       
 
         <hr><label><strong><h2>Please rate your ability to perform certain activities that might occur during a typical day</h2></strong></label><hr>
       
-        <div>
-            <div><label>*Lifting or carrying groceries:</label></div>
-          <div class="input"><input type="radio" name="groceries" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="groceries" value=1>Some help</div>
-          <div class="input"><input type="radio" name="groceries" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Climbing one flight of stairs:</label></div>
-          <div class="input"><input type="radio" name="climbingStairs" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="climbingStairs" value=1>Some help</div>
-          <div class="input"><input type="radio" name="climbingStairs" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Stepping up and down a small curb:</label></div>
-          <div class="input"><input type="radio" name="steppingCurb" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="steppingCurb" value=1>Some help</div>
-          <div class="input"><input type="radio" name="steppingCurb" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Picking up small object from the floor:</label></div>
-          <div class="input"><input type="radio" name="pickingObject" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="pickingObject" value=1>Some help</div>
-          <div class="input"><input type="radio" name="pickingObject" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Walking a mile or more:</label></div>
-          <div class="input"><input type="radio" name="walkingMile" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="walkingMile" value=1>Some help</div>
-          <div class="input"><input type="radio" name="walkingMile" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Walking 2-3 blocks:</label></div>
-          <div class="input"><input type="radio" name="walkingBlocks" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="walkingBlocks" value=1>Some help</div>
-          <div class="input"><input type="radio" name="walkingBlocks" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Walking around in your home:</label></div>
-          <div class="input"><input type="radio" name="walkingHome" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="walkingHome" value=1>Some help</div>
-          <div class="input"><input type="radio" name="walkingHome" value=2>Unable to perform</div>
-        </div>
-       
-        <div>
-            <div><label>*Bathing or dressing yourself:</label></div>
-          <div class="input"><input type="radio" name="dressingSelf" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="dressingSelf" value=1>Some help</div>
-          <div class="input"><input type="radio" name="dressingSelf" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Getting in and out of a car:</label></div>
-          <div class="input"><input type="radio" name="gettingOutCar" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="gettingOutCar" value=1>Some help</div>
-          <div class="input"><input type="radio" name="gettingOutCar" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Writing on a computer Keyboard:</label></div>
-          <div class="input"><input type="radio" name="usingKeyboard" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="usingKeyboard" value=1>Some help</div>
-          <div class="input"><input type="radio" name="usingKeyboard" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Preparing meals:</label></div>
-          <div class="input"><input type="radio" name="preparingMeal" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="preparingMeal" value=1>Some help</div>
-          <div class="input"><input type="radio" name="preparingMeal" value=2>Unable to perform</div>
-        </div>
-        
-        <div>
-            <div><label>*Cleaning your home:</label></div>
-          <div class="input"><input type="radio" name="cleaningHome" required checked value=0>No help</div>
-          <div class="input"><input type="radio" name="cleaningHome" value=1>Some help</div>
-          <div class="input"><input type="radio" name="cleaningHome" value=2>Unable to perform</div>
-        </div>                 
+        <?php
+          $question1 = array("Lifting or carrying groceries:", "Climbing one flight of stairs:", "Stepping up and down a small curb:", "Picking up small object from the floor:",
+            "Walking a mile or more:", "Walking 2-3 blocks:", "Walking around in your home:", "Bathing or dressing yourself:", "Getting in and out of a car:", "Writing on a computer Keyboard:",
+            "Preparing meals:", "Cleaning your home:");
 
+          for ($i = 4; $i < count($question1)+4; $i++)
+          {
+            echo '<div>';
+            echo '<div><label>'.$question1[$i-4].'</label></div>';
+            echo '<div class="input"><input type="radio" name="q'. ($i) .'"' . ((isset($_POST["q$i"]) && $_POST["q$i"] == 0)? "checked":"") .' required value=0>No help</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($i) .'"' . ((isset($_POST["q$i"]) && $_POST["q$i"] == 1)? "checked":"") .' value=1>Some help</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($i) .'"' . ((isset($_POST["q$i"]) && $_POST["q$i"] == 2)? "checked":"") .' value=2>Unable to perform</div>';
+            echo '</div>';
+          }
+        ?>
         <div>
           <div><label for="affectActivities">Describe how the Sit and Be Fit exercise program affects your ability to perform the activities listed above?:</label>                
-          <div class="input"><textarea type="text" name="affectActivities"></textarea></div>
+          <div class="input"><textarea type="text" name="q16"></textarea></div>
         </div>
      <!-- end panel "More About Yourself" -->
 
             <hr><label><strong><h2>The following questions are about your feelings. For each question, please choose the one answer that comes closest to the way you felt BEFORE ever doing the Sit and Be Fit exercise program.</h2></strong></label><hr>
     
       <label>How much of the time did you...</label>
-        <div>
-            <div><label>*Feel full of life?:</label></div>
-          <div class="input"><input type="radio" name="feelFullOfLifeB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelFullOfLifeB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelFullOfLifeB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelFullOfLifeB" value=3>Rarely</div>
-        </div>
-        
-        <div>
-            <div><label>*Feel nervous?:</label></div>
-          <div class="input"><input type="radio" name="feelNervousB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelNervousB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelNervousB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelNervousB" value=3>Rarely</div>
-        </div>
-       
-        <div>
-            <div><label>*Feel that you are playing a useful part in things?:</label></div>
-          <div class="input"><input type="radio" name="feelUsefulB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelUsefulB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelUsefulB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelUsefulB" value=3>Rarely</div>
-        </div>
-        
-        <div>
-            <div><label>*Feel calm and peaceful?:</label></div>
-          <div class="input"><input type="radio" name="feelCalmB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelCalmB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelCalmB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelCalmB" value=3>Rarely</div>
-        </div>
-        
-        <div>
-          <label>*Have a lot of energy?:</label>
-          <div class="input"><input type="radio" name="feelEnergyB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelEnergyB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelEnergyB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelEnergyB" value=3>Rarely</div>
-        </div>                      
-        
-        <div>
-            <div><label>*Feel depressed?:</label></div>
-          <div class="input"><input type="radio" name="feelDepressedB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelDepressedB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelDepressedB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelDepressedB" value=3>Rarely</div>
-        </div>
-        
-        <div>
-            <div><label>*Feel worn out?:</label></div>
-          <div class="input"><input type="radio" name="feelWornOutB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelWornOutB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelWornOutB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelWornOutB" value=3>Rarely</div>
-        </div>
-        
-        <div>
-            <div><label>*Feel happy?:</label></div>
-          <div class="input"><input type="radio" name="feelHappyB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelHappyB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelHappyB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelHappyB" value=3>Rarely</div>
-        </div>
-        
-        <div>
-            <div><label>*Feel satisfied with your life?:</label></div>
-          <div class="input"><input type="radio" name="feelSatisfiedB" required checked value=0>Always</div>
-          <div class="input"><input type="radio" name="feelSatisfiedB" value=1>Mostly</div>
-          <div class="input"><input type="radio" name="feelSatisfiedB" value=2>Half the time</div>
-          <div class="input"><input type="radio" name="feelSatisfiedB" value=3>Rarely</div>
-        </div>
-       <!-- end well -->
+      <?php
+        $question2 = array("Feel full of life?:", "Feel nervous?:", "Feel that you are playing a useful part in things?:", "Feel calm and peaceful?:", "Have a lot of energy?:",
+          "Feel depressed?:", "Feel worn out?:", "Feel happy?:", "Feel satisfied with your life?:");
+        $i++;
+        for ($j = $i; $j < count($question2)+$i; $j++)
+          {
+            echo '<div>';
+            echo '<div><label>'.$question2[$j - $i].'</label></div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 0)? "checked":"") .' required value=0>Always</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 1)? "checked":"") .' value=1>Mostly</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 2)? "checked":"") .' value=2>Half the time</div>';
+            echo '<div class="input"><input type="radio" name="q'. ($j) .'"' . ((isset($_POST["q$j"]) && $_POST["q$j"] == 3)? "checked":"") .' value=3>Rarely</div>';
+            echo '</div>';
+          }
+      ?>  
 
             <hr><label><strong><h2>The following questions are about how you feel currently.</h2></strong></label><hr>
                                           
         <label>How much of the time did you...</label>
-          <div>
-              <div><label>*Feel full of life?:</label></div>
-            <div class="input"><input type="radio" name="feelFullOfLifeA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelFullOfLifeA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelFullOfLifeA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelFullOfLifeA" value=3>Rarely</div>
-          </div>
-          
-          <div>
-            <label>*Feel nervous?:</label>
-            <div class="input"><input type="radio" name="feelNervousA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelNervousA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelNervousA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelNervousA" value=3>Rarely</div>
-          </div>
-          
-          <div>
-              <div><label>*Feel that you are playing a useful part in things?:</label></div>
-            <div class="input"><input type="radio" name="feelUsefulA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelUsefulA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelUsefulA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelUsefulA" value=3>Rarely</div>
-          </div>
-          
-          <div>
-              <div><label>*Feel calm and peaceful?:</label></div>
-            <div class="input"><input type="radio" name="feelCalmA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelCalmA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelCalmA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelCalmA" value=3>Rarely</div>
-          </div>
-          
-          <div>
-              <div><label>*Have a lot of energy?:</label></div>
-            <div class="input"><input type="radio" name="feelEnergyA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelEnergyA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelEnergyA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelEnergyA" value=3>Rarely</div>
-          </div>                      
-          
-          <div>
-              <div><label>*Feel depressed?:</label></div>
-            <div class="input"><input type="radio" name="feelDepressedA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelDepressedA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelDepressedA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelDepressedA" value=3>Rarely</div>
-          </div>
-          
-          <div>
-              <div><label>*Feel worn out?:</label></div>
-            <div class="input"><input type="radio" name="feelWornOutA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelWornOutA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelWornOutA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelWornOutA" value=3>Rarely</div>
-          </div>
-          
-          <div>
-              <div><label>*Feel happy?:</label></div>
-            <div class="input"><input type="radio" name="feelHappyA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelHappyA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelHappyA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelHappyA" value=3>Rarely</div>
-          </div>
-          
-          <div>
-              <div><label>*Feel satisfied with your life?:</label></div>
-            <div class="input"><input type="radio" name="feelSatisfiedA" required checked value=0>Always</div>
-            <div class="input"><input type="radio" name="feelSatisfiedA" value=1>Mostly</div>
-            <div class="input"><input type="radio" name="feelSatisfiedA" value=2>Half the time</div>
-            <div class="input"><input type="radio" name="feelSatisfiedA" value=3>Rarely</div>
-          </div>
+        <?php
 
+          for ($k = $j; $k < count($question2)+$j; $k++)
+            {
+              echo '<div>';
+              echo '<div><label>'.$question2[$k - $j].'</label></div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 0)? "checked":"") .' required value=0>Always</div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 1)? "checked":"") .' value=1>Mostly</div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 2)? "checked":"") .' value=2>Half the time</div>';
+              echo '<div class="input"><input type="radio" name="q'. ($k) .'"' . ((isset($_POST["q$k"]) && $_POST["q$k"] == 3)? "checked":"") .' value=3>Rarely</div>';
+              echo '</div>';
+            }
+        ?>  
+          
           <div>
-            <div><label for="affectFeelings">How are the feelings that are listed above affected when you participate in a Sit and Be Fit exercise class?:</label></div>                    
-            <div><textarea type="text" id="affectFeelings" name="affectFeelings"></textarea></div>
+            <div><label for="q35">How are the feelings that are listed above affected when you participate in a Sit and Be Fit exercise class?:</label></div>                    
+            <div><textarea type="text" name="q35"></textarea></div>
           </div>
-            <div class="inputs"><button type="submit" name="submitQ2">Submit</button></div>
+        
+
+
+            <button class="btn-primary" type="submit" name="submitQuestionnaireP2">Submit</button>
       </form> <!-- end form -->
     </fieldset> <!-- end offset centered -->
   </div> <!-- end container -->
-
-     <?php if(isset($return) && !empty($return)){?>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-      <script>
-      $(document).ready(function (){
-        $("#message").html('<?= $return;?>');
-        $("#message").show();
-      });
-      </script>
-      <?php } ?>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+ 
+    <script>
+    <?php   if(isset($q2return)) { ?>
+    
+    // display message upon success  or error
+    $(document).ready(function () { 
+      var message;
+      <?php if ($q2return == false) { ?>
+        message = "<strong>Error!</strong> Something went wrong while saving the form data.";
+        $("#q2message").removeClass("success").addClass("error");
+        $("#q2message").html(message);
+        $("#q2message").show();         
+        <?php   }
+        else if ($q2return === "sucess") { ?>
+          message = "<strong>Success!</strong?> Form submitted!";         
+          $("#q2message").removeClass("error").addClass("success");
+          $("#q2message").html(message);
+          $("#q2message").show();         
+          <?php } ?>
+        }); 
+  <?php } ?>
+  </script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+ 
