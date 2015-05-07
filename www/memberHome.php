@@ -8,17 +8,18 @@ $ques2Stat = "";
 $parqStat ="";	
 
 //-----------------------------------lock completed forms-------------------------------------------
-	if(FormsModel::isEnrollmentComplete())
+	$user_id = $user->id;
+	if(FormsModel::isEnrollmentComplete($user_id))
 	//	if(FormsModelTemp::isEnrollmentComplete())
 		$enrollStat = "lock";
 	
-	if(FormsModel::isParQComplete())	
+	if(FormsModel::isParQComplete($user_id))	
 		$parqStat = "lock";
 
-	if(FormsModel::isQues1Complete())	
+	if(FormsModel::isQues1Complete($user_id))	
 		$ques1Stat = "lock";
 
-	if(FormsModel::isQues2Complete())	
+	if(FormsModel::isQues2Complete($user_id))	
 		$ques2Stat = "lock";
 	
 //----------------------------------------errors-------------------------------------------------
