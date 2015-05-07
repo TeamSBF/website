@@ -506,7 +506,7 @@ class FormsModel
 	public static function isQues1Complete($id)
 	{
 		$select = QueryFactory::Build("select");
-		$select->Select('completed')->Table('questionnaireP1_form')->Where(['userID','=', $id])->Limit();
+		$select->Select('completed')->Table('questionnairep1_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
 		$resultArray = $res->Result();
 
@@ -521,7 +521,7 @@ class FormsModel
 	public static function isQues2Complete($id)
 	{
 		$select = QueryFactory::Build("select");
-		$select->Select('completed')->Table('questionnaireP2_form')->Where(['userID','=', $id])->Limit();
+		$select->Select('completed')->Table('questionnairep2_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
 		$resultArray = $res->Result();
 
