@@ -474,11 +474,8 @@ class FormsModel
 	
 	//==================================================
 
-	public static function isEnrollmentComplete()
+	public static function isEnrollmentComplete($id)
 	{
-		$id = $_SESSION['user']->__get('id');
-		
-		
 		$select = QueryFactory::Build("select");
 		$select->Select('completed')->Table('enrollment_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
@@ -492,10 +489,8 @@ class FormsModel
 		return false;
 	}
 	
-	public static function isParQComplete()
+	public static function isParQComplete($id)
 	{
-		$id = $_SESSION['user']->__get('id');
-		
 		$select = QueryFactory::Build("select");
 		$select->Select('completed')->Table('parq_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
@@ -508,10 +503,8 @@ class FormsModel
 		}
 		return false;
 	}
-	public static function isQues1Complete()
+	public static function isQues1Complete($id)
 	{
-		$id = $_SESSION['user']->__get('id');
-		
 		$select = QueryFactory::Build("select");
 		$select->Select('completed')->Table('questionnaireP1_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
@@ -525,10 +518,8 @@ class FormsModel
 		return false;
 	}
 	
-	public static function isQues2Complete()
+	public static function isQues2Complete($id)
 	{
-		$id = $_SESSION['user']->__get('id');
-		
 		$select = QueryFactory::Build("select");
 		$select->Select('completed')->Table('questionnaireP2_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
