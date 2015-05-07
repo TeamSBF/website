@@ -249,7 +249,7 @@
 
           </div> 
         </div> <!-- end panel "demographics" -->
-               <div><button type="submit" name="submitQuestionnaireP1">Submit</button></div>
+               <div class="inputs"><button type="submit" name="submitQuestionnaireP1">Submit</button></div>
         </div>
       </form>
 
