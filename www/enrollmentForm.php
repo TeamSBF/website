@@ -1,6 +1,5 @@
 
 <?php
-
     if (isset($_POST['submitEnrollment']))
     {
       //print_r($_POST);
@@ -88,7 +87,7 @@
             <div class="inputs"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 0) echo "checked";?> value=0>No</div>
           </div>
 
-          <div class="enrollInput"><button type="submit" name="submitEnrollment">Submit</button></div>
+          <div><button type="submit" name="submitEnrollment">Submit</button></div>
         </div>
   </form>
 </div>
@@ -124,6 +123,7 @@
 </script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="js/bootstrap.min.js"></script>
+
 
 
 

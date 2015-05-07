@@ -1,5 +1,6 @@
 
 <?php
+
  	if (isset($_POST['submitParQ']))
     {
     	if ($user)
@@ -434,7 +435,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 	/* Generic function for all section 2 questions, if yes show sub-questions, if no hide */
 	function s2RadiosClick(radioElement, divID) {
 		var count = $("#"+divID+" > div").length;
-		if ($(radioElement).val() === 1) {
+		if ($(radioElement).val() == 1) {
 			$("#"+ divID).show("slow");			
 			switchRequiredAttribute(divID, count, "true");
 		}
@@ -446,7 +447,6 @@ seek further advice from your doctor OR a qualified exercise professional before
 
 	function loopSubQuestions(radioElement, divID) {
 		var count = $("#"+divID+" > div").length;
-		//$(radioElement).checked = false;
 		$("#"+ divID).hide("slow");			
 		switchRequiredAttribute(divID, count, "false");
 		uncheckSubQuestions(divID, count);
