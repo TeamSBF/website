@@ -59,6 +59,7 @@ tinymce.init({
                 "searchreplace visualblocks code fullscreen",
                 "insertdatetime media table contextmenu paste youtube"
             ],
+            contextmenu: "link image inserttable | cell row column deletetable | youtube",
             toolbar: "save | insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image| youtube"
         });
 	$(document).ready(function(){
