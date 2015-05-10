@@ -483,8 +483,7 @@ class FormsModel
 
 		if ($res->RowCount() == 1)
 		{
-
-			return $res;
+			return true;
 		}
 		return false;
 	}

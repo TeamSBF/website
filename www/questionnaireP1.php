@@ -13,12 +13,11 @@
     }
 ?>
 
-      <div class="container">
-        <div class="background"><fieldset>
-          <legend><strong><h1>Pre-Study Questionnaire Part 1</h1></strong></legend>
 
+        <div class="background">
+          <strong><h1>Pre-Study Questionnaire Part 1</h1></strong>
+          <fieldset>
           <form method="post">
-           <div>
             <div>
               <div id="q1message" style="display:none"></div>
               <div>
@@ -38,7 +37,7 @@
               </div>
               
               <div>
-                  <div><label>You exercise:</label>
+                  <div><label>You exercise:</label></div>
                   <div class="input"><input type="radio" name="q3" required checked value=0>By yourself</div>
                   <div class="input"><input type="radio" name="q3" value=1>With a partner</div>
                   <div class="input"><input type="radio" name="q3" value=2>With a class</div>
@@ -59,7 +58,6 @@
               </div>
 
             </div>
-          </div>
 
           <div>
               <hr><div><h2>Health Questions</h2></div><hr>
@@ -178,9 +176,9 @@
                   <div class="input"><input type="radio" name="q21" value=0>No</div>
               </div>
               <div>
-                  <div><label for="otherConditions" class="control-label col-sm-3">Other medical conditions</label></div>
-                <div class="col-sm-9">
-                    <div class="input"><textarea type="text" class="form-control" name="q22" rows="3"></textarea></div>
+                  <div><label for="otherConditions">Other medical conditions</label></div>
+                <div>
+                    <div class="input"><textarea type="text" name="q22" rows="3"></textarea></div>
                 </div>
               </div>
 
@@ -192,15 +190,15 @@
             <div>
 
              <div>
-                 <div><label for="age" class="control-label col-sm-4">Age:</label></div>
-              <div class="col-sm-offset-4">
-                  <div class="input"><input type="number" pattern="\d{1-3}" class="form-control" name="q23" placeholder="your age"></div>
+                 <div><label for="age">Age:</label></div>
+              <div>
+                  <div class="input"><input type="number" pattern="\d{1-3}" name="q23" placeholder="your age"></div>
               </div>
             </div>
             
             <div>
-                <div><label class="col-sm-4">Gender:</label></div>
-              <div class="col-sm-offset-5">
+                <div><label>Gender:</label></div>
+              <div>
                   <div class="input"><input type="radio" name="q24" required checked value=1>Male</div>
                   <div class="input"><input type="radio" name="q24" value=0>Female</div>
               </div>
@@ -218,15 +216,15 @@
             </div>
             
             <div>
-                <div><label class="control-label col-sm-4" for="education">Highest level of Education:</label></div>
-              <div class="col-sm-offset-4">
-                  <div class="input"><input type="text" class="form-control" name="q26"></div>
+                <div><label for="education">Highest level of Education:</label></div>
+              <div>
+                  <div class="input"><input type="text" name="q26"></div>
               </div>
             </div>
             
             <div>
-                <div><label class="col-sm-5">Current Working Status:</label></div>
-              <div class="col-sm-offset-5">
+                <div><label>Current Working Status:</label></div>
+              <div>
                   <div class="input"><input type="radio" name="q27" required checked value=0>Employed</div>
                   <div class="input"><input type="radio" name="q27" value=1>Unemployed</div>
                   <div class="input"><input type="radio" name="q27" value=2>Retired</div>
@@ -234,30 +232,28 @@
             </div>
         
             <div>
-                <div><label for="householdNumber" class="control-label col-sm-4">Number of members in your household:</label></div>
-              <div class="col-sm-8">
-                  <div class="input"><input type="number" pattern="\d{1-2}" class="form-control" name="q28" placeholder="household number"></div>
+                <div><label for="householdNumber">Number of members in your household:</label></div>
+              <div>
+                  <div class="input"><input type="number" pattern="\d{1-2}" name="q28" placeholder="household number"></div>
               </div>
             </div>
             
             <div>
-                <div><label for="q29" class="control-label col-sm-4">Annual Income:</label></div>
-              <div class="col-sm-8">
-                  <div class="input"><input type="number" class="form-control" name="q29" placeholder="income per year"></div>
+                <div><label for="q29">Annual Income:</label></div>
+              <div>
+                  <div class="input"><input type="number" name="q29" placeholder="income per year"></div>
               </div>
             </div>
 
           </div> 
         </div> <!-- end panel "demographics" -->
-               <div class="inputs"><button type="submit" name="submitQuestionnaireP1">Submit</button></div>
-        </div>
+               <div class="inputs"><button type="submit" id="submitQuestionnaireP1" name="submitQuestionnaireP1">Submit</button></div>
+
       </form>
 
-            </fieldset> <!-- end offset centered -->
-  </div> <!-- end container -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    </fieldset></div> <!-- end offset centered -->
  
-    <script>
+<script>
     <?php   if(isset($q1return)) { ?>
     
     // display message upon success  or error
@@ -279,5 +275,3 @@
   <?php } ?>
   </script>
 
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
