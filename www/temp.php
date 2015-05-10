@@ -4,10 +4,8 @@
       if ($user)
       {
         $_POST['userID'] = $user->id;
-        print_r($_POST);
         $qp2validator = new FormsModel($_POST);
         $q2return = $qp2validator->validateQuestionnaireP2();
-        echo $q2return;
       }      
     }
 ?>
