@@ -24,15 +24,9 @@ class FormsModel
 	}
 
 	/* Entry point for the pre-study questionnaire part 1 form */
-	public function validateQuestionnaireP1()
+	public function validateQuestionnaire()
 	{
-		return $this->validateAndSaveQuestionnaireP1();
-	}
-
-	/* Entry point for the pre-study questionnaire part 2 form */
-	public function validateQuestionnaireP2()
-	{
-		return $this->validateAndSaveQuestionnaireP2();
+		return $this->validateAndSaveQuestionnaire();
 	}
 
 	/* Entry point for the parQ form */
@@ -230,14 +224,14 @@ class FormsModel
 	}
 
 	/* Validates the questionnaire part 2 form data, build the insert query and save to the database */
-	private function validateAndSaveQuestionnaireP1()
+	private function validateAndSaveQuestionnaire()
 	{
 		// get a Insert query object
 		$insert = QueryFactory::Build('insert');
-		$insert->Into("questionnairep1_form");
+		$insert->Into("questionnaire_form");
 
 		//return $this->validateParQFieldsAndBuildQuery($insert);
-		$insert = $this->validateQuestionnaireP1AndBuildQuery($insert);
+		$insert = $this->validateQuestionnaireAndBuildQuery($insert);
 		// Check if validation passed
 		if ($insert == false)
 			return false;
@@ -249,7 +243,7 @@ class FormsModel
         if ($qinfo->RowCount() == 1)
         {
         	$complete = QueryFactory::Build('update');
-        	$complete->Table('questionnairep1_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$complete->Table('questionnaire_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
         	if ($cinfo->RowCount() == 1)
         		return "success";
@@ -258,7 +252,7 @@ class FormsModel
 	}
 
 	/* Validates the fields for the questionnaire part 1 form */
-	private function validateQuestionnaireP1AndBuildQuery($query)
+	private function validateQuestionnaireAndBuildQuery($query)
 	{
 		$f = $this->form;
 		if (isset($f["userID"]))
@@ -268,12 +262,16 @@ class FormsModel
 			"q1" => 3, "q2" => 3, "q3" => 3, "q4" => 2, "q5" => 1, "q6" => 4, "q7" => 4, "q8" => 3,
 			"q9" => 3, "q10" => 1, "q11" => 1, "q12" => 1, "q13" => 1, "q14" => 1, "q15" => 1, "q16" => 1,
 			"q17" => 1, "q18" => 1, "q19" => 1, "q20" => 1, "q21" => 1, "q22" => "text", "q23" => "number", "q24" => 1,
-			"q25" => 4, "q26" => "text", "q27" => 2, "q28" => "number", "q29" => "number");
+			"q25" => 4, "q26" => "text", "q27" => 2, "q28" => "number", "q29" => "number",
+			"q30" => "number", "q31" => "number", "q32" => "text", "q33" => 2, "q34" => 2, "q35" => 2, "q36" => 2, "q37" => 2,
+			"q38" => 2, "q39" => 2, "q40" => 2, "q41" => 2, "q42" => 2, "q43" => 2, "q44" => 2, "q45" => "text",
+			"q46" => 3, "q47" => 3, "q48" => 3, "q49" => 3, "q50" => 3, "q51" => 3, "q52" => 3, "q53" => 3,
+			"q54" => 3, "q55" => 3, "q56" => 3, "q57" => 3, "q58" => 3, "q59" => 3, "q60" => 3, "q61" => 3, "q62" => 3, "q63" => 3, "q64" => "text");
 
-		return $this->validateP1P2($q, $query);
+		return $this->validateQuestionnaireFields($q, $query);
 	}
 
-	private function validateP1P2($arr, $query)
+	private function validateQuestionnaireFields($arr, $query)
 	{
 		$f = $this->form;
 		$textLength = 500;
@@ -317,49 +315,6 @@ class FormsModel
 		}
 
 		return $query;
-	}
-
-	/* Validates the questionnaire part 2 form data, build the insert query and save to the database */
-	private function validateAndSaveQuestionnaireP2()
-	{
-		// get a Insert query object
-		$insert = QueryFactory::Build('insert');
-		$insert->Into("questionnairep2_form");
-
-		//return $this->validateParQFieldsAndBuildQuery($insert);
-		$insert = $this->validateQuestionnaireP2AndBuildQuery($insert);
-		// Check if validation passed
-		if ($insert == false)
-			return false;
-		//return printr($insert->Query(true));
-        // save to the DB
-        $qinfo = DatabaseManager::Query($insert);
-
-        // check for success or failure
-        if ($qinfo->RowCount() == 1)
-        {
-        	$complete = QueryFactory::Build('update');
-        	$complete->Table('questionnairep2_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
-        	$cinfo = DatabaseManager::Query($complete);
-        	if ($cinfo->RowCount() == 1)
-        		return "success";
-        }
-        return false;
-	}
-
-	private function validateQuestionnaireP2AndBuildQuery($query)
-	{
-		$f = $this->form;
-		if (isset($f["userID"]))
-			$query->Set(["userID", $f["userID"]]);
-		// array defining valid options (integers mean this radio button options goes from 0 to X)
-		$q = array(
-			"q1" => "number", "q2" => "number", "q3" => "text", "q4" => 2, "q5" => 2, "q6" => 2, "q7" => 2, "q8" => 2,
-			"q9" => 2, "q10" => 2, "q11" => 2, "q12" => 2, "q13" => 2, "q14" => 2, "q15" => 2, "q16" => "text",
-			"q17" => 3, "q18" => 3, "q19" => 3, "q20" => 3, "q21" => 3, "q22" => 3, "q23" => 3, "q24" => 3,
-			"q25" => 3, "q26" => 3, "q27" => 3, "q28" => 3, "q29" => 3, "q30" => 3, "q31" => 3, "q32" => 3, "q33" => 3, "q34" => 3, "q35" => "text");
-
-		return $this->validateP1P2($q, $query);
 	}
 
 	/* Validates the parQ form data, build the insert query and save to the database */
@@ -483,8 +438,7 @@ class FormsModel
 
 		if ($res->RowCount() == 1)
 		{
-
-			return $res;
+			return true;
 		}
 		return false;
 	}
@@ -503,25 +457,10 @@ class FormsModel
 		}
 		return false;
 	}
-	public static function isQues1Complete($id)
+	public static function isQuestionnaireComplete($id)
 	{
 		$select = QueryFactory::Build("select");
-		$select->Select('completed')->Table('questionnairep1_form')->Where(['userID','=', $id])->Limit();
-		$res = DatabaseManager::Query($select);
-		$resultArray = $res->Result();
-
-		if ($res->RowCount() == 1)
-		{
-
-			return $res;
-		}
-		return false;
-	}
-	
-	public static function isQues2Complete($id)
-	{
-		$select = QueryFactory::Build("select");
-		$select->Select('completed')->Table('questionnairep2_form')->Where(['userID','=', $id])->Limit();
+		$select->Select('completed')->Table('questionnaire_form')->Where(['userID','=', $id])->Limit();
 		$res = DatabaseManager::Query($select);
 		$resultArray = $res->Result();
 

@@ -44,6 +44,7 @@ $grid = ($user) ? 12 : 8;
         <?php } ?>
     	$(function() {
             $("#accordion").accordion({
+                active: false,
                 collapsible: true,
                 heightStyle: "content"
             });

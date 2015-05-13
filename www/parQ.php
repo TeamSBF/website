@@ -15,7 +15,7 @@
 ?>
 
 <div class="background">
-<form method="post" class="form-vertical" id="parQform">
+<form method="post" id="parQform">
 	<h1><strong>Par-Q Form</strong></h1>
 	<div>
 		<h2>The Physical Activity Readiness Questionnaire for Everyone</h2>
@@ -378,10 +378,9 @@ seek further advice from your doctor OR a qualified exercise professional before
 			</fieldset>
 		</div>
 	</div>
-    <div class="parqInput"><button type="submit" name="submitParQ">Submit</button></div>
+    <div class="parqInput"><button type="submit" id="submitParQ" name="submitParQ">Submit</button></div>
 </form> <!-- end Form -->
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	
 <script>
 
@@ -480,5 +479,3 @@ seek further advice from your doctor OR a qualified exercise professional before
 	<?php } ?>
 
 </script>
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.min.js"></script>

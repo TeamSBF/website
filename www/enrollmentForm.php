@@ -2,21 +2,21 @@
 <?php
     if (isset($_POST['submitEnrollment']))
     {
-      //print_r($_POST);
+      print_r($_POST);
       if ($user)
       {
         $_POST['userID'] = $user->id;
         $enrollmentValidator = new FormsModel($_POST);
         $enrollmentReturn = $enrollmentValidator->validateEnrollment();
-        //print_r($enrollmentReturn);      
+        print_r($enrollmentReturn);      
       }      
     } 
 ?>
 
 <div class="background">
-    <form method="post" class="form-horizontal">
+    <form method="post">
     <div class="formBackground">
-      <h2>ENROLLMENT FORM</h2>
+      <legend><strong><h1>Enrollment Form</h1></strong></legend>
       <div id="enrollmentMessage" class="success" style="display:none"></div>
           <div>
               <div class="input"><label for="lName">Last Name</label></div>
@@ -87,18 +87,16 @@
             <div class="input"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 0) echo "checked";?> value=0>No</div>
           </div>
 
-          <div class="enrollInput"><button type="submit" name="submitEnrollment">Submit</button></div>
+          <div class="enrollInput"><button type="submit" id="submitEnrollment" name="submitEnrollment">Submit</button></div>
         </div>
   </form>
 </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
     <?php   if(isset($enrollmentReturn)) { ?>
     // display message upon success  or error
     $(document).ready(function () {
-      debugger;
       var message;
       <?php if ($enrollmentReturn == false) { ?>
         message = "<strong>Error!</strong> Something went wrong while saving the form data.\nHave you already completed and submitted this form?.";
@@ -121,24 +119,3 @@
         }); 
   <?php } ?>
 </script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
