@@ -59,20 +59,20 @@
 	<form class="register" method="POST">
 		<input type="hidden" name="regKey" value="">
 		<label>E-mail Address </label><br> 
-		<input type="text" name="email" placeholder="johndoe@example.net" value="a@a.a"> 
+		<input type="text" name="email" placeholder="johndoe@example.net" > 
 		<br> 
 		<br>
 		<label>Confirm E-mail Address </label><br>
-		<input type="text" name="cEmail" placeholder="johndoe@example.net" value="a@a.a">	  
+		<input type="text" name="cEmail" placeholder="johndoe@example.net">	  
 		<br>
 		<br>
 		<label>Password </label> 
 		<br>
-		<input type="password" name="password" placeholder="Password" value="a"> 
+		<input type="password" name="password" placeholder="Password" > 
 		<br><br>
 		<label>Confirm Password </label>
 		<br>
-		<input type="password" name="cPassword" placeholder="Confirm Password" value="a"> 
+		<input type="password" name="cPassword" placeholder="Confirm Password" > 
 		<br><br>
 		<div class="g-recaptcha" data-sitekey="6LejtgYTAAAAAITL_F2_L0NbPWtcEk35Cn7-O98W" data-theme="light"></div> <!--recaptcha  stuff-->
 		<button type="submit" name="register" value="Register">Register</button>
