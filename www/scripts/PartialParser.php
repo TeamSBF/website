@@ -11,21 +11,22 @@ class PartialParser extends Singleton
 
     private function parseTemplate($template, $data)
     {
-        printr($data);
-        $keys = array_keys($data);
-        $values = array_values($data);
-        // key prep for replace
-        array_walk($keys, function (&$value, $key) {$value = "[-$value-]";});
-
-        // replace the basic or easy stuff
-        $partial = str_replace($keys, $values, $template);
-        $partial = $this->parseLogic($partial, $keys, $values);
-        return $partial;
+        // convert keys to template keys
+        $data = $this->convertKeys($data);
+        // replace the templated values with the actual values
+        $partial = str_replace(array_keys($data), array_values($data), $template);
+        // replace anything else that wasn't used with an empty string
+        return preg_replace('/(\s*)\[\[(.*?)\]\](\s*)/', "", $partial);
     }
-
-    private function parseLogic($partial, $keys, $values)
+    
+    private function convertKeys($data)
     {
-
+        $converted = array();
+        $keys = array_keys($data);
+        foreach($keys as $key)
+            $converted["[[".$key."]]"] = $data[$key];
+        
+        return $converted;
     }
 
     public static function getPartial($partial)
