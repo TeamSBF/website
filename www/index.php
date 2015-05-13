@@ -3,52 +3,52 @@ require_once"header.php";
 
 if(isset($_POST['id']))
 {
-printr(htmlspecialchars($_POST['editor']));
+    //printr(htmlspecialchars($_POST['editor']));
 
-preg_match_all('/<img[^>]+>/i', $_POST['editor'], $results);
-$imgs = array();
-$found = array();
-foreach($results as $result)
-{
-    foreach($result as $img_tag)
+    preg_match_all('/<img[^>]+>/i', $_POST['editor'], $results);
+    $imgs = array();
+    $found = array();
+    foreach($results as $result)
     {
-        $found[] = $img_tag;
-        preg_match_all('/(alt|title|src|width|height|id)=("[^"]*")/i',
-        $img_tag,
-        $imgs[htmlspecialchars($img_tag)]);
+        foreach($result as $img_tag)
+        {
+            $found[] = $img_tag;
+            preg_match_all('/(alt|title|src|width|height|id)=("[^"]*")/i',
+            $img_tag,
+            $imgs[htmlspecialchars($img_tag)]);
+        }
     }
-}
 
-$contentImgs = array();
-foreach($imgs as $img)
-{
-    $contentImgs[] = array();
-    $j = count($contentImgs) - 1;
-    for($i = 0; $i < count($img[1]); $i++)
+    $contentImgs = array();
+    foreach($imgs as $img)
     {
-        $contentImgs[$j][$img[1][$i]] = str_replace("\"", "", $img[2][$i]);
+        $contentImgs[] = array();
+        $j = count($contentImgs) - 1;
+        for($i = 0; $i < count($img[1]); $i++)
+        {
+            $contentImgs[$j][$img[1][$i]] = str_replace("\"", "", $img[2][$i]);
+        }
     }
-}
 
-$parsedImgs = array();
-foreach($contentImgs as $img)
-{
-    if($img['id'] === "youtubevideo")
+    $parsedImgs = array();
+    foreach($contentImgs as $img)
     {
-        $src = 'http://www.youtube.com/embed/' . linkifyYouTubeURLs($img['src']);
-        $parsedImgs[] = '<iframe width="'.$img['width'].'" height="'.$img['height'].'" src="'.$src.'" frameborder="0" allowfullscreen="allowfullscren"></iframe>';
+        if($img['id'] === "youtubevideo")
+        {
+            $src = 'http://www.youtube.com/embed/' . linkifyYouTubeURLs($img['src']);
+            $parsedImgs[] = '<iframe width="'.$img['width'].'" height="'.$img['height'].'" src="'.$src.'" frameborder="0" allowfullscreen="allowfullscren"></iframe>';
+        }
     }
-}
-$_POST['editor'] = str_replace($found, $parsedImgs, $_POST['editor']);
-$_POST['editor'] = htmlspecialchars($_POST['editor']);
-preg_match('!\d+!', $_POST['id'], $results);
-$_POST['id'] = $results[0];
-echo $_POST['title']."<br>";
-echo $_POST['editor'];
-printr($_POST);
-$update = QueryFactory::Build("update")->Table("articles")->Where(["id","=",$_POST['id']]);
-$update->Set(["title", $_POST['title']],['content', $_POST['editor']], ['updated', "UNIX_TIMESTAMP()"]);
-DatabaseManager::Query($update);
+    $_POST['editor'] = str_replace($found, $parsedImgs, $_POST['editor']);
+    $_POST['editor'] = htmlspecialchars($_POST['editor']);
+    preg_match('!\d+!', $_POST['id'], $results);
+    $_POST['id'] = $results[0];
+    //echo $_POST['title']."<br>";
+    //echo $_POST['editor'];
+    //printr($_POST);
+    $update = QueryFactory::Build("update")->Table("articles")->Where(["id","=",$_POST['id']]);
+    $update->Set(["title", $_POST['title']],['content', $_POST['editor']], ['updated', "UNIX_TIMESTAMP()"]);
+    DatabaseManager::Query($update);
 }
 
 // Linkify youtube URLs which are not already links.
@@ -89,6 +89,7 @@ $articles = $info->Result();
 if($info->RowCount() < 2) $articles = [$articles];
 ?>
 <script>
+    var youtubeLinkRegex = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
     $(document).ready(function(){
         var editors = 0;
         var articles = $("#articlesList");
@@ -108,13 +109,35 @@ if($info->RowCount() < 2) $articles = [$articles];
             title.val(p.find("#title").text());
             // TODO: convert all iframe tags in #content into images using the
             // specified preview image.
-            editor.text(p.find("#content").html());
+            
+            var contents = youtubeIframeToImg(p.find("#content").html());
+            editor.html(contents);
             editor.height(p.height() - p.find("#title").height());
             tinymce.EditorManager.execCommand("mceAddEditor", false, editor.attr('id'));
             p.hide();
             editors++;
         });
     });
+    
+    function youtubeIframeToImg(contents)
+    {
+        var iframes = $(contents).find("iframe[src*='youtu']");
+        for(i = 0; i < iframes.length; i++)
+		{
+			var iframe = $(iframes[i]);
+			var replace = iframe.wrap('<p/>').parent().html();
+			var src = 'http://img.youtube.com/vi/' + getVideoID(iframe.attr("src")) + '/hqdefault.jpg';
+			var img = '<img width="'+iframe.attr("width")+'" height="'+iframe.attr("height")+'" src="'+src+'" />';
+			contents = contents.replace(replace, img);
+		}
+        
+        return contents;
+    }
+    
+    function getVideoID(url)
+    {
+        return url.match(youtubeLinkRegex)[7];
+    }
 </script>
     <div class="background">
         <div class="articleWrapper" id="articlesList">
