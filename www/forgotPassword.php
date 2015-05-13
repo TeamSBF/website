@@ -3,6 +3,7 @@
 	if(isset($_POST['retrieve']) )
 	{
 		$email = trim($_POST['email']);
+		$server = $_SERVER['SERVER'];
 		
 		if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
 			echo "Email is invalid, please try again";
@@ -15,13 +16,14 @@
 			$res = DatabaseManager::Query($user)->Result();
 			$id = $res["id"];
 			
+			
 				//if current time is greater then last salt change + 1 day
 			if(strtotime($res["salt_time"],"+1 day") < date())
 			{
 				//update salt and salt_time
-				$salt = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM))
+				$salt = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
 				$update = QueryFactory::Build("update"); //new update query
-				$update->Table("users")->Where( ["id", "=", $id] )->Set(["salt",  4salt],["salt_time", date()]); //update the query
+				$update->Table("users")->Where( ["id", "=", $id] )->Set(["salt",  $salt],["salt_time", date()]); //update the query
 				$resUpdate = DatabaseManager::Query($update); // execute the query
 			}
 			else
@@ -29,7 +31,12 @@
 			
 			
 			$link = sha1($id.$salt);
-			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://localhost/resetPassword.php?id=$id&link=$link"); 
+			
+			/*//insert 
+			$insert = QueryFactory::Build("insert");
+			$insert->Into("forgotPasswordTimeout")->Set(["id", $id], ["hash", $pass], ["creationTime", "UNIX_TIMESTAMP()"]);
+			*/
+			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://$server/resetPassword.php?id=$id&link=$link"); 
 			
 		}
 	}
