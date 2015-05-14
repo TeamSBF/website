@@ -1,6 +1,6 @@
 <?php
 //path to cronJobs file
-$path = "cronJobs/";
+//$path = "cronJobs/";
 
 //path to config and sessions
 chdir('..');
@@ -31,25 +31,32 @@ else if($res->RowCount() == 1)
 	process($res2);
 }
 
-private function process ($curr)
+function process ($curr)
 {
+	//path to cronjob files
+	$path = "cronJobs/";
+	
+	echo $curr["name"] . ": ";
+	echo $curr["frequency"]."<br>";
 	//if need to run task
 	if( strtotime($curr["frequency"],$curr["lastRun"]) < time())
 	{
-			//run job
-			//note working out of www dir
-			require_once($path.$curr["name"]);
+		echo "current dir: ". getcwd(). "<br>";
+		echo $path.$curr["name"]."<br>";
+		//run job
+		//note working out of www dir
+		include($path.$curr["name"]);
 		
-			//update last run time
-			$ran = QueryFactory::Build('update');
-			$ran->Table("schedule")->Set(["lastRun", time()])->Where(["name", '=', $curr["name"]]);
-			$success=DatabaseManager::Query($ran);
+		//update last run time
+		$ran = QueryFactory::Build('update');
+		$ran->Table("schedule")->Set(["lastRun", time()])->Where(["name", '=', $curr["name"]]);
+		$success=DatabaseManager::Query($ran);
 		
 		//for testing
-			if($success->RowCount() > 0)
-				echo $curr['name'] . " updated";
-			else
-				echo $curr['name'] . " failed";
+		if($success->RowCount() > 0)
+			echo $curr['name'] . " updated";
+		else
+			echo $curr['name'] . " failed";
 	}
 }
 ?>

@@ -1,6 +1,6 @@
-table<?php
+<?php
 
-/*-------------------------------for testing
+/*
 //path to cronJobs file
 $path = "cronJobs/";
 
@@ -10,54 +10,59 @@ chdir('..');
 //needed to use models
 require_once "config.php";
 require_once "sessions.php";
-//----------------------------------------*/
 
+*/
 
-select = QueryFactory::Build("select");
+$select = QueryFactory::Build("select");
 // get all rows to users table
 $select->Select("id", "activated","created","pLevel")->From("users");
         // Get the results from the query execution
 $res = DatabaseManager::Query($select)->Result();
 
+
 foreach($res as $value)
 {
-	//if ($res["pLevel"] < admin)//----------------------------------------
-	//{
-		if(lateActivation($res))
+	if ($value["pLevel"] != 3 && $value["activated"] !=-1)//---------------------------------------- not admin, not deactivated
+	{
+//		echo $value["id"] . " is: <br>"; 
+		if(lateActivation($value))
 		{
-			deactivate($res["id"]);
+//			echo "not activated <br>";
+			remove($value["id"]);
 		}
-		else if(lateForms($res))
+		else if(lateForms($value))
 		{
-			deactivate($res["id"]);
+//			echo "late with forms <br>";
+			deactivate($value["id"]);
 		}
 		else
 		{
-			checkAssessments($res);
+			//checkAssessments($res);
 		}
-	//}
+	}
 }
+
 
 function lateActivation ($curr)
 {
 	//read from settings
 	$time_to_live = "+1 day";
-	if( strtotime($curr["created"],$time_to_live) < time() && !$$curr["activated"])
+	if( strtotime($time_to_live,$curr["created"]) < time() && $curr["activated"] == 0)
 	{
-		return true	;
+		return true;
 	}
 	return false;
 }
 
-function lateForms($res)
+function lateForms($curr)
 {
 	//read from settings?
 	$time_to_live = "+1 month";
-	if(strtotime($curr["created"],$time_to_live) < time())
+	if(strtotime($time_to_live,$curr["created"]) < time())
 	{
-		if(!FormModel::isEnrollmentCompleteed($curr["id"]) || !FormModel::isParQComplete($curr["id"]) || !FormModel::isQues1Complete($curr["id"]) || !FormModel::isQues2Complete($curr["id"]))
+		if(!FormsModel::isEnrollmentComplete($curr["id"]) || !FormsModel::isParQComplete($curr["id"]) || !FormsModel::isQues1Complete($curr["id"]) || !FormsModel::isQues2Complete($curr["id"]))
 		{
-			return true
+			return true;
 		}
 	}
 	return false;
@@ -69,24 +74,27 @@ function checkAssessments($curr)
 		//get assessment count
 		//if assessment count < 1
 			//delete assessments
+	return 1;
 }
 
-private function remove($id)
+
+function remove($id)
 {
 	$del = QueryFactory::Build("delete");
-	$del->Table("users")->Where(["id","=",$row["id"]]);
+	$del->Table("users")->Where(["id","=",$id]);
 	$deleted = DatabaseManager::Query($del);
 }
 
-private function deactivate($id)
+function deactivate($id)
 {
 	$update = QueryFactory::Build('update');
-	$update->Table('users')->Set(['activated',0])->Where(['id','=', $id]);
-	$temp = DtatbaseManager::Query($update);
+	$update->Table('users')->Set(['activated',-1])->Where(['id','=', $id]);
+	$temp = DatabaseManager::Query($update);
 	
 	if($temp->RowCount()==1)
 		echo "deactivated ". $id;
 	else
 		echo "failed to deactivate ". $id;
 }
+
 ?>
