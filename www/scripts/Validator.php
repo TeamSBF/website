@@ -24,6 +24,20 @@ class Validator extends Singleton
 
         return filter_var($value, $this->types[$type]["s"]);
     }
+    
+    public function SanitizeArray($type, $values)
+    {
+        // We don't have the knowledge to sanitize $value OR it's not an array
+        if (!$this->checkType($type, "s") || !is_array($values))
+            return $values;
+        
+        $keys = array_keys($values);
+        $sanitized = array();
+        for($i = 0; $i < count($keys); $i++)
+            $sanitized[$keys[$i]] = $this->Sanitize($type, $values[$keys[$i]]);
+        
+        return $sanitized;
+    }
 
     private function checkType($type, $filter)
     {

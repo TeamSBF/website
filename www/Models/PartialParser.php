@@ -32,7 +32,14 @@ class PartialParser extends Singleton
     public static function getPartial($partial)
     {
         if (!array_key_exists($partial, self::$partials)) {
-            self::$partials[$partial] = require_once "/partials/$partial.php";
+            $path = "partials/";
+            $filename = "$partial.php";
+            
+            $file = $path.$filename;
+            if(!file_exists($file))
+                $file = $path."formelements/".$filename;
+            
+            self::$partials[$partial] = require_once $file;
         }
         return self::$partials[$partial];
     }

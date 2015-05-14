@@ -28,6 +28,6 @@ class RadioButton
         $data['text'] = $this->text;
         $data['value'] = $this->value;
         $data['checked'] = $this->checked? "checked" : "";
-        return PartialParser::Parse('radio-button', $data);
+        return PartialParser::Parse('radiobutton', $data);
     }
 }

@@ -121,7 +121,7 @@ class DatabaseManager extends Singleton
         $stmt = $this->conn->prepare($q);
         // Bind all the columns with their associated values
         for ($i = 0; $i < count($cvpair); $i++)
-            $stmt->bindValue(":" . $cvpair[$i]->Column(), $cvpair[$i]->Value());
+            $stmt->bindValue(":" . $cvpair[$i]->BoundColumn(), $cvpair[$i]->Value());
 
         return $stmt;
     }

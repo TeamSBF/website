@@ -1,5 +1,5 @@
 <?php ob_start();?>
-<div class="[[classes]]">[[content]]</div>
+<button type="[[type]]" name="[[name]]">[[value]]</button>
 <?php
 $ret = ob_get_contents();
 ob_end_clean();

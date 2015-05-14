@@ -1,5 +1,5 @@
 <?php ob_start();?>
-<div class="[[classes]]">[[content]]</div>
+<div class="table">[[content]]</div>
 <?php
 $ret = ob_get_contents();
 ob_end_clean();

@@ -27,9 +27,9 @@ class RadioGroup
         }
     }
     
-    public function Add($key, $value)
+    public function Add($text, $value, $checked = false)
     {
-        $this->buttons[] = new RadioButton($this->name, $key, false, $value);
+        $this->buttons[] = new RadioButton($this->name, $text, $checked, $value);
     }
     
     public function Html()

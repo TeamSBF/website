@@ -1,5 +1,5 @@
 <?php ob_start();?>
-<div class="[[classes]]">[[content]]</div>
+<select name="[[name]]">[[options]]</select>
 <?php
 $ret = ob_get_contents();
 ob_end_clean();
