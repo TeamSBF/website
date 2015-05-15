@@ -35,11 +35,11 @@
 					if($id){
 						//*****************   SEND ACTIVATION EMAIL ********************************
 						$user = QueryFactory::Build("select");				
-						$user->Select("email","created", "password")->From("users")->Where(["id","=",$id])->Limit();
+						$user->Select("email","created")->From("users")->Where(["id","=",$id])->Limit();
 						$res = DatabaseManager::Query($user);
 						$res = $res->Result(); // get result from table
 						
-						$link = sha1($id.$res["email"].$res["created"].$res["password"]);// get the hash value for the link to send out
+						$link = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out
 						
 						Mailer::Send("$email","Activation Email","Please click on the link below to activate your account, http://$server/activation.php?id=$id&link=$link"); 
 						echo "<br/><br/>Check your email for account activation";
