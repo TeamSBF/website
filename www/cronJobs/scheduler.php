@@ -1,9 +1,12 @@
 <?php
-//path to cronJobs file
-//$path = "cronJobs/";
-
+/*------------------------------------------------to get where cron start at
+//	$myfile = fopen("CronStartLocation.txt", "a");
+//	fwrite($myfile, "cron starts at ". getcwd());
+//	fclose($myfile);
+*///------------------------------------------------------
+	
 //path to config and sessions
-chdir('..');
+chdir('www/'); //dependent on where cron runs from
 
 //needed to use models
 require_once "config.php";
@@ -19,8 +22,10 @@ $res2 = $res->Result();
 // iterate through each task and proccess
 if($res->RowCount() > 1 )
 {
+	fwrite($myfile, "in first if\n");
 	foreach($res2 as $curr)
 	{
+		fwrite($myfile,"prosess\n");
 		process($curr);
 	}
 }
@@ -28,24 +33,23 @@ if($res->RowCount() > 1 )
 //edge case of only one task
 else if($res->RowCount() == 1)
 {
+	fwrite($myfile ,"other prosess\n");
 	process($res2);
 }
+
 
 function process ($curr)
 {
 	//path to cronjob files
-	$path = "cronJobs/";
+	$path = "..\cronJobs";
 	
-	echo $curr["name"] . ": ";
-	echo $curr["frequency"]."<br>";
+//	echo $curr["name"] . ": ";
+//	echo $curr["frequency"]."<br>";
 	//if need to run task
 	if( strtotime($curr["frequency"],$curr["lastRun"]) < time())
 	{
-		echo "current dir: ". getcwd(). "<br>";
-		echo $path.$curr["name"]."<br>";
-		//run job
-		//note working out of www dir
-		include($path.$curr["name"]);
+		//run job		
+		include(__DIR__ . '/'. $curr["name"]);
 		
 		//update last run time
 		$ran = QueryFactory::Build('update');

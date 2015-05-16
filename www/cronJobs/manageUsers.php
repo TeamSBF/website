@@ -22,7 +22,7 @@ $res = DatabaseManager::Query($select)->Result();
 
 foreach($res as $value)
 {
-	if ($value["pLevel"] != 3 && $value["activated"] !=-1)//---------------------------------------- not admin, not deactivated
+	if ($value["pLevel"] !=UserLevel::Admin && $value["pLevel"] !=UserLevel::Super && $value["activated"] !=-1)//---------------------------------------- not admin, not deactivated
 	{
 //		echo $value["id"] . " is: <br>"; 
 		if(lateActivation($value))
