@@ -1,5 +1,5 @@
 <?php ob_start();?>
-<button type="[[type]]" name="[[name]]" id="[[id]]">[[value]]</button>
+<input type="hidden" name="[[name]]" value="[[value]]" />
 <?php
 $ret = ob_get_contents();
 ob_end_clean();
