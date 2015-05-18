@@ -24,7 +24,7 @@
 				echo "Failed to register, email already exists, please use a different email"; 
 			else{
 				// ************************************************* this block is google's recaptcha stuff *************************************************************************
-				$secret = "6LejtgYTAAAAAMlSC70hXViKkntfBVU2PBdICylx"; 
+				$secret = "6LejtgYTAAAAAMlSC70hXViKkntfBVU2PBdICylx";  // this is a secret code for reCaptcha connection
 				$ip = $_SERVER['REMOTE_ADDR'];
 				$captcha = $_POST['g-recaptcha-response'];
 				$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip=$ip");

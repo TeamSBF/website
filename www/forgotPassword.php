@@ -23,7 +23,6 @@
 			// *************** BIG NOTE!!! change this update to 1 day before deploy!!!
 			if($saltTime < time())
 			{
-				echo "new link <br>";
 				//update salt and salt_time
 				$salt = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)); // this will generate a new salt every time if exceed 24 hrs
 				$update = QueryFactory::Build("update"); 
@@ -31,9 +30,7 @@
 				$resUpdate = DatabaseManager::Query($update); // execute the query
 				
 				$link = sha1($id.$salt);
-				
 			}else{
-				echo "same link <br>";
 				$link = sha1($id.$salt);
 			}
 			
@@ -44,15 +41,15 @@
 ?>
 
 
-    <div class="background">
-        <h1> Forgot Password </h1>
-		<form class="forgotPassword" method="POST">
-			<div class="labels"><label>Email address </label></div>
-            <div class="inputFields"><input type="text" name="email" placeholder=""></div> 
-            <div class="inputFields"><button type="submit" name="retrieve" value="retrieve">Retreive</button></div>
-        </form>
-        </div>
+<div class="background">
+	<h1> Forgot Password </h1>
+	<form class="forgotPassword" method="POST">
+		<div class="labels"><label>Email address </label></div>
+		<div class="inputFields"><input type="text" name="email" placeholder=""></div> 
+		<div class="inputFields"><button type="submit" name="retrieve" value="retrieve">Retreive</button></div>
+	</form>
 	</div>
+</div>
 
 	
 <?php require_once"footer.php";?>

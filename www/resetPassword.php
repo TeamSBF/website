@@ -10,7 +10,7 @@
 		$select->Select("id","salt", "salt_time")->From("users")->Where(["id","=",$id])->Limit();
 		$res = DatabaseManager::Query($select)->Result();
 		$saltTime = $res["salt_time"];
-		$userIDHash = sha1($res["id"].$res["salt"]);
+		$userIDHash = sha1($res["id"].$res["salt"]); //get hash from database to check against the hash from the link
 		
 		
 		if($saltTime < time())
