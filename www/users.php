@@ -129,53 +129,57 @@ else // not editing users
         }
     }
     
-    $select = QueryFactory::Build("select")->Select('id','email','pLevel','created','activated')->From("users");
+    $select = QueryFactory::Build("select")->Select('id','email','pLevel','created','activated')->From("users")->Where(['id','!=',$user->id,"AND"],['pLevel','<=',$user->AccessLevel]);
     $res = DatabaseManager::Query($select);
-    if($res->RowCount() < 2)
-        $res = [$res->Result()];
-    else
-        $res = $res->Result();
-    $page .= PartialParser::Parse('div',["classes"=>"header", "content" => "Registered Users"]);
-    $header = createHeader(array_merge(["Edit"], array_keys($res[0]), [""]));
-    
-    $formElements = "";
-    foreach($res as $result)
-    {
-        // hide user accounts from anyone who has a lower access level than the account
-        // or who's account is currently logged in (prevents editing or deleting your own account)
-        if($result['pLevel'] > $user->AccessLevel || $result['id'] === $user->id) continue;
-        
-        $editBtn = PartialParser::Parse('checkbox', ['name' => 'id', 'value' => $result['id']]);        
-        $row = PartialParser::Parse('table-cell', ["content" => $editBtn]);
-        
-        $keys = array_keys($result);
-        foreach($keys as $key)
-        {
-            $content = "";
-            if($key === "activated")
-                $content = $result['activated'] === "1" ? "Yes" : "No";
-            else if($key === "pLevel")
-                $content = array_search($result['pLevel'], $userLevels);
-            else
-                $content = $result[$key];
-           
-           $row .= PartialParser::Parse("table-cell", ["content" => $content]);
-        }
-        
-        $input = PartialParser::Parse('button', ["name" => "delete", "value" => "Delete", "type" =>"button", "id" => "delete".$result['id']]);
-        // create the table cell
-        $row.= PartialParser::Parse('table-cell', ["content" => $input]);
-        // add the pieces of the form together
-        $formElements .= PartialParser::Parse('table-row', ["content" => $row]);
-    }
-    // add an edit button to the form
-    $formElements .= PartialParser::Parse('button',["type"=>"submit", "value" => "Edit", "id" => "editusers"]);
-    $formElements .= PartialParser::Parse('button',["type"=>"button", "value" => "Add", "id" => "adduser"]);
-    $data["action"] = $_SERVER['PHP_SELF']."?edit";
-    $tableID = "users";
+	if($res->RowCount() < 1)
+		$res = false;
+	else if($res->RowCount() < 2)
+		$res = [$res->Result()];
+	else
+		$res = $res->Result();
+	
+	if($res)
+	{
+		$page .= PartialParser::Parse('div',["classes"=>"header", "content" => "Registered Users"]);
+		$header = createHeader(array_merge(["Edit"], array_keys($res[0]), [""]));
+	}
+	
+	$formElements = "";
+	if($res)
+		foreach($res as $result)
+		{
+			$editBtn = PartialParser::Parse('checkbox', ['name' => 'id', 'value' => $result['id']]);        
+			$row = PartialParser::Parse('table-cell', ["content" => $editBtn]);
+			
+			$keys = array_keys($result);
+			foreach($keys as $key)
+			{
+				$content = "";
+				if($key === "activated")
+					$content = $result['activated'] === "1" ? "Yes" : "No";
+				else if($key === "pLevel")
+					$content = array_search($result['pLevel'], $userLevels);
+				else
+					$content = $result[$key];
+			   
+			   $row .= PartialParser::Parse("table-cell", ["content" => $content]);
+			}
+			
+			$input = PartialParser::Parse('button', ["name" => "delete", "value" => "Delete", "type" =>"button", "id" => "delete".$result['id']]);
+			// create the table cell
+			$row.= PartialParser::Parse('table-cell', ["content" => $input]);
+			// add the pieces of the form together
+			$formElements .= PartialParser::Parse('table-row', ["content" => $row]);
+		}
+	// add an edit button to the form
+	if($res)
+		$formElements .= PartialParser::Parse('button',["type"=>"submit", "value" => "Edit", "id" => "editusers"]);
+	$formElements .= PartialParser::Parse('button',["type"=>"button", "value" => "Add", "id" => "adduser"]);
+	$data["action"] = $_SERVER['PHP_SELF']."?edit";
+	$tableID = "users";
 }
 
-$data["content"] = $header.$formElements;
+$data["content"] = ($res ? $header : "").$formElements;
 $data["method"] = "POST";
 // wrap all the contents into a form field
 $form = PartialParser::Parse('form', $data);
@@ -190,6 +194,7 @@ echo PartialParser::Parse('div', ["classes" => "background", "content" => $page]
     <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 80px 0;"></span>The user will be permanently deleted and cannot be recovered. Are you sure?</p>
 </div>
 <div id="addUserDialog" title="Add User" style="display:none;">
+	<form name="adduser" method="POST" action="users.php?adduser">
     <div class="table">
         <div class="row">
             <div class="cell">Email Address</div>
@@ -217,6 +222,7 @@ echo PartialParser::Parse('div', ["classes" => "background", "content" => $page]
             </div>
         </div>
     </div>
+	</form>
 </div>
 <script>
 $(document).ready(function(){
@@ -246,6 +252,7 @@ $(document).ready(function(){
             modal: true,
             buttons: {
                 "Add User": function() {
+					$(document.forms['adduser']).submit();
                     $(this).dialog("close");
                 },
                 Cancel: function() {
