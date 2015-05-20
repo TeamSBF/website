@@ -25,10 +25,11 @@
 			else{
 				// ************************************************* this block is google's recaptcha stuff *************************************************************************
 				$secret = "6LejtgYTAAAAAMlSC70hXViKkntfBVU2PBdICylx";  // this is a secret code for reCaptcha connection
-				$ip = $_SERVER['REMOTE_ADDR'];
+				$ip = gethostbyname($_SERVER['SERVER_NAME']); // this is how you grab end user's ip
 				$captcha = $_POST['g-recaptcha-response'];
 				$response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret=$secret&response=$captcha&remoteip=$ip");
 				$captchaResult = json_decode($response, true);
+				
 				//******************************************************************************************************************************************************************************
 				if($captchaResult['success']){// if pass recaptcha go ahead and register
 					$id =  UserModel::Register($email,$password);

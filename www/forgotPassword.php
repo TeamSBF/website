@@ -23,6 +23,7 @@
 			// *************** BIG NOTE!!! change this update to 1 day before deploy!!!
 			if($saltTime < time())
 			{
+				
 				//update salt and salt_time
 				$salt = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)); // this will generate a new salt every time if exceed 24 hrs
 				$update = QueryFactory::Build("update"); 
