@@ -6,14 +6,16 @@ class NavMenu extends Singleton
     protected function __construct()
     {
         if (self::$items === null) {
+            // ORDER DOES MATTER AS IT DEFINES THE ORDER IN WHICH THEY APPEAR
             self::$items = [
                 new MenuItem("Home", "index.php",UserLevel::Anon),
                 new MenuItem("About", "about.php",UserLevel::Anon, "only"),
                 new MenuItem("Contact", "contact.php",UserLevel::Anon, "only"),
                 new MenuItem("FAQ", "faq.php",UserLevel::Anon, "only"),
-				new MenuItem("Forms", "memberHome.php",UserLevel::Member),
-                new MenuItem("Assessments", "assessments.php",UserLevel::Member),
-                new MenuItem("Register", "register.php", UserLevel::Anon, "only"),
+				new MenuItem("Register", "register.php", UserLevel::Anon, "only"),
+                new MenuItem("Forms", "memberHome.php",UserLevel::Member, "only"),
+                new MenuItem("Assessments", "assessments.php",UserLevel::Member, "only"),
+                new MenuItem("Users", "users.php", UserLevel::Admin),
                 new MenuItem("Profile", "profile.php", UserLevel::Member),
                 new MenuItem("Logout", "logout.php", UserLevel::Member)
             ];
