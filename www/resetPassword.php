@@ -4,12 +4,13 @@
 	
 	if(isset($_POST['reset']) )
 	{
+		$server = $_SERVER['SERVER'];
 		$id = Validator::instance()->sanitize("int", $_GET['id']);//get the ID to prevent people from inserting their own ID
 		$select = QueryFactory::Build("select");
-		$select->Select("id")->From("users")->Where(["id","=",$id])->Limit();
+		$select->Select("id","salt")->From("users")->Where(["id","=",$id])->Limit();
 		$res = DatabaseManager::Query($select)->Result();
 		
-		$userIDHash = sha1($res["id"]);
+		$userIDHash = sha1($res["id"].$res["salt"]);
 		if($userIDHash === $_GET['link']){ // link is valid go ahead and reset the password
 			$newPass = trim( $_POST['newPass']);
 			$cNewPass = trim( $_POST['cNewPass']);
@@ -40,7 +41,7 @@
 					$res = $res->Result(); // get result from table
 					$email = $res['email'];
 					$activationLink = sha1($id.$res["email"].$res["created"].$res["password"]);// get the hash value for the link to send out
-					Mailer::Send("$email","Activation Email","Your account is yet to be activated, please click on the link below to activate your account, http://localhost/activation.php?id=$id&link=$activationLink"); 
+					Mailer::Send("$email","Activation Email","Your account is yet to be activated, please click on the link below to activate your account, http://$server/activation.php?id=$id&link=$activationLink"); 
 				}
 			}	
 		}else{

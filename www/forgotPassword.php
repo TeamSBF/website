@@ -3,18 +3,41 @@
 	if(isset($_POST['retrieve']) )
 	{
 		$email = trim($_POST['email']);
+		$server = $_SERVER['SERVER'];
 		
 		if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
 			echo "Email is invalid, please try again";
 		else if(!UserModel::Exists("email", $email))
 			echo "Email doesn't exist in database, please try again";
 		else{// email exists go ahead send a reset password link and activation link
+		
 			$user = QueryFactory::Build("select");				
-			$user->Select("id")->From("users")->Where(["email","=",$email])->Limit();
+			$user->Select("id","salt,salt_time")->From("users")->Where(["email","=",$email])->Limit();
 			$res = DatabaseManager::Query($user)->Result();
 			$id = $res["id"];
-			$link = sha1($id);
-			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://localhost/resetPassword.php?id=$id&link=$link"); 
+			
+			
+				//if current time is greater then last salt change + 1 day
+			if(strtotime($res["salt_time"],"+1 day") < date())
+			{
+				//update salt and salt_time
+				$salt = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
+				$update = QueryFactory::Build("update"); //new update query
+				$update->Table("users")->Where( ["id", "=", $id] )->Set(["salt",  $salt],["salt_time", date()]); //update the query
+				$resUpdate = DatabaseManager::Query($update); // execute the query
+			}
+			else
+				$salt = $res["salt"];
+			
+			
+			$link = sha1($id.$salt);
+			
+			/*//insert 
+			$insert = QueryFactory::Build("insert");
+			$insert->Into("forgotPasswordTimeout")->Set(["id", $id], ["hash", $pass], ["creationTime", "UNIX_TIMESTAMP()"]);
+			*/
+			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://$server/resetPassword.php?id=$id&link=$link"); 
+			
 		}
 	}
 ?>

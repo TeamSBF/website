@@ -1,24 +1,19 @@
 <?php
-
-
     if (isset($_POST['submitQuestionnaireP2']))
     {
       if ($user)
       {
         $_POST['userID'] = $user->id;
-        print_r($_POST);
         $qp2validator = new FormsModel($_POST);
         $q2return = $qp2validator->validateQuestionnaireP2();
-        echo $q2return;
       }      
     }
 ?>
 
 <div class="background">
+  <strong><h1>Pre-Study Questionnaire Part 2</h1></strong>
   <fieldset>
-      <legend><strong><h1>Pre-Study Questionnaire Part 2</h1></strong></legend>
-
-    <form class="form-vertical" method="post">
+    <form method="post">
       <div id="q2message" style="display:none"></div>
         <div>
             <div><label for="q1">Current Height (in inches): </label></div>
@@ -54,7 +49,7 @@
           }
         ?>
         <div>
-          <div><label for="affectActivities">Describe how the Sit and Be Fit exercise program affects your ability to perform the activities listed above?:</label>                
+          <div><label for="affectActivities">Describe how the Sit and Be Fit exercise program affects your ability to perform the activities listed above?:</label></div>                
           <div class="input"><textarea type="text" name="q16"></textarea></div>
         </div>
      <!-- end panel "More About Yourself" -->
@@ -99,14 +94,10 @@
             <div><label for="q35">How are the feelings that are listed above affected when you participate in a Sit and Be Fit exercise class?:</label></div>                    
             <div><textarea type="text" name="q35"></textarea></div>
           </div>
-        
-
-
-            <button class="btn-primary" type="submit" name="submitQuestionnaireP2">Submit</button>
+        <button class="btn-primary" type="submit" id="submitQuestionnaireP2" name="submitQuestionnaireP2">Submit</button>            
       </form> <!-- end form -->
     </fieldset> <!-- end offset centered -->
   </div> <!-- end container -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
  
     <script>
     <?php   if(isset($q2return)) { ?>
@@ -128,7 +119,4 @@
           <?php } ?>
         }); 
   <?php } ?>
-  </script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
- 
+  </script> 

@@ -7,8 +7,6 @@
 	$select->Select("id","email","created","password","activated")->From("users")->Where(["id","=",$id])->Limit();
 	$res = DatabaseManager::Query($select);
 	$res = $res->Result();
-	
-	
 
 	if($res["activated"] === 1)
 			die("Your account is already activated!");

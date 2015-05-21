@@ -1,9 +1,11 @@
 <?php
 //path to cronJobs file
-
+$path = "cronJobs/";
 
 //path to config and sessions
 chdir('..');
+
+//needed to use models
 require_once "config.php";
 require_once "sessions.php";
 
@@ -13,6 +15,8 @@ $select->Select("name", "frequency","lastRun" )->From("schedule");
 
 $res = DatabaseManager::Query($select);
 $res2 = $res->Result();
+
+// iterate through each task and proccess
 if($res->RowCount() > 1 )
 {
 	foreach($res2 as $curr)
@@ -20,17 +24,16 @@ if($res->RowCount() > 1 )
 		process($curr);
 	}
 }
-//if only one job
+
+//edge case of only one task
 else if($res->RowCount() == 1)
 {
 	process($res2);
 }
 
-
-
-function process ($curr)
+private function process ($curr)
 {
-	$path = "cronJobs/";
+	//if need to run task
 	if( strtotime($curr["frequency"],$curr["lastRun"]) < time())
 	{
 			//run job
@@ -43,7 +46,7 @@ function process ($curr)
 			$success=DatabaseManager::Query($ran);
 		
 		//for testing
-			if($success)
+			if($success->RowCount() > 0)
 				echo $curr['name'] . " updated";
 			else
 				echo $curr['name'] . " failed";

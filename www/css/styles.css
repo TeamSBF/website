@@ -117,13 +117,13 @@ label,nav
     font-weight: 400;
 }
 
-.inputs > button
+.inputs
 {
     position: relative;
     top:75px;
-    left: 88%;
+    left: 80%;
 }
-.enrollInput > button
+.enrollInput
 {
     position: relative;
     top:48px;
@@ -375,21 +375,28 @@ nav a:visited
 	padding-bottom: 0;
     color: #2E4BC3;
 }
-
-.table
-{
-    display: table;
-    
+/*--------------------------------------------------------------------------------*/
+/*Misc Code*/
+.info, .success, .warning, .error, .validation {
+border: 1px solid;
+margin: 10px 0px;
+padding:15px 10px 15px 50px;
+background-repeat: no-repeat;
+background-position: 10px center;
 }
-
-.row
-{
-    display: table-row;
+.info {
+color: #00529B;
+background-color: #BDE5F8;
 }
-
-.cell
-{
-   display: table-cell;
-   padding: 10px;
-   margin: 10px;
+.success {
+color: #4F8A10;
+background-color: #DFF2BF;
+}
+.warning {
+color: #9F6000;
+background-color: #FEEFB3;
+}
+.error {
+color: #D8000C;
+background-color: #FFBABA;
 }
