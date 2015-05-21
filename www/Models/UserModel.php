@@ -73,14 +73,16 @@ class UserModel
      * @param string $pass The users password
      * @return boolean True when the registration succeeds and false when it fails
      */
-    public static function Register($email, $pass)
+    public static function Register($email, $pass, $activated = 0, $accesslevel = 1)
     {
         // get the hashed passsword
         $pass = self::hashPass($pass);
         // Get an insert query
         $insert = QueryFactory::Build("insert");
         // Build the insert query
-        $insert->Into("users")->Set(["email", $email], ["password", $pass], ["created", "UNIX_TIMESTAMP()"]);
+        $insert->Into("users")->Set(["email", $email], ["password", $pass]);
+        $insert->Set(["created", "UNIX_TIMESTAMP()"], ["activated", $activated]);
+        $insert->Set(["pLevel", $accesslevel]);
         // Execute the query and get the result
         $qinfo = DatabaseManager::Query($insert);
         // If the user was added successfully return true

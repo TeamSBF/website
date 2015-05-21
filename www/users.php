@@ -14,7 +14,6 @@ function createHeader($keys)
     
     return PartialParser::Parse('table-row', ["content" => $row]);
 }
-
 $page = "";
 $userLevels = (new ReflectionClass("UserLevel"))->getConstants();
 unset($userLevels['Anon']);
@@ -128,6 +127,11 @@ else // not editing users
                 echo "Error deleting user or user does not exist";
         }
     }
+    else if(isset($_GET['adduser']) && isset($_POST))
+    {
+        $activated = $_POST['activated'] === "1" ? 1 : 0;
+        UserModel::Register($_POST['email'], $_POST['pass'], $activated, $_POST['accesslevel']);
+    }
     
     $select = QueryFactory::Build("select")->Select('id','email','pLevel','created','activated')->From("users")->Where(['id','!=',$user->id,"AND"],['pLevel','<=',$user->AccessLevel]);
     $res = DatabaseManager::Query($select);
@@ -218,7 +222,7 @@ echo PartialParser::Parse('div', ["classes" => "background", "content" => $page]
             <div class="cell">Activated</div>
             <div class="cell">
                 <label><input type="radio" name="activated" value="1" />Yes</label><br />
-                <label><input type="radio" name="activated" value="0" />No</label>
+                <label><input type="radio" name="activated" value="0" checked />No</label>
             </div>
         </div>
     </div>
