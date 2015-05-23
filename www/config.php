@@ -5,11 +5,13 @@ spl_autoload_register('AutoLoader::ClassLoader');
 
 class AutoLoader
 {
-    private static $folders = ["Queries/",
+    private static $folders = [
+        "Queries/",
         "Queries/QueryElements/",
         "Models/",
         "Managers/",
-        "scripts/"];
+        "scripts/"
+    ];
 
     public static function ClassLoader($className)
     {

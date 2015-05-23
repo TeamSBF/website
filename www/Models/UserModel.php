@@ -5,36 +5,6 @@
 class UserModel
 {
     /**
-     * The user ID of the user
-     * @var int
-     */
-    private $id;
-    /**
-     * The privilege level of the user
-     * @var int
-     */
-    private $accesslevel;
-
-    /**
-     * The class constructor
-     *
-     * @param $info The array of info the model will store
-     */
-    private function __construct($info)
-    {
-        $this->id = $info['id'];
-        $this->accesslevel = $info['pLevel'];
-    }
-
-    public function __get($name)
-    {
-        $name = strtolower($name);
-        if(property_exists(__CLASS__, $name))
-            return $this->{$name};
-    }
-
-    // ----------------------------- Static Functions -----------------------------
-    /**
      * Attempts to log the user in
      *
      * @param string $email The user's email address
@@ -59,7 +29,7 @@ class UserModel
             // If their provided password matches the database password, return a new user model
             if (password_verify($pass, $resultArray['password'])) {
                 unset($resultArray['password']);
-                return new UserModel($resultArray);
+                return new User($resultArray['id'], $resultArray['pLevel']);
             }
         }
 

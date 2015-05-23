@@ -1,17 +1,14 @@
 <?php
-class MenuItem
+class Page extends RestrictedAccess
 {
     private $name;
     private $page;
-    private $priv;
-    private $mode;
 
     public function __construct($name, $page, $priv = UserLevel::Anon, $mode = "all")
     {
+        parent::__construct($priv, $mode);
         $this->name = $name;
         $this->page = $page;
-        $this->priv = $priv;
-        $this->mode = $mode;
     }
 
     public function __get($name)
