@@ -26,10 +26,9 @@
 				// READ FROM SETTINGS TABLE TO GRAB THE SALT_TIME AND PLUG IT IN BELOW 
 				
 				$select = QueryFactory::Build("select");
-				$select->Table("settings")->Where( ["name", "=", "forgotpassword"] )->Limit();
+				$select->Select("value")->From("settings")->Where( ["name", "=", "forgotpassword"] )->Limit();
 				$lifeTime = DatabaseManager:: Query($select)->Result()['value'];
-				print_r($lifeTime);
-				echo "lifeTime: $lifeTime<br>";
+				//print_r($select->Query(true));
 				//update salt and salt_time
 				$salt = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)); // this will generate a new salt every time if exceed 24 hrs
 				$update = QueryFactory::Build("update"); 
