@@ -4,6 +4,23 @@
 
 class CSVConverter {
 	
+    public static function testGet($type)
+    {
+        // note the php://output, that's required
+        $out = fopen('php://output', 'w');
+        switch($type)
+        {
+            case "assessments":
+                // do the normal thing
+                fputcsv($out, array('this','is some','csv "stuff"', "blah"));
+            break;
+        }
+        // include the headers that tell the browser it's receiving a download
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename=assessments.csv');
+        // close the file (which is actually a variable)
+        fclose($out);
+    }
 	/*
 	Query the parq_form table and selects everything.
 	Convert all relevant numerical values to english and prints to a csv file.

@@ -1,10 +1,23 @@
 <?php require_once"header.php"; ?>
 <?php
 
-if ($user && $user->AccessLevel >= 2)
+// needs better protection but is a proof of concept
+if(isset($_GET['f']))
+    {
+        $csv = new CSVConverter();
+        // we don't want anything being sent along with the csv
+        ob_end_clean();
+        CSVConverter::testGet($_GET['f']);
+        // not enough data for me to test this out and the method is not set up to handle
+        // automatic file downloads either
+        //$csv->getParQCSV();
+        // kill the page so it can't output any else except for the file
+        die();
+    }
+else if ($user && $user->AccessLevel >= 2)
 {
-	$csv = new CSVConverter();
-	$rowCount = $csv->getDataTableRowCount();
+	
+	//$rowCount = $csv->getDataTableRowCount();
 	//$rowCount = CSVConverter::getDataTableRowCount();
 ?>
 <div class="background">
@@ -37,7 +50,7 @@ if ($user && $user->AccessLevel >= 2)
 /* event handlers to download the files */
 $("#assessmentDl").on("click", function() {
 	//$.ajax({ url: 'scripts/MakeAssessmentCsv.php' });
-	window.location.href = 'scripts/CsvDownload.php?f=assessment_data.csv';
+	window.location.href = 'admincsv.php?f=assessments';
 });
 
 $("#enrollmentDl").on("click", function() {
