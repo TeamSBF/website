@@ -1,16 +1,13 @@
 <?php
-require_once"header.php";
 
-$f = new CSVConverter();
-$q = $f->getParQCSV();
-
-print_r($q);
-
-
+//require_once(__DIR__."/../Managers/DatabaseManager.php");
 
 class CSVConverter {
 	
-	/* Returns a CSV file */
+	/*
+	Query the parq_form table and selects everything.
+	Convert all relevant numerical values to english and prints to a csv file.
+	*/
 	public function getParQCSV()
 	{
 		$query = QueryFactory::Build('select');
@@ -30,7 +27,7 @@ class CSVConverter {
 			" 2.4 "," 2.4a "," 2.4b "," 2.4c "," 2.5 "," 2.5a "," 2.5b "," 2.6 "," 2.6a "," 2.6b "," 2.6c "," 2.6d "," 2.7 "," 2.7a "," 2.7b "," 2.7c "," 2.8 "," 2.8a "," 2.8b "," 2.8c "," 2.9 "," 2.9a "," 2.9b "," 2.9c ",
 			"Date Completed","Signature","Parent/care provider signature");
 
-		$file = fopen("parq_data.csv", "w") or die("Unable to open parq_data file");
+		$file = fopen(__DIR__."/csv/parq_data.csv", "w") or die("Unable to open parq_data file");
 
 		// print header values to CSV file
 		foreach($parq_header as $val)
@@ -62,10 +59,12 @@ class CSVConverter {
 		$this->printCSV($file, $array);
 
 		fclose($file);
-
-		return $array;
 	}
 
+	/*
+	Query the enrollment_form table and selects everything.
+	Convert all relevant numerical values to english and prints to a csv file.
+	*/
 	public function getEnrollmentCSV()
 	{
 		$query = QueryFactory::Build('select');
@@ -82,7 +81,7 @@ class CSVConverter {
 
 		$array = $qinfo->Result();
 
-		$file = fopen("enrollment_data.csv", "w") or die("Unable to open enrollment_data file");
+		$file = fopen(__DIR__."/csv/enrollment_data.csv", "w") or die("Unable to open enrollment_data file");
 
 		$header = array("User ID", "Last Name", "First Name", "Street Address", "City", "Phone", "Email", "Date of Birth", "Gender",
 			"Health History", "Watch SBF", "How Many Times a Week", "Control Group", "Experimental Group");
@@ -120,10 +119,12 @@ class CSVConverter {
 		$this->printCSV($file, $array);
 
 		fclose($file);
-
-		return $array;
 	}
 
+	/*
+	Query the questionnaire_form table and selects everything.
+	Convert all relevant numerical values to english and prints to a csv file.
+	*/
 	public function getQuestionnaireCSV()
 	{
 		$query = QueryFactory::Build('select');
@@ -141,16 +142,16 @@ class CSVConverter {
 
 		$array = $qinfo->Result();
 
-		$file = fopen("questionnaire_data.csv", "w") or die("Unable to open questionnaire_data file");
+		$file = fopen(__DIR__."/csv/questionnaire_data.csv", "w") or die("Unable to open questionnaire_data file");
 				
 		// print header values to CSV file
 		fwrite($file, "User ID,");
 		$numQuestion = 64;
-		for($i = 0; $i < $numQuestion; $i++)
+		for($i = 1; $i < $numQuestion; $i++)
 		{
 			fwrite($file, $i . ",");
 		}
-		fwrite($file, "64");
+		fwrite($file, "64\n");
 		
 		// TO-DO: replace numeric value to english values
 		// define arrays of values for various radio buttons that will be used to convert from numerical values to english
@@ -166,11 +167,17 @@ class CSVConverter {
           
         $yesno = array("No", "Yes");
 
+        $gender = array("Female", "Male");
+
+        $race = array("Asian", "African American", "Caucasian", "Hispanic", "Native American");
+
+        $work = array("Employed", "Unemployed", "Retired");
+
         $help = array("No help", "Some help", "Unable to perform");
 
         $time = array("Always", "Mostly", "Half the time", "Rarely");
 
-        print_r($array);
+        //print_r($array);
 
         // QUESTIONS 1-9 included use $how
 
@@ -191,47 +198,87 @@ class CSVConverter {
         	{
         		if ($i < 10)
         		{
-        			$array[$key]["q$i"] = $how[$i][$array[$key]["q$i"]];
+        			$array[$key]["q$i"] = $how[$i-1][$array[$key]["q$i"]];
         		}
-        		else if ($i < 23)
+        		else if ($i < 22)
         		{
-
+        			$array[$key]["q$i"] = $yesno[$array[$key]["q$i"]];
+        		}
+        		else if ($i == 24)
+        		{
+        			$array[$key]["q$i"] = $gender[$array[$key]["q$i"]];
         		}
         		else if ($i == 25)
         		{
-
+        			$array[$key]["q$i"] = $race[$array[$key]["q$i"]];
         		}
-        		else if ($i == 26)
+        		else if ($i == 27)
         		{
-
+        			$array[$key]["q$i"] = $work[$array[$key]["q$i"]];
         		}
-        		else if ($i == 28)
+        		else if ($i > 32 && $i < 45)
         		{
-
+        			$array[$key]["q$i"] = $help[$array[$key]["q$i"]];
         		}
-        		else if ($i > 33 && $i < 46)
+        		else if ($i > 45 && $i < 64)
         		{
-
-        		}
-        		else if ($i > 46 && $i < 65)
-        		{
-
+        			$array[$key]["q$i"] = $time[$array[$key]["q$i"]];
         		}
         	}
         }          
 
-		//$this->printCSV($file, $array);
+		$this->printCSV($file, $array);
 
-		//fclose($file);
+		fclose($file);
 
-		//return $array;
+		return $array;
 	}
 
+	/*
+	Query the assessemnt table and selects everything.
+	Convert all relevant numerical values to english and prints to a csv file
+	*/
 	public function getAssessmentCSV()
 	{
-
+		//TO-DO
 	}
 
+	/*
+	Queries each relevant data table and save the number of rows returned
+	by the query in an array
+	return: $value_array
+	*/
+	public function getDataTableRowCount()
+	{
+		$query = QueryFactory::Build('select');
+		$query->Select('id')->From('enrollment_form');
+		$enrolCount = DatabaseManager::Query($query);
+
+		$query = QueryFactory::Build('select');
+		$query->Select('id')->From('questionnaire_form');
+		$questCount = DatabaseManager::Query($query);
+
+		$query = QueryFactory::Build('select');
+		$query->Select('id')->From('parq_form');
+		$parqCount = DatabaseManager::Query($query);
+
+		/*
+		uncomment when assessments are working and done
+		$query = QueryFactory::Build('select');
+		$query->Select('id')->From('assessment');
+		$enrolCount = DatabaseManager::Query($query);
+		*/
+
+		// add the value for assessments when they are done
+		$value_array = array($enrolCount->RowCount(), $questCount->RowCount(), $parqCount->RowCount());
+
+		return $value_array;
+	}
+
+	/*
+	Given an array of values, prints each value in CSV format to a file
+	$params: $file (file pointer), $array (the array of values)
+	*/
 	private function printCSV($file, $array)
 	{
 		//print each arrays of values as line in csv format
@@ -240,47 +287,4 @@ class CSVConverter {
 			fputcsv($file, $row);
 		}
 	}
-
-	private function convertQuestionnaireValue($arr, $val)
-	{
-
-	}
-
-	// this array is not even used, just keep it for now in case we decide to swap the parQ header values, don;t want to have to type this again
-	private $parq_headers = array("Has your doctor ever said that you have a heart condition OR high blood pressure?",
-			"Do you feel pain in your chest at rest, during your daily activities of living, OR when you do physical activity?",
-			"Do you lose balance because of dizziness OR have you lost consciousness in the last 12 months?",
-			"Have you ever been diagnosed with another chronic medical condition (other than heart disease or high blood pressure)?",
-			"Are you currently taking prescribed medications for a chronic medical condition?",
-			"Do you have a bone or joint problem that could be made worse by becoming more physically active?",
-			"Has your doctor ever said that you should only do medically supervised physical activity?",
-			"Do you have Arthritis, Osteoporosis, or Back Problems?","Do you have difficulty controlling your condition with medications or other physician_prescribed therapies?",
-			"Do you have joint problems causing pain, a recent fracture or fracture caused by osteoporosis or cancer, displaced vertebra, and/or spondylolysis/pars defect?",
-			"Have you had steroid injections or taken steroid tablets regularly for more than 3 months?",
-			"Do you have Cancer of any kind?", "Does your cancer diagnosis include any of the following types: lung/bronchogenic, multiple myeloma (cancer of plasma cells), head, and neck?",
-			"Are you currently receiving cancer therapy?","Do you have Heart Disease or Cardiovascular Disease?",
-			"Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
-			"Do you have an irregular heart beat that requires medical management?","Do you have chronic heart failure?",
-			"Do you have a resting blood pressure equal to or greater than 160/90 mmHg with or without medication?",
-			"Do you have diagnosed coronary artery (cardiovascular) disease and have not participated in regular physical activity in the last 2 months?",
-			"Do you have any Metabolic Conditions?","Is your blood sugar often above 13.0 mmol/L?",
-			"Do you have any signs or symptoms of diabetes complications such as heart or vascular disease and/or complications affecting your eyes, kidneys, and the sensation in your toes and feet?",
-			"Do you have other metabolic conditions?","Do you have any Mental Health Problems or Learning Difficulties?",
-			"Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
-			"Do you also have back problems affecting nerves or muscles?","Do you have a Respiratory Disease?",
-			"Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
-			"Has your doctor ever said your blood oxygen level is low at rest or during exercise and/or that you require supplemental oxygen therapy?",
-			"If asthmatic, do you currently have symptoms of chest tightness, wheezing, laboured breathing, consistent cough (more than 2 days/week), or have you used your rescue medication more than twice in the last week?",
-			"Has your doctor ever said you have high blood pressure in the blood vessels of your lungs?",
-			"Do you have a Spinal Cord Injury?","Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
-			"Do you commonly exhibit low resting blood pressure significant enough to cause dizziness, light_headedness, and/or fainting?",
-			"Has your physician indicated that you exhibit sudden bouts of high blood pressure (known as Autonomic Dysreflexia)?",
-			"Have you had a Stroke?","Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
-			"Do you have any impairment in walking or mobility?","Have you experienced a stroke or impairment in nerves or muscles in the past 6 months?",
-			"Do you have any other medical condition not listed above or do you live with two chronic conditions?",
-			"Have you experienced a blackout, fainted, or lost consciousness as a result of a head injury within the last 12 months OR have you had a diagnosed concussion within the last 12 months?",
-			"Do you have a medical condition that is not listed (such as epilepsy, neurological conditions, kidney problems)?",
-			"Do you currently live with two chronic conditions?",
-			"Date Completed","Signature","Parent/Guardian/Care Provider Signature");
 }
-require_once"footer.php";

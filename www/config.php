@@ -9,7 +9,9 @@ class AutoLoader
         "Queries/QueryElements/",
         "Models/",
         "Managers/",
-        "scripts/"];
+        "scripts/",
+        "./",
+        "./../"];
 
     public static function ClassLoader($className)
     {
