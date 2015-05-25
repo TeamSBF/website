@@ -1,22 +1,18 @@
 <?php require_once"header.php"; ?>
 <?php
 
+$csv = new CSVConverter();
 // needs better protection but is a proof of concept
-if(isset($_GET['f']))
-    {
-        $csv = new CSVConverter();
-        // we don't want anything being sent along with the csv
-        ob_end_clean();
-        CSVConverter::testGet($_GET['f']);
-        // not enough data for me to test this out and the method is not set up to handle
-        // automatic file downloads either
-        //$csv->getParQCSV();
-        // kill the page so it can't output any else except for the file
-        die();
-    }
-else if ($user && $user->AccessLevel >= 2)
+if(isset($_GET['f']) && $user && $user->AccessLevel >= 2)
 {
-	
+    // we don't want anything being sent along with the csv
+    ob_end_clean();
+    $csv->getCSV($_GET['f']);
+    // kill the page so it can't output any else except for the file
+    die();
+}
+else if ($user && $user->AccessLevel >= 2)
+{	
 	//$rowCount = $csv->getDataTableRowCount();
 	//$rowCount = CSVConverter::getDataTableRowCount();
 ?>
@@ -49,29 +45,19 @@ else if ($user && $user->AccessLevel >= 2)
 
 /* event handlers to download the files */
 $("#assessmentDl").on("click", function() {
-	//$.ajax({ url: 'scripts/MakeAssessmentCsv.php' });
 	window.location.href = 'admincsv.php?f=assessments';
 });
 
 $("#enrollmentDl").on("click", function() {
-	//$.ajax({ url: 'scripts/MakeEnrollmentCsv.php' });
-	window.location.href = 'scripts/CsvDownload.php?f=enrollment_data.csv';
+	window.location.href = 'admincsv.php?f=enrollment';
 });
 
 $("#questionnaireDl").on("click", function() {
-	//$.ajax({ url: 'scripts/MakeQuestionnaireCsv.php' });
-	window.location.href = 'scripts/CsvDownload.php?f=questionnaire_data.csv';
+	window.location.href = 'admincsv.php?f=questionnaire';
 });
 
 $("#parqDl").on("click", function() {
-	$.ajax({ 
-		url: 'MakeParqCsv.php',
-		async: false,
-		success: function(data) {
-			$("#scriptMessage").html(data);
-		}
-	});
-	window.location.href = 'scripts/CsvDownload.php?f=parq_data.csv';
+	window.location.href = 'admincsv.php?f=parq';
 });
 
 </script>

@@ -1,23 +1,30 @@
 <?php
 
-//require_once(__DIR__."/../Managers/DatabaseManager.php");
-
 class CSVConverter {
 	
-    public static function testGet($type)
+    public function GetCSV($type)
     {
         // note the php://output, that's required
-        $out = fopen('php://output', 'w');
+        $out;
+        // = fopen('php://output', 'w');
         switch($type)
         {
             case "assessments":
-                // do the normal thing
-                fputcsv($out, array('this','is some','csv "stuff"', "blah"));
-            break;
+            	$out = $this->getAssessementCSV(); 
+        		break;
+            case "parq":
+            	$out = $this->getParQCSV();
+            	break;
+            case "questionnaire":
+            	$out = $this->getQuestionnaireCSV();
+            	break;
+            case "enrollment":
+            	$out = $this->getEnrollmentCSV();
+            	break;
         }
         // include the headers that tell the browser it's receiving a download
         header('Content-Type: text/csv');
-        header('Content-Disposition: attachment;filename=assessments.csv');
+        header('Content-Disposition: attachment;filename='.$type.'_data.csv');
         // close the file (which is actually a variable)
         fclose($out);
     }
@@ -44,7 +51,7 @@ class CSVConverter {
 			" 2.4 "," 2.4a "," 2.4b "," 2.4c "," 2.5 "," 2.5a "," 2.5b "," 2.6 "," 2.6a "," 2.6b "," 2.6c "," 2.6d "," 2.7 "," 2.7a "," 2.7b "," 2.7c "," 2.8 "," 2.8a "," 2.8b "," 2.8c "," 2.9 "," 2.9a "," 2.9b "," 2.9c ",
 			"Date Completed","Signature","Parent/care provider signature");
 
-		$file = fopen(__DIR__."/csv/parq_data.csv", "w") or die("Unable to open parq_data file");
+		$file = fopen("php://output", "w") or die("Unable to open parq_data file");
 
 		// print header values to CSV file
 		foreach($parq_header as $val)
@@ -75,7 +82,7 @@ class CSVConverter {
 
 		$this->printCSV($file, $array);
 
-		fclose($file);
+		return $file;
 	}
 
 	/*
@@ -98,7 +105,7 @@ class CSVConverter {
 
 		$array = $qinfo->Result();
 
-		$file = fopen(__DIR__."/csv/enrollment_data.csv", "w") or die("Unable to open enrollment_data file");
+		$file = fopen("php://output", "w") or die("Unable to open enrollment_data file");
 
 		$header = array("User ID", "Last Name", "First Name", "Street Address", "City", "Phone", "Email", "Date of Birth", "Gender",
 			"Health History", "Watch SBF", "How Many Times a Week", "Control Group", "Experimental Group");
@@ -135,7 +142,7 @@ class CSVConverter {
 
 		$this->printCSV($file, $array);
 
-		fclose($file);
+		return $file;
 	}
 
 	/*
@@ -159,7 +166,7 @@ class CSVConverter {
 
 		$array = $qinfo->Result();
 
-		$file = fopen(__DIR__."/csv/questionnaire_data.csv", "w") or die("Unable to open questionnaire_data file");
+		$file = fopen("php://output", "w") or die("Unable to open questionnaire_data file");
 				
 		// print header values to CSV file
 		fwrite($file, "User ID,");
@@ -193,8 +200,6 @@ class CSVConverter {
         $help = array("No help", "Some help", "Unable to perform");
 
         $time = array("Always", "Mostly", "Half the time", "Rarely");
-
-        //print_r($array);
 
         // QUESTIONS 1-9 included use $how
 
@@ -246,9 +251,7 @@ class CSVConverter {
 
 		$this->printCSV($file, $array);
 
-		fclose($file);
-
-		return $array;
+		return $file;
 	}
 
 	/*
