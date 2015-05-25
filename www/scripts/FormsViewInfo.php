@@ -1,0 +1,41 @@
+<?php
+/* This file contains array of quesrtions and optional values */
+$parq_questions = array("Has your doctor ever said that you have a heart condition OR high blood pressure?",
+			"Do you feel pain in your chest at rest, during your daily activities of living, OR when you do physical activity?",
+			"Do you lose balance because of dizziness OR have you lost consciousness in the last 12 months?",
+			"Have you ever been diagnosed with another chronic medical condition (other than heart disease or high blood pressure)?",
+			"Are you currently taking prescribed medications for a chronic medical condition?",
+			"Do you have a bone or joint problem that could be made worse by becoming more physically active?",
+			"Has your doctor ever said that you should only do medically supervised physical activity?",
+			"Do you have Arthritis, Osteoporosis, or Back Problems?","Do you have difficulty controlling your condition with medications or other physician_prescribed therapies?",
+			"Do you have joint problems causing pain, a recent fracture or fracture caused by osteoporosis or cancer, displaced vertebra, and/or spondylolysis/pars defect?",
+			"Have you had steroid injections or taken steroid tablets regularly for more than 3 months?",
+			"Do you have Cancer of any kind?", "Does your cancer diagnosis include any of the following types: lung/bronchogenic, multiple myeloma (cancer of plasma cells), head, and neck?",
+			"Are you currently receiving cancer therapy?","Do you have Heart Disease or Cardiovascular Disease?",
+			"Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
+			"Do you have an irregular heart beat that requires medical management?","Do you have chronic heart failure?",
+			"Do you have a resting blood pressure equal to or greater than 160/90 mmHg with or without medication?",
+			"Do you have diagnosed coronary artery (cardiovascular) disease and have not participated in regular physical activity in the last 2 months?",
+			"Do you have any Metabolic Conditions?","Is your blood sugar often above 13.0 mmol/L?",
+			"Do you have any signs or symptoms of diabetes complications such as heart or vascular disease and/or complications affecting your eyes, kidneys, and the sensation in your toes and feet?",
+			"Do you have other metabolic conditions?","Do you have any Mental Health Problems or Learning Difficulties?",
+			"Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
+			"Do you also have back problems affecting nerves or muscles?","Do you have a Respiratory Disease?",
+			"Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
+			"Has your doctor ever said your blood oxygen level is low at rest or during exercise and/or that you require supplemental oxygen therapy?",
+			"If asthmatic, do you currently have symptoms of chest tightness, wheezing, laboured breathing, consistent cough (more than 2 days/week), or have you used your rescue medication more than twice in the last week?",
+			"Has your doctor ever said you have high blood pressure in the blood vessels of your lungs?",
+			"Do you have a Spinal Cord Injury?","Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
+			"Do you commonly exhibit low resting blood pressure significant enough to cause dizziness, light_headedness, and/or fainting?",
+			"Has your physician indicated that you exhibit sudden bouts of high blood pressure (known as Autonomic Dysreflexia)?",
+			"Have you had a Stroke?","Do you have difficulty controlling your condition with medications or other physician-prescribed therapies?",
+			"Do you have any impairment in walking or mobility?","Have you experienced a stroke or impairment in nerves or muscles in the past 6 months?",
+			"Do you have any other medical condition not listed above or do you live with two chronic conditions?",
+			"Have you experienced a blackout, fainted, or lost consciousness as a result of a head injury within the last 12 months OR have you had a diagnosed concussion within the last 12 months?",
+			"Do you have a medical condition that is not listed (such as epilepsy, neurological conditions, kidney problems)?",
+			"Do you currently live with two chronic conditions?",
+			"Date Completed","Signature","Parent/Guardian/Care Provider Signature");
+
+$questionnaire_questions = array();
+
+$enrollment_questions = array();
