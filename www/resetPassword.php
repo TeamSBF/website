@@ -50,7 +50,7 @@
 		}else{
 			echo "Invalid link, please try again!";
 		}
-	
+		// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 	}
 ?>
 
@@ -59,10 +59,10 @@
 		<form class="resetPassword" method="POST">
 
 			<div class="labels"><label>New Password </label></div> 
-            <div class="inputFields"><input type="password" name="newPass" placeholder=""></div> 
+            <div class="inputFields"><input type="password" name="newPass" placeholder="" required></div> 
 			
             <div class="labels"><label>Confirm New Password </label></div>
-            <div class="inputFields"><input type="password" name="cNewPass" placeholder=""></div> 
+            <div class="inputFields"><input type="password" name="cNewPass" placeholder="" required></div> 
             
             <div class="inputFields"><button type="submit" name="reset" value="reset">reset</button></div>
         </form>

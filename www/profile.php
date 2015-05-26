@@ -33,19 +33,21 @@
 			}
 		}	
 	}
+	// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 ?>
+
 
 <div class="background">
 	<h1> Change Password </h1>
 	<form class="changePassword" method="POST">
 		<div class="labels"><label>Current password </label></div>
-		<div class="inputFields"><input type="password" name="oldPass" placeholder=""></div> 
+		<div class="inputFields"><input type="password" name="oldPass" placeholder="" required></div> 
 
 		<div class="labels"><label>New Password </label></div> 
-		<div class="inputFields"><input type="password" name="newPass" placeholder=""></div> 
+		<div class="inputFields"><input type="password" name="newPass" placeholder="" required></div> 
 		
 		<div class="labels"><label>Confirm New Password </label></div>
-		<div class="inputFields"><input type="password" name="cNewPass" placeholder=""></div> 
+		<div class="inputFields"><input type="password" name="cNewPass" placeholder="" required></div> 
 		
 		<div class="inputFields"><button type="submit" name="update" value="update">update</button></div>
 	</form>

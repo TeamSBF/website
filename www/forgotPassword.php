@@ -42,7 +42,7 @@
 			
 			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://$server/resetPassword.php?id=$id&link=$link");
 		}
-		
+		// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 	}
 ?>
 
@@ -51,7 +51,7 @@
 	<h1> Forgot Password </h1>
 	<form class="forgotPassword" method="POST">
 		<div class="labels"><label>Email address </label></div>
-		<div class="inputFields"><input type="text" name="email" placeholder=""></div> 
+		<div class="inputFields"><input type="text" name="email" placeholder="" required></div> 
 		<div class="inputFields"><button type="submit" name="retrieve" value="retrieve">Retreive</button></div>
 	</form>
 	</div>

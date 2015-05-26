@@ -55,27 +55,28 @@
 		}	
 	}
 	//$_SESSION['regKey'] = bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM));
+	//^^^^^^^^^^^^^^^^^^^^ ADD THIS IN BEFORE DEPLOY TO MAKE SURE USER USE OUR FORM !!!! **********************************************************************
 	
 ?>
 <div class="background">
 	<h1> Register </h1>
-	<form class="register" method="POST">
+	<form class="register" method="POST" >
 		<input type="hidden" name="regKey" value="">
 		<label>E-mail Address </label><br> 
-		<input type="text" name="email" placeholder="johndoe@example.net" > 
+		<input type="text" name="email" placeholder="johndoe@example.net" oncut="return false;" required> <!--   onpaste="return false;"  ONCOPY, ONCUT, ONSHIT << ADD THIS ATTRIBUTE IN BEFORE DEPLOY!!--> 
 		<br> 
 		<br>
 		<label>Confirm E-mail Address </label><br>
-		<input type="text" name="cEmail" placeholder="johndoe@example.net">	  
+		<input type="text" name="cEmail" placeholder="johndoe@example.net" required>	  
 		<br>
 		<br>
 		<label>Password </label> 
 		<br>
-		<input type="password" name="password" placeholder="Password" > 
+		<input type="password" name="password" placeholder="Password" required> 
 		<br><br>
 		<label>Confirm Password </label>
 		<br>
-		<input type="password" name="cPassword" placeholder="Confirm Password" > 
+		<input type="password" name="cPassword" placeholder="Confirm Password" required> 
 		<br><br>
 		<div class="g-recaptcha" data-sitekey="6LejtgYTAAAAAITL_F2_L0NbPWtcEk35Cn7-O98W" data-theme="light"></div> <!--recaptcha  stuff (from google api)-->
 		<button type="submit" name="register" value="Register">Register</button>
