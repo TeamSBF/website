@@ -4,16 +4,17 @@
 	
 	if(isset($_POST['regKey'], $_POST['register']))// && $_POST['regKey'] === $_SESSION['regKey'])
 	{
+		//********************* GET ALL THE FILEDS FROM THE FORM **************************************
 		$email = trim($_POST['email']);
 		$cEmail = trim($_POST['cEmail']); 
 		$password = trim($_POST['password']);
 		$cPassword = trim($_POST['cPassword']);
 		$server = $_SERVER['SERVER_NAME'];
-		$recaptcha=$_POST['g-recaptcha-response'];
+		$recaptcha=$_POST['g-recaptcha-response']; //get recaptcha (google api)
 		
 		if(empty($email) || empty($cEmail) || empty($password) || empty($cPassword) || empty($recaptcha))
 			echo "all fields required";
-		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
+		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL))) // check the email entered against php built in email validator
 			echo "invalid email, try again";
 		else if($email !== $cEmail)
 			echo "Email doesn't match";
@@ -24,6 +25,7 @@
 				echo "Failed to register, email already exists, please use a different email"; 
 			else{
 				// ************************************************* this block is google's recaptcha stuff *************************************************************************
+				//*********************************************** THIS IS FROM GOOGLE RECAPTCHA API ***********************************************************************
 				$secret = "6LejtgYTAAAAAMlSC70hXViKkntfBVU2PBdICylx";  // this is a secret code for reCaptcha connection
 				$ip = gethostbyname($_SERVER['SERVER_NAME']); // this is how you grab end user's ip
 				$captcha = $_POST['g-recaptcha-response'];
@@ -32,7 +34,7 @@
 				
 				//******************************************************************************************************************************************************************************
 				if($captchaResult['success']){// if pass recaptcha go ahead and register
-					$id =  UserModel::Register($email,$password);
+					$id =  UserModel::Register($email,$password); // return boolean if registration success or not
 					if($id){
 						//*****************   SEND ACTIVATION EMAIL ********************************
 						$user = QueryFactory::Build("select");				
@@ -43,10 +45,10 @@
 						$link = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out
 						
 						Mailer::Send("$email","Activation Email","Please click on the link below to activate your account, http://$server/activation.php?id=$id&link=$link"); 
-						echo "<br/><br/>Check your email for account activation";
+						echo "<br><br>Check your email for account activation";
 					}
 					else
-						echo "GET LOST ROBOT!";
+						echo "You are not a human, registration denied! <br>";
 				
 				}
 			}
@@ -75,13 +77,13 @@
 		<br>
 		<input type="password" name="cPassword" placeholder="Confirm Password" > 
 		<br><br>
-		<div class="g-recaptcha" data-sitekey="6LejtgYTAAAAAITL_F2_L0NbPWtcEk35Cn7-O98W" data-theme="light"></div> <!--recaptcha  stuff-->
+		<div class="g-recaptcha" data-sitekey="6LejtgYTAAAAAITL_F2_L0NbPWtcEk35Cn7-O98W" data-theme="light"></div> <!--recaptcha  stuff (from google api)-->
 		<button type="submit" name="register" value="Register">Register</button>
 		<br>
 		
 		
 	</form>
-	<script src="https://www.google.com/recaptcha/api.js?fallback=false" async defer></script>  <!--recaptcha js-->
+	<script src="https://www.google.com/recaptcha/api.js?fallback=false" async defer></script>  <!--recaptcha js (from google api) -->
 	
 </div>
 <?php require_once"footer.php";?>

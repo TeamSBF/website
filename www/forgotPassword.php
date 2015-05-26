@@ -5,7 +5,7 @@
 		$email = trim($_POST['email']);
 		$server = $_SERVER['SERVER_NAME'];
 		
-		if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))
+		if(!(filter_var($email, FILTER_VALIDATE_EMAIL))) // check the email entered against php built in email validator
 			echo "Email is invalid, please try again";
 		else if(!UserModel::Exists("email", $email))
 			echo "Email doesn't exist in database, please try again";

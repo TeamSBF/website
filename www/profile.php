@@ -1,7 +1,8 @@
 <?php
 	require_once "header.php";
-	if(isset($_POST['update'], $_POST['update']))
+	if(isset($_POST['update']))
 	{
+		//********************* GET ALL THE FILEDS FROM THE FORM **************************************
 		$oldPass = trim($_POST['oldPass']);
 		$newPass = trim($_POST['newPass']); 
 		$cNewPass = trim($_POST['cNewPass']);
@@ -22,7 +23,7 @@
 			
 			if( password_verify($oldPass, $res->Result()['password']) ) //verify if the current password matches the password in the database
 			{
-				if(UserModel::updatePassword($user->ID, $newPass))
+				if(UserModel::updatePassword($user->ID, $newPass)) //updataPassword returns a boolean whether the update is a success or not
 					echo "Password changed successfully";
 				else
 					echo "Failed to change password";

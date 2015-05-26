@@ -6,15 +6,17 @@
 	{
 		$server = $_SERVER['SERVER_NAME'];
 		$id = Validator::instance()->sanitize("int", $_GET['id']);//get the ID to prevent people from inserting their own ID
+		
+		// *********************************  GET HASH FROM DATABASE TO CHECK AGAINST THE HASH COMING FROM THE LINK
 		$select = QueryFactory::Build("select");
 		$select->Select("id","salt", "salt_time")->From("users")->Where(["id","=",$id])->Limit();
 		$res = DatabaseManager::Query($select)->Result();
 		$saltTime = $res["salt_time"];
-		$userIDHash = sha1($res["id"].$res["salt"]); //get hash from database to check against the hash from the link
+		$userIDHash = sha1($res["id"].$res["salt"]);
 		
 		
 		if($saltTime < time())
-			echo "Reset password link has been expired, please get a new link";
+			echo "Reset password link has been expired, please get a new one from forgot password";
 		else if($userIDHash === $_GET['link']){ // link is valid go ahead and reset the password
 			$newPass = trim( $_POST['newPass']);
 			$cNewPass = trim( $_POST['cNewPass']);
