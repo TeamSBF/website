@@ -16,27 +16,41 @@ class CronValidator
 	}
 	public function Validate()
 	{
+		$enabled=-1;
 		$err="";
-		
-		if($this->formInfo["submit"]=="submit activation")//----------------------
+		if(isset($this->formInfo["enabled"]))
+		{
+			$enabled = 1;
+		}
+		else
+		{
+			$enabled = 0;
+		}
+
+		if($this->formInfo["submit"]=="submit activation")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
-				$err = $this->set("ttl_activation");
+				$err = $this->set("ttl_activation",$enabled);
 		}
 		else if($this->formInfo["submit"]=="submit form")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
-				$err = $this->set("ttl_form");
+				$err = $this->set("ttl_form",$enabled);
 		}
-		else if($this->formInfo["submit"]=="submit assessment")
+		else if($this->formInfo["submit"]=="submit assessment frequency")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
-				$err = $this->set("ttl_assessment_frequency");
+				$err = $this->set("ttl_assessment_frequency",$enabled);
 		}
-	
+		else if($this->formInfo["submit"]=="submit assessment duration")
+		{
+			$err = $this->prv_validate();
+			if(!$err)
+				$err = $this->set("ttl_assessment_complete",$enabled);
+		}
 		return $err;
 	}
 
@@ -53,22 +67,23 @@ class CronValidator
 		return false;
 	}
 	
-	private function set($name)
+	private function set($name,$enabled)
 	{	
 		//format string
 		$str= $this->formatString();
-		
+
 		//update
 //		echo strlen($str);
+		$update = QueryFactory::Build('update');
+		$update->Table('settings')->Set(['enabled',$enabled])->Where(['name', '=',$name]);
 		if(strlen($str) > 2)
 		{
-		$update = QueryFactory::Build('update');
-        $update->Table('settings')->Set(['value',$str ])->Where(['name', '=',$name]);
-        $cinfo = DatabaseManager::Query($update);
+			$update->Table('settings')->Set(['value',$str ])->Where(['name', '=',$name]);
+		}
+		$cinfo = DatabaseManager::Query($update);
 		if($cinfo->RowCount() != 1)
 			return "our servers are having issues please try again later";
 		return false;
-		}
 	}
 	
 	private function formatString()

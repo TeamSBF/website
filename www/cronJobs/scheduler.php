@@ -1,12 +1,15 @@
 <?php
-/*------------------------------------------------to get where cron start at
-//	$myfile = fopen("CronStartLocation.txt", "a");
-//	fwrite($myfile, "cron starts at ". getcwd());
+
+//	$myfile = fopen("CronFile.txt", "a");
+	//fwrite($myfile, "cron starts at ". getcwd());
+//	fwrite($myfile,"\nstart-------------------------\n");
 //	fclose($myfile);
-*///------------------------------------------------------
+//chdir('../'); //dependent on where cron runs from
+
 	
 //path to config and sessions
 chdir('www/'); //dependent on where cron runs from
+//chdir('../');
 
 //needed to use models
 require_once "config.php";
@@ -18,14 +21,14 @@ $select->Select("name", "frequency","lastRun" )->From("schedule");
 
 $res = DatabaseManager::Query($select);
 $res2 = $res->Result();
-
+//fclose($myfile);//-----------------------------
 // iterate through each task and proccess
 if($res->RowCount() > 1 )
 {
-	fwrite($myfile, "in first if\n");
+//	fwrite($myfile, "in first if\n");//------------------------
 	foreach($res2 as $curr)
 	{
-		fwrite($myfile,"prosess\n");
+//		fwrite($myfile,"prosess\n");//--------------------------------
 		process($curr);
 	}
 }
@@ -33,18 +36,17 @@ if($res->RowCount() > 1 )
 //edge case of only one task
 else if($res->RowCount() == 1)
 {
-	fwrite($myfile ,"other prosess\n");
+//	fwrite($myfile ,"other prosess\n");//---------------------------------------
 	process($res2);
 }
 
+//fclose($myfile);
 
 function process ($curr)
 {
-	//path to cronjob files
-	$path = "..\cronJobs";
-	
-//	echo $curr["name"] . ": ";
-//	echo $curr["frequency"]."<br>";
+
+	echo $curr["name"] . ": ";
+	echo $curr["frequency"]."<br>";
 	//if need to run task
 	if( strtotime($curr["frequency"],$curr["lastRun"]) < time())
 	{
