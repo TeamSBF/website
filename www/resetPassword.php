@@ -34,13 +34,13 @@
 					echo "Password reset failed <br><br>";	
 				
 				//***********************This block below check if the user has been activated if not send out another activating email******************************
-				$user = QueryFactory::Build("select");	
-				$user->Select("activated")->From("users")->Where(["id","=",$id])->Limit();
-				$resActivated = DatabaseManager::Query($user)->Result()["activated"];
+				$userQuery = QueryFactory::Build("select");	
+				$userQuery->Select("activated")->From("users")->Where(["id","=",$id])->Limit();
+				$resActivated = DatabaseManager::Query($userQuery)->Result()["activated"];
 				if($resActivated === "0"){ // if account has not been activated send them activation link
-					$user = QueryFactory::Build("select");				
-					$user->Select("email","created")->From("users")->Where(["id","=",$id])->Limit();
-					$res = DatabaseManager::Query($user);
+					$userQuery = QueryFactory::Build("select");				
+					$userQuery->Select("email","created")->From("users")->Where(["id","=",$id])->Limit();
+					$res = DatabaseManager::Query($userQuery);
 					$res = $res->Result(); // get result from table
 					$email = $res['email'];
 					$activationLink = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out

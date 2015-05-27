@@ -12,9 +12,9 @@
 		else{// email exists go ahead send a reset password link and activation link
 		
 			// grab salt time to check if the link has been expired
-			$user = QueryFactory::Build("select");				
-			$user->Select("id","salt", "salt_time")->From("users")->Where(["email","=",$email])->Limit();
-			$res = DatabaseManager::Query($user)->Result();
+			$userQuery = QueryFactory::Build("select");				
+			$userQuery->Select("id","salt", "salt_time")->From("users")->Where(["email","=",$email])->Limit();
+			$res = DatabaseManager::Query($userQuery)->Result();
 			$id = $res["id"];
 			$salt = $res["salt"];
 			$saltTime = $res["salt_time"];

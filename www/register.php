@@ -37,9 +37,9 @@
 					$id =  UserModel::Register($email,$password); // return boolean if registration success or not
 					if($id){
 						//*****************   SEND ACTIVATION EMAIL ********************************
-						$user = QueryFactory::Build("select");				
-						$user->Select("email","created")->From("users")->Where(["id","=",$id])->Limit();
-						$res = DatabaseManager::Query($user);
+						$userQuery = QueryFactory::Build("select");				
+						$userQuery->Select("email","created")->From("users")->Where(["id","=",$id])->Limit();
+						$res = DatabaseManager::Query($userQuery);
 						$res = $res->Result(); // get result from table
 						
 						$link = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out
