@@ -12,7 +12,7 @@ $table->AddColumn('FootUpAndGo')->MakeFloat()->DefaultValue(-2);
 $table->AddColumn('leftunilateralbalancetest')->MakeFloat()->DefaultValue(-2);
 $table->AddColumn('rightunilateralbalancetest')->MakeFloat()->DefaultValue(-2);
 $table->AddColumn('FunctionalReach')->MakeInt()->DefaultValue(-2);
-$table->AddColumn('reminded')->MakeBool->DefaultValue('false');
+$table->AddColumn('reminded')->MakeBool()->DefaultValue('false');
 
 return [$table,[]];
 ?>
