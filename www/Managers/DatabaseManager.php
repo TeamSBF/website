@@ -71,7 +71,10 @@ class DatabaseManager extends Singleton
                 $err = $stmt->errorInfo()[2];
                 // Concatenate the error info together
                 $errors .= "Failed to process the query: " . $err . "\n";
-
+				
+				// If time out occurs for this file, uncomment the following line
+				//printr($err);
+				
                 // If the error is data related, not database related, break out as
                 // there is nothing that can be done to solve that problem
                 if (is_numeric(strpos(strtolower($err),"duplicate")))
