@@ -2,7 +2,8 @@
 require_once "config.php";
 require_once "sessions.php";
 
-$grid = ($user) ? 12 : 8;
+// Restrict access to each page based on the user's access level
+Pages::instance()->ConfirmAccess($user, $_SERVER['PHP_SELF']);
 ?>
 
 <!doctype html>
@@ -44,11 +45,14 @@ $grid = ($user) ? 12 : 8;
         <?php } ?>
     	$(function() {
             $("#accordion").accordion({
+                collapsible: true,
+                heightStyle: "content"
+            });
+            $("#accordion2").accordion({
                 active: false,
                 collapsible: true,
                 heightStyle: "content"
             });
-
             // Hover states on the static widgets
             $("#dialog-link, #icons li").hover(
                 function () {
@@ -66,8 +70,8 @@ $grid = ($user) ? 12 : 8;
 <body>
   <header class="grid_12 alpha">
     <nav class="grid_12 alpha">
-      <?php NavMenu::Build($user);?>
+      <?=Pages::instance()->BuildMenu($user);?>
     </nav>
   </header>
     <div class="container">
-	<div class="grid_<?=$grid;?> alpha">
+	<div class="grid_<?=($user->isLoggedIn() ? 12 : 8);?> alpha">

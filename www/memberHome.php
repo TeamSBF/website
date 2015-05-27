@@ -7,7 +7,7 @@ After each form submission you can take a break and finish the rest anytime.</p>
 <div id="formsDoneMessage" style="display:none"><p>Thank you for taking the time to complete this survey!<br>Click here to access the Physical Assessments page:</p></div>
 <div><button type="button" id="assessmentPageLink" style="display:none">Assessments</button></div>
 <!-- Accordion -->
-    <div id="accordion">
+    <div id="accordion2">
     	<h2 id="acc1">Enrollment Form</h2>
         <div id="accordion-1" class="accordion-section-content">
             <?php require_once"enrollmentForm.php"; ?>

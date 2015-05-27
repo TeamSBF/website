@@ -1,7 +1,8 @@
 <?php
 	require_once "header.php";
-	if(isset($_POST['update'], $_POST['update']))
+	if(isset($_POST['update']))
 	{
+		//********************* GET ALL THE FILEDS FROM THE FORM **************************************
 		$oldPass = trim($_POST['oldPass']);
 		$newPass = trim($_POST['newPass']); 
 		$cNewPass = trim($_POST['cNewPass']);
@@ -19,44 +20,38 @@
 			$select = QueryFactory::Build("select");// build an empty select query
 			$select->Select("password")->From("users")->Where( ["id", "=", $user->ID] )->Limit(1);  // SELECT password from user where id = id
 			$res = DatabaseManager::Query($select); // send to DBmanager
-			//$res->Result()['password']; //get password from table
 			
 			if( password_verify($oldPass, $res->Result()['password']) ) //verify if the current password matches the password in the database
 			{
-				if(UserModel::updatePassword($user->ID, $newPass))
+				if(UserModel::updatePassword($user->ID, $newPass)) //updataPassword returns a boolean whether the update is a success or not
 					echo "Password changed successfully";
 				else
 					echo "Failed to change password";
-				
-				
 			}
-			else
-			{
+			else{
 				echo "Current password doesn't match";
 			}
-		}
-		
-		
+		}	
 	}
-	?>
-    <div class="background">
-        <h1> Change Password </h1>
-		<form class="changePassword" method="POST">
-			<div class="labels"><label>Current password </label></div>
-            <div class="inputFields"><input type="password" name="oldPass" placeholder=""></div> 
+	// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
+?>
 
-			<div class="labels"><label>New Password </label></div> 
-            <div class="inputFields"><input type="password" name="newPass" placeholder=""></div> 
-			
-            <div class="labels"><label>Confirm New Password </label></div>
-            <div class="inputFields"><input type="password" name="cNewPass" placeholder=""></div> 
-            
-            <div class="inputFields"><button type="submit" name="update" value="update">update</button></div>
-        </form>
-        </div>
+
+<div class="background">
+	<h1> Change Password </h1>
+	<form class="changePassword" method="POST">
+		<div class="labels"><label>Current password </label></div>
+		<div class="inputFields"><input type="password" name="oldPass" placeholder="" required></div> 
+
+		<div class="labels"><label>New Password </label></div> 
+		<div class="inputFields"><input type="password" name="newPass" placeholder="" required></div> 
+		
+		<div class="labels"><label>Confirm New Password </label></div>
+		<div class="inputFields"><input type="password" name="cNewPass" placeholder="" required></div> 
+		
+		<div class="inputFields"><button type="submit" name="update" value="update">update</button></div>
+	</form>
 	</div>
-
-		
-
-		
+</div>
+	
 <?php require_once"footer.php";?>
