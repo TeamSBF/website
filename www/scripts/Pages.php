@@ -20,6 +20,7 @@ class Pages extends Singleton
                 "users.php" => new Page("Users", "users.php", UserLevel::Admin),
 				"admincsv.php" => new Page("Reports", "admincsv.php", UserLevel::Admin),
                 "profile.php" => new Page("Profile", "profile.php", UserLevel::Member),
+				"cronSettings.php" => new Page("Settings", "cronSettings.php", UserLevel::Admin, "only"),
                 "logout.php" => new Page("Logout", "logout.php", UserLevel::Member),
 				"activation.php" => new Page("", "activation.php",UserLevel::Anon, "only", false)
             ];

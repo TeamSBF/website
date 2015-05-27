@@ -78,7 +78,7 @@ class CronValidator
 		$update->Table('settings')->Set(['enabled',$enabled])->Where(['name', '=',$name]);
 		if(strlen($str) > 2)
 		{
-			$update->Table('settings')->Set(['value',$str ])->Where(['name', '=',$name]);
+			$update->Table('settings')->Set(['value',$str ]);
 		}
 		$cinfo = DatabaseManager::Query($update);
 		if($cinfo->RowCount() != 1)
