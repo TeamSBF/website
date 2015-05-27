@@ -20,7 +20,8 @@ class Pages extends Singleton
                 "users.php" => new Page("Users", "users.php", UserLevel::Admin),
 				"admincsv.php" => new Page("Reports", "admincsv.php", UserLevel::Admin),
                 "profile.php" => new Page("Profile", "profile.php", UserLevel::Member),
-                "logout.php" => new Page("Logout", "logout.php", UserLevel::Member)
+                "logout.php" => new Page("Logout", "logout.php", UserLevel::Member),
+				"activation.php" => new Page("", "activation.php",UserLevel::Anon, "only", false)
             ];
             
             $this->items = $items;
@@ -34,7 +35,7 @@ class Pages extends Singleton
         $items = "";
         foreach ($this->items as $item)
         {
-            if ($item->HasAccess($plevel))
+            if ($item->HasAccess($plevel) && $item->display)
                 $items .= PartialParser::Parse("menuitem",["url"=>$item->page, "name"=>$item->name]);
         }
 
