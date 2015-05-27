@@ -1,5 +1,5 @@
 <?php
-abstract class UserLevel extends BasicEnum
+abstract class UserLevel
 {
     const Anon = 0;
     const Member = 1;

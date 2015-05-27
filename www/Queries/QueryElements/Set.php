@@ -8,6 +8,8 @@ abstract class Set
      * The sets to be put into the query
      */
     protected $sets;
+    
+    protected $columns;
 
     /*
      * The class constructor
@@ -15,6 +17,7 @@ abstract class Set
     public function __construct()
     {
         $this->sets = [];
+        $this->columns = [];
     }
 
     /*
@@ -25,7 +28,18 @@ abstract class Set
     public function Set($arr)
     {
         foreach($arr as $element) {
-            $this->sets[count($this->sets)] = new CVPair($element[0], $element[1]);
+            $column = $element[0];
+            $value = $element[1];
+            
+            // if the column does not exist, add it it in and set it the count to zero
+            if(!array_key_exists($column, $this->columns))
+                $this->columns[$column] = 0;
+            
+            $boundColumn = $column.$this->columns[$column];
+            
+            $this->sets[] = new CVPair($column, $boundColumn, $value);
+            
+            $this->columns[$column]++;
         }
     }
 
