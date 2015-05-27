@@ -1,9 +1,8 @@
-<?php require_once"header.php"; ?>
-<?php
+<?php require_once"header.php";
 
 $csv = new CSVConverter();
 // needs better protection but is a proof of concept
-if(isset($_GET['f']) && $user && $user->AccessLevel >= 2)
+if(isset($_GET['f']))
 {
     // we don't want anything being sent along with the csv
     ob_end_clean();
@@ -11,7 +10,7 @@ if(isset($_GET['f']) && $user && $user->AccessLevel >= 2)
     // kill the page so it can't output any else except for the file
     die();
 }
-else if ($user && $user->AccessLevel >= 2)
+else
 {	
 	//$rowCount = $csv->getDataTableRowCount();
 	//$rowCount = CSVConverter::getDataTableRowCount();

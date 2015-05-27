@@ -42,16 +42,17 @@ class CSVConverter {
 
 		$qinfo = DatabaseManager::Query($query);
 
+		$file = fopen("php://output", "w") or die("Unable to open parq_data file");
+		
 		if ($qinfo->RowCount() < 2)
 		{
-			return "Not enough data to create a CSV file";
+			fwrite($file, "Not enough data to create a CSV file\n");
+			return $file;
 		}
 
 		$parq_header = array("User ID "," 1.1 "," 1.2 "," 1.3 "," 1.4 "," 1.5 "," 1.6 "," 1.7 "," 2.1 "," 2.1a "," 2.1b "," 2.1c "," 2.2 "," 2.2a "," 2.2b "," 2.3 "," 2.3a "," 2.3b "," 2.3c "," 2.3d "," 2.3e ",
 			" 2.4 "," 2.4a "," 2.4b "," 2.4c "," 2.5 "," 2.5a "," 2.5b "," 2.6 "," 2.6a "," 2.6b "," 2.6c "," 2.6d "," 2.7 "," 2.7a "," 2.7b "," 2.7c "," 2.8 "," 2.8a "," 2.8b "," 2.8c "," 2.9 "," 2.9a "," 2.9b "," 2.9c ",
 			"Date Completed","Signature","Parent/care provider signature");
-
-		$file = fopen("php://output", "w") or die("Unable to open parq_data file");
 
 		// print header values to CSV file
 		foreach($parq_header as $val)
@@ -98,14 +99,16 @@ class CSVConverter {
 
 		$qinfo = DatabaseManager::Query($query);
 
+		$file = fopen("php://output", "w") or die("Unable to open enrollment_data file");
 		if ($qinfo->RowCount() < 2)
 		{
-			return "Not enough data to create a CSV file";
+			fwrite($file, "Not enough data to create a CSV file\n");
+			return $file;
 		}
 
 		$array = $qinfo->Result();
 
-		$file = fopen("php://output", "w") or die("Unable to open enrollment_data file");
+		
 
 		$header = array("User ID", "Last Name", "First Name", "Street Address", "City", "Phone", "Email", "Date of Birth", "Gender",
 			"Health History", "Watch SBF", "How Many Times a Week", "Control Group", "Experimental Group");
