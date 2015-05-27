@@ -10,7 +10,7 @@ class CSVConverter {
         switch($type)
         {
             case "assessments":
-            	$out = $this->getAssessementCSV(); 
+            	$out = $this->getAssessmentCSV(); 
         		break;
             case "parq":
             	$out = $this->getParQCSV();
@@ -100,6 +100,7 @@ class CSVConverter {
 		$qinfo = DatabaseManager::Query($query);
 
 		$file = fopen("php://output", "w") or die("Unable to open enrollment_data file");
+		
 		if ($qinfo->RowCount() < 2)
 		{
 			fwrite($file, "Not enough data to create a CSV file\n");
@@ -162,14 +163,15 @@ class CSVConverter {
 
 		$qinfo = DatabaseManager::Query($query);
 
+		$file = fopen("php://output", "w") or die("Unable to open questionnaire_data file");
+
 		if ($qinfo->RowCount() < 2)
 		{
-			return "Not enough data to create a CSV file";
+			fwrite($file, "Not enough data to create a CSV file\n");
+			return $file;
 		}
 
-		$array = $qinfo->Result();
-
-		$file = fopen("php://output", "w") or die("Unable to open questionnaire_data file");
+		$array = $qinfo->Result();		
 				
 		// print header values to CSV file
 		fwrite($file, "User ID,");
