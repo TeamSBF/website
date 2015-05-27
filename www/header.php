@@ -44,11 +44,14 @@ $grid = ($user) ? 12 : 8;
         <?php } ?>
     	$(function() {
             $("#accordion").accordion({
+                collapsible: true,
+                heightStyle: "content"
+            });
+            $("#accordion2").accordion({
                 active: false,
                 collapsible: true,
                 heightStyle: "content"
             });
-
             // Hover states on the static widgets
             $("#dialog-link, #icons li").hover(
                 function () {
