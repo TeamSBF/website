@@ -16,6 +16,8 @@ class CVPair
      * @var string
      */
     protected $value;
+    
+    protected $boundColumn;
 
     /*
      * The class constructor
@@ -23,10 +25,11 @@ class CVPair
      * @param string $column The column to be stored
      * @param string $value The value to be stored
      */
-    public function __construct($column, $value)
+    public function __construct($column, $boundColumn, $value)
     {
         $this->column = $column;
         $this->value = $value;
+        $this->boundColumn = $boundColumn;
     }
 
     public function Column()
@@ -37,5 +40,10 @@ class CVPair
     public function Value()
     {
         return $this->value;
+    }
+    
+    public function BoundColumn()
+    {
+        return $this->boundColumn;
     }
 }

@@ -71,7 +71,10 @@ class DatabaseManager extends Singleton
                 $err = $stmt->errorInfo()[2];
                 // Concatenate the error info together
                 $errors .= "Failed to process the query: " . $err . "\n";
-
+				
+				// If time out occurs for this file, uncomment the following line
+				//printr($err);
+				
                 // If the error is data related, not database related, break out as
                 // there is nothing that can be done to solve that problem
                 if (is_numeric(strpos(strtolower($err),"duplicate")))
@@ -121,7 +124,7 @@ class DatabaseManager extends Singleton
         $stmt = $this->conn->prepare($q);
         // Bind all the columns with their associated values
         for ($i = 0; $i < count($cvpair); $i++)
-            $stmt->bindValue(":" . $cvpair[$i]->Column(), $cvpair[$i]->Value());
+            $stmt->bindValue(":" . $cvpair[$i]->BoundColumn(), $cvpair[$i]->Value());
 
         return $stmt;
     }

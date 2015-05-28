@@ -1,5 +1,5 @@
     </div>
-    <?php if(!$user){?>
+    <?php if(!$user->isLoggedIn()){?>
     <div class="grid_4 omega">
       <div class="background">
             <h1>Login</h1>

@@ -13,7 +13,7 @@ class CVOCPair extends CVPair
      *
      * @var array
      */
-    private static $valid_conditions = array("AND", "OR","");
+    private static $valid_conditions = array("AND", "OR", "");
     // ---
 
     /*
@@ -35,7 +35,7 @@ class CVOCPair extends CVPair
      * @param string $column The column aspect of the CVOCPair
      * @param string $value The value aspect of the CVOCPair
      */
-    public function __construct($column, $value, $operator, $condition)
+    public function __construct($column, $boundColumn, $value, $operator, $condition)
     {
         // Make it upper case to make it easier
         $condition = strtoupper($condition);
@@ -44,7 +44,7 @@ class CVOCPair extends CVPair
             throw new Exception("'$condition' is not a valid condition");
 
         // Call the parents constructor as this one only implements the OC part of CVOC
-        parent::__construct($column, $value);
+        parent::__construct($column, $boundColumn, $value);
         // Store the values
         $this->operator = $operator;
         $this->condition = $condition;

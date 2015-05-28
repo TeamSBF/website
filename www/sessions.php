@@ -10,4 +10,7 @@ if(!$session->isValid()) {
 $session->forget();
 }
 
+if(!$session->get('user'))
+    $session->put('user', new User(-1, UserLevel::Anon));
+
 $user = $session->get('user');

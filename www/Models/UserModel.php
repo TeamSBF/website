@@ -5,36 +5,6 @@
 class UserModel
 {
     /**
-     * The user ID of the user
-     * @var int
-     */
-    private $id;
-    /**
-     * The privilege level of the user
-     * @var int
-     */
-    private $accesslevel;
-
-    /**
-     * The class constructor
-     *
-     * @param $info The array of info the model will store
-     */
-    private function __construct($info)
-    {
-        $this->id = $info['id'];
-        $this->accesslevel = $info['pLevel'];
-    }
-
-    public function __get($name)
-    {
-        $name = strtolower($name);
-        if(property_exists(__CLASS__, $name))
-            return $this->{$name};
-    }
-
-    // ----------------------------- Static Functions -----------------------------
-    /**
      * Attempts to log the user in
      *
      * @param string $email The user's email address
@@ -59,7 +29,7 @@ class UserModel
             // If their provided password matches the database password, return a new user model
             if (password_verify($pass, $resultArray['password'])) {
                 unset($resultArray['password']);
-                return new UserModel($resultArray);
+                return new User($resultArray['id'], $resultArray['pLevel']);
             }
         }
 
@@ -73,14 +43,16 @@ class UserModel
      * @param string $pass The users password
      * @return boolean True when the registration succeeds and false when it fails
      */
-    public static function Register($email, $pass)
+    public static function Register($email, $pass, $activated = 0, $accesslevel = 1)
     {
         // get the hashed passsword
         $pass = self::hashPass($pass);
         // Get an insert query
         $insert = QueryFactory::Build("insert");
         // Build the insert query
-        $insert->Into("users")->Set(["email", $email], ["password", $pass], ["created", "UNIX_TIMESTAMP()"]);
+        $insert->Into("users")->Set(["email", $email], ["password", $pass]);
+        $insert->Set(["created", "UNIX_TIMESTAMP()"], ["activated", $activated]);
+        $insert->Set(["pLevel", $accesslevel]);
         // Execute the query and get the result
         $qinfo = DatabaseManager::Query($insert);
         // If the user was added successfully return true
