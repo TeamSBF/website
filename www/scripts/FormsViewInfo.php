@@ -1,5 +1,7 @@
 <?php
-/* This file contains array of quesrtions and optional values */
+/* This file contains array of quesrtions and optional values 
+ * In case the forms need to be refactored or for any use really
+ * Contains all questions and posssible values array (for radio button option) */
 $parq_questions = array("Has your doctor ever said that you have a heart condition OR high blood pressure?",
 			"Do you feel pain in your chest at rest, during your daily activities of living, OR when you do physical activity?",
 			"Do you lose balance because of dizziness OR have you lost consciousness in the last 12 months?",
@@ -36,6 +38,84 @@ $parq_questions = array("Has your doctor ever said that you have a heart conditi
 			"Do you currently live with two chronic conditions?",
 			"Date Completed","Signature","Parent/Guardian/Care Provider Signature");
 
-$questionnaire_questions = array();
+$parq_values = array("No", "Yes");
 
-$enrollment_questions = array();
+$questionnaire_questions = array("How often do you perform the Sit and Be Fit exercises?:" => array("Less than once a month", "Once per month", "Once per week", "More than once per week"),
+			"How long have you participated in the Sit and Be Fit program?:" => array("Less than 3 months", "3 to 6 months", "6 to 12 months", "More than 12 months"),
+          	"You exercise:" => array("By yourself", "With a partner", "With a class", "Other"), 
+          	"Where do you exercise:" => array("Home", "Gym", "Other"),
+          	"Do you consider the Sit and Be Fit program host Mary Ann Wilson to be your exercise partner?:" => array("No", "Yes"),
+          	"How would you have rated your overall health BEFORE starting the Sit and Be Fit program?:" => array("Excellent", "Very good", "Good", "Fair", "Poor"),
+            "How would you rate your current overall health?:" => array("Excellent", "Very good", "Good", "Fair", "Poor"), 
+            "Do you use an aid for walking? If so please select the aid usually used:" => array("None", "Wheel Chair", "Walker", "Cane"),
+            "How many times have you fallen in the last year?:" => array("None", "1 time", "2 times", "3 or more"), 
+            "Do you have pains?:" => array("No", "Yes"), 
+            "Do you have trouble sleeping at night?:" => array("No", "Yes"),
+            "Hearing/Vision problems?" => array("No", "Yes"),
+            "Heart/Vascular problems?" => array("No", "Yes"), 
+            "Lung problems?" => array("No", "Yes"), 
+            "Nervous system problems?" => array("No", "Yes"),
+            "Hormone/Endoctrine problems?" => array("No", "Yes"), 
+            "Kidney/Bladder problems?" => array("No", "Yes"), 
+            "Cancer problems?" => array("No", "Yes"), 
+            "Digestive problems?" => array("No", "Yes"),
+            "Muscle joints or bone problems?" => array("No", "Yes"), 
+            "Skin problems?" => array("No", "Yes"),
+            "Other medical conditions:",
+            "Age:",
+            "Gender:" => array("Female", "Male"),
+            "Ethnicity:" => array("Asian", "African American", "Caucasian", "Hispanic", "Native American"),
+            "Highest level of Education:",
+            "Current working status:",
+            "Number of members in your household:",
+            "Annual Income:",
+            "Current Height (in inches):",
+            "Current Weight (in pounds):",
+            "Describe how the Sit and Be Fit exercise program has affected the listed medical conditions in part 1",           
+            "Lifting or carrying groceries:" => array("No help", "Some help", "Unable to perform"),
+            "Climbing one flight of stairs:" => array("No help", "Some help", "Unable to perform"),
+            "Stepping up and down a small curb:" => array("No help", "Some help", "Unable to perform"), 
+            "Picking up small object from the floor:" => array("No help", "Some help", "Unable to perform"),
+          	"Walking a mile or more:" => array("No help", "Some help", "Unable to perform"),
+          	"Walking 2-3 blocks:" => array("No help", "Some help", "Unable to perform"),
+          	"Walking around in your home:" => array("No help", "Some help", "Unable to perform"),
+          	"Bathing or dressing yourself:" => array("No help", "Some help", "Unable to perform"),
+          	"Getting in and out of a car:" => array("No help", "Some help", "Unable to perform"),
+          	"Writing on a computer Keyboard:" => array("No help", "Some help", "Unable to perform"),
+          	"Preparing meals:" => array("No help", "Some help", "Unable to perform"), 
+          	"Cleaning your home:" => array("No help", "Some help", "Unable to perform"),
+          	"Describe how the Sit and Be Fit exercise program affects your ability to perform the activities listed above?:",
+          	"Feel full of life?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel nervous?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel that you are playing a useful part in things?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel calm and peaceful?:" => array("Always", "Mostly", "Half the time", "Rarely"), "Have a lot of energy?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel depressed?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel worn out?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel happy?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel satisfied with your life?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel full of life?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel nervous?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel that you are playing a useful part in things?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel calm and peaceful?:" => array("Always", "Mostly", "Half the time", "Rarely"), "Have a lot of energy?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel depressed?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel worn out?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel happy?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"Feel satisfied with your life?:" => array("Always", "Mostly", "Half the time", "Rarely"),
+          	"How are the feelings that are listed above affected when you participate in a Sit and Be Fit exercise class?:"
+          	);
+
+$enrollment_questions = array(
+			"Last Name",
+			"First Name",
+			"Street Address",
+			"City",
+			"Phone",
+			"E-mail",
+			"Date of Birth",
+			"Gener" => array("Female", "Male"),
+			"Health History",
+			"Do you watch Sit and Be Fit?" => array("No", "Yes"),
+			"How many times a week?",
+			"Control Group (will NOT participate in Sit and Be Fit)" => array("No", "Yes"),
+			"Experimental Group (participate in Sit and Be Fit)" => array("No", "Yes")
+			);
