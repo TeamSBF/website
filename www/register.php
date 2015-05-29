@@ -11,18 +11,19 @@
 		$cPassword = trim($_POST['cPassword']);
 		$server = $_SERVER['SERVER_NAME'];
 		$recaptcha=$_POST['g-recaptcha-response']; //get recaptcha (google api)
+		$msg = "";
 		
 		if(empty($email) || empty($cEmail) || empty($password) || empty($cPassword) || empty($recaptcha))
-			echo "all fields required";
-		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL))) // check the email entered against php built in email validator
-			echo "invalid email, try again";
+			$msg =   "All fields required";
+		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))// check the email entered against php built in email validator
+			$msg =  "Invalid Email address, please try again!";
 		else if($email !== $cEmail)
-			echo "Email doesn't match";
+			$msg =   "Email doesn't match, please try again";
 		else if($password !== $cPassword)
-			echo "password doesn't match";
+			$msg =   "Password doesn't match, please try again";
 		else{
 			if(UserModel::Exists("email", $email))
-				echo "Failed to register, email already exists, please use a different email"; 
+				$msg =   "Failed to register, email already exists, please use a different email"; 
 			else{
 				// ************************************************* this block is google's recaptcha stuff *************************************************************************
 				//*********************************************** THIS IS FROM GOOGLE RECAPTCHA API ***********************************************************************
@@ -45,10 +46,10 @@
 						$link = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out
 						
 						Mailer::Send("$email","Activation Email","Please click on the link below to activate your account, http://$server/activation.php?id=$id&link=$link"); 
-						echo "<br><br>Check your email for account activation";
+						$msg =   "Registration successful, please check your email for account activation";
 					}
 					else
-						echo "You are not a human, registration denied! <br>";
+						$msg =   "You are not a human, registration denied! <br>";
 				
 				}
 			}
@@ -59,6 +60,9 @@
 	
 ?>
 <div class="background">
+	<?php if(!empty($msg)){?>
+		<div><?='* '.$msg;?></div>
+	<?php } ?>
 	<h1> Register </h1>
 	<form class="register" method="POST" >
 		<input type="hidden" name="regKey" value="">
@@ -70,11 +74,11 @@
 		<input type="text" name="cEmail" placeholder="johndoe@example.net" required>	  
 		<br>
 		<br>
-		<label>Password </label> 
+		<label>Password (6 characters minimum) </label> 
 		<br>
 		<input type="password" name="password" placeholder="Password" required> 
 		<br><br>
-		<label>Confirm Password </label>
+		<label>Confirm Password (6 characters minimum)</label>
 		<br>
 		<input type="password" name="cPassword" placeholder="Confirm Password" required> 
 		<br><br>

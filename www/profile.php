@@ -6,12 +6,13 @@
 		$oldPass = trim($_POST['oldPass']);
 		$newPass = trim($_POST['newPass']); 
 		$cNewPass = trim($_POST['cNewPass']);
+		$msg = "";
 			
 		
 		if(empty($oldPass) || empty($newPass) || empty($cNewPass))
-			echo "all fields required";
+			$msg = "all fields required";
 		else if($newPass !== $cNewPass) // check new pass match
-			echo "new password doesn't match";
+			$msg = "new password doesn't match";
 		else // update the password
 		{
 			require_once("scripts/password.php");
@@ -24,12 +25,12 @@
 			if( password_verify($oldPass, $res->Result()['password']) ) //verify if the current password matches the password in the database
 			{
 				if(UserModel::updatePassword($user->ID, $newPass)) //updataPassword returns a boolean whether the update is a success or not
-					echo "Password changed successfully";
+					$msg = "Password changed successfully";
 				else
-					echo "Failed to change password";
+					$msg = "Failed to change password";
 			}
 			else{
-				echo "Current password doesn't match";
+				$msg = "Current password doesn't match";
 			}
 		}	
 	}
@@ -38,15 +39,20 @@
 
 
 <div class="background">
+	<?php if(!empty($msg)){?>
+		<div><?='* '.$msg;?></div>
+	<?php } ?>
 	<h1> Change Password </h1>
 	<form class="changePassword" method="POST">
 		<div class="labels"><label>Current password </label></div>
 		<div class="inputFields"><input type="password" name="oldPass" placeholder="" required></div> 
 
-		<div class="labels"><label>New Password </label></div> 
+		<div class="labels"><label>New Password</label></div> 
+		<div class="labels"><label>(minimum 6 characters) </label></div>
 		<div class="inputFields"><input type="password" name="newPass" placeholder="" required></div> 
 		
 		<div class="labels"><label>Confirm New Password </label></div>
+		<div class="labels"><label>(minimum 6 characters) </label></div>
 		<div class="inputFields"><input type="password" name="cNewPass" placeholder="" required></div> 
 		
 		<div class="inputFields"><button type="submit" name="update" value="update">update</button></div>

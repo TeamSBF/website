@@ -4,11 +4,11 @@
 	{
 		$email = trim($_POST['email']);
 		$server = $_SERVER['SERVER_NAME'];
-		
+		$msg = "";
 		if(!(filter_var($email, FILTER_VALIDATE_EMAIL))) // check the email entered against php built in email validator
-			echo "Email is invalid, please try again";
+			$msg = "Invalid Email address, please try again";
 		else if(!UserModel::Exists("email", $email))
-			echo "Email doesn't exist in database, please try again";
+			$msg = "Email doesn't exist in our database, please try again";
 		else{// email exists go ahead send a reset password link and activation link
 		
 			// grab salt time to check if the link has been expired
@@ -41,6 +41,7 @@
 			}
 			
 			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://$server/resetPassword.php?id=$id&link=$link");
+			$msg = "Please check your email for reset password link";
 		}
 		// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 	}
@@ -48,10 +49,13 @@
 
 
 <div class="background">
+	<?php if(!empty($msg)){?>
+		<div><?='* '.$msg;?></div>
+	<?php } ?>
 	<h1> Forgot Password </h1>
 	<form class="forgotPassword" method="POST">
-		<div class="labels"><label>Email address </label></div>
-		<div class="inputFields"><input type="text" name="email" placeholder="" required></div> 
+		<div class="labels"><label>Email address</label></div>
+		<div class="inputFields"><input type="text" name="email" placeholder="johndoe@example.net" required></div> 
 		<div class="inputFields"><button type="submit" name="retrieve" value="retrieve">Retreive</button></div>
 	</form>
 	</div>

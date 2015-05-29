@@ -6,7 +6,7 @@
 	{
 		$server = $_SERVER['SERVER_NAME'];
 		$id = Validator::instance()->sanitize("int", $_GET['id']);//get the ID to prevent people from inserting their own ID
-		
+		$msg = "";
 		// *********************************  GET HASH FROM DATABASE TO CHECK AGAINST THE HASH COMING FROM THE LINK
 		$select = QueryFactory::Build("select");
 		$select->Select("id","salt", "salt_time")->From("users")->Where(["id","=",$id])->Limit();
@@ -16,22 +16,22 @@
 		
 		
 		if($saltTime < time())
-			echo "Reset password link has been expired, please get a new one from forgot password";
+			$msg = "This reset password link has been expired, please get a new one from forgot password";
 		else if($userIDHash === $_GET['link']){ // link is valid go ahead and reset the password
 			$newPass = trim( $_POST['newPass']);
 			$cNewPass = trim( $_POST['cNewPass']);
 			
 			if(empty($newPass) || empty($cNewPass))
-				echo "Please enter all the fields!";
+				$msg = "Please enter all the fields!";
 			else if($newPass !== $cNewPass)
-				echo "Password doesn't match, please try again!";
+				$msg = "Password doesn't match, please try again!";
 			else{// new pass match go ahead and update the database
 				require_once("scripts/password.php");
 				
 				if(UserModel::updatePassword($id,$newPass))
-					echo " Password reset successfully! <br><br>";
+					$msg = " Password reset successfully! <br><br>";
 				else
-					echo "Password reset failed <br><br>";	
+					$msg = "Password reset failed <br><br>";	
 				
 				//***********************This block below check if the user has been activated if not send out another activating email******************************
 				$userQuery = QueryFactory::Build("select");	
@@ -45,16 +45,20 @@
 					$email = $res['email'];
 					$activationLink = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out
 					Mailer::Send("$email","Activation Email","Your account is yet to be activated, please click on the link below to activate your account, http://$server/activation.php?id=$id&link=$activationLink"); 
+					$msg =   "Your account has not been activated, please check your email for account activation";
 				}//end if
 			}//end else
 		}else{
-			echo "Invalid link, please try again!";
+			$msg = "Invalid link, please try again!";
 		}
 		// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 	}
 ?>
 
     <div class="background">
+	<?php if(!empty($msg)){?>
+		<div><?='* '.$msg;?></div>
+	<?php } ?>
         <h1> Reset Password </h1>
 		<form class="resetPassword" method="POST">
 
