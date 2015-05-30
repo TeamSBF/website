@@ -142,7 +142,7 @@ class FormsModel
         if ($qinfo->RowCount() == 1)
         {
         	$complete = QueryFactory::Build('update');
-        	$complete->Table('enrollment_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$complete->Table('enrollment_form')->Set(['completed', 1])->Set(["created", "UNIX_TIMESTAMP()"])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
         	if ($cinfo->RowCount() == 1)
         		return "success";
