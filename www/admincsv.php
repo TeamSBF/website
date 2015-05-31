@@ -4,9 +4,17 @@ $csv = new CSVConverter();
 // needs better protection but is a proof of concept
 if(isset($_GET['f']))
 {
+	$start = $_GET['start'];
+	$end = $_GET['end'];
+	if ($start != 0 && $start != "")
+		$start = strtotime($_GET['start']);
+	echo $start . "<br>";
+	if ($end != 0 && $end != "")
+		$end = strtotime($_GET['end']);
+	echo $end;
     // we don't want anything being sent along with the csv
     ob_end_clean();
-    $csv->getCSV($_GET['f']);
+    $csv->getCSV($_GET['f'], $start, $end);
     // kill the page so it can't output any else except for the file
     die();
 }
@@ -34,7 +42,7 @@ else
 <button type="button" id="enrollmentDl">Download</button>
 <div style="margin-top:15px;margin-bottom:15px"><input type="checkbox" id="enrollmentBox"><label>Filter By Date</label>
 <label style="margin-left:50px;margin-right:10px">From:</label><input type="date" id="enrollmentDateStart">
-<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="enrollmentDateSEnd" value="<?php echo date('Y-m-d'); ?>"></div>
+<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="enrollmentDateEnd" value="<?php echo date('Y-m-d'); ?>"></div>
 
 <hr>
 
@@ -42,7 +50,7 @@ else
 <button type="button" id="questionnaireDl">Download</button>
 <div style="margin-top:15px;margin-bottom:15px"><input type="checkbox" id="questionnaireBox"><label>Filter By Date</label>
 <label style="margin-left:50px;margin-right:10px">From:</label><input type="date" id="questionnaireDateStart">
-<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="questionnaireDateStart" value="<?php echo date('Y-m-d'); ?>"></div>
+<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="questionnaireDateEnd" value="<?php echo date('Y-m-d'); ?>"></div>
 
 <hr>
 
@@ -50,7 +58,7 @@ else
 <button type="button" id="parqDl">Download</button>
 <div style="margin-top:15px;margin-bottom:15px"><input type="checkbox" id="parqBox"><label>Filter By Date</label>
 <label style="margin-left:50px;margin-right:10px">From:</label><input type="date" id="parqDateStart">
-<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="parqDateStart" value="<?php echo date('Y-m-d'); ?>"></div>
+<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="parqDateEnd" value="<?php echo date('Y-m-d'); ?>"></div>
 </div>
 
 <script>
@@ -65,7 +73,12 @@ $("#assessmentDl").on("click", function() {
 });
 
 $("#enrollmentDl").on("click", function() {
-	window.location.href = 'admincsv.php?f=enrollment';
+	var startDate = 0; var endDate = 0;
+	if ($("#enrollmentBox").is(":checked")) {
+		startDate = $("#enrollmentDateStart").val();
+		endDate = $("#enrollmentDateEnd").val();		
+	}
+	window.location.href = 'admincsv.php?f=enrollment&start='+ startDate +'&end='+ endDate;
 });
 
 $("#questionnaireDl").on("click", function() {

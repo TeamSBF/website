@@ -2,10 +2,11 @@
 
 class CSVConverter {
 	
-    public function GetCSV($type)
+    public function GetCSV($type, $start, $end)
     {
         // note the php://output, that's required
         $out;
+
         // = fopen('php://output', 'w');
         switch($type)
         {
@@ -19,7 +20,7 @@ class CSVConverter {
             	$out = $this->getQuestionnaireCSV();
             	break;
             case "enrollment":
-            	$out = $this->getEnrollmentCSV();
+            	$out = $this->getEnrollmentCSV($start, $end);
             	break;
         }
         // include the headers that tell the browser it's receiving a download
@@ -90,12 +91,13 @@ class CSVConverter {
 	Query the enrollment_form table and selects everything.
 	Convert all relevant numerical values to english and prints to a csv file.
 	*/
-	public function getEnrollmentCSV()
+	public function getEnrollmentCSV($start, $end)
 	{
 		$query = QueryFactory::Build('select');
 
-		$query->Select("userID","lastName","firstName","streetAddress","city","phone","email","dob","gender","healthHistory",
-			"watchSbf","HowManyTimesAWeek","controlGroup","experimentalGroup")->From("enrollment_form")->Where(["completed","=","1"]);
+		$query->Select("userID", "DateCompleted" ,"lastName","firstName","streetAddress","city","phone","email","dob","gender","healthHistory",
+			"watchSbf","HowManyTimesAWeek","controlGroup","experimentalGroup")->From("enrollment_form")->Where(["completed","=","1", "AND"],
+			["DateCompleted", ">", $start, "AND"], ["DateCompleted", "<", $end]);
 
 		$qinfo = DatabaseManager::Query($query);
 
@@ -111,7 +113,7 @@ class CSVConverter {
 
 		
 
-		$header = array("User ID", "Last Name", "First Name", "Street Address", "City", "Phone", "Email", "Date of Birth", "Gender",
+		$header = array("User ID", "Date Completed" ,"Last Name", "First Name", "Street Address", "City", "Phone", "Email", "Date of Birth", "Gender",
 			"Health History", "Watch SBF", "How Many Times a Week", "Control Group", "Experimental Group");
 				
 		// print header values to CSV file

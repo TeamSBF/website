@@ -2,14 +2,13 @@
 <?php
     if (isset($_POST['submitEnrollment']))
     {
-      print_r($_POST);
+      //print_r($_POST);
       if ($user)
-      {
-        $_POST['userID'] = $user->id;
+      {        
+        $_POST['userID'] = $user->id;       
         $enrollmentValidator = new FormsModel($_POST);
-        $enrollmentReturn = $enrollmentValidator->validateEnrollment();
-        print_r($enrollmentReturn);      
-      }      
+        $enrollmentReturn = $enrollmentValidator->validateEnrollment();          
+      }
     } 
 ?>
 
