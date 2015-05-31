@@ -1,16 +1,11 @@
-
 <?php
-
  	if (isset($_POST['submitParQ']))
     {
-    	if ($user)
-    	{
-    		$_POST['userID'] = $user->id;
-		    print_r($_POST);
-		    $parQvalidator = new FormsModel($_POST);
-		    $parQreturn = $parQvalidator->validateParQ();
-		    print_r($parQreturn);
-    	}	
+        $_POST['userID'] = $user->id;
+        //printr($_POST);
+        $parQvalidator = new FormsModel($_POST);
+        $parQreturn = $parQvalidator->validateParQ();
+        //printr($parQreturn);
     }
 ?>
 
@@ -23,65 +18,40 @@
 Being more physically active is very safe for MOST people. This questionnaire will tell you whether it is necessary for you to
 seek further advice from your doctor OR a qualified exercise professional before becoming more physically active.</p>
 		<div id="parQmessage" class="success" style="display:none"></div>
-		<div id="section1">
-			
-			<fieldset>
-				<legend>SECTION 1 - GENERAL HEALTH</legend>
-				<p>Please read the 7 questions below carefully and answer each one honestly: check YES or NO.</p>
-				<div id="s1RadioGroup">
-                    <div>
-                        <label for="q1_1"><p>1: Has your doctor ever said that you have a heart condition OR high blood pressure?</p></label>
-                        <div><input type="radio" class="s1Radios" name="q1_1" <?php if (isset($_POST['q1_1']) && $_POST['q1_1'] == 1) {echo "checked";}?> required value=1>Yes</div>
-					    <div><input type="radio" class="s1Radios" name="q1_1" <?php if (isset($_POST['q1_1']) && $_POST['q1_1'] == 0) {echo "checked";}?> value=0>No</div>
-                    </div>
+<?php
+$disclaimer = PartialParser::Parse('tag',['tag'=>"p", 'content' => "Please read the questions below carefully and answer each one honestly: check YES or NO."]);
+$keys = array_keys($parq_questions);
+$page = "";
+$showSection2 = false;
+for($i = 0; $i < count($keys); $i++)
+{
+    $key = $keys[$i];
+    $legend = PartialParser::Parse('tag',["tag"=>"legend", "content"=>"SECTION ".($i+1)." - ".$key]);
+    $section = $parq_questions[$key];
+    $questions = "";
+    for($j = 0; $j < count($section); $j++)
+    {
+        $id = ($i + 1)."_".($j + 1);
+        $questions .= PartialParser::Parse('div',['content'=>$section[$j]->html($id),'id'=>'s'.($i+1).'RadioGroup']);
+        if($section[$j]->showSubs())
+            $showSection2 = true;
+    }
+    $fieldset = PartialParser::Parse('tag',['tag'=>'fieldset', 'content'=>$legend.$disclaimer.$questions]);
+    
+    $details = ['id'=>'section'.($i+1),'content'=>$fieldset];
+    if($i > 0 && !$showSection2)
+    {
+        $details['style'] = 'display:none;';
+    }
+    $page .= PartialParser::Parse('div', $details)."<br /><br />";
+}
 
-                    <div>                    
-					   <label for="q1_2"><p>2: Do you feel pain in your chest at rest, during your daily activities of living, OR when you do physical activity?</p></label>
-					   <div><input type="radio" class="s1Radios" name="q1_2" <?php if (isset($_POST['q1_2']) && $_POST['q1_2'] == 1) echo "checked";?> required value=1>Yes</div>
-					   <div><input type="radio" class="s1Radios" name="q1_2" <?php if (isset($_POST['q1_2']) && $_POST['q1_2'] == 0) echo "checked";?> value=0>No</div>
-                    </div>
-                    
-                    <div>
-					   <label for="q1_3"><p>3: Do you lose balance because of dizziness OR have you lost consciousness in the last 12 months? 
-									Please answer NO if your dizziness was associated with over_breathing (including during vigorous exercise):</p></label>
-                       <div><input type="radio" class="s1Radios" name="q1_3" <?php if (isset($_POST['q1_3']) && $_POST['q1_3'] == 1) echo "checked";?> required value=1>Yes</div>
-					   <div><input type="radio" class="s1Radios" name="q1_3" <?php if (isset($_POST['q1_3']) && $_POST['q1_3'] == 0) echo "checked";?>  value=0>No</div>
-                    </div>
-                    
-                    <div>
-					   <label for="q1_4"><p>4: Have you ever been diagnosed with another chronic medical condition (other than heart disease or high blood pressure)?</p></label>
-					   <div><input type="radio" class="s1Radios" name="q1_4" <?php if (isset($_POST['q1_4']) && $_POST['q1_4'] == 1) echo "checked";?> required value=1>Yes</div>
-					   <div><input type="radio" class="s1Radios" name="q1_4" <?php if (isset($_POST['q1_4']) && $_POST['q1_4'] == 0) echo "checked";?>  value=0>No</div>
-                    </div>
-                    
-                    <div>
-					   <label for="q1_5"><p>5: Are you currently taking prescribed medications for a chronic medical condition?</p></label>
-					   <div><input type="radio" class="s1Radios" name="q1_5" <?php if (isset($_POST['q1_5']) && $_POST['q1_5'] == 1) echo "checked";?> required value=1>Yes</div>
-					   <div><input type="radio" class="s1Radios" name="q1_5" <?php if (isset($_POST['q1_5']) && $_POST['q1_5'] == 0) echo "checked";?>  value=0>No</div>
-                    </div>
-                    
-                    <div>
-					   <label for="q1_6"><p>6: Do you have a bone or joint problem that could be made worse by becoming more physically active? 
-									Please answer NO if you had a joint problem in the past, but it does not limit your current ability to be physically active. 
-									For example, knee, ankle, shoulder or other.</p></label>
-					   <div><input type="radio" class="s1Radios" name="q1_6" <?php if (isset($_POST['q1_6']) && $_POST['q1_6'] == 1) echo "checked";?> required value=1>Yes</div>
-					   <div><input type="radio" class="s1Radios" name="q1_6" <?php if (isset($_POST['q1_6']) && $_POST['q1_6'] == 0) echo "checked";?>  value=0>No</div>
-                    </div>
-                    
-                    <div>
-					   <label for="q1_7"><p>7: Has your doctor ever said that you should only do medically supervised physical activity?</p></label>
-					   <div><input type="radio" class="s1Radios" name="q1_7" <?php if (isset($_POST['q1_7']) && $_POST['q1_7'] == 1) echo "checked";?> required value=1>Yes</div>
-					   <div><input type="radio" class="s1Radios" name="q1_7" <?php if (isset($_POST['q1_7']) && $_POST['q1_7'] == 0) echo "checked";?> value=0>No</div>
-                    </div>
-				</div>
-			</fieldset>	
-		</div> <!-- end section1 -->
-		<br><br>
+echo PartialParser::Parse('div',['content'=>$page]);?>
+<?php if(1==2){// DELETE ONCE CONFIRMED TO BE WORKING, NOT BEFORE TO BE USED AS REFERENCE/TEMPLATE?>
 		<div id="section2" style="display:none">
 			<fieldset>
 				<legend>SECTION 2 - CHRONIC MEDICAL CONDITIONS</legend>
 				<p>Please read the questions below carefully and answer each one honestly: check YES or NO.</p>
-
 				<div> <!-- div for question 2.1, the sub section with id: q2.* should be indented (see parQ pdf) -->
                     <div>
                         <label for="q2_1"><p>2.1: Do you have Arthritis, Osteoporosis, or Back Problems?</p></label>
@@ -350,7 +320,8 @@ seek further advice from your doctor OR a qualified exercise professional before
 				</div> <!-- end div for question 2.9 -->
 			</fieldset>
 		</div> <!-- end section2 -->
-		<br><br>
+        <br><br>
+<?php } ?>
 		<div>
 			<legend>SECTION 3 - DECLARATION</legend>
 			<p>›› You are encouraged to photocopy the PAR-Q+. You must use the entire questionnaire and NO changes are permitted.</p>
@@ -410,11 +381,11 @@ seek further advice from your doctor OR a qualified exercise professional before
 			// loop through main section 2 questions and set their subquestions to non-required if needed
 			var name, radio;
 			for (var i = 1; i <= questions; i++) {
-				name = "q2_" + i;
+				name = "q2." + i;
 				radio = document.getElementsByName(name);
 				if ($(radio).is(":checked")) {
 					$(radio).prop("checked", false);
-					loopSubQuestions(radio, name);
+					loopSubQuestions(name);
 				}
 			}
 		}
@@ -423,28 +394,36 @@ seek further advice from your doctor OR a qualified exercise professional before
 	// switch the required attribute between true and false depending on input
 	function switchRequiredAttribute(name, howmany, value)	{
 		for (var i = 1; i <= howmany; i++) {
+            var input = "input[name='"+name+"_"+i+"']";
 			if (value === "false")
-				$("[name="+name+"_"+i+"]").attr("required", false);
+				$(input).attr("required", false);
 			else
-				$("[name="+name+"_"+i+"]").attr("required", true);								
+				$(input).attr("required", true);
 		}
 			
 	}
 
 	/* Generic function for all section 2 questions, if yes show sub-questions, if no hide */
-	function s2RadiosClick(radioElement, divID) {
-		var count = $("#"+divID+" > div").length;
-		if ($(radioElement).val() == 1) {
-			$("#"+ divID).show("slow");			
-			switchRequiredAttribute(divID, count, "true");
-		}
-		else {
-			$("#"+ divID).hide("slow");
-			loopSubQuestions(radioElement, divID);
-		}
-	}
+    $("#section2 input").on('click', function () {
+        var input = $(this);
+        var name = input.attr('name');
+        var subs = $('#'+name);
+        if(subs.length)
+        {
+            if(!subs.is(':visible') && input.val() == 1)
+            {
+                subs.show("slow");
+                switchRequiredAttribute(input.attr('name'), subs.length, "true");
+            }
+            else
+            {
+                subs.hide("slow");
+                loopSubQuestions(input.attr('name'));
+            }
+        }
+	});
 
-	function loopSubQuestions(radioElement, divID) {
+	function loopSubQuestions(divID) {
 		var count = $("#"+divID+" > div").length;
 		$("#"+ divID).hide("slow");			
 		switchRequiredAttribute(divID, count, "false");
@@ -453,7 +432,7 @@ seek further advice from your doctor OR a qualified exercise professional before
 
 	function uncheckSubQuestions(name, count) {
 		for (var i = 1; i <= count; i++) {
-			$("[name="+name+"_"+i+"]").prop("checked", false);
+			$("input[name='"+name+"_"+i+"']").prop("checked", false);
 		}
 	}
 

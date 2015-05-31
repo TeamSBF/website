@@ -16,7 +16,15 @@ class PartialParser extends Singleton
         // replace the templated values with the actual values
         $partial = str_replace(array_keys($data), array_values($data), $template);
         // replace anything else that wasn't used with an empty string
-        return preg_replace('/(\s*)\[\[(.*?)\]\](\s*)/', "", $partial);
+        // the unused brackets
+        $brackets = '\[\[(.*?)\]\]';
+        // attribute with quote
+        $attribute = '[\"a-z=]*';
+        // optional starting space
+        $startSpace = '\s?';
+        // optional ending quote
+        $endQuote = '\"?';
+        return preg_replace('/'.$startSpace.$attribute.$brackets.$endQuote.'/', "", $partial);
     }
     
     private function convertKeys($data)

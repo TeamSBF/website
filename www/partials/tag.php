@@ -1,5 +1,5 @@
 <?php ob_start();?>
-<label for="[[for]]">[[content]]</label>
+<[[tag]] class="[[classes]]" id="[[id]]" style="[[style]]">[[content]]</[[tag]]>
 <?php
 $ret = ob_get_contents();
 ob_end_clean();

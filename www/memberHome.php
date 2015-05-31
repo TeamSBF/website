@@ -1,4 +1,5 @@
-<?php require_once("header.php");?>
+<?php require_once("header.php");
+require_once"scripts/FormsViewInfo.php";?>
 
 <div class="background">
 <h1 class="demoHeaders">Forms</h1>
