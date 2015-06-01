@@ -8,9 +8,13 @@ if(isset($_GET['f']))
 	$end = $_GET['end'];
 	if ($start != 0 && $start != "")
 		$start = strtotime($_GET['start']);
+	else
+		$start = 0;
 	echo $start . "<br>";
 	if ($end != 0 && $end != "")
 		$end = strtotime($_GET['end']);
+	else
+		$end = PHP_INT_MAX;
 	echo $end;
     // we don't want anything being sent along with the csv
     ob_end_clean();
@@ -33,8 +37,8 @@ else
 <h3>Assessments Data:</h3>
 <button type="button" id="assessmentDl">Download</button>
 <div style="margin-top:15px;margin-bottom:15px"><input type="checkbox" id="assessmentBox"><label>Filter By Date</label>
-<label style="margin-left:50px;margin-right:10px">From:</label><input type="date" id="assesssmentDateStart">
-<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="assesssmentDateEnd" value="<?php echo date('Y-m-d'); ?>"></div>
+<label style="margin-left:50px;margin-right:10px">From:</label><input type="date" id="assessmentDateStart">
+<label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="assessmentDateEnd" value="<?php echo date('Y-m-d'); ?>"></div>
 
 <hr>
 
@@ -69,6 +73,11 @@ $(document).ready(function() {
 });
 
 $("#assessmentDl").on("click", function() {
+	var startDate = 0; var endDate = 0;
+	if ($("#assessmentBox").is(":checked")) {
+		startDate = $("#assessmentDateStart").val();
+		endDate = $("#assessmentDateEnd").val();		
+	}
 	window.location.href = 'admincsv.php?f=assessments';
 });
 
@@ -82,11 +91,21 @@ $("#enrollmentDl").on("click", function() {
 });
 
 $("#questionnaireDl").on("click", function() {
-	window.location.href = 'admincsv.php?f=questionnaire';
+	var startDate = 0; var endDate = 0;
+	if ($("#questionnaireBox").is(":checked")) {
+		startDate = $("#questionnaireDateStart").val();
+		endDate = $("#questionnaireDateEnd").val();		
+	}
+	window.location.href = 'admincsv.php?f=questionnaire&start='+ startDate +'&end='+ endDate;
 });
 
 $("#parqDl").on("click", function() {
-	window.location.href = 'admincsv.php?f=parq';
+	var startDate = 0; var endDate = 0;
+	if ($("#parqBox").is(":checked")) {
+		startDate = $("#parqDateStart").val();
+		endDate = $("#parqDateEnd").val();		
+	}
+	window.location.href = 'admincsv.php?f=parq&start='+ startDate +'&end='+ endDate;
 });
 
 </script>
