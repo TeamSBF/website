@@ -10,12 +10,10 @@ if(isset($_GET['f']))
 		$start = strtotime($_GET['start']);
 	else
 		$start = 0;
-	echo $start . "<br>";
 	if ($end != 0 && $end != "")
 		$end = strtotime($_GET['end']);
 	else
 		$end = PHP_INT_MAX;
-	echo $end;
     // we don't want anything being sent along with the csv
     ob_end_clean();
     $csv->getCSV($_GET['f'], $start, $end);
@@ -47,6 +45,7 @@ else
 <div style="margin-top:15px;margin-bottom:15px"><input type="checkbox" id="enrollmentBox"><label>Filter By Date</label>
 <label style="margin-left:50px;margin-right:10px">From:</label><input type="date" id="enrollmentDateStart">
 <label style="margin-left:20px;margin-right:10px">To:</label><input type="date" id="enrollmentDateEnd" value="<?php echo date('Y-m-d'); ?>"></div>
+
 
 <hr>
 
