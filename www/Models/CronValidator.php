@@ -30,21 +30,21 @@ class CronValidator
 			$enabled = 0;
 		}
 		//change activation times
-		if($this->formInfo["submit"]=="submit activation")
+		if($this->formInfo["submit"]=="activation duration")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
 				$err = $this->set("ttl_activation",$enabled);
 		}
 		//change form life
-		else if($this->formInfo["submit"]=="submit form")
+		else if($this->formInfo["submit"]=="forms duration")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
 				$err = $this->set("ttl_form",$enabled);
 		}
 		//change assessment frequency
-		else if($this->formInfo["submit"]=="submit assessment frequency")
+		else if($this->formInfo["submit"]=="assessment frequency")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
@@ -53,17 +53,22 @@ class CronValidator
 			}
 		}
 		//change assessment life
-		else if($this->formInfo["submit"]=="submit assessment duration")
+		else if($this->formInfo["submit"]=="assessment duration")
 		{
-			echo "d";
 			$err = $this->prv_validate();
 			if(!$err)
 				$err = $this->set("ttl_assessment_complete",$enabled);
 		}
-		//change password life
-		else if($this->formInfo["submit"]=="submit forgot password")
+		//change assessment choice life
+		else if($this->formInfo["submit"]=="assessment choice duration")
 		{
-			echo "e";
+			$err = $this->prv_validate();
+			if(!$err)
+				$err = $this->set("ttl_assessment_choice",$enabled);
+		}
+		//change password life
+		else if($this->formInfo["submit"]=="forgot password duration")
+		{
 			$err = $this->prv_validate();
 			if(!$err)
 				$err = $this->set("forgotpassword",$enabled);

@@ -20,13 +20,23 @@ if(isset($user) && ($user->AccessLevel == UserLevel::Admin || $user->AccessLevel
 	$res = DatabaseManager::Query($selectAct)->Result();
 ?>
 
-
 <?php
 
 
-	$arr = array("forgot password","activation","assessment choice", "assessment duration", "assessment frequency","form");
-
-	echo '<div class = "grid_10 omega background">';
+	$arr = array("forgot password duration","activation duration","assessment choice duration", "assessment duration", "assessment frequency","forms duration");
+	$description= array("The amount of time a forgot password link will stay active before a user request another link",
+						"The amount of time a user has to activate their account after registering before that account is deleted",
+						"The amount of time a user has to choose which assessments they want to take",
+						"The amount of time a user has to take an assessment once active",
+						"The amount of time between each assessment",
+						"The amount of time a user has to complete their forms");
+	echo '<div class = "grid_10 alpha background">';
+	
+		//----------
+		echo '<h1>Settings</h1>';
+		echo '<p>Below you can change the time limits for each item as well as enable or disable them. For more information hover mouse over item.</p>';
+	
+		//-----------
 		echo '<div class="grid_6 alpha">';
 
 	for($i=0; $i < count($arr); $i = $i+1)
@@ -40,14 +50,14 @@ if(isset($user) && ($user->AccessLevel == UserLevel::Admin || $user->AccessLevel
 			echo '</div> <div class="grid_6 omega">';
 		}
 		echo '<form method = "POST">' .
-			'<label>'. $arr[$i] . ' time</label>'.
-			'<br><input type="checkbox" name="enabled" value="true"'.$checked.'> Enabled' .
-			'<br>currently runs: '. $res[$i]["value"]. '<br>'.
-			'<input name="month" type="number" min="0" max ="60" maxlength ="2" size = "4"> : months <br>
-		<input name="day" type="number" min="0" max ="60" maxlength ="2" size = "4"> : days <br>
-		<input name="hour" type="number" min="0" max ="60" maxlength ="2" size = "4"> : hours <br>
+			'<label title="'.$description[$i].'">'. $arr[$i] . '</label>'.
+			'<br><input title="enable or disable this feature" type="checkbox" name="enabled" value="true"'.$checked.'> Enabled' .
+			'<br>currently runs: '. $res[$i]["value"]. '(s)<br>'.
+			'<input title="number of months from 0-60" name="month" type="number" min="0" max ="60" maxlength ="2" size = "4"> : months <br>
+		<input title="number of days from 0-60" name="day" type="number" min="0" max ="60" maxlength ="2" size = "4"> : days <br>
+		<input title="number of hours from 0-60" name="hour" type="number" min="0" max ="60" maxlength ="2" size = "4"> : hours <br>
 		<br>
-		<button name ="submit" type="submit" value="submit '.$arr[$i].'">'.$arr[$i].'</button>
+		<button title="submit the changes for '.$arr[$i].'" name ="submit" type="submit" value="'.$arr[$i].'">'.$arr[$i].'</button>
 		</form><br>';
 		
 	}
