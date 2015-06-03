@@ -2,24 +2,25 @@
 
 class CSVConverter {
 	
-    public function GetCSV($type)
+    public function GetCSV($type, $start, $end)
     {
         // note the php://output, that's required
         $out;
+
         // = fopen('php://output', 'w');
         switch($type)
         {
             case "assessments":
-            	$out = $this->getAssessmentCSV(); 
+            	$out = $this->getAssessmentCSV($start, $end); 
         		break;
             case "parq":
-            	$out = $this->getParQCSV();
+            	$out = $this->getParQCSV($start, $end);
             	break;
             case "questionnaire":
-            	$out = $this->getQuestionnaireCSV();
+            	$out = $this->getQuestionnaireCSV($start, $end);
             	break;
             case "enrollment":
-            	$out = $this->getEnrollmentCSV();
+            	$out = $this->getEnrollmentCSV($start, $end);
             	break;
         }
         // include the headers that tell the browser it's receiving a download
@@ -32,13 +33,14 @@ class CSVConverter {
 	Query the parq_form table and selects everything.
 	Convert all relevant numerical values to english and prints to a csv file.
 	*/
-	public function getParQCSV()
+	public function getParQCSV($start, $end)
 	{
 		$query = QueryFactory::Build('select');
 		$query->Select("userID","q1_1","q1_2","q1_3","q1_4","q1_5","q1_6","q1_7","q2_1","q2_1_1","q2_1_2","q2_1_3",
 			"q2_2","q2_2_1","q2_2_2","q2_3","q2_3_1","q2_3_2","q2_3_3","q2_3_4","q2_3_5","q2_4","q2_4_1","q2_4_2",
 			"q2_4_3","q2_5","q2_5_1","q2_5_2","q2_6","q2_6_1","q2_6_2","q2_6_3","q2_6_4","q2_7","q2_7_1","q2_7_2",
-			"q2_7_3","q2_8","q2_8_1","q2_8_2","q2_8_3","q2_9","q2_9_1","q2_9_2","q2_9_3","q3_1","q3_2","q3_3")->From("parq_form")->Where(["completed","=","1"]);
+			"q2_7_3","q2_8","q2_8_1","q2_8_2","q2_8_3","q2_9","q2_9_1","q2_9_2","q2_9_3","q3_1","q3_2","q3_3")->From("parq_form")->Where(["completed","=","1", "AND"],
+			["DateCompleted", ">", $start, "AND"], ["DateCompleted", "<", $end]);
 
 		$qinfo = DatabaseManager::Query($query);
 
@@ -90,12 +92,13 @@ class CSVConverter {
 	Query the enrollment_form table and selects everything.
 	Convert all relevant numerical values to english and prints to a csv file.
 	*/
-	public function getEnrollmentCSV()
+	public function getEnrollmentCSV($start, $end)
 	{
 		$query = QueryFactory::Build('select');
 
-		$query->Select("userID","lastName","firstName","streetAddress","city","phone","email","dob","gender","healthHistory",
-			"watchSbf","HowManyTimesAWeek","controlGroup","experimentalGroup")->From("enrollment_form")->Where(["completed","=","1"]);
+		$query->Select("userID", "DateCompleted" ,"lastName","firstName","streetAddress","city","phone","email","dob","gender","healthHistory",
+			"watchSbf","HowManyTimesAWeek","controlGroup","experimentalGroup")->From("enrollment_form")->Where(["completed","=","1", "AND"],
+			["DateCompleted", ">", $start, "AND"], ["DateCompleted", "<", $end]);
 
 		$qinfo = DatabaseManager::Query($query);
 
@@ -106,12 +109,9 @@ class CSVConverter {
 			fwrite($file, "Not enough data to create a CSV file\n");
 			return $file;
 		}
-
+        
 		$array = $qinfo->Result();
-
-		
-
-		$header = array("User ID", "Last Name", "First Name", "Street Address", "City", "Phone", "Email", "Date of Birth", "Gender",
+		$header = array("User ID", "Date Completed" ,"Last Name", "First Name", "Street Address", "City", "Phone", "Email", "Date of Birth", "Gender",
 			"Health History", "Watch SBF", "How Many Times a Week", "Control Group", "Experimental Group");
 				
 		// print header values to CSV file
@@ -153,13 +153,14 @@ class CSVConverter {
 	Query the questionnaire_form table and selects everything.
 	Convert all relevant numerical values to english and prints to a csv file.
 	*/
-	public function getQuestionnaireCSV()
+	public function getQuestionnaireCSV($start, $end)
 	{
 		$query = QueryFactory::Build('select');
 
 		$query->Select("userID","q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15","q16","q17","q18","q19","q20",
-			"q21","q22","q23","q24","q25","q26","q27","q28","q29","q30","q31","q32","q33","q34","q35","q36","q37","q38","q39","q40","q41","q42",
-			"q43","q44","q45","q46","q47","q48","q49","q50","q51","q52","q53","q54","q55","q56","q57","q58","q59","q60","q61","q62","q63","q64")->From("questionnaire_form")->Where(["completed","=","1"]);
+			"q21","q22","q23","q24","q25","q26","q27","q28","q29","q30","q31","q32","q33","q34","q35","q36","q37","q38","q39","q40","q41","q42",      "q43","q44","q45","q46","q47","q48","q49","q50","q51","q52","q53","q54","q55","q56","q57","q58","q59","q60","q61","q62","q63","q64")->From("questionnaire_form")->Where(["completed","=","1", "AND"],
+			["DateCompleted", ">", $start, "AND"], ["DateCompleted", "<", $end]);
+
 
 		$qinfo = DatabaseManager::Query($query);
 

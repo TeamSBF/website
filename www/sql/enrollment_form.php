@@ -3,6 +3,7 @@
 $table = new CreateTable("enrollment_form");
 $table->AddColumn('id')->SetAutoIncrement();
 $table->AddColumn('userID')->MakeInt()->AddKey('unique');
+$table->AddColumn('DateCompleted')->MakeInt()->DefaultValue(0);
 $table->AddColumn('completed')->MakeBool()->DefaultValue('false');
 $table->AddColumn('lastName')->MakeVarChar(50);
 $table->AddColumn('firstName')->MakeVarChar(50);
