@@ -14,6 +14,115 @@
 		  return $this->validateSaveAssessments();
 	    }
         
+        public function validateAssessmentData()
+        {
+            return $this->validateData();
+        }
+        
+        private function validateData()
+        {
+            $insert = $this->validateAndBuildQuery();
+            //Throw error
+            if(is_string($insert))
+                return $insert;
+            $save = DatabaseManager::Query($insert);
+            printr($save->Errors());
+            printr($insert->Query(true));
+            if($save->RowCount()<1)
+                return "Failed to save data.";
+            
+            return $this->SaveUpdate();           
+        }
+        
+        private function SaveUpdate()
+        {
+            $settings=QueryFactory::Build('select');
+            $settings->Select("ttl_assessment_frequency")->From("settings");
+            $time = DatabaseManager::Query($settings);
+            $time = strtotime($time->Result()["ttl_assessment_frequency"]);
+            
+            $update = QueryFactory::Build('update'); 
+            $update->Table("users")->Set(["NextAssessment",$time])->Where(["id","=",$this->data["userID"]]);
+            $save = DatabaseManager::Query($update);
+            
+            $count=QueryFactory::Build('select');
+            $count->Select("TestNumber","Chairstand","ArmCurl","StepTest","FootUpAndGo","leftunilateralbalancetest","rightunilateralbalancetest","FunctionalReach")->From('assessments')->Where(['userid', '=', $this->data["userID"]]);
+            $save =DatabaseManager::Query($count);
+            $count=$save->RowCount();
+            $res=$save->Result();
+            if(!is_array($res))
+                $res=[$res];
+            
+            $largest=-1;
+            $testNum=-1;
+            printr($res);
+            for($i = 0;$i < $count;$i++ )
+            {
+                if($res[$i]["TestNumber"] >$testNum)
+                {
+                    $largest=$i;
+                    $testNum=$res[$i]["TestNumber"];
+                }
+            }
+            $res=$res[$largest];
+            unset($res["TestNumber"]);
+            $insert = QueryFactory::Build('insert');
+            $insert->Into("assessments")->Set(["userid",$this->data["userID"]],["TestNumber",$count+1]);
+            foreach(array_keys($res) as $key)
+            {
+                $value = -2;
+                if($res[$key]>-1)
+                    $value = -1;
+                 $insert->Set([$key,$value]); 
+            }
+            $save=DatabaseManager::Query($insert);
+            if($save->RowCount() > 0)
+                return "SUCCESS";
+            return "Failed to insert data correctly";
+        }
+        
+        private function validateAndBuildQuery()
+        {
+            $data = $this->data;
+            $insert = QueryFactory::Build('update');
+		    $insert->Table("assessments"); 
+            $insert->Where(["userid","=",$data["userID"],"AND"],["DateCompleted","=",0]);
+            foreach(array_keys($data) as $key)
+            {
+                $value=$data[$key];
+                if(is_array($value))
+                {
+                    if($this->validateNumber($value[0])&&$this->validateNumber($value[1])) 
+                    {
+                        $value=$value[0]*60+$value[1];
+                    }
+                    else
+                    {
+                        return $key." Invalid Format(ONLY NUMBERS GREATER THAN OR EQUAL TO ZERO ARE ACCEPTED!)";   
+                    }
+                }
+                
+                    if($this->validateNumber($value))
+                    {
+                        $insert->Set([$key,$value]);   
+                    }
+                    else
+                    {
+                        return $key." Invalid Format(ONLY NUMBERS GREATER THAN OR EQUAL TO ZERO ARE ACCEPTED!)";   
+                    }     
+                
+            }
+            //$insert->Set(["DateCompleted","UNIX_TIMESTAMP()"]);
+            return $insert;   
+        }
+        
+        private function validateNumber($value)
+        {
+               if(is_numeric($value) && $value >= 0 && $value < PHP_INT_MAX)
+                   return true;
+                return false;
+        }
+        
         private function validateSaveAssessments()
         {
             $insert = QueryFactory::Build('insert');
