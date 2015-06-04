@@ -3,6 +3,7 @@
 $table = new CreateTable("questionnaire_form");
 $table->AddColumn('id')->SetAutoIncrement();
 $table->AddColumn('userID')->MakeInt()->AddKey('unique');
+$table->AddColumn('DateCompleted')->MakeInt()->DefaultValue(0);
 $table->AddColumn('completed')->MakeBool()->DefaultValue('false');
 $table->AddColumn('q1')->MakeInt();
 $table->AddColumn('q2')->MakeInt();

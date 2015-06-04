@@ -36,10 +36,10 @@ class FormsModel
 	}
 
 	/* Checks if some input contains character we don't want */
-	private function checkForIllegalCharacters($str)
+	/*private function checkForIllegalCharacters($str)
 	{
 		return !preg_match('/[^A-Za-z0-9.!?\\-$\']/', $str);
-	}
+	} */
 
 	/* Checks if a given string is below allowed length
 	 * $param: $value (string), $length (int) 
@@ -142,7 +142,7 @@ class FormsModel
         if ($qinfo->RowCount() == 1)
         {
         	$complete = QueryFactory::Build('update');
-        	$complete->Table('enrollment_form')->Set(['completed', 1])->Set(["created", "UNIX_TIMESTAMP()"])->Where(['userID', '=', $this->form['userID']]);
+        	$complete->Table('enrollment_form')->Set(['completed', 1])->Set(["DateCompleted", "UNIX_TIMESTAMP()"])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
         	if ($cinfo->RowCount() == 1)
         		return "success";
@@ -243,7 +243,7 @@ class FormsModel
         if ($qinfo->RowCount() == 1)
         {
         	$complete = QueryFactory::Build('update');
-        	$complete->Table('questionnaire_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$complete->Table('questionnaire_form')->Set(['completed', 1])->Set(["DateCompleted", "UNIX_TIMESTAMP()"])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
         	if ($cinfo->RowCount() == 1)
         		return "success";
@@ -286,7 +286,7 @@ class FormsModel
 
 				if ($val === "text") // this is a text input
 				{
-					if ($this->checkForIllegalCharacters($f[$name]) && $this->validateValueLength($f[$name], $textLength))
+					if ($this->validateValueLength($f[$name], $textLength))
 					{
 						$query->Set([$name, $f[$name]]);
 					}
@@ -337,7 +337,7 @@ class FormsModel
         if ($qinfo->RowCount() == 1)
         {
         	$complete = QueryFactory::Build('update');
-        	$complete->Table('parq_form')->Set(['completed', 1])->Where(['userID', '=', $this->form['userID']]);
+        	$complete->Table('parq_form')->Set(['completed', 1])->Set(["DateCompleted", "UNIX_TIMESTAMP()"])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
         	if ($cinfo->RowCount() == 1)
         		return "success";
@@ -418,7 +418,7 @@ class FormsModel
 			$maxLength = 50;
 			if (isset($f[$name]))
 			{
-				if ($this->checkForIllegalCharacters($f[$name]) && $this->validateValueLength($f[$name], $maxLength))
+				if ($this->validateValueLength($f[$name], $maxLength))
 					$query->Set([$name, $f[$name]]);
 			}		
 			else
