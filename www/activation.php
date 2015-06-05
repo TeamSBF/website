@@ -25,7 +25,7 @@
 	
 ?>
 <div class="background">
-	<h2> Activation </h2>
+	<h2><center> Activation </center></h2>
 		<h4><center><?=$msg;?></center></h4>
 </div>
 
