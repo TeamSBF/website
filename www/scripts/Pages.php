@@ -16,7 +16,7 @@ class Pages extends Singleton
                 "faq.php" => new Page("FAQ", "faq.php",UserLevel::Anon, "only"),
 				"register.php" => new Page("Register", "register.php", UserLevel::Anon, "only"),
                 "memberHome.php" => new Page("Forms", "memberHome.php",UserLevel::Member),
-                "assessments.php" => new Page("Assessments", "assessments.php",UserLevel::Participant, "only"),
+                "assessments.php" => new Page("Assessments", "assessments.php",UserLevel::Participant),
                 "users.php" => new Page("Users", "users.php", UserLevel::Admin),
 				"admincsv.php" => new Page("Reports", "admincsv.php", UserLevel::Admin),
                 "profile.php" => new Page("Profile", "profile.php", UserLevel::Member),

@@ -1,5 +1,5 @@
 <?php require_once"header.php";
-
+$msg = "";
 function createHeader($keys)
 {
     $row = "";
@@ -109,9 +109,9 @@ else // not editing users
             $rows += $res->RowCount();
         }
         if($rows < 1)
-            echo "Error: User(s) were not updated or there were no changes to save.";
+            $msg = ["Error: User(s) were not updated or there were no changes to save.",0];
         else
-            echo "Users were successfully updated.";
+            $msg = ["Users were successfully updated.",1];
         unset($res, $update, $email, $ids, $id, $level, $activated);
     }
     else if(isset($_GET['delete']) && isset($_POST['id']))
@@ -122,9 +122,9 @@ else // not editing users
             $delete = QueryFactory::Build("delete")->From("users")->Where(["id", "=", $id]);
             $res = DatabaseManager::Query($delete);
             if($res->RowCount() > 0)
-                echo "User successfully deleted";
+                $msg = ["User successfully deleted",1];
             else
-                echo "Error deleting user or user does not exist";
+                $msg = ["Error deleting user or user does not exist",0];
         }
     }
     else if(isset($_GET['adduser']) && isset($_POST))
@@ -191,7 +191,9 @@ $form = PartialParser::Parse('form', $data);
 // add the table to the page
 $page = PartialParser::Parse('table',["content" => $form, "id" => (isset($tableID) ? $tableID : "")]);
 // wrap the page in the background div and display it
-echo PartialParser::Parse('div', ["classes" => "background", "content" => $page]);
+if(is_array($msg))
+	$msg = PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]);
+echo PartialParser::Parse('div', ["classes" => "background", "content" => $msg.$page]);
 ?>
 
 <div id="dialog-confirm" title="Delete the user?" style="display:none;">

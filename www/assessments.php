@@ -150,7 +150,8 @@ $time =$time->Result()["NextAssessment"];
 		{?>
             <button type="submit" name="<?php echo($rowCount<1?"submitAssessments":"submitData"); ?>" >Submit</button>
   <?php } ?>
-    </form> 
+    </form>
+<?php if(1==2){?>
     <h2>Previous Tests</h2>
     <table>
         <thead>
@@ -163,7 +164,7 @@ $time =$time->Result()["NextAssessment"];
         </thead>
         
     </table>
-
+<?php }?>
 </div>
     
 

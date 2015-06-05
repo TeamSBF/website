@@ -2,7 +2,7 @@
 require_once("header.php");
 //do if plevel admin or super
 
-if(isset($user) && ($user->AccessLevel == UserLevel::Admin || $user->AccessLevel == UserLevel::Super))
+if($user->AccessLevel == UserLevel::Admin || $user->AccessLevel == UserLevel::Super)
 {
 	$err= "";
 	if(!empty($_POST))

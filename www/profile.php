@@ -11,9 +11,9 @@
 			
 		//******************* this block below is where we validate input from user ***********************
 		if(empty($oldPass) || empty($newPass) || empty($cNewPass))
-			$msg = "all fields required";
+			$msg = ["all fields required",0];
 		else if($newPass !== $cNewPass) // check if the newPassword match
-			$msg = "new password doesn't match";
+			$msg = ["new password doesn't match",0];
 		else // update the password
 		{
 			require_once("scripts/password.php");
@@ -26,13 +26,13 @@
 			if(password_verify($oldPass, $res->Result()['password'])) //verify if the current password matches the password in the database
 			{
 				if(UserModel::updatePassword($user->ID, $newPass)) //updataPassword returns a boolean whether the update is a success or not
-					$msg = "Password changed successfully";
+					$msg = ["Password changed successfully",1];
 				else
-					$msg = "Failed to change password";
+					$msg = ["Failed to change password",0];
 			}
 			else
 			{
-				$msg = "Current password doesn't match";
+				$msg = ["Current password doesn't match",0];
 			}
 		}	
 	}
@@ -41,9 +41,7 @@
 
 
 <div class="background">
-	<?php if(!empty($msg)){?>
-		<div><?='* '.$msg;?></div>
-	<?php } ?>
+	<?php if(is_array($msg)) echo PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]); ?>
 	<h1> Change Password </h1>
 	<form class="changePassword" method="POST">
 		<div class="labels"><label>Current password </label></div>
