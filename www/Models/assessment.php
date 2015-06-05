@@ -26,8 +26,9 @@
             if(is_string($insert))
                 return $insert;
             $save = DatabaseManager::Query($insert);
-            printr($save->Errors());
-            printr($insert->Query(true));
+     //       printr($save->Errors());
+   //         printr($insert->Query(true));
+	//		printr($save);
             if($save->RowCount()<1)
                 return "Failed to save data.";
             
@@ -37,14 +38,15 @@
         private function SaveUpdate()
         {
             $settings=QueryFactory::Build('select');
-            $settings->Select("ttl_assessment_frequency")->From("settings");
+            $settings->Select('value')->Where(['name','=','ttl_assessment_frequency'])->From("settings");
             $time = DatabaseManager::Query($settings);
-            $time = strtotime($time->Result()["ttl_assessment_frequency"]);
-            
+			//printr($time);
+            $time = strtotime($time->Result()['value']);
+             
             $update = QueryFactory::Build('update'); 
             $update->Table("users")->Set(["NextAssessment",$time])->Where(["id","=",$this->data["userID"]]);
             $save = DatabaseManager::Query($update);
-            
+           
             $count=QueryFactory::Build('select');
             $count->Select("TestNumber","Chairstand","ArmCurl","StepTest","FootUpAndGo","leftunilateralbalancetest","rightunilateralbalancetest","FunctionalReach")->From('assessments')->Where(['userid', '=', $this->data["userID"]]);
             $save =DatabaseManager::Query($count);
@@ -55,16 +57,24 @@
             
             $largest=-1;
             $testNum=-1;
-            printr($res);
-            for($i = 0;$i < $count;$i++ )
-            {
-                if($res[$i]["TestNumber"] >$testNum)
-                {
-                    $largest=$i;
-                    $testNum=$res[$i]["TestNumber"];
-                }
-            }
-            $res=$res[$largest];
+			//echo "count: ". $count. "<br>";
+            //printr($res);//---------------------------------------------------------------------
+			
+			//if more then one
+			if($count > 1)
+			{
+				//get last form
+				for($i = 0;$i < $count;$i++ )
+				{
+					if($res[$i]["TestNumber"] >$testNum)
+					{
+						$largest=$i;
+						$testNum=$res[$i]["TestNumber"];
+					}
+				}
+				$res=$res[$largest];
+			}
+			
             unset($res["TestNumber"]);
             $insert = QueryFactory::Build('insert');
             $insert->Into("assessments")->Set(["userid",$this->data["userID"]],["TestNumber",$count+1]);
@@ -87,21 +97,25 @@
             $insert = QueryFactory::Build('update');
 		    $insert->Table("assessments"); 
             $insert->Where(["userid","=",$data["userID"],"AND"],["DateCompleted","=",0]);
+//			printr($data);
             foreach(array_keys($data) as $key)
             {
                 $value=$data[$key];
-                if(is_array($value))
-                {
-                    if($this->validateNumber($value[0])&&$this->validateNumber($value[1])) 
-                    {
-                        $value=$value[0]*60+$value[1];
-                    }
-                    else
-                    {
-                        return $key." Invalid Format(ONLY NUMBERS GREATER THAN OR EQUAL TO ZERO ARE ACCEPTED!)";   
-                    }
-                }
-                
+//				echo $value . "<br>";
+				if(!empty($value))
+				{	
+					if(is_array($value))
+					{
+						if($this->validateNumber($value[0])&&$this->validateNumber($value[1])) 
+						{
+							$value=$value[0]*60+$value[1];
+						}
+						else
+						{
+							return $key." Invalid Format(ONLY NUMBERS GREATER THAN OR EQUAL TO ZERO ARE ACCEPTED!)";   
+						}
+					}
+					
                     if($this->validateNumber($value))
                     {
                         $insert->Set([$key,$value]);   
@@ -110,9 +124,9 @@
                     {
                         return $key." Invalid Format(ONLY NUMBERS GREATER THAN OR EQUAL TO ZERO ARE ACCEPTED!)";   
                     }     
-                
+                }
             }
-            //$insert->Set(["DateCompleted","UNIX_TIMESTAMP()"]);
+            $insert->Set(["DateCompleted","UNIX_TIMESTAMP()"]);
             return $insert;   
         }
         
@@ -182,6 +196,7 @@
                 $date = QueryFactory::Build('update');
 		        $date->Table("users");
                 $date->Set(['NextAssessment',"UNIX_TIMESTAMP()"]);
+				$date->Where(["id","=",$p["userID"]]);
                 $s = DatabaseManager::Query($date);
                 return $insert;
             }

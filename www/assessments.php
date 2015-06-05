@@ -1,17 +1,21 @@
 <?php require_once"header.php";
+//printr($_POST);//--------------------------------------
 if (isset($_POST['submitAssessments']))
     {
         $_POST['userID'] = $user->id;
         $assessmentValidator = new assessment($_POST);
         $assessmentReturn = $assessmentValidator->validateAssessments();
-        if($assessmentReturn =="SUCCESS")?>
-            <script>alert("Assessment Selection Completed.");</script><?php           
+        if($assessmentReturn =="SUCCESS")
+		{?>
+		<script>alert("Assessment Selection Completed.");</script><?php 
+		//$assessmentReturn = "";
+		}          
     } 
 if (isset($_POST['submitData']))
 {
     $_POST['userID'] = $user->id;
     unset($_POST['submitData']);
-    printr($_POST);
+ //   printr($_POST);
     $assessmentValidator = new assessment($_POST);
     $assessmentReturn = $assessmentValidator->validateAssessmentData();
    // $assessmentReturn="SUCCESS";
@@ -31,6 +35,7 @@ $array = ["Chairstand" =>["30 Second Chair Stand","Lower body strength evaluatio
 <!-- Accordion -->
     
 <?php
+
 $find = QueryFactory::Build('select');
 $find->Select("Chairstand","ArmCurl","StepTest","FootUpAndGo","leftunilateralbalancetest","rightunilateralbalancetest","FunctionalReach")->From('assessments')->Where(['userID', '=', $user->id,"AND"],['DateCompleted','=',0]);
 $find->Limit();
@@ -40,12 +45,26 @@ $left = $result["leftunilateralbalancetest"];
 $right =$result["rightunilateralbalancetest"];
 $result["unilateralbalancetest"]=[$left,$right];
 unset($result["leftunilateralbalancetest"],$result["rightunilateralbalancetest"]);
+
+$time = QueryFactory::Build('select');
+$time->Select("NextAssessment")->From("users")->Where(["id","=",$user->id])->limit();
+$time = DatabaseManager::Query($time);
+$time =$time->Result()["NextAssessment"];
+//echo $time;
 ?>
 
 
     <h1 class="demoHeaders">Assessments</h1>
+	 <?php 
+	 //show next assessment date
+	 if($time > 0 && $time > time()) 
+		{
+			echo "<h2>next assessment on ". date("F d, Y",$time). "</h2>";
+		}
+		?> 
     <form method="post">
         <?php
+		//show errors here
             if(!empty($assessmentReturn))
             {?>
                <div><?=$assessmentReturn;?> </div>
@@ -54,8 +73,10 @@ unset($result["leftunilateralbalancetest"],$result["rightunilateralbalancetest"]
         <div id="accordion">
         
         <?php 
+			//get row count
             $keys = array_keys($array);
             $rowCount = $res->RowCount();
+			//set up accordion tabs
             for($x=0;$x<count($keys);$x++){
                 $key = $keys[$x];
                 if($rowCount > 0)
@@ -84,11 +105,12 @@ unset($result["leftunilateralbalancetest"],$result["rightunilateralbalancetest"]
                 <h2><?php echo $array[$key][0];?></h2>  
                 <div>
                     <?php
+					//if need to select assessments
                    if($rowCount<1)
                    {?>
                       <input type="checkbox" name="<?php echo $array[$key][2];?>">Select if you would like to do 
                    <?php }
-                    else
+                    else if($time <= time())// && $time > 0)
                     {?>
                         
                         <?php if($key==="unilateralbalancetest") {
@@ -99,7 +121,7 @@ unset($result["leftunilateralbalancetest"],$result["rightunilateralbalancetest"]
                                     
                                 $seconds=($seconds<0?"":$seconds);
                                 $minutes=($minutes<0?"":$minutes);?>
-                                    Left Unilateral: <input  type="number"  name="left<?=$key;?>[]" value="<?=$minutes?>"> minutes
+                                    Left Unilateral: <input  type="number" name="left<?=$key;?>[]" value="<?=$minutes?>"> minutes
                                     <input  type="number"  name="left<?=$key;?>[]" value="<?=$seconds?>"> seconds<br>
                         <?php   }
                                 if($result[$key][1]>= -1) {
@@ -115,7 +137,7 @@ unset($result["leftunilateralbalancetest"],$result["rightunilateralbalancetest"]
                               }
                               else
                               {?>
-                                <input type="number" name="<?php echo $keys[$x];?>" value="<?=$result[$key];?>">
+                                <input type="number" name="<?php echo $keys[$x];?>" value="<?php if($result[$key] >-1){echo $result[$key];} ?>" min="0">
                     <?php }
                     }?>
                     <p>Definition:<?php echo $array[$keys[$x]][1];?></p>
@@ -124,7 +146,10 @@ unset($result["leftunilateralbalancetest"],$result["rightunilateralbalancetest"]
         <?php }?>
         
         </div>
+		<?php if($rowCount < 1 || ($time > 0 && $time <= time()))
+		{?>
             <button type="submit" name="<?php echo($rowCount<1?"submitAssessments":"submitData"); ?>" >Submit</button>
+  <?php } ?>
     </form> 
     <h2>Previous Tests</h2>
     <table>
