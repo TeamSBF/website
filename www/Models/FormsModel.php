@@ -130,10 +130,13 @@ class FormsModel
 		// get a Insert query object
 		$insert = QueryFactory::Build('insert');
 		// build the query
-        $insert->Into('enrollment_form')->Set(['userID', $form['userID']])->Set(['lastName', $form['lName']], ['firstName', $form['fName']], ['streetAddress', $form['streetAddress']],
-        	['city', $form['city']], ['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']], ['gender', $form['gender']],
-        	['healthHistory', $form['healthHistory']], ['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']],
-        	['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
+        $insert->Into('enrollment_form')->Set(['userID', $form['userID']]);
+        $insert->Set(['lastName', $form['lName']], ['firstName', $form['fName']]);
+        $insert->Set(['streetAddress', $form['streetAddress']],['city', $form['city']]);
+        $insert->Set(['phone', $form['phone']], ['email', $form['email']], ['dob', $form['dob']]);
+        $insert->Set(['gender', $form['gender']], ['healthHistory', $form['healthHistory']]);
+        $insert->Set(['watchSbf', $form['watchSbf']], ['howManyTimesAWeek', $form['howMany']]);
+        $insert->Set(['controlGroup', $form['controlGrp']], ['experimentalGroup', $form['experimentalGrp']]);
 
         
         // save to the DB
@@ -142,7 +145,7 @@ class FormsModel
         if ($qinfo->RowCount() == 1)
         {
         	$complete = QueryFactory::Build('update');
-        	$complete->Table('enrollment_form')->Set(['completed', 1])->Set(["created", "UNIX_TIMESTAMP()"])->Where(['userID', '=', $this->form['userID']]);
+        	$complete->Table('enrollment_form')->Set(['completed', 1], ["DateCompleted", "UNIX_TIMESTAMP()"])->Where(['userID', '=', $this->form['userID']]);
         	$cinfo = DatabaseManager::Query($complete);
         	if ($cinfo->RowCount() == 1)
         		return "success";

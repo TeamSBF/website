@@ -2,13 +2,26 @@
 
 if (isset($_POST['submitQuestionnaire']))
 {
-  if ($user)
-  {
     $_POST['userID'] = $user->id;
-    //print_r($_POST);
     $qp1validator = new FormsModel($_POST);
     $q1return = $qp1validator->validateQuestionnaire();
-  }      
+}
+
+if($questionnaire = FormsModel::isQuestionnaireComplete($user->id))
+{
+    $select = QueryFactory::Build("select");
+    $grab = [];
+    for($i = 0; $i < 64; $i++)
+    {
+        $grab[] = "q".($i+1);
+    }
+    $select->Select($grab)->From('questionnaire_form')->Where(['userID','=',$user->id])->Limit();
+    $select = DatabaseManager::Query($select);
+    $result = $select->Result();
+    foreach(array_keys($result) as $key)
+    {
+        $_POST[$key] = $result[$key];
+    }
 }
 ?>
 

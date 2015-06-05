@@ -2,7 +2,7 @@
 /**
  * Class UserModel A class to represent the User
  */
-class UserModel
+abstract class UserModel
 {
     /**
      * Attempts to log the user in
@@ -142,5 +142,19 @@ class UserModel
         require_once("scripts/password.php");
         $options = array('cost' => 11);
         return password_hash($pass, PASSWORD_BCRYPT, $options);
+    }
+    
+    public static function FormsCompleted($userid)
+    {
+        $update = QueryFactory::Build("update")->Table("users");
+        $update->Set(["pLevel",UserLevel::Participant],["NextAssessment","UNIX_TIMESTAMP()"]);
+        $update->Where(["id","=",$userid])->Limit();
+        $res = DatabaseManager::Query($update);
+        if($res->RowCount() > 0)
+        {
+            $user->accesslevel = UserLevel::Participant;
+            $session->put('user', $user);
+            header("Location: memberHome.php");
+        }
     }
 }

@@ -1,95 +1,125 @@
-
 <?php
-    if (isset($_POST['submitEnrollment']))
+if (isset($_POST['submitEnrollment']))
+{
+    $_POST['userID'] = $user->id;       
+    $enrollmentValidator = new FormsModel($_POST);
+    $enrollmentReturn = $enrollmentValidator->validateEnrollment();
+}
+
+$items = [
+    [
+        PartialParser::Parse("label",['for'=>'lName','content'=>'<b>Last Name</b>']),
+        PartialParser::Parse("text",['name'=>'lName', 'placeholder'=>'Doe', 'required'=>'required','value'=>(isset($_POST['lName'])?htmlspecialchars($_POST['lName']):"")])
+    ],
+    [
+        PartialParser::Parse("label",['for'=>'fName','content'=>'<b>First Name</b>']),
+        PartialParser::Parse("text",['name'=>'fName','placeholder'=>'John', 'required'=>'required', 'value'=>(isset($_POST['fName'])?htmlspecialchars($_POST['fName']):"")])
+    ],
+    [
+        PartialParser::Parse('label',['for'=>'streetAddress','content'=>'<b>Street Address</b>']),
+        PartialParser::Parse('textarea',['name'=>'streetAddress','placeholder'=>'123 Fake St', 'rows'=>'3', 'cols'=>'27', 'style'=>'width:auto;', 'content'=>(isset($_POST['streetAddress'])?htmlspecialchars($_POST['streetAddress']):"")])
+    ],
+    [
+        PartialParser::Parse("label",["for"=>"city", 'content'=>'<b>City</b>']),
+        PartialParser::Parse('text',['name'=>'city', 'placeholder'=>'Spokane', 'value'=>(isset($_POST['city'])?htmlspecialchars($_POST['city']):"")])
+    ],
+    [
+        PartialParser::Parse('label',['for'=>'phone', 'content'=>'<b>Phone</b>']),
+        PartialParser::Parse('tel',['name'=>'phone', 'placeholder'=>'(509)555-5555', 'value'=>(isset($_POST['phone'])?htmlspecialchars($_POST['phone']):"")])
+    ],
+    [
+        PartialParser::Parse('label', ['for'=>'email', 'content'=>'<b>E-mail</b>']),
+        PartialParser::Parse('email', ['name'=>'email', 'placeholder'=>'johnDoe@abc', 'required'=>'required', 'value'=>(isset($_POST['email'])?htmlspecialchars($_POST['email']):"")])
+    ],
+    [
+        PartialParser::Parse('label', ['for'=>'dob','content'=>'<b>Date of Birth</b>']),
+        PartialParser::Parse('date',['name'=>'dob', 'required'=>'required', 'value'=>(isset($_POST['dob'])?htmlspecialchars($_POST['dob']):"")])
+    ],
+    [
+        PartialParser::Parse('label',['content'=>'<b>Gender</b>']),
+        PartialParser::Parse('radiobutton',['name'=>'gender', 'required'=>'required', 'value'=>'1', 'text'=>'Male', 'checked'=>(isset($_POST['gender']) && $_POST['gender'] == 1?"checked":"")]),
+        PartialParser::Parse('radiobutton',['name'=>'gender', 'required'=>'required', 'value'=>'0', 'text'=>'Female', 'checked'=>(isset($_POST['gender']) && $_POST['gender'] == 0?"checked":"")])
+    ],
+    [
+        PartialParser::Parse('label',['for'=>'healthHistory','content'=>'<b>Health History</b>']),
+        PartialParser::Parse('textarea',['name'=>'healthHistory', 'rows'=>'4', 'cols'=>'27', 'style'=>'width:auto;', 'content'=>(isset($_POST['healthHistory'])?htmlspecialchars($_POST['healthHistory']):"")])
+    ],
+    [
+        PartialParser::Parse('label',['content'=>'<b>Do you watch Sit and Be Fit?</b>']),
+        PartialParser::Parse('radiobutton',['name'=>'watchSbf', 'required'=>'required','value'=>'1','text'=>'Yes', 'checked'=>(isset($_POST['watchSbf']) && $_POST['watchSbf'] == 1?"checked":"")]),
+        PartialParser::Parse('radiobutton',['name'=>'watchSbf', 'value'=>'0','text'=>'No', 'checked'=>(isset($_POST['watchSbf']) && $_POST['watchSbf'] == 0?"checked":"")])
+    ],
+    [
+        PartialParser::Parse('label',['for'=>'howMany','content'=>'<b>How many times a week?</b>']),
+        PartialParser::Parse('number',['name'=>'howMany', 'value'=>(isset($_POST['howMany'])?htmlspecialchars($_POST['howMany']):"1")])
+    ],
+    [
+        PartialParser::Parse('label',['for'=>'controlGrp', 'content'=>'<b>Control Group (will NOT participate in Sit and Be Fit)</b>']),
+        PartialParser::Parse('radiobutton',['name'=>'controlGrp', 'required'=>'required','value'=>'1','text'=>'Yes', 'checked'=>(isset($_POST['controlGrp']) && $_POST['controlGrp'] == 1?"checked":"")]),
+        PartialParser::Parse('radiobutton',['name'=>'controlGrp', 'value'=>'0','text'=>'No', 'checked'=>(isset($_POST['controlGrp']) && $_POST['controlGrp'] == 0?"checked":"")])
+    ],
+    [
+        PartialParser::Parse('label',['for'=>'experimentalGrp', 'content'=>'<b>Experimental Group (participate in Sit and Be Fit)</b>']),
+        PartialParser::Parse('radiobutton',['name'=>'experimentalGrp', 'required'=>'required','value'=>'1','text'=>'Yes', 'checked'=>(isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 1?"checked":"")]),
+        PartialParser::Parse('radiobutton',['name'=>'experimentalGrp', 'value'=>'0','text'=>'No', 'checked'=>(isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 0?"checked":"")])
+    ]
+];
+
+if($enrollment = FormsModel::isEnrollmentComplete($user->id))
+{
+    $select = QueryFactory::Build("select")->Select("lastName","firstName","streetAddress","city","phone","email","dob","gender","healthHistory","watchSbf","HowManyTimesAWeek","controlGroup","experimentalGroup");
+    $select->From("enrollment_form")->Where(["userID","=",$user->id])->Limit();
+    $select = DatabaseManager::Query($select);
+    $results = $select->Result();
+    $keys = array_keys($results);
+    for($i = 0; $i < count($keys); $i++)
     {
-      print_r($_POST);
-      if ($user)
-      {
-        $_POST['userID'] = $user->id;
-        $enrollmentValidator = new FormsModel($_POST);
-        $enrollmentReturn = $enrollmentValidator->validateEnrollment();
-        print_r($enrollmentReturn);      
-      }      
-    } 
+        $key = $keys[$i];
+        $value = $results[$key];
+        if($key !== "HowManyTimesAWeek")
+            if($value === "1")
+            {
+                $value = "Yes";
+                if($key === "gender")
+                    $value = "Male";
+            }
+            else if($value === "0")
+            {
+                $value = "No";
+                if($key === "gender")
+                    $value = "Female";
+            }
+        
+        if($value === "")
+            $value = "-";
+        
+        $items[$i] = [$items[$i][0],PartialParser::Parse("div",['content'=>$value])];
+    }
+}
 ?>
 
 <div class="background">
+<?php if(!$enrollment && $user->accesslevel < UserLevel::Admin){?>
     <form method="post">
+<?php }?>
     <div class="formBackground">
-      <legend><strong><h1>Enrollment Form</h1></strong></legend>
-      <div id="enrollmentMessage" class="success" style="display:none"></div>
-          <div>
-              <div class="input"><label for="lName">Last Name</label></div>
-              <div class="input"><input type="text" name="lName" placeholder="Doe" required value="<?php if(isset($_POST['lName'])){echo htmlspecialchars($_POST['lName']);} ?>"></div>
-          </div>
-          
-          <div>
-              <div class="input"><label for="fName">First Name</label></div>
-              <div class="input"><input type="text" class="form-control" name="fName" placeholder="John" required value="<?php if(isset($_POST['fName'])){echo htmlspecialchars($_POST['fName']);} ?>"></div>
-          </div>
-
-          <div>
-              <div class="input"><label for="streetAddress">Street Address</label></div>
-              <div class="input"><textarea type="text" class="form-control" name="streetAddress" placeholder="123 Fake St" rows="3"><?php if(isset($_POST['streetAddress'])){echo htmlspecialchars($_POST['streetAddress']);} ?></textarea></div>
-          </div>
-          
-          <div>
-              <div class="input"><label for="city">City</label></div>
-              <div class="input"><input type="text" class="form-control" name="city" placeholder="Spokane" value="<?php if(isset($_POST['city'])){echo htmlspecialchars($_POST['city']);} ?>"></div>
-          </div>
-
-          <div>
-              <div class="input"><label for="phone">Phone</label></div>
-              <div class="input"><input type="tel" class="form-control" name="phone" placeholder="(509)555-5555" value="<?php if(isset($_POST['phone'])){echo htmlspecialchars($_POST['phone']);} ?>"></div>
-          </div>
-
-          <div>
-              <div class="input"><label for="email">E-mail</label></div>
-              <div class="input"><input type="email" class="form-control" name="email" placeholder="johnDoe@abc.com" required value="<?php if(isset($_POST['email'])){echo htmlspecialchars($_POST['email']);} ?>"></div>
-          </div>
-
-          <div>
-              <div class="input"><label for="dob">Date of Birth</label></div>
-              <div class="input"><input type="date" class="form-control" name="dob" required value="<?php if(isset($_POST['dob'])){echo htmlspecialchars($_POST['dob']);} ?>"></div>
-          </div>
-
-          <div>
-              <div class="input"style="font-weight:bold"><label>Gender</label></div>
-            <div class="input"><input type="radio" name="gender" required <?php if (isset($_POST['gender']) && $_POST['gender'] == 1) echo "checked";?> value=1>Male</div>
-            <div class="input"><input type="radio" name="gender" <?php if (isset($_POST['gender']) && $_POST['gender'] == 0) echo "checked";?> value=0>Female</div>
-          </div>
-
-          <div>
-              <div class="input"><label for="healthHistory">Health History</label></div>
-              <div class="input"><textarea type="text" class="form-control" name="healthHistory" rows="3"><?php if(isset($_POST['healthHistory'])){echo htmlspecialchars($_POST['healthHistory']);} ?></textarea></div>
-          </div>
-
-          <div >
-              <div class="input"><label>Do you watch Sit and Be Fit?</label></div>
-            <div class="input"><input type="radio" name="watchSbf" required <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 1) echo "checked";?> value=1>Yes</div>
-            <div class="input"><input type="radio" name="watchSbf" <?php if (isset($_POST['watchSbf']) && $_POST['watchSbf'] == 0) echo "checked";?> value=0>No</div>
-          </div>
-
-          <div name="howManyTimes">
-              <div class="input"><label for="howMany">How many times a week?</label>            </div>
-              <div class="input"><input type="number" class="form-control" name="howMany" value="<?php if(isset($_POST['howMany'])){echo htmlspecialchars($_POST['howMany']);}else{echo 1;} ?>"></div>
-          </div>
-
-          <div>
-              <div class="input"><label for="controlGrp">Control Group (will NOT participate in Sit and Be Fit)</label></div>
-            <div class="input"><input type="radio" name="controlGrp" required <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 1) echo "checked";?> value=1>Yes</div>
-            <div class="input"><input type="radio" name="controlGrp" <?php if (isset($_POST['controlGrp']) && $_POST['controlGrp'] == 0) echo "checked";?> value=0>No</div>
-          </div>
-
-          <div>
-              <div class="input"><label for="experimentalGrp">Experimental Group (participate in Sit and Be Fit)</label></div>
-            <div class="input"><input type="radio" name="experimentalGrp" required <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 1) echo "checked";?> value=1>Yes</div>            
-            <div class="input"><input type="radio" name="experimentalGrp" <?php if (isset($_POST['experimentalGrp']) && $_POST['experimentalGrp'] == 0) echo "checked";?> value=0>No</div>
-          </div>
-
-          <div class="enrollInput"><button type="submit" id="submitEnrollment" name="submitEnrollment">Submit</button></div>
-        </div>
-  </form>
+        <legend><strong><h1>Enrollment Form</h1></strong></legend>
+        <div id="enrollmentMessage" class="success" style="display:none"></div>
+<?php   $page = "";
+        foreach($items as $item){
+            $content = "";
+            foreach($item as $element)
+                $content .= PartialParser::Parse("div",["classes"=>"input","content"=>$element."<br>"]);
+            
+            $page .= PartialParser::Parse("div",["content"=>$content]);
+        }
+        echo $page;
+        
+        if(!$enrollment && $user->accesslevel < UserLevel::Admin){?>
+        <div class="enrollInput"><button type="submit" id="submitEnrollment" name="submitEnrollment">Submit</button></div>
+<?php }?>
+    </div>
+    </form>
 </div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

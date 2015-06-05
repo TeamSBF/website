@@ -11,7 +11,7 @@ After each form submission you can take a break and finish the rest anytime.</p>
     <div id="accordion2">
     	<h2 id="acc1">Enrollment Form</h2>
         <div id="accordion-1" class="accordion-section-content">
-            <?php require_once"enrollmentForm.php"; ?>
+            <?php require_once"enrollmentForm.php";?>
         </div>
     
     	<h2 id="acc2">Pre-Study Questionnaire</h2>
@@ -74,4 +74,7 @@ $(document).ready(function () {
 });
 </script>
 
-<?php require_once("footer.php"); ?>
+<?php
+if($formsDone) UserModel::FormsCompleted($user->id);
+
+ require_once("footer.php"); ?>

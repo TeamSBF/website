@@ -20,29 +20,37 @@ class Question
         $label = PartialParser::Parse("label",["content"=>$question]);
         
         $input = "";
-        for($i = 0; $i < count($this->options); $i++)
+        if(count($this->options) == 1)
         {
-            $details = [
-                'name'=>'q'.$id,
-                'value'=>$i,
-                'text'=>$this->options[$i]
-            ];
-            
-            if($id[0] === "1")
+            $option = $this->options;
+            $input = PartialParser::Parse($option[0], $option[1]);
+        }
+        else
+        {
+            for($i = 0; $i < count($this->options); $i++)
             {
-                $details['classes'] = 's1Radios';
-                if($i == 0)
-                    $details["required"] = "required";
+                $details = [
+                    'name'=>'q'.$id,
+                    'value'=>$i,
+                    'text'=>$this->options[$i]
+                ];
+                
+                if($id[0] === "1")
+                {
+                    $details['classes'] = 's1Radios';
+                    if($i == 0)
+                        $details["required"] = "required";
+                }
+                
+                if(isset($_POST['q'.$id]) && $_POST['q'.$id] == $i)
+                {
+                    $details['checked'] = "checked";
+                    if($i > 0)
+                        $this->showSubs = true;
+                }
+                $radio = PartialParser::Parse('radioButton', $details);
+                $input .= PartialParser::Parse('div',['classes'=>'input','content'=>$radio]);
             }
-            
-            if(isset($_POST['q'.$id]) && $_POST['q'.$id] == $i)
-            {
-                $details['checked'] = "checked";
-                if($i > 0)
-                    $this->showSubs = true;
-            }
-            $radio = PartialParser::Parse('radioButton', $details);
-            $input .= PartialParser::Parse('div',['classes'=>'input','content'=>$radio]);
         }
         
         $mainQuestion = PartialParser::Parse('div',['content'=>$label.$input]);

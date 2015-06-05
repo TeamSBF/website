@@ -19,16 +19,20 @@ class Select
         $this->select = [];
     }
 
-    /*
+    /**
      * Takes an array and stores it for parsing
      *
      * @param array $arr
      */
     public function Select($arr)
     {
-        // Checks to see if the parameter is an array
-        if (is_array($arr))
-            $this->select = $arr;
+        // Guarantee the array coming in is a 2d array, if it isn't, make it one
+        if (count($arr) == count($arr, COUNT_RECURSIVE))
+            $arr = [$arr];
+        
+        // Add all the elements of the array
+        foreach($arr as $a)
+            $this->select = array_merge($this->select, $a);
     }
 
     /*
