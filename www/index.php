@@ -144,7 +144,7 @@ if($info->RowCount() < 2) $articles = [$articles];
         <?php for($i = 0; $i < count($articles); $i++) {?>
             <div class="article" id="article<?=$articles[$i]['id'];?>">
                 <div class="title" id="title"><h1><?=$articles[$i]["title"];?></h1></div>
-                <?php if($user && $user->AccessLevel > 1){?><div class="edit"><img src="img/gear.png" id="edit" /></div><?php } ?>
+                <?php if($user->AccessLevel >= UserLevel::Admin){?><div class="edit"><img src="img/gear.png" id="edit" /></div><?php } ?>
                 <div class="content" id="content"><?=htmlspecialchars_decode($articles[$i]["content"]);?></div>
             </div>
         <?php } ?>

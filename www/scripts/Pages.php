@@ -15,16 +15,16 @@ class Pages extends Singleton
                 "contact.php" => new Page("Contact", "contact.php",UserLevel::Anon, "only"),
                 "faq.php" => new Page("FAQ", "faq.php",UserLevel::Anon, "only"),
 				"register.php" => new Page("Register", "register.php", UserLevel::Anon, "only"),
-                "memberHome.php" => new Page("Forms", "memberHome.php",UserLevel::Member, "only"),
-                "assessments.php" => new Page("Assessments", "assessments.php",UserLevel::Member, "only"),
+                "memberHome.php" => new Page("Forms", "memberHome.php",UserLevel::Member),
+                "assessments.php" => new Page("Assessments", "assessments.php",UserLevel::Participant, "only"),
                 "users.php" => new Page("Users", "users.php", UserLevel::Admin),
 				"admincsv.php" => new Page("Reports", "admincsv.php", UserLevel::Admin),
                 "profile.php" => new Page("Profile", "profile.php", UserLevel::Member),
+				"cronSettings.php" => new Page("Settings", "cronSettings.php", UserLevel::Admin, "only"),
                 "logout.php" => new Page("Logout", "logout.php", UserLevel::Member),
 				"activation.php" => new Page("", "activation.php",UserLevel::Anon, "only", false),
 				"forgotPassword.php" => new Page("", "forgotPassword.php",UserLevel::Anon, "only", false),
 				"resetPassword.php" => new Page("", "resetPassword.php",UserLevel::Anon, "only", false)
-				
             ];
             
             $this->items = $items;
