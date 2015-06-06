@@ -3,17 +3,20 @@
 class CronValidator
 {
     private $formInfo;
-	private $max = 9999;
-
+	private $max = 60;
+	
     public function __construct($info)
     {
         $this->formInfo = $info;
     }
 	
+	//returns the max value
 	public static function Max()
 	{
 		return $max;
 	}
+	
+	//public access to validate form info
 	public function Validate()
 	{
 		$enabled=-1;
@@ -26,40 +29,60 @@ class CronValidator
 		{
 			$enabled = 0;
 		}
-
-		if($this->formInfo["submit"]=="submit activation")
+		//change activation times
+		if($this->formInfo["submit"]=="activation duration")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
 				$err = $this->set("ttl_activation",$enabled);
 		}
-		else if($this->formInfo["submit"]=="submit form")
+		//change form life
+		else if($this->formInfo["submit"]=="forms duration")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
 				$err = $this->set("ttl_form",$enabled);
 		}
-		else if($this->formInfo["submit"]=="submit assessment frequency")
+		//change assessment frequency
+		else if($this->formInfo["submit"]=="assessment frequency")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
+			{
 				$err = $this->set("ttl_assessment_frequency",$enabled);
+			}
 		}
-		else if($this->formInfo["submit"]=="submit assessment duration")
+		//change assessment life
+		else if($this->formInfo["submit"]=="assessment duration")
 		{
 			$err = $this->prv_validate();
 			if(!$err)
 				$err = $this->set("ttl_assessment_complete",$enabled);
 		}
+		//change assessment choice life
+		else if($this->formInfo["submit"]=="assessment choice duration")
+		{
+			$err = $this->prv_validate();
+			if(!$err)
+				$err = $this->set("ttl_assessment_choice",$enabled);
+		}
+		//change password life
+		else if($this->formInfo["submit"]=="forgot password duration")
+		{
+			$err = $this->prv_validate();
+			if(!$err)
+				$err = $this->set("forgotpassword",$enabled);
+		}
 		return $err;
 	}
 
+	//private helper method to validate
 	private function prv_validate()
 	{
 		unset($this->formInfo["submit"]);
 		foreach($this->formInfo as $curr)
 		{
-			//make int
+			//makes all valuse an integer
 			settype($curr, "integer");
 			if($curr < 0 && $curr < $this->max+1)
 				return "*number must be greater then 0 less then 10000*";
@@ -67,13 +90,13 @@ class CronValidator
 		return false;
 	}
 	
+	//update database with the submited information
 	private function set($name,$enabled)
 	{	
 		//format string
 		$str= $this->formatString();
 
 		//update
-//		echo strlen($str);
 		$update = QueryFactory::Build('update');
 		$update->Table('settings')->Set(['enabled',$enabled])->Where(['name', '=',$name]);
 		if(strlen($str) > 2)
@@ -86,6 +109,7 @@ class CronValidator
 		return false;
 	}
 	
+	//formats the string to work in strtotime method
 	private function formatString()
 	{
 		$str = "+ ";
