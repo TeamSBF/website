@@ -1,10 +1,6 @@
 <?php
 require_once("header.php");
 
-/*
-if(isset($user) && ($user->AccessLevel == UserLevel::Admin || $user->AccessLevel == UserLevel::Super))
-{
-*/ 
 	$err= "";
 	if(!empty($_POST))
 	{
@@ -18,9 +14,6 @@ if(isset($user) && ($user->AccessLevel == UserLevel::Admin || $user->AccessLevel
 	$selectAct = QueryFactory::Build("select");
 	$selectAct->Select("value","enabled")->From("settings");
 	$res = DatabaseManager::Query($selectAct)->Result();
-?>
-
-<?php
 
 
 	$arr = array("forgot password duration","activation duration","assessment choice duration", "assessment duration", "assessment frequency","forms duration");
@@ -63,17 +56,5 @@ if(isset($user) && ($user->AccessLevel == UserLevel::Admin || $user->AccessLevel
 	}
 		echo '</div>';
 	echo '</div>'; 
-/*
-}
-else
-{
-	//dont belong
-	$session->forget();
-	header("location: index.php");
-}
-*/
-?>
 
-<?php
-require_once("footer.php");
-?>
+require_once("footer.php");?>
