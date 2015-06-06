@@ -1,6 +1,8 @@
 <?php
 	require_once "header.php";
-	
+	$msg = "";
+	$email = "";
+	$cEmail = "";
 	// if the user press REGISTER
 	if(isset($_POST['regKey'], $_POST['register']))// && $_POST['regKey'] === $_SESSION['regKey'])
 	{
@@ -11,22 +13,21 @@
 		$cPassword = trim(strip_tags($_POST['cPassword']));
 		$server = $_SERVER['SERVER_NAME'];
 		$recaptcha = $_POST['g-recaptcha-response']; //get recaptcha (google api)
-		$msg = "";
 		
 		//***************************** this block below is where we validate input from user *************************************************************************
 		if(empty($email) || empty($cEmail) || empty($password) || empty($cPassword) || empty($recaptcha))
-			$msg =   "All fields required";
+			$msg = ["All fields required",0];
 		else if(!(filter_var($email, FILTER_VALIDATE_EMAIL)))// check the email entered against built in PHP email validator
-			$msg =  "Invalid Email address, please try again!";
+			$msg = ["Invalid Email address, please try again!",0];
 		else if($email !== $cEmail)
-			$msg =   "Email doesn't match, please try again";
+			$msg = ["Email doesn't match, please try again",0];
 		else if($password !== $cPassword)
-			$msg =   "Password doesn't match, please try again";
+			$msg = ["Password doesn't match, please try again",0];
 		else
 		{ //Incoming data is good, go ahead and try to register
 			// First case if the email user enter an existing email, register fails
 			if(UserModel::Exists("email", $email)) 
-				$msg =   "Failed to register, email already exists, please use a different email"; 
+				$msg = ["Failed to register, email already exists, please use a different email",0];
 			else
 			{
 				// ************************************************* this block is google's recaptcha *************************************************************************
@@ -52,12 +53,13 @@
 						$link = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out
 						
 						Mailer::Send("$email","Activation Email","Please click on the link below to activate your account, http://$server/activation.php?id=$id&link=$link"); 
-						$msg =   "Registration successful, please check your email for account activation";
+						$msg = ["Registration successful, please check your email for account activation",1];
+						unset($_POST);
 					}
 				}
 				else // Failed reCaptcha, registration denied
 				{
-					$msg =   "You are not a human, registration denied! <br>";
+					$msg = ["You are not a human, registration denied! <br>",0];
 				}
 			}
 		}	
@@ -68,23 +70,21 @@
 
 
 <div class="background">
-	<?php if(!empty($msg)){?>
-		<div><?='* '.$msg;?></div>
-	<?php } ?>
+	<?php if(is_array($msg)) echo PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]); ?>
 	<h1> Register </h1>
 	<form class="register" method="POST" >
 		<input type="hidden" name="regKey" value="">
 		<label>E-mail Address </label><br> 
-		<input type="text" name="email" placeholder="johndoe@example.net" oncut="return false;" required> <!--   onpaste="return false;"  ONCOPY, ONCUT, ONSHIT << ADD THIS ATTRIBUTE IN BEFORE DEPLOY!!--> 
+		<input type="text" name="email" placeholder="johndoe@example.net" oncut="return false;" required value="<?=$email;?>" /> <!--   onpaste="return false;"  ONCOPY, ONCUT << ADD THIS ATTRIBUTE IN BEFORE DEPLOY!!--> 
 		<br> 
 		<br>
 		<label>Confirm E-mail Address </label><br>
-		<input type="text" name="cEmail" placeholder="johndoe@example.net" required>	  
+		<input type="text" name="cEmail" placeholder="johndoe@example.net" required value="<?=$cEmail;?>" />
 		<br>
 		<br>
 		<label>Password (6 characters minimum) </label> 
 		<br>
-		<input type="password" name="password" placeholder="Password" required> 
+		<input type="password" name="password" placeholder="Password" required>
 		<br><br>
 		<label>Confirm Password (6 characters minimum)</label>
 		<br>

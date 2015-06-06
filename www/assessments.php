@@ -1,16 +1,18 @@
 <?php require_once"header.php";
-//printr($_POST);//--------------------------------------
+$msg = "";
 if (isset($_POST['submitAssessments']))
     {
         $_POST['userID'] = $user->id;
         $assessmentValidator = new assessment($_POST);
         $assessmentReturn = $assessmentValidator->validateAssessments();
         if($assessmentReturn =="SUCCESS")
-		{?>
-		<script>alert("Assessment Selection Completed.");</script><?php 
-		//$assessmentReturn = "";
-		}          
-    } 
+		{
+			$msg = ["Assessment Selection Completed.",1];
+		}else
+		{
+			$msg = ["Please select one or more assessments",0];
+		}
+    }
 if (isset($_POST['submitData']))
 {
     $_POST['userID'] = $user->id;
@@ -18,9 +20,10 @@ if (isset($_POST['submitData']))
  //   printr($_POST);
     $assessmentValidator = new assessment($_POST);
     $assessmentReturn = $assessmentValidator->validateAssessmentData();
-   // $assessmentReturn="SUCCESS";
     if($assessmentReturn =="SUCCESS")
-        $assessmentReturn = "Assessment submitted successfully.";
+        $msg = ["Assessment submitted successfully.",1];
+	else
+		$smg = ["Failed to submit assessment data",0];
     
     
 }
@@ -63,13 +66,7 @@ $time =$time->Result()["NextAssessment"];
 		}
 		?> 
     <form method="post">
-        <?php
-		//show errors here
-            if(!empty($assessmentReturn))
-            {?>
-               <div><?=$assessmentReturn;?> </div>
-            <?php }
-        ?>
+        <?php if(is_array($msg)) echo PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]); ?>
         <div id="accordion">
         
         <?php 

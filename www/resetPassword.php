@@ -1,7 +1,6 @@
 <?php
 	require_once "header.php";
-	require_once "config.php";
-	
+	$msg = "";
 	//if the user press RESET
 	if(isset($_POST['reset']) )
 	{
@@ -17,27 +16,26 @@
 		
 		// compare saltTime ( link creation time ) against current time to see if link is still valid
 		if($saltTime < time()) // if creation time is greater than current time, the link is invalid
-			$msg = "This reset password link has been expired, please get a new one from forgot password";
+			$msg = ["This reset password link has been expired, please get a new one from forgot password",0];
 		else if($userIDHash === $_GET['link'])  // link is valid ( both lifetime and link matches from database) go ahead and reset the password
 		{
 			// get the new passwords from the form
-			$msg = "";
 			$newPass = trim( strip_tags($_POST['newPass']));
 			$cNewPass = trim( strip_tags($_POST['cNewPass']));
 			
 			// validate the input below
 			if(empty($newPass) || empty($cNewPass))
-				$msg = "Please enter all the fields!";
+				$msg = ["Please enter all the fields!",0];
 			else if($newPass !== $cNewPass)
-				$msg = "Password doesn't match, please try again!";
+				$msg = ["Password doesn't match, please try again!",0];
 			else// new pass match go ahead and update the database
 			{
 				require_once("scripts/password.php");
 				
 				if(UserModel::updatePassword($id,$newPass))  // call to updatePassword in UserModel to update the password based on ID, returns true if update success, false otherwise
-					$msg = " Password reset successfully! <br><br>";
+					$msg = ["Password reset successfully!",1];
 				else
-					$msg = "Password reset failed <br><br>";	
+					$msg = ["Password reset failed",0];
 				
 				//***********************This block below check if the user has been activated if not send out another activating email******************************
 				// *********************  In case they forgot their password immediately after register send out a new activation link ********************************
@@ -53,11 +51,11 @@
 					$email = $res['email'];
 					$activationLink = sha1($id.$res["email"].$res["created"]);// get the hash value for the link to send out
 					Mailer::Send("$email","Activation Email","Your account is yet to be activated, please click on the link below to activate your account, http://$server/activation.php?id=$id&link=$activationLink"); 
-					$msg =   "Your account has not been activated, please check your email for account activation";
+					$msg = ["Your account has not been activated, please check your email for account activation",0];
 				}//end if
 			}//end else
 		}else{
-			$msg = "Invalid link, please try again!";
+			$msg = ["Invalid link, please try again!",0];
 		}
 		// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 	}
@@ -65,9 +63,7 @@
 
 
 <div class="background">
-<?php if(!empty($msg)){?>
-	<div><?='* '.$msg;?></div>
-<?php } ?>
+	<?php if(is_array($msg)) echo PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]); ?>
 	<h1> Reset Password </h1>
 	<form class="resetPassword" method="POST">
 

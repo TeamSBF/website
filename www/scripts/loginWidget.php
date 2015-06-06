@@ -1,4 +1,5 @@
 <?php require_once"header.php";
+$msg = "";
 if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $session->get('regKeyLogin'))) {
     $err_message = "";
     if (isset($_POST['emailLogin'], $_POST['passwordLogin'])) {
@@ -9,8 +10,6 @@ if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $session->get('reg
         //clear whitespace
         $email = trim($email);
         $passed_pwd = trim($passed_pwd);
-
-        //require_once("assets/password.php");
 
         $result = UserModel::Login($email, $passed_pwd);    //to db
 		//grab activated to check against
@@ -25,11 +24,10 @@ if(isset($_POST['regKeyLogin']) && ($_POST['regKeyLogin'] === $session->get('reg
             $session->put('user', $result);
             header("location: index.php");
         } else {
-            $err_message = '<div class="alert alert-warning"> *failed to login* </div>';
+            $msg = ["Invalid username/password",0];
         }
     }
 }
-unset($_POST['password']);
 
 $session->put('regKeyLogin', bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)));
 ?>
@@ -39,6 +37,7 @@ $session->put('regKeyLogin', bin2hex(mcrypt_create_iv(22, MCRYPT_DEV_URANDOM)));
                 <div class="container-fluid">
                     <div class="row">
                         <div>
+							<?php if(is_array($msg)) echo PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]);?>
                             <form class="form-signin" action="<?=$_SERVER['PHP_SELF'];?>" method="POST">
                                 <input name="regKeyLogin" type="hidden" value = "<?php echo $_SESSION['regKeyLogin'];?>" />
                                 <?php if(1==2){?><h2 class="form-signin-heading">Please sign in</h2><?php } ?>

@@ -1,42 +1,41 @@
-<?php
-	require_once "header.php";
-	// if the user press UPDATE
-	if(isset($_POST['update']))
+<?php require_once "header.php";
+$msg = "";
+// if the user press UPDATE
+if(isset($_POST['update']))
+{
+	//********************* GET ALL THE FILEDS FROM THE FORM **************************************
+	$oldPass = trim(strip_tags($_POST['oldPass']));
+	$newPass = trim(strip_tags($_POST['newPass'])); 
+	$cNewPass = trim(strip_tags($_POST['cNewPass']));
+		
+	//******************* this block below is where we validate input from user ***********************
+	if(empty($oldPass) || empty($newPass) || empty($cNewPass))
+		$msg = ["all fields required",0];
+	else if($newPass !== $cNewPass) // check if the newPassword match
+		$msg = ["new password doesn't match",0];
+	else // update the password
 	{
-		//********************* GET ALL THE FILEDS FROM THE FORM **************************************
-		$oldPass = trim(strip_tags($_POST['oldPass']));
-		$newPass = trim(strip_tags($_POST['newPass'])); 
-		$cNewPass = trim(strip_tags($_POST['cNewPass']));
-		$msg = "";
-			
-		//******************* this block below is where we validate input from user ***********************
-		if(empty($oldPass) || empty($newPass) || empty($cNewPass))
-			$msg = ["all fields required",0];
-		else if($newPass !== $cNewPass) // check if the newPassword match
-			$msg = ["new password doesn't match",0];
-		else // update the password
+		require_once("scripts/password.php");
+		
+		// this below is to grab the current password from the database
+		$select = QueryFactory::Build("select");// build an empty select query
+		$select->Select("password")->From("users")->Where( ["id", "=", $user->ID] )->Limit(1);  // SELECT password from user where id = id
+		$res = DatabaseManager::Query($select); // send to DBmanager
+		
+		if(password_verify($oldPass, $res->Result()['password'])) //verify if the current password matches the password in the database
 		{
-			require_once("scripts/password.php");
-			
-			// this below is to grab the current password from the database
-			$select = QueryFactory::Build("select");// build an empty select query
-			$select->Select("password")->From("users")->Where( ["id", "=", $user->ID] )->Limit(1);  // SELECT password from user where id = id
-			$res = DatabaseManager::Query($select); // send to DBmanager
-			
-			if(password_verify($oldPass, $res->Result()['password'])) //verify if the current password matches the password in the database
-			{
-				if(UserModel::updatePassword($user->ID, $newPass)) //updataPassword returns a boolean whether the update is a success or not
-					$msg = ["Password changed successfully",1];
-				else
-					$msg = ["Failed to change password",0];
-			}
+			if(UserModel::updatePassword($user->ID, $newPass)) //updataPassword returns a boolean whether the update is a success or not
+				$msg = ["Password changed successfully",1];
 			else
-			{
-				$msg = ["Current password doesn't match",0];
-			}
-		}	
-	}
-	// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
+				$msg = ["Failed to change password",0];
+		}
+		else
+		{
+			$msg = ["Current password doesn't match",0];
+		}
+	}	
+}
+// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 ?>
 
 

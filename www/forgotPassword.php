@@ -1,19 +1,18 @@
 <?php
 	require_once "header.php";
-	
+	$msg = "";
 	// When the user press RETRIEVE
 	if(isset($_POST['retrieve']) )
 	{
 		//********************* get the email from the form **************************************
 		$email = trim(strip_tags($_POST['email']));
 		$server = $_SERVER['SERVER_NAME'];
-		$msg = "";
 		
 		//***************************** this block below is where we validate input from user *************************************************************************
 		if(!(filter_var($email, FILTER_VALIDATE_EMAIL))) // check the email entered against php built in email validator
-			$msg = "Invalid Email address, please try again";
+			$msg = ["Invalid Email address, please try again",0];
 		else if(!UserModel::Exists("email", $email))
-			$msg = "Email doesn't exist in our database, please try again";
+			$msg = ["Email doesn't exist in our database, please try again",0];
 		else// email exists go ahead send a reset password link and activation link
 		{
 			// grab salt time ( When the link was created ) to check if the link has been expired
@@ -44,7 +43,7 @@
 				$link = sha1($id.$salt);
 			}
 			Mailer::Send("$email","Reset Password","Please click on the link below to change your password, http://$server/resetPassword.php?id=$id&link=$link");
-			$msg = "Please check your email for reset password link";
+			$msg = ["Please check your email for reset password link",1];
 		}
 		// ******************************** FORM ENFORCEMENT REGKEY !!! *************************************************8
 	}
@@ -52,9 +51,7 @@
 
 
 <div class="background">
-	<?php if(!empty($msg)){?>
-		<div><?='* '.$msg;?></div>
-	<?php } ?>
+	<?php if(is_array($msg)) echo PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]); ?>
 	<h1> Forgot Password </h1>
 	<form class="forgotPassword" method="POST">
 		<div class="labels"><label>Email address</label></div>
