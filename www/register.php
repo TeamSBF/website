@@ -21,6 +21,8 @@
 			$msg = ["Invalid Email address, please try again!",0];
 		else if($email !== $cEmail)
 			$msg = ["Email doesn't match, please try again",0];
+		else if(strlen($password) < 6 || strlen($cPassword) < 6 )
+			$msg = ["Password length has to be at least 6 letters, please try again",0];
 		else if($password !== $cPassword)
 			$msg = ["Password doesn't match, please try again",0];
 		else
@@ -72,10 +74,10 @@
 <div class="background">
 	<?php if(is_array($msg)) echo PartialParser::Parse("div",["content"=>$msg[0], "classes"=>($msg[1] === 1?"success":"error")]); ?>
 	<h1> Register </h1>
-	<form class="register" method="POST" >
+	<form class="register" method="POST" oncut="return false;" oncopy="return false;" onpaste="return false;">
 		<input type="hidden" name="regKey" value="">
 		<label>E-mail Address </label><br> 
-		<input type="text" name="email" placeholder="johndoe@example.net" oncut="return false;" required value="<?=$email;?>" /> <!--   onpaste="return false;"  ONCOPY, ONCUT << ADD THIS ATTRIBUTE IN BEFORE DEPLOY!!--> 
+		<input type="text" name="email" placeholder="johndoe@example.net" required value="<?=$email;?>" /> <!--   onpaste="return false;"  ONCOPY, ONCUT << ADD THIS ATTRIBUTE IN BEFORE DEPLOY!!--> 
 		<br> 
 		<br>
 		<label>Confirm E-mail Address </label><br>

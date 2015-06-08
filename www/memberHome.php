@@ -71,6 +71,9 @@ $(document).ready(function () {
 	<?php
 	} ?>
 });
+	$("#assessmentPageLink").on("click", function() {
+		window.location.href = "assessments.php";
+	})
 </script>
 
 <?php require_once("footer.php"); ?>

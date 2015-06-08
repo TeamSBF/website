@@ -17,13 +17,15 @@ if (isset($_POST['submitData']))
 {
     $_POST['userID'] = $user->id;
     unset($_POST['submitData']);
- //   printr($_POST);
+    printr($_POST);
     $assessmentValidator = new assessment($_POST);
     $assessmentReturn = $assessmentValidator->validateAssessmentData();
     if($assessmentReturn =="SUCCESS")
         $msg = ["Assessment submitted successfully.",1];
-	else
-		$smg = ["Failed to submit assessment data",0];
+	else {
+		$msg = ["Failed to submit assessment data",0];
+	}
+		
     
     
 }
@@ -112,22 +114,32 @@ $time =$time->Result()["NextAssessment"];
                         
                         <?php if($key==="unilateralbalancetest") {
                                 if($result[$key][0]>= -1) {
-                                $seconds =intval($result[$key][0]);
-                                $minutes =(int)($seconds/60);
-                                $seconds%=60;
-                                    
-                                $seconds=($seconds<0?"":$seconds);
-                                $minutes=($minutes<0?"":$minutes);?>
-                                    Left Unilateral: <input  type="number" name="left<?=$key;?>[]" value="<?=$minutes?>"> minutes
-                                    <input  type="number"  name="left<?=$key;?>[]" value="<?=$seconds?>"> seconds<br>
+									if ($result[$key][0] < 0) {
+										$minutes = $seconds = "";								
+									}
+									else {																			
+										$seconds =intval($result[$key][0]);
+										$minutes =(int)($seconds/60);
+										$seconds%=60;
+											
+										$seconds=($seconds<0?"":$seconds);
+										$minutes=($minutes<0?"":$minutes);
+									}?>									
+										Left Unilateral: <input  type="number" name="left<?=$key;?>[]" value="<?=$minutes?>"> minutes
+										<input  type="number"  name="left<?=$key;?>[]" value="<?=$seconds?>"> seconds<br>
                         <?php   }
                                 if($result[$key][1]>= -1) {
-                                $seconds =intval($result[$key][1]);
-                                $minutes =(int)($seconds/60);
-                                $seconds%=60;
-                                    
-                                $seconds=($seconds<0?"":$seconds);
-                                $minutes=($minutes<0?"":$minutes);?>
+									if ($result[$key][0] < 0) {
+										$minutes = $seconds = "";								
+									}
+									else {																			
+										$seconds =intval($result[$key][0]);
+										$minutes =(int)($seconds/60);
+										$seconds%=60;
+											
+										$seconds=($seconds<0?"":$seconds);
+										$minutes=($minutes<0?"":$minutes);
+									}?>                                
                                    Right Unilateral: <input  type="number"  name="right<?=$key;?>[]" value="<?=$minutes?>"> minutes
                                     <input  type="number"  name="right<?=$key;?>[]" value="<?=$seconds?>"> seconds<br>
                         <?php   }

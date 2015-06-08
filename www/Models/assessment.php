@@ -106,6 +106,13 @@
 				{	
 					if(is_array($value))
 					{
+						if ($value[0] != "" || $value[1] != "")
+						{
+							if ($value[0] == "")
+								$value[0] = 0;
+							else if ($value[1] == "")
+								$value[1] = 0;							
+						}
 						if($this->validateNumber($value[0])&&$this->validateNumber($value[1])) 
 						{
 							$value=$value[0]*60+$value[1];
