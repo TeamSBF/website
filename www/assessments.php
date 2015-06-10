@@ -17,7 +17,7 @@ if (isset($_POST['submitData']))
 {
     $_POST['userID'] = $user->id;
     unset($_POST['submitData']);
-    printr($_POST);
+   // printr($_POST);
     $assessmentValidator = new assessment($_POST);
     $assessmentReturn = $assessmentValidator->validateAssessmentData();
     if($assessmentReturn =="SUCCESS")
