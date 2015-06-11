@@ -45,6 +45,7 @@ Pages::instance()->ConfirmAccess($user, $_SERVER['PHP_SELF']);
         <?php } ?>
     	$(function() {
             $("#accordion").accordion({
+                active:false,
                 collapsible: true,
                 heightStyle: "content"
             });
