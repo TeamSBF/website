@@ -12,6 +12,6 @@ $table->AddColumn('salt')->MakeVarChar(100)->DefaultValue(bin2hex(mcrypt_create_
 $table->AddColumn('salt_time')->MakeInt()->DefaultValue(0);
 
 $population = array();
-$population[] = QueryFactory::Build("insert")->Into($name)->Set(["email", "admin@sbf.org"], ["password", "$2y$11$593EkWGKJ.1dkCN/ivW1OOOf180ijPxRPyaUr7w79fWFJmQUNietK"], ["created", "UNIX_TIMESTAMP()"],["pLevel",3],["activated", 1]);
+$population[] = QueryFactory::Build("insert")->Into($name)->Set(["email", "admin@sbf.org"], ["password", "$2y$11$593EkWGKJ.1dkCN/ivW1OOOf180ijPxRPyaUr7w79fWFJmQUNietK"], ["created", "UNIX_TIMESTAMP()"],["pLevel",4],["activated", 1]);
 
 return [$table, $population];

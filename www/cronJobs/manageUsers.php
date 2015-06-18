@@ -7,7 +7,8 @@ chdir('..');
 require_once "config.php";
 require_once "sessions.php";
 */
-
+$myfile = fopen("ManageUsers.txt", "a");
+fwrite($myfile,"\nstart-------------------------\n");
 //get all user info
 $select = QueryFactory::Build("select");
 $select->Select("id", "activated","created","pLevel","email","NextAssessment")->From("users");
@@ -15,27 +16,69 @@ $res = DatabaseManager::Query($select);
 
 if($res->RowCount() > 1)
 {
+	fwrite($myfile,"\nres count = ".$res->RowCount() . "\n");
+	
 	$res = $res->Result();
+	fwrite($myfile,"array count = ".count($res)." \nAll rows\n");
+
 	foreach($res as $value)
 	{
+		fwrite($myfile,'id: '.$value["id"]." email: ".$value["email"]."created: ".$value["created"]."\n");
+		if ($value["pLevel"] !=UserLevel::Admin && $value["pLevel"] !=UserLevel::Super)
+		{
+			fwrite($myfile,": not an admin");
+			
+			if(lateActivation($value))
+			{
+				fwrite($myfile,": late activation");
+				//remove($value["id"]);
+			}
+			if(lateForms($value))
+			{
+				fwrite($myfile,": late forms");
+			}
+			if(lateAssessment($value))
+			{
+				fwrite($myfile,": late forms");
+			}
+			if(needAssessmentReminder($curr,$myfile))
+			{
+				fwrite($myfile,": need reminder");
+			}
+
+		}
+		fwrite($myfile,"\n");
+	}
+	fwrite($myfile,"\n---------------------------------\n");
+	
+	fwrite($myfile,"reading rows\n");
+	foreach($res as $value)
+	{
+		fwrite($myfile,'id: '.$value["id"]." email: ".$value["email"]."\n");
 		//if not admin or super
+		
+		
 		if ($value["pLevel"] !=UserLevel::Admin && $value["pLevel"] !=UserLevel::Super && $value["activated"] !=-1)
 		{
- 
+			
+
+			//fwrite($myfile,'id: '.$value["id"]." activated: ".$value["activated"]." pLevel: ".$value["pLevel"]." email: ".$value["email"]."\n");
 			//check if user in not activated
 			if(lateActivation($value))
 			{
+				fwrite($myfile,"\nlate activation\n");
 				remove($value["id"]);
 			}
 			//check if user has forms completed
 			else if(lateForms($value))
 			{
-//				echo "late with forms <br>";
+				fwrite($myfile,"\nlate with forms \n");
 				deactivate($value["id"]);
 			}
 			//check if user had assessments completed
 			else if(lateAssessment($value))
 			{
+				fwrite($myfile, "\ndeactivated\n");
 				deactivate($value["id"]);
 			}
 			
@@ -53,7 +96,10 @@ if($res->RowCount() > 1)
 			}
 		}
 	}
+	
+	fwrite($myfile,"\n------------------------end\n");
 }
+
 function remind($curr) //---------------- needs testing
 {
 	//update reminder value
@@ -67,10 +113,14 @@ function remind($curr) //---------------- needs testing
 }
 function getLastAssessment($curr) // ----------needs testing
 {
+	
 	$assessments = QueryFactory::Build("select");
 	$assessments->Select("reminded","dateCompleted","TestNumber")->Where(["id","=", $curr["id"]])->From("assessments");
-	$assessments=DatabaseManager::Query($$assessments)->Result();
+	$assessments=DatabaseManager::Query($assessments);
 	$count = $assessments->RowCount();
+	
+	$assessments= $assessments->Result();	
+	
 	$reminded = false;
 
 	//iterate to latest assessment
@@ -90,11 +140,10 @@ function getLastAssessment($curr) // ----------needs testing
 function needAssessmentReminder($curr) //--------------needs testing
 {
 	$assessments = getLastAssessment($curr);
-
 	//get assessment lifespan from db
 	$ttl = QueryFactory::Build("select");
 	$ttl->Select("value")->Where(["name","=", "ttl_assessment_complete"])->From("settings");
-	$ttl=DatabaseManager::Query($$ttl)->Result();
+	$ttl=DatabaseManager::Query($ttl)->Result();
 		
 	//if not reminded and time to
 	if(isset($assessments) && !$assessments["reminded"] && strtotime(ttl,time()) > $strtotime("-1 week",$curr["NextAssessment"]))
@@ -114,7 +163,7 @@ function lateActivation ($curr)
 	$ttl= DatabaseManager::Query($selectAct)->Result();
 	$time_to_live = $ttl["value"];
 	
-	if($ttl["enabled"] && strtotime($time_to_live,$curr["NextAssessment"]) < time())
+	if($ttl["enabled"] && strtotime($time_to_live,$curr["created"]) < time())
 		return true;
 	
 	return false;
@@ -123,7 +172,7 @@ function lateActivation ($curr)
 function lateForms($curr)
 {
 	$selectForm = QueryFactory::Build("select");
-	$selectForm->Select("value","enabled")->From("settings")->Where(["name","=","ttl_activation"]);
+	$selectForm->Select("value","enabled")->From("settings")->Where(["name","=","ttl_form"]);
 	$time_to_live = DatabaseManager::Query($selectForm)->Result();
 //	echo"\nactivation time: ". $time_to_live;
 //	$time_to_live = "+1 month";
@@ -137,14 +186,14 @@ function lateForms($curr)
 	return false;
 }
 
-function lateAssessments($curr)
-{
-		$selectAmt = QueryFactory::Build("select");
-	$selectAmt->Select("value","enabled")->From("settings")->Where(["name","=","ttl_activation"]);
+function lateAssessment($curr)
+{	
+	$selectAmt = QueryFactory::Build("select");
+	$selectAmt->Select("value","enabled")->From("settings")->Where(["name","=","ttl_assessment_complete"]);
 	$time_to_live = DatabaseManager::Query($selectAmt)->Result();
-//	echo"\nactivation time: ". $time_to_live;
+
 	//if need to take next assessment
-	if($time_to_live['enabled'] && strtoTime($time_to_live['value'] ,$curr["NextAssessment"]) < time() && $curr["NextAssessment"] != 0)
+	if($time_to_live['enabled'] && $curr["NextAssessment"] != 0 && strtoTime($time_to_live['value'] ,$curr["NextAssessment"]) < time() )
 	{
 		return true;
 	}
