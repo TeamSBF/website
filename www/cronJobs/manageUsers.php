@@ -1,12 +1,12 @@
 <?php
+		echo"\nstart";
 
-/*
 chdir('..');
 
 //needed to use models
 require_once "config.php";
 require_once "sessions.php";
-*/
+
 $myfile = fopen("ManageUsers.txt", "a");
 fwrite($myfile,"\nstart-------------------------\n");
 //get all user info
@@ -23,7 +23,8 @@ if($res->RowCount() > 1)
 
 	foreach($res as $value)
 	{
-		fwrite($myfile,'id: '.$value["id"]." email: ".$value["email"]."created: ".$value["created"]."\n");
+		fwrite($myfile,'id: '.$value["id"]." email: ".$value["email"]." created: ".$value["created"]." \n");
+		
 		if ($value["pLevel"] !=UserLevel::Admin && $value["pLevel"] !=UserLevel::Super)
 		{
 			fwrite($myfile,": not an admin");
@@ -31,15 +32,21 @@ if($res->RowCount() > 1)
 			if(lateActivation($value))
 			{
 				fwrite($myfile,": late activation");
-				//remove($value["id"]);
+				remove($value["id"]);
 			}
 			if(lateForms($value))
 			{
 				fwrite($myfile,": late forms");
+				store($value["id"],$value["email"]);
+				remove($value["id"]);
 			}
 			if(lateAssessment($value))
 			{
 				fwrite($myfile,": late forms");
+				//if first assessment
+					//store assessment
+					
+				store($value["id"],$value["email"]);
 			}
 			if(needAssessmentReminder($curr,$myfile))
 			{
@@ -203,9 +210,20 @@ function lateAssessment($curr)
 //store users in old user table
 function store($id, $email)
 {
-	$insert= QueryFactory::Build("insert");
-	$insert->Into("old_users")->Set(["email", $email], ["id",$id]);
-    $inserted = DatabaseManager::Query($insert);
+//	try
+//	{
+	$insert = QueryFactory::Build("insert");
+        // Build the insert query
+    $insert->Into("old_users")->Set(["email", $email], ["id", $id]);
+        // Execute the query and get the result
+     $qinfo = DatabaseManager::Query($insert);
+//	}
+/*	catch (Exception $e)
+	{
+		fwrite($strfl, "\nerror: ". $e->getMessage(). "\n");
+		echo"error";
+	}
+*/
 }
 //remove user
 function remove($id)
